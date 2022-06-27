@@ -1,0 +1,10 @@
+﻿{
+  "Info": {
+    "Class": "clsDbProjProperty",
+    "Description": "Project Properties (Access)"
+  },
+  "Items": {
+    "VCS Build Path": "D:\\Access365\\_Dev\\TradAccess",
+    "VCS Source Path": "\\Sources"
+  }
+}
