@@ -1,0 +1,32 @@
+﻿<dataroot xmlns:od="urn:schemas-microsoft-com:officedata">
+<T_Langues>
+<LangueCode>1030</LangueCode>
+<LangueNom>Dansk(Danmark)</LangueNom>
+<CodeImage>da-DK</CodeImage>
+</T_Langues>
+<T_Langues>
+<LangueCode>1034</LangueCode>
+<LangueNom>Español</LangueNom>
+<CodeImage>es-ES</CodeImage>
+</T_Langues>
+<T_Langues>
+<LangueCode>1036</LangueCode>
+<LangueNom>Français(France)</LangueNom>
+<CodeImage>fr-FR</CodeImage>
+</T_Langues>
+<T_Langues>
+<LangueCode>1040</LangueCode>
+<LangueNom>Italiano</LangueNom>
+<CodeImage>it-IT</CodeImage>
+</T_Langues>
+<T_Langues>
+<LangueCode>2057</LangueCode>
+<LangueNom>English(United Kingdom)</LangueNom>
+<CodeImage>en-UK</CodeImage>
+</T_Langues>
+<T_Langues>
+<LangueCode>2070</LangueCode>
+<LangueNom>Português(Portugal)</LangueNom>
+<CodeImage>pt-PT</CodeImage>
+</T_Langues>
+</dataroot>
