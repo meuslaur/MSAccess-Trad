@@ -1,5 +1,5 @@
 # MSAccessTrad
-Test traduction Access
+Beta Test traduction Access
 
 ## Résumé
 
