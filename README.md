@@ -1,5 +1,6 @@
 # MSAccessTrad
-Beta Test traduction Access
+
+Beta Test [v0.2](https://github.com/meuslaur/MSAccess-Trad/tree/beta) traduction Access
 
 ## Résumé
 
