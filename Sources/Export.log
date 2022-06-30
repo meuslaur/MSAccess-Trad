@@ -1,0 +1,201 @@
+﻿-------------------------------------
+Beginning Export of all Source
+TradAccess.accdb
+VCS Version 3.4.22
+Using Fast Save
+30/06/2022 09:28:12
+-------------------------------------
+-------------------------------------
+Exporting project...          
+  TradAccess.accdb
+[1] project processed.
+-------------------------------------
+Exporting vb project...       
+  TradAccess
+[1] vb project processed.
+-------------------------------------
+Exporting vbe references...   
+  DAO
+[3] vbe references processed.
+-------------------------------------
+No modified vbe forms found in this database.
+-------------------------------------
+Exporting proj properties...  
+  Current Project Properties (Access)
+[2] proj properties processed.
+-------------------------------------
+No modified saved specs found in this database.
+-------------------------------------
+Exporting db properties...    
+  Database Properties (DAO)
+[51] db properties processed.
+-------------------------------------
+No modified shared images found in this database.
+-------------------------------------
+Exporting themes...           
+  Thème Office
+[1] themes processed.
+-------------------------------------
+No modified imex specs found in this database.
+  Removing orphaned file: Customers.sql
+  Removing orphaned file: Customers.xml
+  Removing orphaned file: Order Details Status.sql
+  Removing orphaned file: Order Details Status.xml
+  Removing orphaned file: Order Details.sql
+  Removing orphaned file: Order Details.xml
+  Removing orphaned file: Orders Status.sql
+  Removing orphaned file: Orders Status.xml
+  Removing orphaned file: Orders.sql
+  Removing orphaned file: Orders.xml
+-------------------------------------
+Exporting tables...           
+  T_Langues
+    Sanitized in 0,005 seconds.
+  T_Langues (SQL)
+  T_ObjetControles
+    Sanitized in 0,002 seconds.
+  T_ObjetControles (SQL)
+  T_Objets
+    Sanitized in 0,002 seconds.
+  T_Objets (SQL)
+  T_TradTexte
+    Sanitized in 0,002 seconds.
+  T_TradTexte (SQL)
+[4] tables processed.
+  Removing orphaned file: Customers Extended.bas
+  Removing orphaned file: Customers Extended.sql
+  Removing orphaned file: Order Details Extended.bas
+  Removing orphaned file: Order Details Extended.sql
+  Removing orphaned file: Order Price Totals.bas
+  Removing orphaned file: Order Price Totals.sql
+  Removing orphaned file: Order Summary.bas
+  Removing orphaned file: Order Summary.sql
+  Removing orphaned file: Requête1.bas
+  Removing orphaned file: Requête1.sql
+  Removing orphaned file: R_lstApps.bas
+  Removing orphaned file: R_lstApps.sql
+  Removing orphaned file: R_ObjetsListe.bas
+  Removing orphaned file: R_ObjetsListe.sql
+-------------------------------------
+Exporting queries...          
+  R_ControlesTexte
+    Sanitized in 0,003 seconds.
+  R_ControlesTexte (SQL)
+  RL_Apps
+Source: modSanitize.SanitizeFile
+    Sanitized in 0,002 seconds.
+  RL_Apps (SQL)
+  RL_Langues
+    Sanitized in 0,001 seconds.
+  RL_Langues (SQL)
+[3] queries processed.
+  Removing orphaned file: Customer Details.bas
+  Removing orphaned file: Customer Orders Subform.bas
+  Removing orphaned file: F_ObjetControles.bas
+  Removing orphaned file: F_Objets.bas
+  Removing orphaned file: F_tmp.bas
+  Removing orphaned file: F_tmpSF.bas
+  Removing orphaned file: F_Trad.bas
+  Removing orphaned file: F_TradTexte.bas
+-------------------------------------
+Exporting forms...            
+  SF_MainTxtObjControles
+    Sanitized in 0,005 seconds.
+  F_MainTxt
+Source: modSanitize.SanitizeFile
+    Sanitized in 0,015 seconds.
+  SF_MainTxtTexte
+    Sanitized in 0,007 seconds.
+[3] forms processed.
+-------------------------------------
+No modified macros found in this database.
+  Removing orphaned file: R_tmp.bas
+-------------------------------------
+No modified reports found in this database.
+-------------------------------------
+Exporting table data...       
+  T_Langues
+    Sanitized in 0,001 seconds.
+[1] table data processed.
+-------------------------------------
+Exporting modules...          
+  MD_FSO
+  MD_Dev
+[2] modules processed.
+-------------------------------------
+No modified table data macros found in this database.
+-------------------------------------
+Exporting relations...        
+  T_LanguesT_TradTexte
+  T_ObjetControlesT_TradTexte
+  T_ObjetsT_ObjetControles
+[3] relations processed.
+-------------------------------------
+Exporting doc properties...   
+  Database Documents
+[5] doc properties processed.
+-------------------------------------
+Exporting nav pane groups...  
+  Groups
+[1] nav pane groups processed.
+-------------------------------------
+No modified hidden attributes found in this database.
+-------------------------------------
+Done. (0,95 seconds)
+
+--------------------------------------------------
+                PERFORMANCE REPORTS
+--------------------------------------------------
+Object Type                   Count     Seconds
+--------------------------------------------------
+Project                       1         0,02
+VB Project                    1         0,02
+VBE References                3         0,03
+Proj Properties               2         0,01
+DB Properties                 51        0,14
+Themes                        1         0,01
+Tables                        4         0,09
+Queries                       3         0,08
+Forms                         3         0,14
+Table Data                    1         0,11
+Modules                       2         0,04
+Relations                     3         0,04
+Doc Properties                5         0,02
+Nav Pane Groups               1         0,01
+--------------------------------------------------
+TOTALS:                       81        0,76
+--------------------------------------------------
+
+--------------------------------------------------
+Operations                    Count     Seconds
+--------------------------------------------------
+Read File                     22        0,09
+Parse JSON                    11        0,01
+Convert to JSON               518       0,19
+Compute SHA256                27        0,00
+Console Updates               2         0,03
+Compare Dictionary            9         0,00
+Get Modified Date             15        0,01
+Get File Property Hash        15        0,00
+Verify Path                   33        0,00
+Create Folder                 2         0,00
+Export Theme                  1         0,00
+Clear Orphaned                7         0,04
+Delete File                   38        0,01
+App.ExportXML()               5         0,13
+Read File Bytes               11        0,08
+Sanitize XML                  5         0,01
+Format XML                    5         0,00
+Write File                    19        0,01
+Save Table SQL                4         0,01
+App.SaveAsText()              6         0,04
+Sanitize File                 6         0,03
+Save Query SQL                3         0,00
+Get VBA Hash                  10        0,01
+Export VBE Module             2         0,02
+Enc. Windows-1252 as utf-8    2         0,01
+--------------------------------------------------
+Other Operations                        0,24
+--------------------------------------------------
+
+

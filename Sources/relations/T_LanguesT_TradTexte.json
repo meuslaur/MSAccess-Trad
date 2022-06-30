@@ -1,0 +1,18 @@
+﻿{
+  "Info": {
+    "Class": "clsDbRelation",
+    "Description": "Database relationship"
+  },
+  "Items": {
+    "Name": "T_LanguesT_TradTexte",
+    "Attributes": 4352,
+    "Table": "T_Langues",
+    "ForeignTable": "T_TradTexte",
+    "Fields": [
+      {
+        "Name": "LangueCode",
+        "ForeignName": "LangueCode"
+      }
+    ]
+  }
+}
