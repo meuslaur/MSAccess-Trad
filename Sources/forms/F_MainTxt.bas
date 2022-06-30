@@ -16,10 +16,10 @@ Begin Form
     Width =18328
     DatasheetFontHeight =11
     ItemSuffix =28
-    Left =3675
+    Left =3525
     Top =450
-    Right =21705
-    Bottom =11205
+    Right =22110
+    Bottom =11460
     DatasheetGridlinesColor =15132391
     RecSrcDt = Begin
         0x5c7a48f85bd8e540
@@ -870,39 +870,39 @@ Begin Form
                     Visible = NotDefault
                     FontItalic = NotDefault
                     OverlapFlags =85
-                    Left =566
-                    Top =1360
-                    Width =3975
+                    Left =2494
+                    Top =1247
+                    Width =4830
                     Height =315
                     FontWeight =700
                     BorderColor =8355711
                     Name ="lbl_InfoScan2"
                     Caption =" "
                     GridlineColor =10921638
-                    LayoutCachedLeft =566
-                    LayoutCachedTop =1360
-                    LayoutCachedWidth =4541
-                    LayoutCachedHeight =1675
+                    LayoutCachedLeft =2494
+                    LayoutCachedTop =1247
+                    LayoutCachedWidth =7324
+                    LayoutCachedHeight =1562
                     ForeThemeColorIndex =4
                     ForeTint =100.0
                 End
                 Begin Label
                     Visible = NotDefault
-                    OverlapFlags =87
+                    OverlapFlags =85
                     Left =566
-                    Top =1020
+                    Top =1247
                     Width =1815
                     Height =315
                     FontWeight =700
                     BorderColor =8355711
                     ForeColor =2366701
                     Name ="lbl_InfoScan1"
-                    Caption ="Analyse en cours,,,"
+                    Caption ="Analyse en cours :"
                     GridlineColor =10921638
                     LayoutCachedLeft =566
-                    LayoutCachedTop =1020
+                    LayoutCachedTop =1247
                     LayoutCachedWidth =2381
-                    LayoutCachedHeight =1335
+                    LayoutCachedHeight =1562
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
                 End
@@ -992,8 +992,8 @@ Option Compare Database
 Option Explicit
 
 '//::::::::::::::::::::::::::::::::::    VARIABLES      ::::::::::::::::::::::::::::::::::
-    Private Const DOS_DRAP  As String = "\Flags\"
-    Private m_ObjetAcc      As C_ObjetsAccess
+    Private C_ObjetAcc      As C_ObjetsAccess
+    Private C_Trad          As C_TradTexte
 
 '//:::::::::::::::::::::::::::::::::: END VARIABLES ::::::::::::::::::::::::::::::::::::::
 
@@ -1004,9 +1004,9 @@ Option Explicit
 '//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&     EVENTS        &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 Private Sub Form_Load()
 
-    Set m_ObjetAcc = initClasse()    '// Initialisation de la classe.
-    RazForm                         '// RaZ des contrôles...
-    ExtraireLangueCours             '// Affiche la langue de l'app en cours...
+    Set C_Trad = New C_TradTexte            '// Initialisation des classes.
+    Set C_ObjetAcc = C_Trad.GetClsObjAcc()  '// Récupère la classe initialisée.
+    RazForm                                 '// RaZ des contrôles...
 
 End Sub
 
@@ -1016,8 +1016,8 @@ Private Sub Form_Close()
     Screen.MousePointer = 11    '// Hourglass.
 
     '// Déclenche class_Terminate()
-    ResetClasse
-    Set m_ObjetAcc = Nothing
+    Set C_Trad = Nothing
+    Set C_ObjetAcc = Nothing
 
 SORTIE_Form_Close:
     DoCmd.Echo True
@@ -1034,45 +1034,33 @@ End Sub
 Private Sub cmbSelectBdd_Click()
     On Error GoTo ERR_cmbSelectBdd
 
-    Dim bRet     As Boolean
+    Dim bRep     As Boolean
     Dim sBaseSel As String
     Dim vTmp     As Variant  '// Pour Split de sBackup.
     Dim sRep     As String
 
     '// Séléction de la base à utiliser.
     sBaseSel = OuvreBoite("MS Access", "*.accdb", , , FD_TypeFilePicker)
-    If (sBaseSel = vbNullString) Then GoTo SORTIE_cmbSelectBdd
+    If (sBaseSel = vbNullString) Then Exit Sub
 
     DoCmd.Echo False
     Screen.MousePointer = 11            '// Hourglass.
 
     '// Création Access.Application, si pas déjà fait.
-    If (m_ObjetAcc.MsAppIsUp = False) Then
-        bRet = m_ObjetAcc.OpenMsApp()
-        If (bRet = False) Then GoTo SORTIE_cmbSelectBdd
+    bRep = InitAppEtBase(sBaseSel)
+
+    If (bRep) Then
+        RazForm True
+        Me.txtBdd = sBaseSel
+        
+        '// Détermine le nonm du fichier de la prochaine sauvegarde...
+        sRep = GetBackupFileName(sBaseSel)
+
+        vTmp = Split(sRep, ";")             '// NOTE retourne folder;backup;base
+        Me.txtBddSauve = vTmp(0) & vTmp(1)  '// folder + backup.
+    Else
+        RazForm                             '// Problème détecter, RaZ et on sort.
     End If
-
-    If (m_ObjetAcc.MsBaseIsOpen = False) Then
-        bRet = m_ObjetAcc.OpenMsBase(sBaseSel) '// Ouverture de la base.
-    End If
-
-    If (bRet = False) Then
-        '// Problème détecter, on ferme tout, RaZ et on sort.
-        bRet = m_ObjetAcc.CloseMsBase(True)
-        RazForm
-        GoTo SORTIE_cmbSelectBdd
-    End If
-
-    RazForm True                        '// Reset les valeurs...
-
-    Me.txtBdd = sBaseSel
-'    Me.cmbOuvreBase.Visible = False
-
-    '// Détermine le nonm du fichier de la prochaine sauvegarde...
-    sRep = GetBackupFileName(sBaseSel)
-    '// NOTE retourne folder;backup;base
-    vTmp = Split(sRep, ";")
-    Me.txtBddSauve = vTmp(0) & vTmp(1) '// folder + backup.
 
 SORTIE_cmbSelectBdd:
     Screen.MousePointer = 0
@@ -1090,7 +1078,7 @@ Private Sub cmdCloseBd_Click()
 
     Screen.MousePointer = 11    '// Hourglass.
     '// Ferme la base en cours, réinitialise les champs par défaut...
-    m_ObjetAcc.CloseMsBase
+    C_ObjetAcc.CloseMsBase
     RazForm
     Screen.MousePointer = 0
     Me.txtBdd = "Sélectionnez un base..."
@@ -1099,6 +1087,15 @@ End Sub
 
 '// MàJ de la liste des objets...
 Private Sub cmdActuLstObjets_Click()
+
+    '// Vérifier si une langue d'origine défini.
+    If (IsNull(Me.zlLangues)) Then
+        MsgBox "Sélectionnez la langue d'origine de la base" & vbCrLf & "Avant de lancer l'analyse, merci.", vbInformation, "Choisir une langue"
+        Me.zlLangues.SetFocus
+        Me.zlLangues.Dropdown
+        Exit Sub
+    End If
+
     Dim bRep As Boolean
 
     Me.lbl_InfoScan1.Visible = True
@@ -1106,7 +1103,7 @@ Private Sub cmdActuLstObjets_Click()
     Me.txtBdd.SetFocus
     Me.cmdActuLstObjets.Enabled = False
 
-    bRep = ScanObjetsApp(FormType, ReportType)  '// Scan les objets de la base sélectionnée....
+    bRep = C_Trad.ScanObjetsApp(FormType, ReportType)  '// Lance le scan les objets de la base sélectionnée....
 
     Me.lbl_InfoScan1.Visible = False
     Me.lbl_InfoScan2.Visible = False
@@ -1114,7 +1111,7 @@ Private Sub cmdActuLstObjets_Click()
     If bRep = False Then Exit Sub
 
     Me.zlApps.Requery
-    Me.zlApps = GetAppNom()
+    Me.zlApps = C_ObjetAcc.BaseOuverteNom()
     zlApps_AfterUpdate
     Me.lstObjets.SetFocus
     Me.cmdActuLstObjets.Enabled = False
@@ -1122,6 +1119,9 @@ Private Sub cmdActuLstObjets_Click()
 End Sub
 
 Private Sub zlApps_AfterUpdate()
+
+    If (IsNull(Me.zlApps)) Then Exit Sub
+
     Dim sSql As String
 
     sSql = "SELECT T_Objets.Objet_ID, T_Objets.ObjetType, T_Objets.ObjetNom, T_Objets.ObjetApp " & _
@@ -1129,20 +1129,55 @@ Private Sub zlApps_AfterUpdate()
            "WHERE (((T_Objets.ObjetApp) = '" & Me.zlApps & "')) " & _
            "ORDER BY T_Objets.ObjetType, T_Objets.ObjetNom;"
 
+    Me.lstObjets = Null
     Me.lstObjets.RowSource = sSql
     Me.lstObjets.Requery
-    Me.lstObjets = Null
+
+    Me.zlLangues = C_Trad.LangueGetIDLangBase(Me.zlApps)    '// Extraire la langue d'origine de la base...
+    MaJLangue False                                         '// Affiche le drapeau, vérouille la zl...
 
 End Sub
 
 Private Sub zlLangues_AfterUpdate()
-    ExtraireFlag Me.zlLangues       '// Affiche le drapeau correspondant a la langue...
+    MaJLangue   '// Affiche le drapeau...
 End Sub
 
 '//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& END EVENTS &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 '// ################################ PRIVATE SUB/FUNC ####################################
 
+Private Function InitAppEtBase(sBase As String) As Boolean
+    Dim bRep As Boolean
+
+    '// Création Access.Application, si pas déjà fait.
+    If (C_ObjetAcc.MsAppIsUp = False) Then
+        bRep = C_ObjetAcc.OpenMsApp()
+        If (bRep = False) Then Exit Function
+    End If
+
+    If (C_ObjetAcc.MsBaseIsOpen = False) Then
+        bRep = C_ObjetAcc.OpenMsBase(sBase)     '// Ouverture de la base.
+    End If
+
+    '// Problème détecter, on ferme tout, RaZ et on sort.
+    If (bRep = False) Then C_ObjetAcc.CloseMsBase True
+
+    InitAppEtBase = bRep
+
+End Function
+
+Private Sub MaJLangue(Optional bEnabledZL As Boolean = True)
+'// Affiche l'image de la langue,
+'// maj de la zl, et la vérouille si bEnabledZL est à true.
+    Dim sImg As String
+
+    C_Trad.IDLangApp = Me.zlLangues
+    Me.zlLangues.Enabled = bEnabledZL
+    
+    sImg = C_Trad.LangueExtraireFlag(Medium)    '// Obtenir l'image du drapeau correspondant a la langue...
+    Me.img_Langue.Picture = IIf(sImg = vbNullString, Me.img_NoLangue.Picture, sImg)
+
+End Sub
 '// Applique les valeurs par défaut.
 Private Sub RazForm(Optional bActive As Boolean)
 
@@ -1150,41 +1185,16 @@ Private Sub RazForm(Optional bActive As Boolean)
     Me.txtBdd = "Sélectionnez un base..."
     Me.txtBddSauve = vbNullString
     Me.zlApps = Null
-    Me.lstObjets = Null
-    
     Me.lstObjets.RowSource = vbNullString
+    Me.lstObjets = Null
+    Me.zlLangues = Null
+    Me.img_Langue.Picture = vbNullString
 
     Me.cmdCloseBd.Visible = bActive
     Me.cmbSelectBdd.Visible = Not bActive
     Me.cmdActuLstObjets.Enabled = bActive
     Me.zlApps.Enabled = Not bActive
+    Me.zlLangues.Enabled = bActive
 
-End Sub
-
-Private Sub ExtraireLangueCours()
-    Dim vLang    As Variant
-    Dim lLangApp As Long
-
-    lLangApp = Application.LanguageSettings.LanguageID(msoLanguageIDUI)
-    vLang = DLookup("[LangueCode]", "T_Langues", "[LangueCode]=" & lLangApp)
-    'lLang = 2070 'TODO: Test
-    If (IsNull(vLang)) Then
-        MsgBox "Langue ID " & lLangApp & " non trouvée dans la table T_Langues.", vbInformation, "Langue de l'application"
-        lLangApp = 0
-    End If
-
-    Me.zlLangues = lLangApp
-    ExtraireFlag lLangApp       '// Affiche le drapeau correspondant a la langue...
-
-End Sub
-
-Private Sub ExtraireFlag(IDFlag As Long)
-    Dim sImg As String
-    sImg = CurrentProject.Path & DOS_DRAP & IDFlag & "-32.png"
-    If FSOCheckFileExist(sImg) Then
-        Me.img_Langue.Picture = sImg
-    Else
-        Me.img_Langue.Picture = img_NoLangue.Picture
-    End If
 End Sub
 '// ################################# END PRIV. SUB/FUNC #################################

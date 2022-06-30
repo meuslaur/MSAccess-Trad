@@ -1,4 +1,13 @@
 #Changelog
+
+## V 0.30 2022/06/30
+
+- Remplace le module MD_Dev par la classe C_TradTexte.
+- Modification du code pour utilisation de la nouvelle classe.
+- Contrôle/vérification plus poussé de la langue dans le code.
+- Synchronisation de la liste des langues avec l'app sélectionée.
+- Correction devers bug mineurs.
+
 ## V 0.25 2022/06/30
 
 - Ajoute label dans le form F_MainTxt pour info avancement du scan des objets de l'application.

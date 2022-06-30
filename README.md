@@ -1,5 +1,5 @@
 # MSAccessTrad
-Beta Test v 0.25 traduction Access
+Beta Test v 0.30 traduction Access
 
 ## Résumé
 

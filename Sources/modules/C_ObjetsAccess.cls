@@ -28,7 +28,8 @@ Option Explicit
 
     '// Options définies dans le formulaire.
     Private m_oMsBase           As DAO.Database
-    Private m_sBaseFullName     As String   '// Sauvegarde du chemin\nom de la base ouverte.
+    Private m_sBaseFullName     As String   '// Chemin\nom complet de la base.
+    Private m_sBaseNom          As String   '// Nom de la base sans extension.
     Private m_bMsAppIsUp        As Boolean
     Private m_bMsBaseIsOpen     As Boolean
 '//:::::::::::::::::::::::::::::::::: END VARIABLES ::::::::::::::::::::::::::::::::::::::
@@ -37,7 +38,7 @@ Option Explicit
 '//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& END EVENTS &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 '//----------------------------------       INIT/TERM       ------------------------------
-Private Sub class_Terminate()
+Private Sub Class_Terminate()
 
     On Error Resume Next
 
@@ -53,10 +54,10 @@ End Sub
 
 '//==================================       PROP        ==================================
 Public Property Get GetMsApp() As Application
-    Set GetMsApp = m_oMsApp
+    If Me.MsAppIsUp Then Set GetMsApp = m_oMsApp
 End Property
 Public Property Get GetMsBase() As DAO.Database
-    Set GetMsBase = m_oMsApp.CurrentDb
+    If Me.MsBaseIsOpen Then Set GetMsBase = m_oMsApp.CurrentDb
 End Property
 
 Public Property Get MsAppIsUp() As Boolean
@@ -71,6 +72,12 @@ Public Property Get MsBaseIsOpen() As Boolean
 End Property
 Public Property Let MsBaseIsOpen(bNewVal As Boolean)
     m_bMsBaseIsOpen = IIf((m_oMsApp.CurrentProject.AccessConnection Is Nothing), False, bNewVal)
+End Property
+Public Property Get BaseOuverteFullPathName() As String
+    BaseOuverteFullPathName = m_sBaseFullName
+End Property
+Public Property Get BaseOuverteNom() As String
+    BaseOuverteNom = m_sBaseNom
 End Property
 Public Property Get GetLangue() As Long
     GetLangue = m_oMsApp.LanguageSettings.LanguageID(msoLanguageIDUI)
@@ -182,9 +189,10 @@ Public Function OpenMsBase(sBaseFullName As String) As Boolean
         Exit Function
     End If
 
-    Me.MsBaseIsOpen = True              '// Flag base ouverte.
-    m_sBaseFullName = sBaseFullName     '// Stock le nom.
-
+    m_bMsBaseIsOpen = True                      '// Flag base ouverte.
+    m_sBaseFullName = sBaseFullName             '// Stock le chemin/nom complet.
+    m_sBaseNom = FSOGetBaseName(sBaseFullName)  '// Extraire le nom de l'app...
+    
     OpenMsBase = True
 
 SORTIE_OpenMsBase:
@@ -197,7 +205,7 @@ ERR_OpenMsBase:
     Resume SORTIE_OpenMsBase
 End Function
 
-Public Function CloseMsBase(Optional CloseMsApp As Boolean = False) As Boolean
+Public Sub CloseMsBase(Optional CloseMsApp As Boolean = False)
     On Error GoTo ERR_CloseMsBase
 
 'TODO:    m_oMsApp.Visible = True
@@ -224,10 +232,8 @@ Public Function CloseMsBase(Optional CloseMsApp As Boolean = False) As Boolean
         Set m_oMsApp = Nothing
     End If
 
-    CloseMsBase = True
-
 SORTIE_CloseMsBase:
-    Exit Function
+    Exit Sub
 
 ERR_CloseMsBase:
     Me.MsAppIsUp = False
@@ -235,7 +241,7 @@ ERR_CloseMsBase:
             " (" & Err.Description & ")" & vbCrLf & _
             "Dans  TriSurFormContinu.CCreateFormContinu.CloseMsBase, ligne " & Erl & "."
     Resume SORTIE_CloseMsBase
-End Function
+End Sub
 '// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ END PUB. SUB/FUNC \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 
