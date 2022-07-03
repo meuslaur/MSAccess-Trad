@@ -1,0 +1,18 @@
+﻿{
+  "Info": {
+    "Class": "clsDbRelation",
+    "Description": "Database relationship"
+  },
+  "Items": {
+    "Name": "T_ObjetsT_ObjetControles",
+    "Attributes": 4352,
+    "Table": "T_Objets",
+    "ForeignTable": "T_ObjetControles",
+    "Fields": [
+      {
+        "Name": "Objet_ID",
+        "ForeignName": "ObjetParent_ID"
+      }
+    ]
+  }
+}
