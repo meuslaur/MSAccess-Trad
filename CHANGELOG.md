@@ -1,5 +1,10 @@
 #Changelog
 
+- Ajoute objets label dans l'appel de ScanObjetApp(C_TradTexte) pour affichage de l'avancement du scan.
+- Création du formulaire d'ajout de langues dans la table T_Langues.
+- Suppréssion de la possibilité d'aboir des images 16*16, les images doivent être en 32*32.
+- Modification code Barre avancement, déplace le code dans Classe.
+
 ## V 0.30 2022/06/30
 
 - Remplace le module MD_Dev par la classe C_TradTexte.
