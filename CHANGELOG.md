@@ -1,4 +1,15 @@
 #Changelog
+
+## V 0.40 2022/07/17
+- Ajout possibilité de modifier ou d'ajouter une langue dans la liste des langues du form F_TradTxt.
+- Ignore les prop de moins de 2 caractères lors du scan (UpdateRstControl).
+- Fermeture auto de la base et de l'app après le scan.
+- Modification entête du form F_Main.
+- Vérification si la base existe déjà dans la table T_Objets, lors de la sélection d'une base dans la boite fichiers.
+- Replacement recodset par une querydef temp.
+- Correction bug text contenant des apostrophes.
+- Modification interface du form F_Main.
+
 ## V 0.35 2022/07/03
 - Ajoute objets label dans l'appel de ScanObjetApp(C_TradTexte) pour affichage de l'avancement du scan.
 - Création du formulaire d'ajout de langues dans la table T_Langues.
