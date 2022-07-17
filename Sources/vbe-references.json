@@ -1,0 +1,12 @@
+﻿{
+  "Info": {
+    "Class": "clsDbVbeReference",
+    "Description": "VBE References"
+  },
+  "Items": {
+    "DAO": {
+      "GUID": "{4AC9E1DA-5BAD-4AC7-86E3-24F4CDCECA28}",
+      "Version": "12.0"
+    }
+  }
+}
