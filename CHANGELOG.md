@@ -1,5 +1,12 @@
 #Changelog
 
+## V 0.42 2022/07/21
+- Ajoute variable m_DateMaJ dans C_TradTexte pour utiliser toujours la même valeur pour le champ DateMaJ lors du scan.
+- Controle des valeurs texte, ne stock pas si vide et nouveau, vérifie si changement et si pas nouveau control.
+- Correction de bugs.
+- Optimisation du code.
+- Ajoute de champs permetant de controler les états des enregistrements.
+
 ## V 0.40 2022/07/17
 - Ajout possibilité de modifier ou d'ajouter une langue dans la liste des langues du form F_TradTxt.
 - Ignore les prop de moins de 2 caractères lors du scan (UpdateRstControl).
