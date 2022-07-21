@@ -1,10 +1,11 @@
 # MSAccessTrad
 
-Beta Test [v0.40](https://github.com/meuslaur/MSAccess-Trad/tree/beta) traduction Access
+Beta Test [v0.42](https://github.com/meuslaur/MSAccess-Trad/tree/beta) traduction Access
 
 # Formulaire F_Main
 
 ![Formulaire de démarrage](Doc/F_Main01.png)
+![Formulaire Récap](Doc/F_Main01-1.png)
 
 # Utilisation :
 
