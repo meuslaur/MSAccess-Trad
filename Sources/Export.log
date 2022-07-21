@@ -1,0 +1,190 @@
+﻿-------------------------------------
+Beginning Export of all Source
+Trad-Access.accdb
+VCS Version 3.4.23
+Using Fast Save
+21/07/2022 21:56:29
+-------------------------------------
+-------------------------------------
+Exporting project...          
+  Trad-Access.accdb
+[1] project processed.
+-------------------------------------
+Exporting vb project...       
+  Trad-Access
+[1] vb project processed.
+-------------------------------------
+Exporting vbe references...   
+  DAO
+[2] vbe references processed.
+-------------------------------------
+No modified vbe forms found in this database.
+-------------------------------------
+Exporting proj properties...  
+  Current Project Properties (Access)
+[2] proj properties processed.
+-------------------------------------
+No modified saved specs found in this database.
+-------------------------------------
+Exporting db properties...    
+  Database Properties (DAO)
+[51] db properties processed.
+-------------------------------------
+No modified shared images found in this database.
+-------------------------------------
+Exporting themes...           
+  Thème Office
+[1] themes processed.
+-------------------------------------
+No modified imex specs found in this database.
+-------------------------------------
+Exporting tables...           
+  T_Langues
+    Sanitized in 0,005 seconds.
+  T_Langues (SQL)
+  T_ObjetControles
+    Sanitized in 0,002 seconds.
+  T_ObjetControles (SQL)
+  T_Objets
+    Sanitized in 0,002 seconds.
+  T_Objets (SQL)
+  T_TradTexte
+    Sanitized in 0,003 seconds.
+  T_TradTexte (SQL)
+[4] tables processed.
+  Removing orphaned file: R_ControlesTexte.bas
+  Removing orphaned file: R_ControlesTexte.sql
+-------------------------------------
+Exporting queries...          
+  a_NonMisAJour
+Source: modSanitize.SanitizeFile
+    Sanitized in 0,002 seconds.
+  a_NonMisAJour (SQL)
+  R_MainTradOrg
+    Sanitized in 0,002 seconds.
+  R_MainTradOrg (SQL)
+  R_SF_MainControles
+    Sanitized in 0,002 seconds.
+  R_SF_MainControles (SQL)
+  R_SF_MainTextes
+Source: modSanitize.SanitizeFile
+    Sanitized in 0,001 seconds.
+  R_SF_MainTextes (SQL)
+  RL_Apps
+Source: modSanitize.SanitizeFile
+    Sanitized in 0,001 seconds.
+  RL_Apps (SQL)
+  RL_Langues
+    Sanitized in 0,001 seconds.
+  RL_Langues (SQL)
+[6] queries processed.
+  Removing orphaned file: SF_MainObjControles.bas
+-------------------------------------
+Exporting forms...            
+  F_RecapT
+    Sanitized in 0,006 seconds.
+  F_RecapC
+    Sanitized in 0,004 seconds.
+  F_Main
+Source: modSanitize.SanitizeFile
+    Sanitized in 0,020 seconds.
+  SF_MainTexte
+    Sanitized in 0,005 seconds.
+  SF_MainControles
+    Sanitized in 0,006 seconds.
+  F_Recap
+    Sanitized in 0,005 seconds.
+  F_RecapO
+    Sanitized in 0,005 seconds.
+[7] forms processed.
+-------------------------------------
+No modified macros found in this database.
+-------------------------------------
+No modified reports found in this database.
+-------------------------------------
+Exporting table data...       
+  T_Langues
+    Sanitized in 0,002 seconds.
+[1] table data processed.
+-------------------------------------
+Exporting modules...          
+  C_TradScanText
+  A_Test
+[2] modules processed.
+-------------------------------------
+No modified table data macros found in this database.
+-------------------------------------
+Exporting relations...        
+  {42B9E965-3965-4A62-B8E2-C08F096C8C7C}
+  {4EC3FD77-3B4E-4C45-A866-7A7A3FA296DA}
+  {887C4F77-6FF2-4380-9F1C-CCEA9E73E2E1}
+[3] relations processed.
+-------------------------------------
+Exporting doc properties...   
+  Database Documents
+[3] doc properties processed.
+-------------------------------------
+Exporting nav pane groups...  
+  Groups
+[1] nav pane groups processed.
+-------------------------------------
+No modified hidden attributes found in this database.
+-------------------------------------
+Done. (1 seconds)
+
+--------------------------------------------------
+                PERFORMANCE REPORTS
+--------------------------------------------------
+Object Type                   Count     Seconds
+--------------------------------------------------
+Project                       1         0,02
+VB Project                    1         0,02
+VBE References                2         0,02
+Proj Properties               2         0,01
+DB Properties                 51        0,08
+Themes                        1         0,00
+Tables                        4         0,09
+Queries                       6         0,12
+Forms                         7         0,24
+Table Data                    1         0,10
+Modules                       2         0,04
+Relations                     3         0,04
+Doc Properties                3         0,01
+Nav Pane Groups               1         0,01
+--------------------------------------------------
+TOTALS:                       85        0,80
+--------------------------------------------------
+
+--------------------------------------------------
+Operations                    Count     Seconds
+--------------------------------------------------
+Read File                     29        0,05
+Parse JSON                    11        0,02
+Convert to JSON               355       0,13
+Compute SHA256                42        0,00
+Console Updates               2         0,03
+Compare Dictionary            9         0,00
+Get Modified Date             22        0,00
+Get File Property Hash        22        0,00
+Write File                    31        0,02
+Verify Path                   52        0,00
+Create Folder                 1         0,00
+Export Theme                  1         0,00
+Clear Orphaned                6         0,02
+App.ExportXML()               5         0,12
+Read File Bytes               18        0,10
+Sanitize XML                  5         0,01
+Format XML                    5         0,00
+Save Table SQL                4         0,01
+Delete File                   12        0,00
+App.SaveAsText()              13        0,08
+Sanitize File                 13        0,05
+Save Query SQL                6         0,00
+Get VBA Hash                  22        0,01
+Export VBE Module             2         0,02
+Enc. Windows-1252 as utf-8    2         0,01
+--------------------------------------------------
+Other Operations                        0,31
+--------------------------------------------------
+
+

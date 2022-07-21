@@ -1,0 +1,18 @@
+﻿{
+  "Info": {
+    "Class": "clsDbRelation",
+    "Description": "Database relationship"
+  },
+  "Items": {
+    "Name": "{4EC3FD77-3B4E-4C45-A866-7A7A3FA296DA}",
+    "Attributes": 4352,
+    "Table": "T_ObjetControles",
+    "ForeignTable": "T_TradTexte",
+    "Fields": [
+      {
+        "Name": "Control_ID",
+        "ForeignName": "Trad_ID"
+      }
+    ]
+  }
+}
