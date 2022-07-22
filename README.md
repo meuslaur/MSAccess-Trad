@@ -1,6 +1,6 @@
 # MSAccessTrad
 
-Beta Test [v0.42](https://github.com/meuslaur/MSAccess-Trad/tree/beta) traduction Access
+Beta Test [v0.42-1](https://github.com/meuslaur/MSAccess-Trad/tree/beta) traduction Access
 
 # Formulaire F_Main
 

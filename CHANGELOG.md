@@ -1,5 +1,8 @@
 #Changelog
 
+## V 0.42-1 2022/07/22
+- Modification de form F_Recap, ajout de ses SF.
+
 ## V 0.42 2022/07/21
 - Ajoute variable m_DateMaJ dans C_TradTexte pour utiliser toujours la même valeur pour le champ DateMaJ lors du scan.
 - Controle des valeurs texte, ne stock pas si vide et nouveau, vérifie si changement et si pas nouveau control.
