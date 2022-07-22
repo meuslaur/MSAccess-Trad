@@ -244,28 +244,10 @@ Begin Form
             BackThemeColorIndex =3
             BackShade =25.0
             Begin
-                Begin Rectangle
-                    Visible = NotDefault
-                    SpecialEffect =0
-                    BackStyle =1
-                    OldBorderStyle =0
-                    OverlapFlags =93
-                    Left =56
-                    Width =17978
-                    Height =1023
-                    BorderColor =10921638
-                    Name ="boxCache"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =56
-                    LayoutCachedWidth =18034
-                    LayoutCachedHeight =1023
-                    BackThemeColorIndex =3
-                    BackShade =25.0
-                End
                 Begin TextBox
                     Locked = NotDefault
                     AllowAutoCorrect = NotDefault
-                    OverlapFlags =223
+                    OverlapFlags =93
                     IMESentenceMode =3
                     Left =2551
                     Top =226
@@ -285,7 +267,7 @@ Begin Form
                     Begin
                         Begin Label
                             BackStyle =1
-                            OverlapFlags =223
+                            OverlapFlags =93
                             TextAlign =3
                             Left =113
                             Top =226
@@ -311,7 +293,7 @@ Begin Form
                 End
                 Begin CommandButton
                     TabStop = NotDefault
-                    OverlapFlags =223
+                    OverlapFlags =93
                     Left =10374
                     Top =283
                     Width =345
@@ -416,7 +398,7 @@ Begin Form
                 End
                 Begin ComboBox
                     TabStop = NotDefault
-                    OverlapFlags =223
+                    OverlapFlags =93
                     IMESentenceMode =3
                     ColumnCount =2
                     ListWidth =2250
@@ -445,7 +427,7 @@ Begin Form
                     LayoutCachedHeight =541
                     Begin
                         Begin Label
-                            OverlapFlags =223
+                            OverlapFlags =93
                             TextAlign =3
                             Left =10941
                             Top =226
@@ -578,7 +560,7 @@ Begin Form
                 Begin CommandButton
                     Enabled = NotDefault
                     TabStop = NotDefault
-                    OverlapFlags =215
+                    OverlapFlags =93
                     Left =17347
                     Top =113
                     Width =570
@@ -696,7 +678,7 @@ Begin Form
                 Begin ComboBox
                     TabStop = NotDefault
                     AllowAutoCorrect = NotDefault
-                    OverlapFlags =223
+                    OverlapFlags =93
                     IMESentenceMode =3
                     ListWidth =2085
                     Left =2551
@@ -723,7 +705,7 @@ Begin Form
                     BackTint =20.0
                     Begin
                         Begin Label
-                            OverlapFlags =215
+                            OverlapFlags =93
                             TextAlign =3
                             Left =113
                             Top =623
@@ -747,7 +729,7 @@ Begin Form
                     Locked = NotDefault
                     TabStop = NotDefault
                     OldBorderStyle =0
-                    OverlapFlags =215
+                    OverlapFlags =93
                     TextAlign =1
                     BackStyle =0
                     IMESentenceMode =3
@@ -769,7 +751,7 @@ Begin Form
                     ForeTint =20.0
                     Begin
                         Begin Label
-                            OverlapFlags =215
+                            OverlapFlags =93
                             TextAlign =3
                             Left =6576
                             Top =623
@@ -788,78 +770,10 @@ Begin Form
                         End
                     End
                 End
-                Begin Label
-                    Visible = NotDefault
-                    OverlapFlags =215
-                    TextAlign =3
-                    Left =396
-                    Top =113
-                    Width =1935
-                    Height =315
-                    BorderColor =8355711
-                    ForeColor =13421772
-                    Name ="lbl_InfoScan1"
-                    Caption ="Analyse :"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =396
-                    LayoutCachedTop =113
-                    LayoutCachedWidth =2331
-                    LayoutCachedHeight =428
-                    ForeTint =20.0
-                End
-                Begin Label
-                    Visible = NotDefault
-                    OverlapFlags =247
-                    Left =2437
-                    Top =113
-                    Width =11175
-                    Height =285
-                    FontSize =10
-                    BorderColor =8355711
-                    ForeColor =16777215
-                    Name ="lbl_InfoScan2"
-                    FontName ="Verdana"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =2437
-                    LayoutCachedTop =113
-                    LayoutCachedWidth =13612
-                    LayoutCachedHeight =398
-                    ThemeFontIndex =-1
-                    ForeTint =0.0
-                End
-                Begin Label
-                    Visible = NotDefault
-                    FontItalic = NotDefault
-                    OldBorderStyle =1
-                    OverlapFlags =247
-                    TextFontCharSet =2
-                    TextFontFamily =18
-                    Left =2444
-                    Top =454
-                    Width =255
-                    Height =300
-                    FontSize =8
-                    FontWeight =700
-                    BorderColor =8355711
-                    Name ="lbl_InfoScan3"
-                    Caption ="a"
-                    FontName ="Webdings"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =2444
-                    LayoutCachedTop =454
-                    LayoutCachedWidth =2699
-                    LayoutCachedHeight =754
-                    ThemeFontIndex =-1
-                    BackThemeColorIndex =7
-                    BackTint =20.0
-                    ForeThemeColorIndex =9
-                    ForeTint =100.0
-                    ForeShade =75.0
-                End
                 Begin CommandButton
                     Enabled = NotDefault
                     TabStop = NotDefault
-                    OverlapFlags =215
+                    OverlapFlags =93
                     Left =10374
                     Top =623
                     Width =330
@@ -930,6 +844,92 @@ Begin Form
                     WebImagePaddingRight =1
                     WebImagePaddingBottom =1
                     Overlaps =1
+                End
+                Begin Rectangle
+                    Visible = NotDefault
+                    SpecialEffect =0
+                    BackStyle =1
+                    OldBorderStyle =0
+                    OverlapFlags =255
+                    Left =56
+                    Width =17978
+                    Height =1023
+                    BorderColor =10921638
+                    Name ="boxCache"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =56
+                    LayoutCachedWidth =18034
+                    LayoutCachedHeight =1023
+                    BackThemeColorIndex =3
+                    BackShade =25.0
+                End
+                Begin Label
+                    Visible = NotDefault
+                    OverlapFlags =247
+                    TextAlign =3
+                    Left =396
+                    Top =113
+                    Width =1935
+                    Height =315
+                    BorderColor =8355711
+                    ForeColor =13421772
+                    Name ="lbl_InfoScan1"
+                    Caption ="Analyse :"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =396
+                    LayoutCachedTop =113
+                    LayoutCachedWidth =2331
+                    LayoutCachedHeight =428
+                    ForeTint =20.0
+                End
+                Begin Label
+                    Visible = NotDefault
+                    OverlapFlags =247
+                    Left =2437
+                    Top =113
+                    Width =11175
+                    Height =285
+                    FontSize =10
+                    BorderColor =8355711
+                    ForeColor =16777215
+                    Name ="lbl_InfoScan2"
+                    FontName ="Verdana"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =2437
+                    LayoutCachedTop =113
+                    LayoutCachedWidth =13612
+                    LayoutCachedHeight =398
+                    ThemeFontIndex =-1
+                    ForeTint =0.0
+                End
+                Begin Label
+                    Visible = NotDefault
+                    FontItalic = NotDefault
+                    OldBorderStyle =1
+                    OverlapFlags =247
+                    TextFontCharSet =2
+                    TextFontFamily =18
+                    Left =2444
+                    Top =454
+                    Width =255
+                    Height =300
+                    FontSize =8
+                    FontWeight =700
+                    BorderColor =8355711
+                    Name ="lbl_InfoScan3"
+                    Caption ="a"
+                    FontName ="Webdings"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =2444
+                    LayoutCachedTop =454
+                    LayoutCachedWidth =2699
+                    LayoutCachedHeight =754
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =7
+                    BackTint =20.0
+                    ForeThemeColorIndex =9
+                    ForeTint =100.0
+                    ForeShade =75.0
                 End
             End
         End
@@ -1002,7 +1002,7 @@ Begin Form
                     TabIndex =3
                     BorderColor =10921638
                     Name ="SF_Textes"
-                    SourceObject ="Form.SF_MainTexte"
+                    SourceObject ="Form.F_MainSFTextes"
                     LinkChildFields ="Trad_ID"
                     LinkMasterFields ="txt_SFControlID"
                     GridlineColor =10921638
@@ -1050,7 +1050,7 @@ Begin Form
                     TabIndex =1
                     BorderColor =10921638
                     Name ="SF_Controles"
-                    SourceObject ="Form.SF_MainControles"
+                    SourceObject ="Form.F_MainSFControles"
                     LinkChildFields ="ObjetParent_ID"
                     LinkMasterFields ="lstObjets"
                     GridlineColor =10921638
@@ -1792,7 +1792,7 @@ Private Sub cmbSelectBdd_Click()
        If m_BaseExiste Then
             
             Me.zlLangues = ScanTxt.LangueGetIDLangBase(sBase)   '// Extraire la langue d'origine de la base...
-            zlBases = ObjetAcc.BaseOuverteNom
+            Me.zlBases = ObjetAcc.BaseOuverteNom
             zlBases_AfterUpdate
         Else
             Me.zlLangues.SetFocus
@@ -1947,7 +1947,7 @@ Private Sub cmdVoirRecap_Click()
         Exit Sub
     End If
 
-    DoCmd.OpenForm "F_Recap", , , , , acDialog, Me.zlBases
+    DoCmd.OpenForm "F_Recap", , , , , acDialog, Me.zlBases & ";" & Me.txtDateScan
 End Sub
 
 Private Sub lstObjets_AfterUpdate()
@@ -1955,7 +1955,7 @@ Private Sub lstObjets_AfterUpdate()
 End Sub
 
 Private Sub cmdAfficheInfo_Click()
-    DoCmd.OpenForm "F_RecapInfo" ', , , , , acDialog
+    DoCmd.OpenForm "F_InfoRecap" ', , , , , , Me.zlBases & ";" & Me.txtDateScan
 End Sub
 
 '//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& END EVENTS &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&

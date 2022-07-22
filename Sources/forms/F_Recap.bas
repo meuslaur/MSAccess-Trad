@@ -2,29 +2,30 @@
 VersionRequired =20
 Begin Form
     RecordSelectors = NotDefault
+    AutoCenter = NotDefault
     NavigationButtons = NotDefault
     AllowDeletions = NotDefault
     DividingLines = NotDefault
     AllowAdditions = NotDefault
-    AllowEdits = NotDefault
     DefaultView =0
     ScrollBars =0
+    BorderStyle =3
     PictureAlignment =2
     DatasheetGridlinesBehavior =3
     Cycle =1
     GridY =10
-    Width =11905
+    Width =11338
     DatasheetFontHeight =11
-    ItemSuffix =8
-    Left =6330
-    Top =1125
-    Right =17985
-    Bottom =11175
+    ItemSuffix =37
+    Left =3255
+    Top =735
+    Right =14595
+    Bottom =11100
     DatasheetGridlinesColor =15132391
     RecSrcDt = Begin
         0x2562231676dbe540
     End
-    Caption ="F_Recap"
+    Caption ="Récapitulatif des changements après le Scan"
     OnOpen ="[Event Procedure]"
     OnClose ="[Event Procedure]"
     DatasheetFontName ="Calibri"
@@ -84,6 +85,53 @@ Begin Form
             PressedForeThemeColorIndex =0
             PressedForeTint =75.0
         End
+        Begin OptionButton
+            BorderLineStyle =0
+            LabelX =230
+            LabelY =-30
+            BorderThemeColorIndex =1
+            BorderShade =65.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+        End
+        Begin CheckBox
+            BorderLineStyle =0
+            LabelX =230
+            LabelY =-30
+            BorderThemeColorIndex =1
+            BorderShade =65.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+        End
+        Begin OptionGroup
+            SpecialEffect =3
+            BorderLineStyle =0
+            Width =1701
+            Height =1701
+            BackThemeColorIndex =1
+            BorderThemeColorIndex =1
+            BorderShade =65.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+        End
+        Begin TextBox
+            AddColon = NotDefault
+            FELineBreak = NotDefault
+            BorderLineStyle =0
+            Width =1701
+            LabelX =-1701
+            FontSize =11
+            FontName ="Calibri"
+            AsianLineBreak =1
+            BackThemeColorIndex =1
+            BorderThemeColorIndex =1
+            BorderShade =65.0
+            ThemeFontIndex =1
+            ForeThemeColorIndex =0
+            ForeTint =75.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+        End
         Begin Subform
             BorderLineStyle =0
             Width =1701
@@ -95,7 +143,7 @@ Begin Form
             ShowPageHeaderAndPageFooter =1
         End
         Begin FormHeader
-            Height =446
+            Height =566
             BackColor =3684411
             Name ="EntêteFormulaire"
             AlternateBackThemeColorIndex =1
@@ -103,27 +151,11 @@ Begin Form
             BackThemeColorIndex =3
             BackShade =25.0
             Begin
-                Begin Label
-                    OverlapFlags =85
-                    Left =566
-                    Width =7995
-                    Height =390
-                    FontSize =14
-                    BorderColor =8355711
-                    ForeColor =13421772
-                    Name ="lblTitre"
-                    Caption ="Récapitulatif des changements après le Scan"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =566
-                    LayoutCachedWidth =8561
-                    LayoutCachedHeight =390
-                    ForeTint =20.0
-                End
                 Begin CommandButton
                     TabStop = NotDefault
                     OverlapFlags =85
                     Left =10034
-                    Top =56
+                    Top =113
                     Width =960
                     Height =330
                     ForeColor =4210752
@@ -177,9 +209,9 @@ Begin Form
                     End
 
                     LayoutCachedLeft =10034
-                    LayoutCachedTop =56
+                    LayoutCachedTop =113
                     LayoutCachedWidth =10994
-                    LayoutCachedHeight =386
+                    LayoutCachedHeight =443
                     PictureCaptionArrangement =5
                     UseTheme =0
                     BackColor =14461583
@@ -193,11 +225,164 @@ Begin Form
                     WebImagePaddingRight =1
                     WebImagePaddingBottom =1
                 End
+                Begin CheckBox
+                    TabStop = NotDefault
+                    OverlapFlags =85
+                    Left =4372
+                    Top =176
+                    TabIndex =1
+                    BorderColor =10921638
+                    Name ="chkScan"
+                    AfterUpdate ="=AppliqueFiltre(\"Scan\")"
+                    DefaultValue ="0"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =4372
+                    LayoutCachedTop =176
+                    LayoutCachedWidth =4632
+                    LayoutCachedHeight =416
+                    Begin
+                        Begin Label
+                            OverlapFlags =85
+                            TextFontCharSet =2
+                            TextFontFamily =18
+                            Left =3975
+                            Top =120
+                            Width =284
+                            Height =340
+                            ForeColor =2366701
+                            Name ="lbl_chkScan"
+                            Caption ="="
+                            FontName ="Webdings"
+                            GridlineColor =10921638
+                            LayoutCachedLeft =3975
+                            LayoutCachedTop =120
+                            LayoutCachedWidth =4259
+                            LayoutCachedHeight =460
+                            ThemeFontIndex =-1
+                            BorderThemeColorIndex =1
+                            BorderTint =100.0
+                            BorderShade =65.0
+                            ForeThemeColorIndex =-1
+                            ForeTint =100.0
+                        End
+                    End
+                End
+                Begin CheckBox
+                    TabStop = NotDefault
+                    OverlapFlags =85
+                    Left =5385
+                    Top =169
+                    TabIndex =2
+                    BorderColor =10921638
+                    Name ="chkModif"
+                    AfterUpdate ="=AppliqueFiltre(\"Modif\")"
+                    DefaultValue ="0"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =5385
+                    LayoutCachedTop =169
+                    LayoutCachedWidth =5645
+                    LayoutCachedHeight =409
+                    Begin
+                        Begin Label
+                            OverlapFlags =85
+                            TextFontCharSet =2
+                            TextAlign =2
+                            TextFontFamily =18
+                            Left =4988
+                            Top =113
+                            Width =284
+                            Height =345
+                            Name ="lbl_chkModif"
+                            Caption ="="
+                            FontName ="Webdings"
+                            GridlineColor =10921638
+                            LayoutCachedLeft =4988
+                            LayoutCachedTop =113
+                            LayoutCachedWidth =5272
+                            LayoutCachedHeight =458
+                            ThemeFontIndex =-1
+                            BorderThemeColorIndex =1
+                            BorderTint =100.0
+                            BorderShade =65.0
+                            ForeThemeColorIndex =8
+                            ForeTint =100.0
+                            ForeShade =75.0
+                        End
+                    End
+                End
+                Begin CheckBox
+                    TabStop = NotDefault
+                    OverlapFlags =85
+                    Left =6406
+                    Top =169
+                    TabIndex =3
+                    BorderColor =10921638
+                    Name ="chkNouv"
+                    AfterUpdate ="=AppliqueFiltre(\"Nouv\")"
+                    DefaultValue ="0"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =6406
+                    LayoutCachedTop =169
+                    LayoutCachedWidth =6666
+                    LayoutCachedHeight =409
+                    GridlineThemeColorIndex =-1
+                    Begin
+                        Begin Label
+                            OverlapFlags =85
+                            TextFontCharSet =2
+                            TextAlign =2
+                            TextFontFamily =18
+                            Left =6009
+                            Top =113
+                            Width =284
+                            Height =340
+                            BorderColor =10921638
+                            ForeColor =3506772
+                            Name ="lbl_chkNouv"
+                            Caption ="="
+                            FontName ="Webdings"
+                            GridlineColor =10921638
+                            LayoutCachedLeft =6009
+                            LayoutCachedTop =113
+                            LayoutCachedWidth =6293
+                            LayoutCachedHeight =453
+                            ThemeFontIndex =-1
+                            BackThemeColorIndex =-1
+                            BorderThemeColorIndex =-1
+                            BorderTint =100.0
+                            BorderShade =65.0
+                            ForeThemeColorIndex =-1
+                            ForeTint =100.0
+                            ForeShade =75.0
+                            GridlineThemeColorIndex =-1
+                        End
+                    End
+                End
+                Begin Label
+                    OverlapFlags =85
+                    Left =1474
+                    Top =113
+                    Width =2160
+                    Height =315
+                    BorderColor =8355711
+                    ForeColor =13421772
+                    Name ="lblChksInfo"
+                    Caption ="Afficher uniquement :"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =1474
+                    LayoutCachedTop =113
+                    LayoutCachedWidth =3634
+                    LayoutCachedHeight =428
+                    ForeTint =20.0
+                End
             End
         End
         Begin Section
             CanGrow = NotDefault
-            Height =9864
+            Height =9807
             Name ="Détail"
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
@@ -211,7 +396,7 @@ Begin Form
                     Height =2040
                     BorderColor =10921638
                     Name ="sfO"
-                    SourceObject ="Form.F_RecapO"
+                    SourceObject ="Form.F_RecapSFO"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =566
@@ -251,7 +436,7 @@ Begin Form
                     TabIndex =1
                     BorderColor =10921638
                     Name ="sfC"
-                    SourceObject ="Form.F_RecapC"
+                    SourceObject ="Form.F_RecapSFC"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =566
@@ -291,7 +476,7 @@ Begin Form
                     TabIndex =2
                     BorderColor =10921638
                     Name ="sfT"
-                    SourceObject ="Form.F_RecapT"
+                    SourceObject ="Form.F_RecapSFT"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =566
@@ -338,54 +523,116 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+'@Folder("Dev")
 Option Compare Database
 Option Explicit
 
     Private bFrmInfoIsOpen As Boolean
 
+'// Chargement de données suvant la base.
 Private Sub Form_Open(Cancel As Integer)
-    If IsNull(Me.OpenArgs) Then
+
+    If IsNull(Me.OpenArgs()) Then
         Cancel = True
         DoCmd.Close
         Exit Sub
     End If
 
-    Dim sSql As String
-    
-    sSql = "SELECT T_Objets.ObjetType, T_Objets.ObjetNom, " & _
+    Dim Args() As String
+    Dim sSql   As String
+
+    Args = Split(Me.OpenArgs(), ";")
+
+    sSql = "SELECT T_Objets.ObjetType, T_Objets.ObjetNom, T_Objets.Scanner, T_Objets.Nouveau, " & _
            "IIf(Scanner=False,""="",Null) AS Scan, IIf(Nouveau=True,""="",Null) AS Nouv " & _
            "FROM T_Objets " & _
-           "WHERE (((T_Objets.Scanner)=False)) OR (((T_Objets.Nouveau)=True) " & _
-           "AND ((T_Objets.ObjetApp)='" & Me.OpenArgs & "'));"
+           "WHERE ((T_Objets.ObjetApp)='" & Args(0) & "') " & _
+           "ORDER BY T_Objets.ObjetNom;"
 
     Me.sfO.Form.RecordSource = sSql
 
-    sSql = "SELECT T_ObjetControles.Control_ID, IIf(Scanner=False,""="",Null) AS Scan, " & _
+    sSql = "SELECT T_ObjetControles.Control_ID, T_ObjetControles.Scanner, T_ObjetControles.Nouveau, " & _
+           "IIf(Scanner=False,""="",Null) AS Scan, " & _
            "IIf(Nouveau=True,""="",Null) AS Nouv " & _
            "FROM T_ObjetControles " & _
-           "WHERE (((T_ObjetControles.Control_ID) Like ('" & Me.OpenArgs & ".*')) " & _
-           "AND ((T_ObjetControles.Scanner)=False)) OR (((T_ObjetControles.Nouveau)=True));"
+           "WHERE ((T_ObjetControles.Control_ID) Like ('" & Args(0) & ".*')) " & _
+           "ORDER BY T_ObjetControles.Control_ID;"
 
     Me.sfC.Form.RecordSource = sSql
 
     sSql = "SELECT T_TradTexte.Trad_ID, T_TradTexte.PropNom, T_TradTexte.PropTexte, " & _
+           "T_TradTexte.ModPropTexte, T_TradTexte.Scanner, T_TradTexte.Nouveau, " & _
            "IIf(Scanner=False,""="",Null) AS Scan, " & _
            "IIf(ModPropTexte=True,""="",Null) AS Modif, " & _
            "IIf(Nouveau=True,""="",Null) AS Nouv " & _
            "FROM T_TradTexte " & _
-           "WHERE (((T_TradTexte.Trad_ID) Like ('" & Me.OpenArgs & ".*')) " & _
-           "AND ((T_TradTexte.Scanner) = False)) Or (((T_TradTexte.ModPropTexte) = True)) " & _
-           "Or (((T_TradTexte.Nouveau) = True));"
+           "WHERE ((T_TradTexte.Trad_ID) Like ('" & Args(0) & ".*')) " & _
+           "ORDER BY T_TradTexte.Trad_ID;"
 
     Me.sfT.Form.RecordSource = sSql
+
+'    If (UBound(Args()) > 0) Then Me.lblTitre.Caption = Me.lblTitre.Caption & " (" & Args(1) & ")"
 
 End Sub
 
 Private Sub Form_Close()
-    If bFrmInfoIsOpen Then DoCmd.Close acForm, "F_RecapInfo"
+    If bFrmInfoIsOpen Then DoCmd.Close acForm, "F_InfoRecap"
 End Sub
 
 Private Sub cmdAfficheInfo_Click()
     bFrmInfoIsOpen = True
-    DoCmd.OpenForm "F_RecapInfo"
+    DoCmd.OpenForm "F_InfoRecap"
 End Sub
+
+'// Filtrage suivant choix des chkBox.
+Private Function AppliqueFiltre(ChkNom As String) As Boolean
+
+    If ResetFiltres Then Exit Function
+
+    Select Case ChkNom
+        Case "Nouv"
+            Me.chkModif = False     '// Ne peux pas être Scan et Mod si Nouveau.
+            Me.chkScan = False
+        Case "Modif", "Scan"
+            Me.chkNouv = False      '// Ne peux pas être Nouv si Scan ou Modif.
+        Case Else
+            Exit Function
+    End Select
+
+    Dim sFiltre As String
+    Dim bFiltre As Boolean
+    Dim sFltO   As String
+    Dim sFltC   As String
+    Dim sFltP   As String
+
+    sFltO = "ObjetType='X'"   '// Masque les données car pas de filtre Modif sur Objet et Control.
+    sFltC = "Control_ID='X'"  '// ...
+
+    If (Me.chkNouv) Then sFiltre = "Nouveau=True": bFiltre = True
+
+    If (Me.chkScan) Then sFiltre = "Scanner=False": bFiltre = True
+
+    If (Me.chkModif) Then
+        sFltP = "ModPropTexte=True"
+        If (Len(sFiltre) > 0) Then sFltP = sFltP & " AND " & sFiltre
+    Else
+        sFltP = sFiltre
+    End If
+
+    Me.sfO.Form.Filter = IIf(bFiltre, sFiltre, sFltO)
+    Me.sfO.Form.FilterOn = True
+    Me.sfC.Form.Filter = IIf(bFiltre, sFiltre, sFltC)
+    Me.sfC.Form.FilterOn = True
+    Me.sfT.Form.Filter = sFltP
+    Me.sfT.Form.FilterOn = True
+
+End Function
+
+Private Function ResetFiltres() As Boolean
+    If (Me.chkScan = False) And (Me.chkNouv = False) And (Me.chkModif = False) Then
+        Me.sfO.Form.FilterOn = False
+        Me.sfC.Form.FilterOn = False
+        Me.sfT.Form.FilterOn = False
+        ResetFiltres = True
+    End If
+End Function

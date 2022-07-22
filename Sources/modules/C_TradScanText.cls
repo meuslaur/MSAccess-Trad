@@ -772,7 +772,6 @@ End Function
 Private Function TexteModifier(NomProp As String, TexteOrg As String) As eReponse
 On Error GoTo ERR_TexteModifier
 
-    Dim sSql As String
     Dim sTxt As String
 
     m_TableTxtCtr.FindFirst "PropNom='" & NomProp & "'"
@@ -996,9 +995,9 @@ Private Function ResetEtatsTables(BaseNom As String) As Boolean
 
     sSql = "UPDATE (T_Objets INNER JOIN T_ObjetControles ON T_Objets.Objet_ID = T_ObjetControles.ObjetParent_ID) " & _
            "INNER JOIN T_TradTexte ON T_ObjetControles.Control_ID = T_TradTexte.Trad_ID " & _
-           "SET T_Objets.Scanner = False, T_Objets.Nouveau = False, " & _
-           "T_ObjetControles.Scanner = False, T_ObjetControles.Nouveau = False, " & _
-           "T_TradTexte.ModPropTexte = False, T_TradTexte.Scanner = False " & _
+           "SET T_Objets.Nouveau = False, " & _
+           "T_ObjetControles.Nouveau = False, " & _
+           "T_TradTexte.ModPropTexte = False, T_TradTexte.Nouveau = False" & _
            "WHERE (((T_Objets.ObjetApp)='" & BaseNom & "'));"
 
     qdfTemp.SQL = sSql
