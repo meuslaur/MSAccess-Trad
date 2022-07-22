@@ -16,10 +16,10 @@ Begin Form
     Width =10545
     DatasheetFontHeight =11
     ItemSuffix =14
-    Left =1905
-    Top =735
-    Right =17895
-    Bottom =7200
+    Left =8355
+    Top =525
+    Right =19680
+    Bottom =2835
     RecSrcDt = Begin
         0xe694bb396cdbe540
     End
@@ -92,7 +92,7 @@ Begin Form
                 Begin Label
                     OverlapFlags =85
                     TextAlign =1
-                    Left =622
+                    Left =963
                     Width =1080
                     Height =315
                     BorderColor =8355711
@@ -101,8 +101,8 @@ Begin Form
                     Tag ="DetachedLabel"
                     GridlineStyleBottom =1
                     GridlineColor =10921638
-                    LayoutCachedLeft =622
-                    LayoutCachedWidth =1702
+                    LayoutCachedLeft =963
+                    LayoutCachedWidth =2043
                     LayoutCachedHeight =315
                     ForeThemeColorIndex =3
                     ForeTint =100.0
@@ -112,7 +112,7 @@ Begin Form
                     OverlapFlags =85
                     TextAlign =1
                     Left =2720
-                    Width =738
+                    Width =678
                     Height =315
                     BorderColor =8355711
                     Name ="lbl_PropTexte"
@@ -121,7 +121,7 @@ Begin Form
                     GridlineStyleBottom =1
                     GridlineColor =10921638
                     LayoutCachedLeft =2720
-                    LayoutCachedWidth =3458
+                    LayoutCachedWidth =3398
                     LayoutCachedHeight =315
                     ForeThemeColorIndex =3
                     ForeTint =100.0
@@ -129,6 +129,7 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =85
+                    TextAlign =2
                     Left =56
                     Width =180
                     Height =315
@@ -145,12 +146,32 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =340
+                    TextAlign =2
+                    Left =623
                     Width =225
                     Height =315
                     BorderColor =8355711
                     Name ="lbl_Modif"
                     Caption ="M"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =623
+                    LayoutCachedWidth =848
+                    LayoutCachedHeight =315
+                    ForeThemeColorIndex =3
+                    ForeTint =100.0
+                    ForeShade =90.0
+                End
+                Begin Label
+                    OverlapFlags =85
+                    TextAlign =2
+                    Left =340
+                    Width =225
+                    Height =315
+                    BorderColor =8355711
+                    Name ="lbl_txtNouv"
+                    Caption ="N"
+                    Tag ="DetachedLabel"
+                    GridlineStyleBottom =1
                     GridlineColor =10921638
                     LayoutCachedLeft =340
                     LayoutCachedWidth =565
@@ -172,8 +193,8 @@ Begin Form
                 Begin TextBox
                     OverlapFlags =93
                     IMESentenceMode =3
-                    Left =566
-                    Width =2085
+                    Left =907
+                    Width =1755
                     Height =315
                     ColumnWidth =3000
                     TabIndex =1
@@ -182,8 +203,8 @@ Begin Form
                     ControlSource ="PropNom"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =566
-                    LayoutCachedWidth =2651
+                    LayoutCachedLeft =907
+                    LayoutCachedWidth =2662
                     LayoutCachedHeight =315
                     BackThemeColorIndex =5
                     BackTint =60.0
@@ -192,10 +213,10 @@ Begin Form
                 End
                 Begin TextBox
                     EnterKeyBehavior = NotDefault
-                    OverlapFlags =93
+                    OverlapFlags =95
                     IMESentenceMode =3
-                    Left =2663
-                    Width =7878
+                    Left =2648
+                    Width =7893
                     Height =585
                     ColumnWidth =3000
                     TabIndex =2
@@ -205,7 +226,7 @@ Begin Form
                     ControlSource ="PropTexte"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =2663
+                    LayoutCachedLeft =2648
                     LayoutCachedWidth =10541
                     LayoutCachedHeight =585
                 End
@@ -235,10 +256,11 @@ Begin Form
                     OldBorderStyle =0
                     OverlapFlags =93
                     TextFontCharSet =2
+                    TextAlign =2
                     TextFontFamily =18
                     IMESentenceMode =3
                     Width =291
-                    Height =315
+                    Height =345
                     TabIndex =3
                     BorderColor =10921638
                     ForeColor =2366701
@@ -248,7 +270,7 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedWidth =291
-                    LayoutCachedHeight =315
+                    LayoutCachedHeight =345
                     ThemeFontIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -258,27 +280,58 @@ Begin Form
                     Locked = NotDefault
                     TabStop = NotDefault
                     OldBorderStyle =0
-                    OverlapFlags =87
+                    OverlapFlags =93
                     TextFontCharSet =2
+                    TextAlign =2
                     TextFontFamily =18
                     IMESentenceMode =3
-                    Left =283
+                    Left =566
                     Width =291
-                    Height =315
+                    Height =345
                     TabIndex =4
                     BorderColor =10921638
-                    ForeColor =15709952
                     Name ="Nouv"
                     ControlSource ="Modif"
                     FontName ="Webdings"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =283
-                    LayoutCachedWidth =574
-                    LayoutCachedHeight =315
+                    LayoutCachedLeft =566
+                    LayoutCachedWidth =857
+                    LayoutCachedHeight =345
                     ThemeFontIndex =-1
-                    ForeThemeColorIndex =-1
+                    ForeThemeColorIndex =8
                     ForeTint =100.0
+                    ForeShade =75.0
+                End
+                Begin TextBox
+                    Enabled = NotDefault
+                    Locked = NotDefault
+                    TabStop = NotDefault
+                    AllowAutoCorrect = NotDefault
+                    OldBorderStyle =0
+                    OverlapFlags =87
+                    TextFontCharSet =2
+                    TextAlign =2
+                    TextFontFamily =18
+                    BackStyle =0
+                    IMESentenceMode =3
+                    Left =283
+                    Width =292
+                    Height =345
+                    TabIndex =5
+                    BorderColor =10921638
+                    Name ="txtNouv"
+                    ControlSource ="Nouv"
+                    FontName ="Webdings"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =283
+                    LayoutCachedWidth =575
+                    LayoutCachedHeight =345
+                    ThemeFontIndex =-1
+                    ForeThemeColorIndex =9
+                    ForeTint =100.0
+                    ForeShade =75.0
                 End
             End
         End

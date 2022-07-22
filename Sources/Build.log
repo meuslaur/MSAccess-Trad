@@ -1,0 +1,35 @@
+﻿-------------------------------------
+Beginning Build from Source
+Trad-Access.accdb
+VCS Version 3.4.23
+22/07/2022 08:39:07
+-------------------------------------
+Saving backup of original database...
+
+-------------------------------------
+ERROR: Unhandled error found before `On Error` directive
+-------------------------------------
+Error 75:  Erreur d'accès Chemin/Fichier Source: Unknown
+Saved as Trad-Access_VCSBackup.accdb.
+
+-------------------------------------
+CRITICAL: Unable to create database file
+-------------------------------------
+Error 7865: Il existe déjà une base de données du même nom. Donnez un nom unique à la nouvelle base de données. Source: modImportExport.Build
+This may occur when building an older database version if the 'New database sort order' (collation) option is not set to 'Legacy'
+
+--------------------------------------------------
+                PERFORMANCE REPORTS
+--------------------------------------------------
+Operations                    Count     Seconds
+--------------------------------------------------
+Console Updates               3         0,04
+Create new database           1         0,00
+Read File                     1         0,00
+Parse JSON                    1         0,00
+Wait for MsgBox Response      1         7,26
+--------------------------------------------------
+Other Operations                        0,07
+--------------------------------------------------
+
+

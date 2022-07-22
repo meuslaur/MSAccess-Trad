@@ -15,10 +15,10 @@ Begin Form
     Width =10204
     DatasheetFontHeight =11
     ItemSuffix =9
-    Left =435
-    Top =390
-    Right =13395
-    Bottom =3855
+    Left =-135
+    Top =375
+    Right =7710
+    Bottom =3840
     RecSrcDt = Begin
         0x0e57f48478dbe540
     End
@@ -228,7 +228,7 @@ Begin Form
                     LayoutCachedWidth =10148
                     LayoutCachedHeight =340
                     ThemeFontIndex =-1
-                    ForeThemeColorIndex =8
+                    ForeThemeColorIndex =9
                     ForeTint =100.0
                     ForeShade =75.0
                 End

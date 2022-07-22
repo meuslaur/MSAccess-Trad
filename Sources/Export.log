@@ -3,7 +3,7 @@ Beginning Export of all Source
 Trad-Access.accdb
 VCS Version 3.4.23
 Using Fast Save
-21/07/2022 21:56:29
+22/07/2022 10:05:41
 -------------------------------------
 -------------------------------------
 Exporting project...          
@@ -52,23 +52,13 @@ Exporting tables...
     Sanitized in 0,003 seconds.
   T_TradTexte (SQL)
 [4] tables processed.
-  Removing orphaned file: R_ControlesTexte.bas
-  Removing orphaned file: R_ControlesTexte.sql
 -------------------------------------
 Exporting queries...          
-  a_NonMisAJour
-Source: modSanitize.SanitizeFile
-    Sanitized in 0,002 seconds.
-  a_NonMisAJour (SQL)
-  R_MainTradOrg
-    Sanitized in 0,002 seconds.
-  R_MainTradOrg (SQL)
   R_SF_MainControles
-    Sanitized in 0,002 seconds.
+    Sanitized in 0,003 seconds.
   R_SF_MainControles (SQL)
   R_SF_MainTextes
-Source: modSanitize.SanitizeFile
-    Sanitized in 0,001 seconds.
+    Sanitized in 0,002 seconds.
   R_SF_MainTextes (SQL)
   RL_Apps
 Source: modSanitize.SanitizeFile
@@ -77,26 +67,24 @@ Source: modSanitize.SanitizeFile
   RL_Langues
     Sanitized in 0,001 seconds.
   RL_Langues (SQL)
-[6] queries processed.
-  Removing orphaned file: SF_MainObjControles.bas
+[4] queries processed.
 -------------------------------------
 Exporting forms...            
-  F_RecapT
-    Sanitized in 0,006 seconds.
-  F_RecapC
-    Sanitized in 0,004 seconds.
   F_Main
 Source: modSanitize.SanitizeFile
-    Sanitized in 0,020 seconds.
+    Sanitized in 0,022 seconds.
+  F_RecapC
+    Sanitized in 0,004 seconds.
   SF_MainTexte
-    Sanitized in 0,005 seconds.
-  SF_MainControles
     Sanitized in 0,006 seconds.
-  F_Recap
-    Sanitized in 0,005 seconds.
   F_RecapO
     Sanitized in 0,005 seconds.
-[7] forms processed.
+  F_RecapInfo
+    Sanitized in 0,005 seconds.
+  F_Recap
+Source: modSanitize.SanitizeFile
+    Sanitized in 0,005 seconds.
+[6] forms processed.
 -------------------------------------
 No modified macros found in this database.
 -------------------------------------
@@ -104,13 +92,10 @@ No modified reports found in this database.
 -------------------------------------
 Exporting table data...       
   T_Langues
-    Sanitized in 0,002 seconds.
+    Sanitized in 0,001 seconds.
 [1] table data processed.
 -------------------------------------
-Exporting modules...          
-  C_TradScanText
-  A_Test
-[2] modules processed.
+No modified modules found in this database.
 -------------------------------------
 No modified table data macros found in this database.
 -------------------------------------
@@ -130,61 +115,58 @@ Exporting nav pane groups...
 -------------------------------------
 No modified hidden attributes found in this database.
 -------------------------------------
-Done. (1 seconds)
+Done. (0,91 seconds)
 
 --------------------------------------------------
                 PERFORMANCE REPORTS
 --------------------------------------------------
 Object Type                   Count     Seconds
 --------------------------------------------------
-Project                       1         0,02
-VB Project                    1         0,02
-VBE References                2         0,02
+Project                       1         0,01
+VB Project                    1         0,01
+VBE References                2         0,01
 Proj Properties               2         0,01
-DB Properties                 51        0,08
+DB Properties                 51        0,14
 Themes                        1         0,00
 Tables                        4         0,09
-Queries                       6         0,12
-Forms                         7         0,24
-Table Data                    1         0,10
-Modules                       2         0,04
-Relations                     3         0,04
+Queries                       4         0,08
+Forms                         6         0,25
+Table Data                    1         0,08
+Relations                     3         0,02
 Doc Properties                3         0,01
 Nav Pane Groups               1         0,01
 --------------------------------------------------
-TOTALS:                       85        0,80
+TOTALS:                       80        0,73
 --------------------------------------------------
 
 --------------------------------------------------
 Operations                    Count     Seconds
 --------------------------------------------------
-Read File                     29        0,05
+Read File                     26        0,01
 Parse JSON                    11        0,02
-Convert to JSON               355       0,13
-Compute SHA256                42        0,00
+Convert to JSON               505       0,19
+Compute SHA256                36        0,00
 Console Updates               2         0,03
 Compare Dictionary            9         0,00
-Get Modified Date             22        0,00
-Get File Property Hash        22        0,00
-Write File                    31        0,02
-Verify Path                   52        0,00
+Get Modified Date             17        0,00
+Get File Property Hash        17        0,00
+Verify Path                   40        0,00
 Create Folder                 1         0,00
 Export Theme                  1         0,00
 Clear Orphaned                6         0,02
-App.ExportXML()               5         0,12
-Read File Bytes               18        0,10
+App.ExportXML()               5         0,10
+Read File Bytes               15        0,09
 Sanitize XML                  5         0,01
 Format XML                    5         0,00
+Write File                    24        0,01
 Save Table SQL                4         0,01
-Delete File                   12        0,00
-App.SaveAsText()              13        0,08
-Sanitize File                 13        0,05
-Save Query SQL                6         0,00
-Get VBA Hash                  22        0,01
-Export VBE Module             2         0,02
-Enc. Windows-1252 as utf-8    2         0,01
+App.SaveAsText()              10        0,11
+Delete File                   10        0,00
+Sanitize File                 10        0,05
+Save Query SQL                4         0,00
+Get VBA Hash                  21        0,03
 --------------------------------------------------
-Other Operations                        0,31
+Other Operations                        0,24
 --------------------------------------------------
 
 
