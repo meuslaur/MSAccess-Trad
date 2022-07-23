@@ -273,8 +273,7 @@ End Function
 ' Requi           :
 '
 '=== Paramètres ===
-' ObjetNom (String)          : Nom de l'objet à utiliser.
-' ObjetType (T_ObjectTypeNum): Type de l'objet (T_ObjectTypeNum)
+' ObjType (T_ObjectTypeNum): Type de l'objet (T_ObjectTypeNum)
 '==================
 '
 '

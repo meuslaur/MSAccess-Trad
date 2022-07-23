@@ -2,24 +2,24 @@
 VersionRequired =20
 Begin Form
     RecordSelectors = NotDefault
-    AutoCenter = NotDefault
     NavigationButtons = NotDefault
     AllowDeletions = NotDefault
     DividingLines = NotDefault
     AllowAdditions = NotDefault
     AllowEdits = NotDefault
-    ScrollBars =0
+    ScrollBars =2
     ViewsAllowed =1
+    BorderStyle =1
     PictureAlignment =2
     DatasheetGridlinesBehavior =3
     GridY =10
-    Width =10545
+    Width =11338
     DatasheetFontHeight =11
     ItemSuffix =14
-    Left =8355
-    Top =525
-    Right =19680
-    Bottom =2835
+    Left =1935
+    Top =6315
+    Right =13275
+    Bottom =8700
     RecSrcDt = Begin
         0xb161d64291dbe540
     End
@@ -216,7 +216,7 @@ Begin Form
                     OverlapFlags =95
                     IMESentenceMode =3
                     Left =2648
-                    Width =7893
+                    Width =8688
                     Height =585
                     ColumnWidth =3000
                     TabIndex =2
@@ -227,7 +227,7 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =2648
-                    LayoutCachedWidth =10541
+                    LayoutCachedWidth =11336
                     LayoutCachedHeight =585
                 End
                 Begin TextBox

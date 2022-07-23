@@ -382,7 +382,7 @@ Begin Form
         End
         Begin Section
             CanGrow = NotDefault
-            Height =9807
+            Height =9864
             Name ="Détail"
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
@@ -471,8 +471,8 @@ Begin Form
                     OverlapFlags =85
                     Left =566
                     Top =5725
-                    Width =10470
-                    Height =3915
+                    Width =10485
+                    Height =4035
                     TabIndex =2
                     BorderColor =10921638
                     Name ="sfT"
@@ -481,8 +481,8 @@ Begin Form
 
                     LayoutCachedLeft =566
                     LayoutCachedTop =5725
-                    LayoutCachedWidth =11036
-                    LayoutCachedHeight =9640
+                    LayoutCachedWidth =11051
+                    LayoutCachedHeight =9760
                     Begin
                         Begin Label
                             Vertical = NotDefault
@@ -492,7 +492,7 @@ Begin Form
                             Left =113
                             Top =5725
                             Width =375
-                            Height =3915
+                            Height =4035
                             BorderColor =8355711
                             ForeColor =6710886
                             Name ="lbl_sfT"
@@ -501,7 +501,7 @@ Begin Form
                             LayoutCachedLeft =113
                             LayoutCachedTop =5725
                             LayoutCachedWidth =488
-                            LayoutCachedHeight =9640
+                            LayoutCachedHeight =9760
                             BackThemeColorIndex =5
                             BackTint =60.0
                         End
@@ -571,7 +571,7 @@ Private Sub Form_Open(Cancel As Integer)
 
     Me.sfT.Form.RecordSource = sSql
 
-'    If (UBound(Args()) > 0) Then Me.lblTitre.Caption = Me.lblTitre.Caption & " (" & Args(1) & ")"
+    If (UBound(Args()) > 0) Then Me.Caption = Me.Caption & " (" & Args(1) & ")"
 
 End Sub
 

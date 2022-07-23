@@ -13,13 +13,13 @@ Begin Form
     PictureAlignment =2
     DatasheetGridlinesBehavior =3
     GridY =10
-    Width =10204
+    Width =10220
     DatasheetFontHeight =11
     ItemSuffix =13
-    Left =2250
-    Top =915
-    Right =12450
-    Bottom =4560
+    Left =4230
+    Top =8415
+    Right =14445
+    Bottom =12180
     RecSrcDt = Begin
         0xb269f48478dbe540
     End
@@ -91,7 +91,7 @@ Begin Form
                 Begin Label
                     OverlapFlags =85
                     TextAlign =2
-                    Left =9354
+                    Left =57
                     Width =180
                     Height =315
                     BorderColor =8355711
@@ -101,14 +101,14 @@ Begin Form
                     Tag ="DetachedLabel"
                     GridlineStyleBottom =1
                     GridlineColor =10921638
-                    LayoutCachedLeft =9354
-                    LayoutCachedWidth =9534
+                    LayoutCachedLeft =57
+                    LayoutCachedWidth =237
                     LayoutCachedHeight =315
                 End
                 Begin Label
                     OverlapFlags =85
                     TextAlign =2
-                    Left =9581
+                    Left =284
                     Width =270
                     Height =315
                     BorderColor =8355711
@@ -118,13 +118,13 @@ Begin Form
                     Tag ="DetachedLabel"
                     GridlineStyleBottom =1
                     GridlineColor =10921638
-                    LayoutCachedLeft =9581
-                    LayoutCachedWidth =9851
+                    LayoutCachedLeft =284
+                    LayoutCachedWidth =554
                     LayoutCachedHeight =315
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =56
+                    Left =963
                     Width =960
                     Height =315
                     BorderColor =8355711
@@ -132,13 +132,13 @@ Begin Form
                     Name ="lbl_PropNom"
                     Caption ="Propriété"
                     GridlineColor =10921638
-                    LayoutCachedLeft =56
-                    LayoutCachedWidth =1016
+                    LayoutCachedLeft =963
+                    LayoutCachedWidth =1923
                     LayoutCachedHeight =315
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =1077
+                    Left =1984
                     Width =690
                     Height =315
                     BorderColor =8355711
@@ -146,14 +146,14 @@ Begin Form
                     Name ="lbl_PropTexte"
                     Caption ="Valeur"
                     GridlineColor =10921638
-                    LayoutCachedLeft =1077
-                    LayoutCachedWidth =1767
+                    LayoutCachedLeft =1984
+                    LayoutCachedWidth =2674
                     LayoutCachedHeight =315
                 End
                 Begin Label
                     OverlapFlags =85
                     TextAlign =2
-                    Left =9921
+                    Left =624
                     Width =225
                     Height =315
                     BorderColor =8355711
@@ -163,8 +163,8 @@ Begin Form
                     Tag ="DetachedLabel"
                     GridlineStyleBottom =1
                     GridlineColor =10921638
-                    LayoutCachedLeft =9921
-                    LayoutCachedWidth =10146
+                    LayoutCachedLeft =624
+                    LayoutCachedWidth =849
                     LayoutCachedHeight =315
                 End
             End
@@ -182,8 +182,8 @@ Begin Form
                     AllowAutoCorrect = NotDefault
                     OverlapFlags =93
                     IMESentenceMode =3
-                    Left =1757
-                    Width =7365
+                    Left =2664
+                    Width =7530
                     Height =345
                     ColumnWidth =3000
                     BorderColor =10921638
@@ -192,8 +192,8 @@ Begin Form
                     ControlSource ="Trad_ID"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =1757
-                    LayoutCachedWidth =9122
+                    LayoutCachedLeft =2664
+                    LayoutCachedWidth =10194
                     LayoutCachedHeight =345
                     BackThemeColorIndex =9
                     BackTint =30.0
@@ -201,6 +201,7 @@ Begin Form
                 Begin TextBox
                     OverlapFlags =95
                     IMESentenceMode =3
+                    Left =907
                     Width =1761
                     Height =345
                     TabIndex =1
@@ -210,7 +211,8 @@ Begin Form
                     ControlSource ="PropNom"
                     GridlineColor =10921638
 
-                    LayoutCachedWidth =1761
+                    LayoutCachedLeft =907
+                    LayoutCachedWidth =2668
                     LayoutCachedHeight =345
                     BackThemeColorIndex =5
                     BackTint =60.0
@@ -221,9 +223,9 @@ Begin Form
                     ScrollBars =2
                     OverlapFlags =87
                     IMESentenceMode =3
-                    Left =793
+                    Left =1700
                     Top =340
-                    Width =7710
+                    Width =8505
                     Height =585
                     TabIndex =2
                     BorderColor =10921638
@@ -232,9 +234,9 @@ Begin Form
                     ControlSource ="PropTexte"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =793
+                    LayoutCachedLeft =1700
                     LayoutCachedTop =340
-                    LayoutCachedWidth =8503
+                    LayoutCachedWidth =10205
                     LayoutCachedHeight =925
                 End
                 Begin TextBox
@@ -249,8 +251,6 @@ Begin Form
                     TextFontFamily =18
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =9297
-                    Top =396
                     Width =284
                     Height =345
                     TabIndex =3
@@ -261,10 +261,8 @@ Begin Form
                     FontName ="Webdings"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =9297
-                    LayoutCachedTop =396
-                    LayoutCachedWidth =9581
-                    LayoutCachedHeight =741
+                    LayoutCachedWidth =284
+                    LayoutCachedHeight =345
                     ThemeFontIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -281,8 +279,7 @@ Begin Form
                     TextFontFamily =18
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =9581
-                    Top =396
+                    Left =284
                     Width =284
                     Height =345
                     TabIndex =4
@@ -292,10 +289,9 @@ Begin Form
                     FontName ="Webdings"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =9581
-                    LayoutCachedTop =396
-                    LayoutCachedWidth =9865
-                    LayoutCachedHeight =741
+                    LayoutCachedLeft =284
+                    LayoutCachedWidth =568
+                    LayoutCachedHeight =345
                     ThemeFontIndex =-1
                     ForeThemeColorIndex =8
                     ForeTint =100.0
@@ -312,8 +308,7 @@ Begin Form
                     TextFontFamily =18
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =9864
-                    Top =396
+                    Left =567
                     Width =284
                     Height =345
                     TabIndex =5
@@ -323,10 +318,9 @@ Begin Form
                     FontName ="Webdings"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =9864
-                    LayoutCachedTop =396
-                    LayoutCachedWidth =10148
-                    LayoutCachedHeight =741
+                    LayoutCachedLeft =567
+                    LayoutCachedWidth =851
+                    LayoutCachedHeight =345
                     ThemeFontIndex =-1
                     ForeThemeColorIndex =9
                     ForeTint =100.0

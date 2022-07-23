@@ -15,10 +15,10 @@ Begin Form
     Width =10204
     DatasheetFontHeight =11
     ItemSuffix =9
-    Left =-135
-    Top =375
-    Right =7710
-    Bottom =3840
+    Left =3735
+    Top =1380
+    Right =14865
+    Bottom =5100
     RecSrcDt = Begin
         0x0e57f48478dbe540
     End
@@ -94,7 +94,6 @@ Begin Form
                 Begin Label
                     OverlapFlags =85
                     TextAlign =2
-                    Left =9467
                     Width =180
                     Height =315
                     BorderColor =8355711
@@ -104,14 +103,13 @@ Begin Form
                     Tag ="DetachedLabel"
                     GridlineStyleBottom =1
                     GridlineColor =10921638
-                    LayoutCachedLeft =9467
-                    LayoutCachedWidth =9647
+                    LayoutCachedWidth =180
                     LayoutCachedHeight =315
                 End
                 Begin Label
                     OverlapFlags =85
                     TextAlign =2
-                    Left =9864
+                    Left =340
                     Width =225
                     Height =315
                     BorderColor =8355711
@@ -121,8 +119,8 @@ Begin Form
                     Tag ="DetachedLabel"
                     GridlineStyleBottom =1
                     GridlineColor =10921638
-                    LayoutCachedLeft =9864
-                    LayoutCachedWidth =10089
+                    LayoutCachedLeft =340
+                    LayoutCachedWidth =565
                     LayoutCachedHeight =315
                 End
             End
@@ -139,6 +137,7 @@ Begin Form
                     AllowAutoCorrect = NotDefault
                     OverlapFlags =93
                     IMESentenceMode =3
+                    Left =623
                     Width =1695
                     Height =340
                     ColumnWidth =3000
@@ -148,15 +147,16 @@ Begin Form
                     ControlSource ="ObjetType"
                     GridlineColor =10921638
 
-                    LayoutCachedWidth =1695
+                    LayoutCachedLeft =623
+                    LayoutCachedWidth =2318
                     LayoutCachedHeight =340
                 End
                 Begin TextBox
                     AllowAutoCorrect = NotDefault
                     OverlapFlags =87
                     IMESentenceMode =3
-                    Left =1702
-                    Width =7605
+                    Left =2325
+                    Width =7875
                     Height =340
                     ColumnWidth =3000
                     TabIndex =1
@@ -166,8 +166,8 @@ Begin Form
                     ControlSource ="ObjetNom"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =1702
-                    LayoutCachedWidth =9307
+                    LayoutCachedLeft =2325
+                    LayoutCachedWidth =10200
                     LayoutCachedHeight =340
                     BackThemeColorIndex =4
                     BackTint =40.0
@@ -178,13 +178,12 @@ Begin Form
                     TabStop = NotDefault
                     AllowAutoCorrect = NotDefault
                     OldBorderStyle =0
-                    OverlapFlags =85
+                    OverlapFlags =93
                     TextFontCharSet =2
                     TextAlign =2
                     TextFontFamily =18
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =9467
                     Width =284
                     Height =340
                     TabIndex =2
@@ -195,8 +194,7 @@ Begin Form
                     FontName ="Webdings"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =9467
-                    LayoutCachedWidth =9751
+                    LayoutCachedWidth =284
                     LayoutCachedHeight =340
                     ThemeFontIndex =-1
                     ForeThemeColorIndex =-1
@@ -208,13 +206,13 @@ Begin Form
                     TabStop = NotDefault
                     AllowAutoCorrect = NotDefault
                     OldBorderStyle =0
-                    OverlapFlags =85
+                    OverlapFlags =87
                     TextFontCharSet =2
                     TextAlign =2
                     TextFontFamily =18
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =9864
+                    Left =283
                     Width =284
                     Height =340
                     TabIndex =3
@@ -224,8 +222,8 @@ Begin Form
                     FontName ="Webdings"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =9864
-                    LayoutCachedWidth =10148
+                    LayoutCachedLeft =283
+                    LayoutCachedWidth =567
                     LayoutCachedHeight =340
                     ThemeFontIndex =-1
                     ForeThemeColorIndex =9
