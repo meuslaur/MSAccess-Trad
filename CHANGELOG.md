@@ -1,5 +1,29 @@
 #Changelog
 
+## V 0.45 2022/07/26
+C_TradScanText.
+- Ajout function `CheckPropApp()`, `CheckGuidApp()`, `CheckAppExiste()`, `UpdateTableApp()`, `GetGuid()`
+- Ajout propriétés `AppGuid` 
+- Ajout constante `TAG_GUIDD`, `TAG_GUIDF`
+- Ajout élément Guid dans Type `TObjet` et `TControl`.
+- Création Type `TApp`.
+
+MD_Utils
+- Ajout fonctions `CreateGuid`.
+
+MD_BDProp
+- Création du module.
+- Ajout des fonctions `DBPropTextCreate`, `DBPropTextDelete`, `DBPropTextSet`, `DBPropTextGet`, `DBPropsExport`, `DBPropTextExist`
+
+F_Main
+- Modification fonction `ReScannerApp`.
+
+Base
+- Ajout table `T_App`.
+- Ajout champ `ObjetGuid` T_Objets.
+- Ajout champ `ControlGuid` T_Controls.
+- Modification champ NomApp en `AppGuid` T_Objets.
+
 ## V 0.43 2022/07/23
 - Modification du form F_Main, réorganisation des listes (bases, types, objets).
 - F_Recap, ajoute de filtres (Scan, Modif, Nouveau).

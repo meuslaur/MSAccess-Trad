@@ -9,7 +9,7 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 '@Folder("Dev")
 ' ------------------------------------------------------
-' Name     : C_TradUtils
+' Name     : C_LabelsInfo
 ' ------------------------------------------------------
 ' Kind     : Module de classe
 ' Purpose  : Outils pour l'app TradAccess

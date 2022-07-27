@@ -16,10 +16,10 @@ Begin Form
     Width =10220
     DatasheetFontHeight =11
     ItemSuffix =13
-    Left =4230
-    Top =8415
-    Right =14445
-    Bottom =12180
+    Left =960
+    Top =972
+    Right =11172
+    Bottom =4740
     RecSrcDt = Begin
         0xb269f48478dbe540
     End
@@ -170,41 +170,18 @@ Begin Form
             End
         End
         Begin Section
-            Height =925
+            Height =585
             Name ="Détail"
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
             BackThemeColorIndex =1
             Begin
                 Begin TextBox
-                    TabStop = NotDefault
-                    EnterKeyBehavior = NotDefault
-                    AllowAutoCorrect = NotDefault
                     OverlapFlags =93
-                    IMESentenceMode =3
-                    Left =2664
-                    Width =7530
-                    Height =345
-                    ColumnWidth =3000
-                    BorderColor =10921638
-                    ForeColor =4210752
-                    Name ="Trad_ID"
-                    ControlSource ="Trad_ID"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =2664
-                    LayoutCachedWidth =10194
-                    LayoutCachedHeight =345
-                    BackThemeColorIndex =9
-                    BackTint =30.0
-                End
-                Begin TextBox
-                    OverlapFlags =95
                     IMESentenceMode =3
                     Left =907
                     Width =1761
                     Height =345
-                    TabIndex =1
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="PropNom"
@@ -223,21 +200,19 @@ Begin Form
                     ScrollBars =2
                     OverlapFlags =87
                     IMESentenceMode =3
-                    Left =1700
-                    Top =340
-                    Width =8505
+                    Left =2664
+                    Width =7533
                     Height =585
-                    TabIndex =2
+                    TabIndex =1
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="PropTexte"
                     ControlSource ="PropTexte"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =1700
-                    LayoutCachedTop =340
-                    LayoutCachedWidth =10205
-                    LayoutCachedHeight =925
+                    LayoutCachedLeft =2664
+                    LayoutCachedWidth =10197
+                    LayoutCachedHeight =585
                 End
                 Begin TextBox
                     Enabled = NotDefault
@@ -253,7 +228,7 @@ Begin Form
                     IMESentenceMode =3
                     Width =284
                     Height =345
-                    TabIndex =3
+                    TabIndex =2
                     BorderColor =10921638
                     ForeColor =2366701
                     Name ="txtScan"
@@ -282,7 +257,7 @@ Begin Form
                     Left =284
                     Width =284
                     Height =345
-                    TabIndex =4
+                    TabIndex =3
                     BorderColor =10921638
                     Name ="txtModif"
                     ControlSource ="Modif"
@@ -311,7 +286,7 @@ Begin Form
                     Left =567
                     Width =284
                     Height =345
-                    TabIndex =5
+                    TabIndex =4
                     BorderColor =10921638
                     Name ="txtNouv"
                     ControlSource ="Nouv"

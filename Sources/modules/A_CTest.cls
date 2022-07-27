@@ -8,6 +8,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 '@IgnoreModule
+'@IgnoreModule
 '@Folder("Test")
 ' ------------------------------------------------------
 ' Name     : ACTest
@@ -32,27 +33,27 @@ Private Type T_Test
     fin As Currency
 End Type
 
-Private test As T_Test
+Private Test As T_Test
 
 Public Property Get Code() As String
-    Code = test.Code
+    Code = Test.Code
 End Property
 Public Property Let Code(ByVal CodeNom As String)
-    test.Code = CodeNom
+    Test.Code = CodeNom
 End Property
 
 Public Property Get Debut() As Currency
-    Debut = test.Debut
+    Debut = Test.Debut
 End Property
 Public Property Let Debut(ByVal DebutTest As Currency)
-    test.Debut = DebutTest
+    Test.Debut = DebutTest
 End Property
 
 Public Property Get fin() As Currency
-    fin = test.fin
+    fin = Test.fin
 End Property
 Public Property Let fin(ByVal FinTest As Currency)
-    test.fin = FinTest
+    Test.fin = FinTest
 End Property
 
 Public Sub LanceTest(Code As String)

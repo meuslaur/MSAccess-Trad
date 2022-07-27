@@ -646,6 +646,7 @@ Attribute VB_Exposed = False
 ' Author   : Laurent
 ' Date     : 03/07/2022 - 14:37
 ' DateMod  :
+' Requi    : module MD_Utils, MD_FSO
 ' ------------------------------------------------------
 Option Compare Database
 Option Explicit
@@ -710,11 +711,11 @@ Private Sub cmbSelectImage_Click()
 
     '// Séléction de la base à utiliser.
     sDosFlag = CurrentProject.Path & DOS_DRAP
-    sImgSel = OuvreBoite("Image png", "*.png", "Sélection de l'image du drapeau.", sDosFlag, FD_TypeFilePicker)
+    sImgSel = MD_Utils.OuvreBoite("Image png", "*.png", "Sélection de l'image du drapeau.", sDosFlag, FD_TypeFilePicker)
     If (sImgSel = vbNullString) Then Exit Sub
 
-    sImg = FSOGetFileName(sImgSel)
-    sImgNom = FSOGetBaseName(sImgSel)
+    sImg = MD_FSO.FSOGetFileName(sImgSel)
+    sImgNom = MD_FSO.FSOGetBaseName(sImgSel)
 
     '// Vérifier si le nom correspond au code de la langue.
     If (Me.LangueCode <> Val(sImgNom)) Then

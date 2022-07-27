@@ -3,7 +3,7 @@ Beginning Export of all Source
 Trad-Access.accdb
 VCS Version 3.4.23
 Using Fast Save
-23/07/2022 12:35:59
+27/07/2022 19:34:14
 -------------------------------------
 -------------------------------------
 Exporting project...          
@@ -16,7 +16,7 @@ Exporting vb project...
 -------------------------------------
 Exporting vbe references...   
   DAO
-[2] vbe references processed.
+[1] vbe references processed.
 -------------------------------------
 No modified vbe forms found in this database.
 -------------------------------------
@@ -28,7 +28,7 @@ No modified saved specs found in this database.
 -------------------------------------
 Exporting db properties...    
   Database Properties (DAO)
-[51] db properties processed.
+[52] db properties processed.
 -------------------------------------
 No modified shared images found in this database.
 -------------------------------------
@@ -39,19 +39,22 @@ Exporting themes...
 No modified imex specs found in this database.
 -------------------------------------
 Exporting tables...           
-  T_Langues
+  T_App
     Sanitized in 0,005 seconds.
+  T_App (SQL)
+  T_Langues
+    Sanitized in 0,002 seconds.
   T_Langues (SQL)
   T_ObjetControles
-    Sanitized in 0,002 seconds.
+    Sanitized in 0,003 seconds.
   T_ObjetControles (SQL)
   T_Objets
     Sanitized in 0,002 seconds.
   T_Objets (SQL)
   T_TradTexte
-    Sanitized in 0,003 seconds.
+    Sanitized in 0,002 seconds.
   T_TradTexte (SQL)
-[4] tables processed.
+[5] tables processed.
 -------------------------------------
 Exporting queries...          
   R_F_MainSFControles
@@ -61,7 +64,6 @@ Exporting queries...
     Sanitized in 0,002 seconds.
   R_F_MainSFTextes (SQL)
   RL_Apps
-Source: modSanitize.SanitizeFile
     Sanitized in 0,001 seconds.
   RL_Apps (SQL)
   RL_Langues
@@ -72,21 +74,19 @@ Source: modSanitize.SanitizeFile
 Exporting forms...            
   F_Main
 Source: modSanitize.SanitizeFile
-    Sanitized in 0,018 seconds.
+    Sanitized in 0,020 seconds.
   F_RecapSFT
-    Sanitized in 0,011 seconds.
+    Sanitized in 0,007 seconds.
   F_MainSFTextes
     Sanitized in 0,006 seconds.
   F_Recap
 Source: modSanitize.SanitizeFile
     Sanitized in 0,008 seconds.
-  F_RecapSFO
-    Sanitized in 0,005 seconds.
   F_RecapSFC
     Sanitized in 0,004 seconds.
   F_MainSFControles
     Sanitized in 0,006 seconds.
-[7] forms processed.
+[6] forms processed.
 -------------------------------------
 No modified macros found in this database.
 -------------------------------------
@@ -99,15 +99,19 @@ Exporting table data...
 -------------------------------------
 Exporting modules...          
   C_TradScanText
-[1] modules processed.
+  MD_DBProp
+  C_ObjetsAccess
+  MD_Utils
+[4] modules processed.
 -------------------------------------
 No modified table data macros found in this database.
 -------------------------------------
 Exporting relations...        
-  {42B9E965-3965-4A62-B8E2-C08F096C8C7C}
-  {4EC3FD77-3B4E-4C45-A866-7A7A3FA296DA}
-  {887C4F77-6FF2-4380-9F1C-CCEA9E73E2E1}
-[3] relations processed.
+  T_AppT_Objets
+  T_LanguesT_TradTexte
+  T_ObjetControlesT_TradTexte
+  T_ObjetsT_ObjetControles
+[4] relations processed.
 -------------------------------------
 Exporting doc properties...   
   Database Documents
@@ -119,7 +123,7 @@ Exporting nav pane groups...
 -------------------------------------
 No modified hidden attributes found in this database.
 -------------------------------------
-Done. (1,19 seconds)
+Done. (1,26 seconds)
 
 --------------------------------------------------
                 PERFORMANCE REPORTS
@@ -127,51 +131,52 @@ Done. (1,19 seconds)
 Object Type                   Count     Seconds
 --------------------------------------------------
 Project                       1         0,02
-VB Project                    1         0,02
-VBE References                2         0,02
+VB Project                    1         0,01
+VBE References                1         0,01
 Proj Properties               2         0,01
-DB Properties                 51        0,21
+DB Properties                 52        0,18
 Themes                        1         0,01
-Tables                        4         0,10
+Tables                        5         0,11
 Queries                       4         0,09
-Forms                         7         0,27
+Forms                         6         0,24
 Table Data                    1         0,13
-Modules                       1         0,06
-Relations                     3         0,05
+Modules                       4         0,16
+Relations                     4         0,05
 Doc Properties                3         0,02
-Nav Pane Groups               1         0,01
+Nav Pane Groups               1         0,02
 --------------------------------------------------
-TOTALS:                       82        1,01
+TOTALS:                       86        1,07
 --------------------------------------------------
 
 --------------------------------------------------
 Operations                    Count     Seconds
 --------------------------------------------------
-Read File                     27        0,07
-Parse JSON                    11        0,02
-Convert to JSON               660       0,25
-Compute SHA256                38        0,00
-Console Updates               3         0,08
-Compare Dictionary            9         0,00
-Get Modified Date             19        0,01
-Get File Property Hash        19        0,00
-Write File                    26        0,01
-Verify Path                   44        0,00
+Read File                     28        0,09
+Parse JSON                    12        0,03
+Convert to JSON               678       0,23
+Compute SHA256                45        0,00
+Console Updates               3         0,07
+Compare Dictionary            10        0,00
+Get Modified Date             22        0,01
+Get File Property Hash        22        0,00
+Write File                    27        0,01
+Verify Path                   48        0,00
 Create Folder                 1         0,00
 Export Theme                  1         0,00
 Clear Orphaned                6         0,02
-App.ExportXML()               5         0,16
-Read File Bytes               16        0,13
-Sanitize XML                  5         0,01
-Format XML                    5         0,00
-Save Table SQL                4         0,01
-App.SaveAsText()              11        0,07
-Delete File                   13        0,00
-Sanitize File                 11        0,06
+App.ExportXML()               6         0,16
+Read File Bytes               16        0,09
+Sanitize XML                  6         0,01
+Format XML                    6         0,00
+Save Table SQL                5         0,01
+App.SaveAsText()              10        0,07
+Delete File                   15        0,00
+Sanitize File                 10        0,05
 Save Query SQL                4         0,00
-Get VBA Hash                  22        0,01
-Export VBE Module             1         0,01
-Enc. Windows-1252 as utf-8    1         0,01
+Get VBA Hash                  26        0,02
+Export VBE Module             4         0,05
+Enc. Windows-1252 as utf-8    4         0,03
+Increment Progress            1         0,04
 --------------------------------------------------
 Other Operations                        0,27
 --------------------------------------------------

@@ -10,11 +10,13 @@
 	<xsd:element name="T_TradTexte">
 		<xsd:annotation>
 			<xsd:appinfo>
+				<od:index index-name="CtrParentGuid" index-key="CtrParentGuid " primary="no" unique="no" clustered="no" order="asc"/>
 				<od:index index-name="LangueCode" index-key="LangueCode " primary="no" unique="no" clustered="no" order="asc"/>
-				<od:index index-name="PrimaryKey" index-key="Trad_ID PropNom " primary="yes" unique="yes" clustered="no" order="asc asc"/>
+				<od:index index-name="PrimaryKey" index-key="CtrParentGuid PropNom " primary="yes" unique="yes" clustered="no" order="asc asc"/>
 				<od:index index-name="PropNom" index-key="PropNom " primary="no" unique="no" clustered="no" order="asc"/>
 				<od:index index-name="Scanner" index-key="Scanner " primary="no" unique="no" clustered="no" order="asc"/>
-				<od:index index-name="Trad_ID" index-key="Trad_ID " primary="no" unique="no" clustered="no" order="asc"/>
+				<od:index index-name="T_LanguesT_TradTexte" index-key="LangueCode " primary="no" unique="no" clustered="no" order="asc"/>
+				<od:index index-name="T_ObjetControlesT_TradTexte" index-key="CtrParentGuid " primary="no" unique="no" clustered="no" order="asc"/>
 				<od:tableProperty name="Orientation" type="2" value="0"/>
 				<od:tableProperty name="OrderByOn" type="1" value="0"/>
 				<od:tableProperty name="DefaultView" type="2" value="2"/>
@@ -36,18 +38,18 @@
 		</xsd:annotation>
 		<xsd:complexType>
 			<xsd:sequence>
-				<xsd:element name="Trad_ID" minOccurs="1" od:jetType="text" od:sqlSType="nvarchar" od:nonNullable="yes">
+				<xsd:element name="CtrParentGuid" minOccurs="1" od:jetType="text" od:sqlSType="nvarchar" od:nonNullable="yes">
 					<xsd:annotation>
 						<xsd:appinfo>
-							<od:fieldProperty name="ColumnWidth" type="3" value="6135"/>
+							<od:fieldProperty name="ColumnWidth" type="3" value="-1"/>
 							<od:fieldProperty name="ColumnOrder" type="3" value="0"/>
 							<od:fieldProperty name="ColumnHidden" type="1" value="0"/>
 							<od:fieldProperty name="Required" type="1" value="1"/>
-							<od:fieldProperty name="AllowZeroLength" type="1" value="1"/>
+							<od:fieldProperty name="AllowZeroLength" type="1" value="0"/>
 							<od:fieldProperty name="DisplayControl" type="3" value="109"/>
 							<od:fieldProperty name="IMEMode" type="2" value="0"/>
 							<od:fieldProperty name="IMESentenceMode" type="2" value="3"/>
-							<od:fieldProperty name="UnicodeCompression" type="1" value="0"/>
+							<od:fieldProperty name="UnicodeCompression" type="1" value="1"/>
 							<od:fieldProperty name="TextAlign" type="2" value="0"/>
 							<od:fieldProperty name="AggregateType" type="4" value="-1"/>
 							<od:fieldProperty name="ResultType" type="2" value="0"/>
@@ -56,7 +58,7 @@
 					</xsd:annotation>
 					<xsd:simpleType>
 						<xsd:restriction base="xsd:string">
-							<xsd:maxLength value="100"/>
+							<xsd:maxLength value="50"/>
 						</xsd:restriction>
 					</xsd:simpleType>
 				</xsd:element>
@@ -67,11 +69,11 @@
 							<od:fieldProperty name="ColumnOrder" type="3" value="0"/>
 							<od:fieldProperty name="ColumnHidden" type="1" value="0"/>
 							<od:fieldProperty name="Required" type="1" value="1"/>
-							<od:fieldProperty name="AllowZeroLength" type="1" value="1"/>
+							<od:fieldProperty name="AllowZeroLength" type="1" value="0"/>
 							<od:fieldProperty name="DisplayControl" type="3" value="109"/>
 							<od:fieldProperty name="IMEMode" type="2" value="0"/>
 							<od:fieldProperty name="IMESentenceMode" type="2" value="3"/>
-							<od:fieldProperty name="UnicodeCompression" type="1" value="0"/>
+							<od:fieldProperty name="UnicodeCompression" type="1" value="1"/>
 							<od:fieldProperty name="TextAlign" type="2" value="0"/>
 							<od:fieldProperty name="AggregateType" type="4" value="-1"/>
 							<od:fieldProperty name="ResultType" type="2" value="0"/>
@@ -159,7 +161,7 @@
 						</xsd:appinfo>
 					</xsd:annotation>
 				</xsd:element>
-				<xsd:element name="ModPropTexte" minOccurs="1" od:jetType="yesno" od:sqlSType="bit" od:nonNullable="yes" type="xsd:boolean">
+				<xsd:element name="ModifTxt" minOccurs="1" od:jetType="yesno" od:sqlSType="bit" od:nonNullable="yes" type="xsd:boolean">
 					<xsd:annotation>
 						<xsd:appinfo>
 							<od:fieldProperty name="ColumnWidth" type="3" value="-1"/>

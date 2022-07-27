@@ -356,7 +356,7 @@ Begin Form
                     Height =4875
                     BorderColor =10921638
                     Name ="SF_TradOrg"
-                    SourceObject ="Form.SF_TradOrg"
+                    SourceObject ="Form.F_TradSFOrg"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =170
@@ -410,6 +410,7 @@ Attribute VB_Exposed = False
 ' Objectif :
 ' Date     : 02/07/2022 - 07:24
 ' DateMod  : 05/07/2022 - 06:11
+' Requi    : Classe : C_TradScanText
 ' ------------------------------------------------------
 Option Compare Database
 Option Explicit

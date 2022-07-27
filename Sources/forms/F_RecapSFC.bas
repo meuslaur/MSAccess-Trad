@@ -13,13 +13,13 @@ Begin Form
     PictureAlignment =2
     DatasheetGridlinesBehavior =3
     GridY =10
-    Width =10207
+    Width =10219
     DatasheetFontHeight =11
-    ItemSuffix =7
-    Left =2550
-    Top =4650
-    Right =13005
-    Bottom =7710
+    ItemSuffix =12
+    Left =2556
+    Top =4656
+    Right =13008
+    Bottom =7716
     RecSrcDt = Begin
         0x6a44f48478dbe540
     End
@@ -134,20 +134,21 @@ Begin Form
                 Begin TextBox
                     EnterKeyBehavior = NotDefault
                     AllowAutoCorrect = NotDefault
-                    OverlapFlags =85
+                    OverlapFlags =93
                     IMESentenceMode =3
-                    Left =697
-                    Width =9510
+                    Left =2437
+                    Width =7782
                     Height =340
                     ColumnWidth =3000
+                    TabIndex =3
                     BorderColor =10921638
                     ForeColor =4210752
-                    Name ="Control_ID"
-                    ControlSource ="Control_ID"
+                    Name ="ControlNom"
+                    ControlSource ="ControlNom"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =697
-                    LayoutCachedWidth =10207
+                    LayoutCachedLeft =2437
+                    LayoutCachedWidth =10219
                     LayoutCachedHeight =340
                     BackThemeColorIndex =9
                     BackTint =30.0
@@ -165,7 +166,6 @@ Begin Form
                     IMESentenceMode =3
                     Width =284
                     Height =340
-                    TabIndex =1
                     BorderColor =10921638
                     ForeColor =2366701
                     Name ="txtScan"
@@ -193,9 +193,9 @@ Begin Form
                     Left =283
                     Width =284
                     Height =340
-                    TabIndex =2
+                    TabIndex =1
                     BorderColor =10921638
-                    Name ="txtModif"
+                    Name ="txtNouv"
                     ControlSource ="Nouv"
                     FontName ="Webdings"
                     GridlineColor =10921638
@@ -207,6 +207,24 @@ Begin Form
                     ForeThemeColorIndex =9
                     ForeTint =100.0
                     ForeShade =75.0
+                End
+                Begin TextBox
+                    TabStop = NotDefault
+                    OverlapFlags =87
+                    IMESentenceMode =3
+                    Left =623
+                    Width =1809
+                    Height =340
+                    TabIndex =2
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    Name ="ControlType"
+                    ControlSource ="ControlType"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =623
+                    LayoutCachedWidth =2432
+                    LayoutCachedHeight =340
                 End
             End
         End

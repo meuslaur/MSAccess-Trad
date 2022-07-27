@@ -16,10 +16,10 @@ Begin Form
     Width =11338
     DatasheetFontHeight =11
     ItemSuffix =14
-    Left =1935
-    Top =750
-    Right =13275
-    Bottom =5520
+    Left =1932
+    Top =756
+    Right =12900
+    Bottom =4716
     RecSrcDt = Begin
         0xe6bed64291dbe540
     End
@@ -104,7 +104,7 @@ Begin Form
                     Width =1080
                     Height =315
                     BorderColor =8355711
-                    Name ="lbl_Control_ID"
+                    Name ="lbl_txtControlNom"
                     Caption ="Control"
                     Tag ="DetachedLabel"
                     GridlineStyleBottom =1
@@ -253,8 +253,8 @@ Begin Form
                     ColumnWidth =3000
                     BorderColor =10921638
                     ForeColor =4210752
-                    Name ="ObjetParent_ID"
-                    ControlSource ="ObjetParent_ID"
+                    Name ="ObjetParentGuid"
+                    ControlSource ="ObjetParentGuid"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =7272
@@ -291,7 +291,7 @@ Begin Form
                     Locked = NotDefault
                     TabStop = NotDefault
                     OldBorderStyle =0
-                    OverlapFlags =119
+                    OverlapFlags =247
                     TextFontCharSet =2
                     TextFontFamily =18
                     IMESentenceMode =3
@@ -326,8 +326,8 @@ Begin Form
                     TabIndex =6
                     BorderColor =10921638
                     ForeColor =4210752
-                    Name ="Control_ID"
-                    ControlSource ="Control_ID"
+                    Name ="ControlGuid"
+                    ControlSource ="ControlGuid"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =9030

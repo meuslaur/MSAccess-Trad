@@ -168,7 +168,7 @@ Begin Form
                     Height =570
                     BorderColor =8355711
                     ForeColor =6710886
-                    Name ="Étiquette2"
+                    Name ="lblBulleScanInfo"
                     Caption ="(S) - (Objet,Contrôle ou Propriéré)\015\012Indique  non vue lors du scan (Suppri"
                         "mé ou à été renommé)."
                     GridlineColor =10921638
@@ -185,7 +185,7 @@ Begin Form
                     Height =570
                     BorderColor =8355711
                     ForeColor =6710886
-                    Name ="Étiquette3"
+                    Name ="lblBulleNouvInfo"
                     Caption ="(N) - (Objet,Contrôle ou Propriéré)\015\012Indique nouveau (Ajouté ou à été reno"
                         "mmé)."
                     GridlineColor =10921638
@@ -202,7 +202,7 @@ Begin Form
                     Height =675
                     BorderColor =8355711
                     ForeColor =6710886
-                    Name ="Étiquette4"
+                    Name ="lblBulleModifInfo"
                     Caption ="(M) - (Propriété)\015\012Indique que le texte de la propriété à été modifié."
                     GridlineColor =10921638
                     LayoutCachedLeft =397

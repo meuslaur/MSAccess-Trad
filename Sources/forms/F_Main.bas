@@ -17,11 +17,11 @@ Begin Form
     GridY =10
     Width =18425
     DatasheetFontHeight =11
-    ItemSuffix =81
-    Left =3480
-    Top =225
-    Right =21645
-    Bottom =11415
+    ItemSuffix =82
+    Left =4212
+    Top =600
+    Right =22632
+    Bottom =12048
     DatasheetGridlinesColor =15132391
     RecSrcDt = Begin
         0x5c7a48f85bd8e540
@@ -321,8 +321,8 @@ Begin Form
                     PressedForeColor =4210752
                     WebImagePaddingLeft =2
                     WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
                     Overlaps =1
                 End
                 Begin CommandButton
@@ -390,10 +390,10 @@ Begin Form
                     PressedColor =9917743
                     HoverForeColor =4210752
                     PressedForeColor =4210752
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
+                    WebImagePaddingLeft =3
+                    WebImagePaddingTop =3
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
                     Overlaps =1
                 End
                 Begin ComboBox
@@ -669,10 +669,10 @@ Begin Form
                     PressedColor =9917743
                     HoverForeColor =4210752
                     PressedForeColor =4210752
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
+                    WebImagePaddingLeft =3
+                    WebImagePaddingTop =3
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
                     Overlaps =1
                 End
                 Begin Rectangle
@@ -779,7 +779,7 @@ Begin Form
                     Left =13039
                     Top =510
                     Width =5163
-                    Height =4305
+                    Height =4485
                     ColumnOrder =0
                     TabIndex =4
                     ForeColor =4210752
@@ -793,7 +793,7 @@ Begin Form
                     LayoutCachedLeft =13039
                     LayoutCachedTop =510
                     LayoutCachedWidth =18202
-                    LayoutCachedHeight =4815
+                    LayoutCachedHeight =4995
                     BackThemeColorIndex =4
                     BackTint =40.0
                     BorderShade =35.0
@@ -838,8 +838,8 @@ Begin Form
                     BorderColor =10921638
                     Name ="SF_Textes"
                     SourceObject ="Form.F_MainSFTextes"
-                    LinkChildFields ="Trad_ID"
-                    LinkMasterFields ="txt_SFControlID"
+                    LinkChildFields ="CtrParentGuid"
+                    LinkMasterFields ="txt_SFControlGuid"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =737
@@ -886,7 +886,7 @@ Begin Form
                     BorderColor =10921638
                     Name ="SF_Controles"
                     SourceObject ="Form.F_MainSFControles"
-                    LinkChildFields ="ObjetParent_ID"
+                    LinkChildFields ="ObjetParentGuid"
                     LinkMasterFields ="lstObjets"
                     GridlineColor =10921638
 
@@ -940,8 +940,8 @@ Begin Form
                     TabIndex =6
                     BorderColor =10921638
                     ForeColor =4210752
-                    Name ="txt_SFControlID"
-                    ControlSource ="=[SF_Controles].[Form]![Control_ID]"
+                    Name ="txt_SFControlGuid"
+                    ControlSource ="=[SF_Controles].[Form]![ControlGuid]"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =3231
@@ -1055,7 +1055,7 @@ Begin Form
                     LayoutCachedTop =623
                     LayoutCachedWidth =7891
                     LayoutCachedHeight =863
-                    TabIndex =10
+                    TabIndex =11
                 End
                 Begin CommandButton
                     TabStop = NotDefault
@@ -1127,10 +1127,10 @@ Begin Form
                     PressedColor =9917743
                     HoverForeColor =4210752
                     PressedForeColor =4210752
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
+                    WebImagePaddingLeft =3
+                    WebImagePaddingTop =3
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
                 End
                 Begin ComboBox
                     LimitToList = NotDefault
@@ -1138,29 +1138,30 @@ Begin Form
                     AllowAutoCorrect = NotDefault
                     OverlapFlags =215
                     IMESentenceMode =3
+                    ColumnCount =2
                     ListWidth =2085
-                    Left =1081
-                    Top =638
+                    Left =1133
+                    Top =581
                     Width =3861
                     Height =300
                     TabIndex =2
                     BorderColor =10921638
                     ForeColor =3484194
-                    ColumnInfo ="\"\";\"\";\"10\";\"100\""
+                    ColumnInfo ="\"\";\"\";\"\";\"\";\"10\";\"200\""
                     Name ="zlBases"
                     RowSourceType ="Table/Query"
                     RowSource ="RL_Apps"
-                    ColumnWidths ="2085"
+                    ColumnWidths ="0;2086"
                     AfterUpdate ="[Event Procedure]"
                     OnGotFocus ="=OuvreZl()"
                     ControlTipText ="Liste des applications déjà enregistrées,"
                     GridlineColor =10921638
                     AllowValueListEdits =0
 
-                    LayoutCachedLeft =1081
-                    LayoutCachedTop =638
-                    LayoutCachedWidth =4942
-                    LayoutCachedHeight =938
+                    LayoutCachedLeft =1133
+                    LayoutCachedTop =581
+                    LayoutCachedWidth =4994
+                    LayoutCachedHeight =881
                     BackThemeColorIndex =7
                     BackTint =20.0
                     Begin
@@ -1170,8 +1171,8 @@ Begin Form
                             OverlapFlags =93
                             TextAlign =2
                             TextFontFamily =49
-                            Left =1081
-                            Top =283
+                            Left =1133
+                            Top =226
                             Width =3855
                             Height =360
                             FontWeight =500
@@ -1181,10 +1182,10 @@ Begin Form
                             Caption ="Bases"
                             FontName ="Consolas"
                             GridlineColor =10921638
-                            LayoutCachedLeft =1081
-                            LayoutCachedTop =283
-                            LayoutCachedWidth =4936
-                            LayoutCachedHeight =643
+                            LayoutCachedLeft =1133
+                            LayoutCachedTop =226
+                            LayoutCachedWidth =4988
+                            LayoutCachedHeight =586
                             ThemeFontIndex =-1
                             BackThemeColorIndex =7
                             BackTint =50.0
@@ -1306,17 +1307,18 @@ Begin Form
                     PressedColor =9917743
                     HoverForeColor =4210752
                     PressedForeColor =4210752
-                    WebImagePaddingLeft =2
-                    WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
+                    WebImagePaddingLeft =3
+                    WebImagePaddingTop =3
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
                     Overlaps =1
                 End
                 Begin ComboBox
                     LimitToList = NotDefault
+                    Enabled = NotDefault
                     TabStop = NotDefault
                     RowSourceTypeInt =1
-                    OverlapFlags =119
+                    OverlapFlags =85
                     DecimalPlaces =0
                     IMESentenceMode =3
                     ColumnCount =2
@@ -1351,7 +1353,7 @@ Begin Form
                         Begin Label
                             BackStyle =1
                             OldBorderStyle =1
-                            OverlapFlags =127
+                            OverlapFlags =255
                             TextAlign =2
                             Left =7869
                             Top =623
@@ -1436,7 +1438,7 @@ Begin Form
                     LayoutCachedTop =226
                     LayoutCachedWidth =12995
                     LayoutCachedHeight =466
-                    TabIndex =11
+                    TabIndex =12
                 End
                 Begin Line
                     LineSlant = NotDefault
@@ -1503,7 +1505,7 @@ Begin Form
                     LayoutCachedTop =3741
                     LayoutCachedWidth =12599
                     LayoutCachedHeight =3981
-                    TabIndex =12
+                    TabIndex =13
                 End
                 Begin Line
                     OverlapFlags =127
@@ -1568,7 +1570,7 @@ Begin Form
                     LayoutCachedTop =7290
                     LayoutCachedWidth =11970
                     LayoutCachedHeight =7530
-                    TabIndex =13
+                    TabIndex =14
                 End
                 Begin Line
                     LineSlant = NotDefault
@@ -1583,6 +1585,32 @@ Begin Form
                     LayoutCachedTop =6990
                     LayoutCachedWidth =11850
                     LayoutCachedHeight =7273
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =15363
+                    Top =6576
+                    TabIndex =10
+                    ForeColor =4210752
+                    Name ="Commande81"
+                    Caption ="Sup prop"
+                    OnClick ="[Event Procedure]"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =15363
+                    LayoutCachedTop =6576
+                    LayoutCachedWidth =17064
+                    LayoutCachedHeight =6859
+                    BackColor =14461583
+                    BorderColor =14461583
+                    HoverColor =15189940
+                    PressedColor =9917743
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =3
+                    WebImagePaddingTop =3
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
                 End
             End
         End
@@ -1612,7 +1640,8 @@ Attribute VB_Exposed = False
 ' Objectif :
 ' Date     : 27/06/2022 - 11:00
 ' DateMod  : 23/07/2022 - 09:40
-' Requi    :
+' Requi    : module :  MD_Utils
+'            Classe : C_ObjetsAccess, C_TradScanText
 ' ------------------------------------------------------
 Option Compare Database
 Option Explicit
@@ -1622,8 +1651,16 @@ Option Explicit
     Private ScanTxt     As C_TradScanText
 
     Private m_AjoutLangue As Boolean    '// Indique a la liste des langues qu'une nouvelle langue à été saisie dans le form F_Langues.
-    Private m_BaseExiste  As Boolean    '// Indique que la base sélectionnée (boite fichier) est déjà dans la table.
 '//:::::::::::::::::::::::::::::::::: END VARIABLES ::::::::::::::::::::::::::::::::::::::
+
+Private Sub Commande81_Click()
+    Dim obd As DAO.Database
+    Set obd = ObjetAcc.GetMsBase()
+    Dim brep As Boolean
+    brep = MD_DBProp.DBPropTextDelete(PROP_GUID, obd)
+    Set obd = Nothing
+    
+End Sub
 
 '//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&     EVENTS        &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 Private Sub Form_Load()
@@ -1661,44 +1698,82 @@ End Sub
 Private Sub cmbSelectBdd_Click()
     On Error GoTo ERR_cmbSelectBdd
 
-    Dim bRep        As Boolean
-    Dim sBaseSel    As String
-    Dim sBase       As String
-'#    Dim vTmp     As Variant  '// Pour Split de sBackup.
-'#    Dim sRep     As String
+    Dim brep     As Boolean
+    Dim sBaseSel As String
+    Dim vtmp     As Variant     '// Pour Split de sBackup.
+    Dim sRep     As String
+    Dim eRep     As eReponse
+    Dim sMsg    As String
+    Dim lRep    As Long
 
     '// Sélection de la base à utiliser.
-    sBaseSel = OuvreBoite("MS Access", "*.accdb", , , FD_TypeFilePicker)
+    sBaseSel = MD_Utils.OuvreBoite("MS Access", "*.accdb", , , FD_TypeFilePicker)
     If (sBaseSel = vbNullString) Then Exit Sub
 
-    sBase = FSOGetBaseName(sBaseSel)
-    If (ReScannerApp(sBase) = False) Then Exit Sub  '// Demande confirmation si la base existe déjà dans la table des objets...
+'//----- Sauvegarde
+    sRep = MD_Utils.GetBackupFileName(sBaseSel)         '// Détermine le nom du fichier de la prochaine sauvegarde...
+    vtmp = Split(sRep, ";")             '// Retourne folder;backup;base
+    Me.txtBddSauve = vtmp(0) & vtmp(1)  '// folder + backup.
 
-    DoCmd.Hourglass True
-    DoCmd.Echo False
+    sMsg = "Créez la sauvegarde ?" & vbCrLf & Me.txtBddSauve
+    lRep = MsgBox(sMsg, vbQuestion + vbYesNo, "Sauvegarde...")
+    If lRep = vbYes Then
+        brep = MD_Utils.CopyFile(sBaseSel, Me.txtBddSauve)  '// Sauvegarde...
+        If (brep = False) Then Exit Sub
+    End If
+'//----- Sauvegarde
 
-    bRep = InitAppEtBase(sBaseSel)                  '// Création Access.Application, ouverture de la base....
+    brep = InitAppEtBase(sBaseSel)         '// Création Access.Application, ouverture de la base....
+
     DoEvents
+    DoCmd.Echo True
+    DoCmd.Hourglass False
 
-    If (bRep) Then
+    If (brep = False) Then Exit Sub '// Erreur, on sort.
 
-        RazForm True
-        Me.txtBdd = sBaseSel
-'#        sRep = GetBackupFileName(sBaseSel)  '// Détermine le nonm du fichier de la prochaine sauvegarde...
-'#
-'#        vTmp = Split(sRep, ";")             '// NOTE retourne folder;backup;base
-'#        Me.txtBddSauve = vTmp(0) & vTmp(1)  '// folder + backup.
+    eRep = ScanTxt.IsNewApp()                 '// Vérifie base déjà scannée...
 
-       If m_BaseExiste Then
+    Select Case eRep
 
-            Me.zlLangues = ScanTxt.LangueGetIDLangBase(sBase)   '// Extraire la langue d'origine de la base...
-            Me.zlBases = ObjetAcc.BaseOuverteNom
-            zlBases_AfterUpdate
-        Else
-            Me.zlLangues.SetFocus
-            Me.zlLangues.Dropdown
-            Me.cmdVoirRecap.Enabled = False
-        End If
+        Case eReponse.Exist             '// Existe, demande confirmation.
+
+            ScanTxt.ReScannerApp = True
+            sMsg = "La base '" & ObjetAcc.BaseOuverteNom & "' est déjà enregistrée dans la table T_Objets." & vbCrLf & _
+                   "Les données concernant cette base vont être mise à jour." & vbCrLf & _
+                   "Voulez-vous continuer ?"
+            lRep = MsgBox(sMsg, vbExclamation + vbYesNo + vbDefaultButton2, "Base déjà enregistrée")
+            If (lRep = vbNo) Then brep = False
+
+        Case eReponse.Inconnu           '// Existe pas.
+            ScanTxt.ReScannerApp = False
+
+        Case eReponse.Faux              '// Guid pas dans la table. 'TODO: CONTROLER
+            MsgBox "Erreur GuidApp pas dans la table.", vbCritical, "cmbSelectBdd_Click"
+            brep = False
+
+        Case eReponse.Erreur            '// Pb correspondance
+             MsgBox "Erreur GuidApp/table ne correspondent pas.", vbCritical, "cmbSelectBdd_Click"
+            brep = False
+
+    End Select
+
+    If (brep = False) Then
+        cmdCloseBd_Click    '// Erreur, on ferme Tout, et on sort.
+        Exit Sub
+    End If
+
+    RazForm True        '// Defini les contrôles à afficher/activés.
+    Me.txtBdd = sBaseSel
+ 
+    If ScanTxt.ReScannerApp Then
+        Me.zlLangues = ScanTxt.GetIDLangBase()      '// Extraire la langue d'origine de la base...
+        Me.zlBases = ScanTxt.AppGuid()
+        zlBases_AfterUpdate
+
+    Else
+        Me.zlLangues.SetFocus
+        Me.zlLangues.Dropdown
+        Me.cmdVoirRecap.Enabled = False
     End If
 
 SORTIE_cmbSelectBdd:
@@ -1716,10 +1791,10 @@ End Sub
 Private Sub cmdCloseBd_Click()
 
     DoCmd.Hourglass True
-    
+
     ObjetAcc.CloseMsBase    '// Ferme la base en cours, réinitialise les champs par défaut...
 
-    m_BaseExiste = False
+    ScanTxt.ReScannerApp = False
     RazForm
     Me.txtBdd = "Sélectionnez un base..."
     DoCmd.Hourglass False
@@ -1753,13 +1828,14 @@ Private Sub zlLangues_AfterUpdate()
     MaJLangue   '// Affiche le drapeau...
 End Sub
 
+' ----------------------------------------------------------------
 '// Ouvre le formulaire de la langue.
+' ----------------------------------------------------------------
 Private Sub zlLangues_DblClick(Cancel As Integer)
     If (IsNull(Me.zlLangues)) Then Exit Sub
     DoCmd.OpenForm "F_Langues", acNormal, , , acFormEdit, acDialog, Me.zlLangues
 End Sub
 
-'// Scan la base sélectionnée...
 '----------------------------------------------------------------
 ' Procedure Nom   : cmdLanceScan_Click
 ' ----------------------------------------------------------------
@@ -1775,7 +1851,7 @@ End Sub
 ' ----------------------------------------------------------------
 Private Sub cmdLanceScan_Click()
 
-    '// Vérifier si une langue d'origine défini.
+    '// Vérifier si une langue d'origine défini(Nouveau scan).
     If (IsNull(Me.zlLangues)) Then
         MsgBox "Sélectionnez la langue d'origine de la base" & vbCrLf & "Avant de lancer l'analyse, merci.", vbInformation, "Choisir une langue"
         Me.zlLangues.SetFocus
@@ -1783,14 +1859,17 @@ Private Sub cmdLanceScan_Click()
         Exit Sub
     End If
 
-    Dim bRep As Boolean
+    Dim brep As Boolean
 
     DoCmd.Hourglass True
-    ScanActif True      '// Affiche les contrôles d'avancement du scan...
-
+    
+    ScanActif True                                                  '// Affiche les contrôles d'avancement du scan...
     ScanTxt.InitialiseLabelsInfo Me.lbl_InfoScan2, Me.lbl_InfoScan3 '// Initialise les labels texte et d'avancement...
 
-    bRep = ScanTxt.ScanObjetsApp(T_FormType, T_ReportType)          '// Lance le scan les objets de la base sélectionnée.... 'TODO: Voir le cas ou aucun objets trouvé.
+    ScanTxt.IDLangApp = Me.zlLangues
+    ' ------------------------------
+    brep = ScanTxt.ScanObjetsApp(FormType, ReportType)          '// Lance le scan les objets de la base sélectionnée.... 'TODO: Voir le cas ou aucun objets trouvé.
+    ' ------------------------------
 
     Me.lbl_InfoScan2.Caption = "Fermeture de la base et de l'application...."
     ObjetAcc.CloseMsBase True       '// Femeture base et app...
@@ -1799,16 +1878,18 @@ Private Sub cmdLanceScan_Click()
 
     DoCmd.Hourglass False
 
-    If bRep Then
+    If brep Then
         Me.zlBases.Requery
-        Me.zlBases = ObjetAcc.BaseOuverteNom()  '// Extraire le nom de la base.
-        zlBases_AfterUpdate                     '// MàJ des données...
+        Me.zlBases = ScanTxt.AppGuid()      '// Extraire le nom de la base.
+        zlBases_AfterUpdate                 '// MàJ des données...
         DoCmd.OpenForm "F_Recap", , , , , acDialog, Me.zlBases
     End If
 
 End Sub
 
+' ----------------------------------------------------------------
 '// Affiche la récap du dernier scan de la base selectionnée.
+' ----------------------------------------------------------------
 Private Sub cmdVoirRecap_Click()
     If (IsNull(Me.zlBases)) Then
         Me.zlBases.SetFocus
@@ -1819,12 +1900,17 @@ Private Sub cmdVoirRecap_Click()
     DoCmd.OpenForm "F_Recap", , , , , acDialog, Me.zlBases & ";" & Me.txtDateScan
 End Sub
 
+' ----------------------------------------------------------------
 '// Actualise la liste des objets suivant la base sélectionné.
+' ----------------------------------------------------------------
 Private Sub zlBases_AfterUpdate()
 
-    If (IsNull(Me.zlBases)) Then Exit Sub
+    If (IsNull(Me.zlBases)) Then
+        Me.cmdVoirRecap.Enabled = False
+        Me.zlObjetTypes.Enabled = False
+        Exit Sub
+    End If
 
-    Dim sSql  As String
     Dim vDate As Variant
 
     DoCmd.Echo False
@@ -1833,14 +1919,15 @@ Private Sub zlBases_AfterUpdate()
 
     MaJListeObjets      '// Charge la liste des objets suivant l'app en cours...
 
-    vDate = DMax("[DateMaJ]", "T_TradTexte", "[Trad_ID] Like('" & Me.zlBases & "*')")
-    Me.txtDateScan = vDate
+    vDate = DFirst("[DernierScan]", "T_App", "[AppGuid] ='" & Me.zlBases & "'")
+    Me.txtDateScan = CDate(vDate)
 
-    Me.zlLangues = ScanTxt.LangueGetIDLangBase(Me.zlBases)  '// Extraire la langue d'origine de la base...
-    MaJLangue False                                         '// Affiche le drapeau, vérouille la zl...
+    Me.zlLangues = ScanTxt.GetIDLangBase(Me.zlBases)    '// Extraire la langue d'origine de la base...
+    MaJLangue False                                     '// Affiche le drapeau, vérouille la zl...
 
     MajLabelsInfo
     Me.cmdVoirRecap.Enabled = True
+    Me.zlObjetTypes.Enabled = True
 
     DoCmd.Echo True
 
@@ -1857,88 +1944,54 @@ Private Sub lstObjets_AfterUpdate()
 End Sub
 
 Private Sub cmdAfficheInfo_Click()
-    DoCmd.OpenForm "F_InfoRecap" ', , , , , , Me.zlBases & ";" & Me.txtDateScan
+    DoCmd.OpenForm "F_InfoRecap"
 End Sub
 
 '//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& END EVENTS &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 '// ################################ PRIVATE SUB/FUNC ####################################
 
-'----------------------------------------------------------------
-' Procedure Nom   : ReScannerApp
 ' ----------------------------------------------------------------
-' Sujet           : Vérifier si la base choisi dans la boite fichier existe déjà dans la table
-' Procedure Kind  : Function
-' Procedure Access: Private
-'
-'=== Paramètres ===
-' BaseSelect (String): Fichier Base choisi
-'==================
-'
-' Return Boolean : True si non trouvé ou si trouvé et si l'utilisateur veux quand même continuer.
-'
-' Author  : Laurent
-' Date    : 11/07/2022 - 17:27
-' DateMod : 20/07/2022 - 17:59
+'// Création de l'objet Application, ouverture de la base
 ' ----------------------------------------------------------------
-Private Function ReScannerApp(BaseSelect As String) As Boolean
-    Dim vRes  As Variant
-    Dim sMsg  As String
-    Dim lRep  As Long
-
-    '// On vérifie si la base est dans la table.
-    vRes = DLookup("[Objet_ID]", "T_Objets", "[ObjetApp]='" & BaseSelect & "'")
-
-    m_BaseExiste = (Not IsNull(vRes))
-    If (m_BaseExiste = False) Then ReScannerApp = True: Exit Function   '// Existe pas, on sort.
-
-    ScanTxt.ReScannerApp = False
-    sMsg = "La base '" & BaseSelect & "' est déjà enregistrée dans la table T_Objets." & vbCrLf & _
-           "Les données concernant cette base vont être mise à jour." & vbCrLf & _
-           "Voulez-vous continuer ?"
-    lRep = MsgBox(sMsg, vbExclamation + vbYesNo + vbDefaultButton2, "Base déjà enregistrée")
-
-    '// Informe la classe que la base vas être re scannée.
-    If (lRep = vbYes) Then
-        ReScannerApp = True
-        ScanTxt.ReScannerApp = True
-    End If
-
-End Function
-
 Private Function InitAppEtBase(sBase As String) As Boolean
-    Dim bRep As Boolean
+    Dim brep As Boolean
+
+    DoCmd.Hourglass True
+    DoCmd.Echo False
 
     If (ObjetAcc Is Nothing) Then Exit Function
 
-    '// Création Access.Application, si pas déjà fait.
     If (ObjetAcc.MsAppIsUp = False) Then
-        bRep = ObjetAcc.OpenMsApp()
-        If (bRep = False) Then Exit Function
+        brep = ObjetAcc.OpenMsApp()                     '// Création Access.Application...
+        If (brep = False) Then Exit Function
     End If
 
     If (ObjetAcc.MsBaseIsOpen = False) Then
-        bRep = ObjetAcc.OpenMsBase(sBase)       '// Ouverture de la base.
+        brep = ObjetAcc.OpenMsBase(sBase)               '// Ouverture de la base...
     End If
 
-    '// Problème détecter, on ferme tout, RaZ et on sort.
-    If (bRep = False) Then ObjetAcc.CloseMsBase True
+    If (brep = False) Then
+        ObjetAcc.CloseMsBase True   '// Problème détecter, on ferme tout, RaZ et on sort.
+    End If
 
-    InitAppEtBase = bRep
+    InitAppEtBase = brep
 
 End Function
 
+' ----------------------------------------------------------------
+'// Filtre la liste des objets suivant le type choisi.
+' ----------------------------------------------------------------
 Private Sub MaJListeObjets(Optional TypeObj As Long = 0)
 
     Dim sSql As String
     Dim sFlt As String
 
-    sSql = "SELECT T_Objets.Objet_ID, T_Objets.ObjetType, T_Objets.ObjetNom " & _
+    sSql = "SELECT T_Objets.ObjetGuid, T_Objets.ObjetType, T_Objets.ObjetNom " & _
            "FROM T_Objets " & _
-           "WHERE (((T_Objets.ObjetApp) = '" & Me.zlBases & "') "
+           "WHERE (((T_Objets.AppGuid) = '" & Me.zlBases & "') "
 
     Select Case TypeObj
-        Case 0
         Case 1
             sFlt = " AND ((T_Objets.ObjetType) = 'Form') "
         Case 2
@@ -1955,9 +2008,11 @@ Private Sub MaJListeObjets(Optional TypeObj As Long = 0)
 
 End Sub
 
-Private Sub MaJLangue(Optional bEnabledZL As Boolean = True)
+' ----------------------------------------------------------------
 '// Affiche l'image de la langue,
 '// maj de la zl, et la vérouille si bEnabledZL est à true.
+' ----------------------------------------------------------------
+Private Sub MaJLangue(Optional bEnabledZL As Boolean = True)
     Dim sImg As String
 
     ScanTxt.IDLangApp = Me.zlLangues
@@ -1972,8 +2027,10 @@ Private Sub MaJLangue(Optional bEnabledZL As Boolean = True)
 
 End Sub
 
+' ----------------------------------------------------------------
+'// Active/Désactive des contrôles suivant scan en cours.
+' ----------------------------------------------------------------
 Private Sub ScanActif(ScanEncours As Boolean)
-
 
     Me.boxCache.Visible = ScanEncours
     Me.lbl_InfoScan1.Visible = ScanEncours
@@ -1992,7 +2049,9 @@ Private Sub ScanActif(ScanEncours As Boolean)
 
 End Sub
 
-'// Applique les valeurs par défaut.
+' ----------------------------------------------------------------
+'// Definir les prop des contrôle de l'interface suivant l'acion en cours.
+' ----------------------------------------------------------------
 Private Sub RazForm(Optional bActive As Boolean)
 
     Me.txtBdd.SetFocus
@@ -2010,7 +2069,7 @@ Private Sub RazForm(Optional bActive As Boolean)
     Me.zlObjetTypes.Enabled = Not bActive
 
     Me.txtBddSauve = vbNullString
-    If (m_BaseExiste = False) Then Me.txtDateScan = vbNullString
+    If (ScanTxt.ReScannerApp = False) Then Me.txtDateScan = vbNullString
 
     Me.lstObjets.RowSource = vbNullString
     Me.lstObjets = Null
@@ -2021,16 +2080,23 @@ Private Sub RazForm(Optional bActive As Boolean)
 
 End Sub
 
+'// Synchronise les 2 SF.
 Private Sub MajLabelsInfo()
     If (Me.SF_Controles.Form.Recordset.RecordCount > 0) Then Me.SF_Controles.Form.Recordset.MoveFirst
 End Sub
 
+' ----------------------------------------------------------------
+'// Ouvre les zl sur OnGotFocus (=OuvreZl()).
+' ----------------------------------------------------------------
 Private Function OuvreZl() As Boolean
     Me.ActiveControl.Dropdown
 End Function
 '// ################################# END PRIV. SUB/FUNC #################################
 
 '// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ PUBLIC SUB/FUNC   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+' ----------------------------------------------------------------
+'// Utiliser par le form F_Langues.
+' ----------------------------------------------------------------
 Public Sub AddLangue(AjoutNouvLangue As Boolean)
     m_AjoutLangue = AjoutNouvLangue
 End Sub

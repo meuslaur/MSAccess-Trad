@@ -2,6 +2,7 @@
 '@Folder("Dev")
 Option Compare Database
 Option Explicit
-
-    Public Const DOS_DRAP  As String = "\Flags\"   '// Dossier des drapeaux (sous dossier de l'app).
+    
+    Public Const DOS_DRAP  As String = "\Flags\"        '// Dossier des drapeaux (sous dossier de l'app).
+    Public Const PROP_GUID As String = "TradAccGuid"    '// Nom de la propriété pour stocker le Guid.
 

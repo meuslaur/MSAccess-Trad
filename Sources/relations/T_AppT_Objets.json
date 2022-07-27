@@ -1,0 +1,18 @@
+﻿{
+  "Info": {
+    "Class": "clsDbRelation",
+    "Description": "Database relationship"
+  },
+  "Items": {
+    "Name": "T_AppT_Objets",
+    "Attributes": 4352,
+    "Table": "T_App",
+    "ForeignTable": "T_Objets",
+    "Fields": [
+      {
+        "Name": "AppGuid",
+        "ForeignName": "AppGuid"
+      }
+    ]
+  }
+}

@@ -26,8 +26,7 @@ Option Explicit
     Private mFSO As Object
 '//:::::::::::::::::::::::::::::::::: END VARIABLES ::::::::::::::::::::::::::::::::::::::
 
-
-'// ################################ PRIVATE SUB/FUNC ####################################
+'// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ PUBLIC SUB/FUNC   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 Public Function GetFSO() As Object
 
 Static pFSO As Object
@@ -39,16 +38,13 @@ Static pFSO As Object
     Set GetFSO = pFSO
 
 End Function
-'// ################################# END PRIV. SUB/FUNC #################################
 
-
-'// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ PUBLIC SUB/FUNC   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-
-
+' ----------------------------------------------------------------
 'Returns True if the folder exists (and is accessible)
 ' - trailing backslash is completely optional
 ' - returns False if the full path to an existing file is passed
 '   to the function (and not just the folder part)
+' ----------------------------------------------------------------
 Public Function FSOCheckFolderExists(ByVal PathToFolder As String) As Boolean
 
     Dim bRes As Boolean
@@ -99,7 +95,7 @@ End Function
 ' DateMod:      04/05/2022 - 17:5
 '
 ' ----------------------------------------------------------------
-Public Function FSOCheckFileExist(ByVal sFullPathFile As String, Optional ByVal sExtFile As String) As Boolean
+Public Function FSOCheckFileExist(ByVal FullPathFile As String, Optional ByVal ExtFile As String) As Boolean
 
     Dim sPath   As String
     Dim sFolder As String
@@ -111,17 +107,17 @@ Public Function FSOCheckFileExist(ByVal sFullPathFile As String, Optional ByVal 
     If (mFSO Is Nothing) Then Set mFSO = GetFSO()
 
     '// Utilise l'extension de fichier indiquer.
-    If (sExtFile <> vbNullString) Then
-        sFolder = mFSO.GetParentFolderName(sFullPathFile) & "\"
-        sFile = mFSO.GetFileName(sFullPathFile)
+    If (ExtFile <> vbNullString) Then
+        sFolder = mFSO.GetParentFolderName(FullPathFile) & "\"
+        sFile = mFSO.GetFileName(FullPathFile)
         sBase = mFSO.GetBaseName(sFile)
     
         '// Ajoute le '.' si besoin
-        If (Left$(sExtFile, 1) <> ".") Then sExt = "." & sExtFile
+        If (Left$(ExtFile, 1) <> ".") Then sExt = "." & ExtFile
         
         sPath = sFolder & sBase & sExt
     Else
-        sPath = sFullPathFile
+        sPath = FullPathFile
     End If
 
     bRes = mFSO.FileExists(sPath)
@@ -130,19 +126,24 @@ Public Function FSOCheckFileExist(ByVal sFullPathFile As String, Optional ByVal 
 
 End Function
 
-Public Function FSOGetBaseName(FileSpec As String) As String
+' ----------------------------------------------------------------
 '// Renvoie une chaîne contenant le nom de base du dernier composant, sans l'extension de fichier, dans un chemin d'accès.
+'// CheckFile option si on doit vérifier que le fichier exist.
+' ----------------------------------------------------------------
+Public Function FSOGetBaseName(FullPathFileNom As String) As String
     Dim bRes    As Boolean
 
     If (mFSO Is Nothing) Then Set mFSO = GetFSO()
 
-    bRes = FSOCheckFileExist(FileSpec)
-    If bRes Then FSOGetBaseName = Trim$(mFSO.GetBaseName(FileSpec))
+    bRes = FSOCheckFileExist(FullPathFileNom)
+    If bRes Then FSOGetBaseName = Trim$(mFSO.GetBaseName(FullPathFileNom))
 
 End Function
 
-Public Function FSOGetFileName(FileSpec As String) As String
+' ----------------------------------------------------------------
 '// Renvoie une chaîne contenant le nom de base du dernier composant, sans l'extension de fichier, dans un chemin d'accès.
+' ----------------------------------------------------------------
+Public Function FSOGetFileName(FileSpec As String) As String
     Dim bRes    As Boolean
 
     If (mFSO Is Nothing) Then Set mFSO = GetFSO()
@@ -151,6 +152,7 @@ Public Function FSOGetFileName(FileSpec As String) As String
     If bRes Then FSOGetFileName = Trim$(mFSO.GetFileName(FileSpec))
 
 End Function
+
 '-----------------------------------------------------------------------------------
 ' Author    : Mike Wolfe
 ' Source    : https://nolongerset.com/tempfilename/
@@ -195,66 +197,12 @@ Public Function FSOGetTempFile(Optional ByVal Path As String = "WINDOWS TEMP FOL
 
 End Function
 
-'---------------------------------------------------------------------
-' Author    : Mike Wolfe
-' Source    : https://nolongerset.com/finding-the-temporary-folder-with-vba/
-' Purpose   : Returns something like:
-'               C:\Users\Mike\AppData\Local\Temp\
-' Notes     - Use PathJoin() function to simplify backslash handling
-'               https://nolongerset.com/joining-paths-in-vba/
-'---------------------------------------------------------------------
-Private Function FSOGetTempPath(Optional WithTrailingBackslash As Boolean = True) As String
-
-    Dim TempFolder  As String
-    Const TemporaryFolder = 2
-
-    If (mFSO Is Nothing) Then Set mFSO = GetFSO()
-    TempFolder = mFSO.GetSpecialFolder(TemporaryFolder)
-
-    If WithTrailingBackslash Then TempFolder = TempFolder & "\"
-    FSOGetTempPath = TempFolder
-
-End Function
-'// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ END PUB. SUB/FUNC \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-
-'Returns the contents of file FName as a string
-Private Function FSOFileRead(FName As String) As String     'Note: Non utilisé
-
-    Dim FNum    As Integer
-    Dim Result  As String
-
-    Result = Space(FileLen(FName))
-    FNum = FreeFile
-    Open FName For Binary Access Read As #FNum
-    Get #FNum, , Result
-    Close FNum
-    FSOFileRead = Result
-
-End Function
-
-'Writes a text file with the contents of a string
-'   - Creates the file if it does not exist
-'   - Overwrites the contents of an existing file without warning
-'   - Returns true if successful
-Private Function FSOFileWrite(FName As String, Contents As String) As Boolean
-
-    If Not FSODeleteFile(FName) Then Exit Function
-
-    Dim FNum As Integer
-    FNum = FreeFile()
-    Open FName For Output As FNum
-    'trailing semi-colon needed to prevent adding blank line at end of file
-    '  see: http://stackoverflow.com/a/9445141/154439
-    Print #FNum, Contents;
-    Close #FNum
-    FSOFileWrite = True
-
-End Function
-
+' ----------------------------------------------------------------
 'Appends the contents to the end of a file
 ' - if the file does not exist, it is created
 ' - a new line is implicitly added after the contents
 '   `- this means that FileAppend may be repeatedly called without passing any vbCrLf's
+' ----------------------------------------------------------------
 Public Sub FSOFileAppend(FName As String, Contents As String)   'Note: Non utilisé
 
     If Not FSOCheckFileExist(FName) Then
@@ -270,7 +218,9 @@ Public Sub FSOFileAppend(FName As String, Contents As String)   'Note: Non utili
 
 End Sub
 
+' ----------------------------------------------------------------
 'https://nolongerset.com/kill-failed-let-user-try-again/
+' ----------------------------------------------------------------
 Public Function FSODeleteFile(FName As String, _
                     Optional DelayInSeconds As Long = 0, _
                     Optional Silent As Boolean = False) As Boolean
@@ -321,4 +271,66 @@ ERR_FSODeleteFile:
             "Dans  TradAccess.MD_FSO.FSODeleteFile, ligne " & Erl & "."
     Resume SORTIE_FSODeleteFile
 End Function
+'// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ END PUB. SUB/FUNC \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
+'// ################################ PRIVATE SUB/FUNC ####################################
+
+'---------------------------------------------------------------------
+' Author    : Mike Wolfe
+' Source    : https://nolongerset.com/finding-the-temporary-folder-with-vba/
+' Purpose   : Returns something like:
+'               C:\Users\Mike\AppData\Local\Temp\
+' Notes     - Use PathJoin() function to simplify backslash handling
+'               https://nolongerset.com/joining-paths-in-vba/
+'---------------------------------------------------------------------
+Private Function FSOGetTempPath(Optional WithTrailingBackslash As Boolean = True) As String
+
+    Dim TempFolder  As String
+    Const TemporaryFolder = 2
+
+    If (mFSO Is Nothing) Then Set mFSO = GetFSO()
+    TempFolder = mFSO.GetSpecialFolder(TemporaryFolder)
+
+    If WithTrailingBackslash Then TempFolder = TempFolder & "\"
+    FSOGetTempPath = TempFolder
+
+End Function
+
+' ----------------------------------------------------------------
+'Returns the contents of file FName as a string
+' ----------------------------------------------------------------
+Private Function FSOFileRead(FName As String) As String     'Note: Non utilisé
+
+    Dim FNum    As Integer
+    Dim Result  As String
+
+    Result = Space(FileLen(FName))
+    FNum = FreeFile
+    Open FName For Binary Access Read As #FNum
+    Get #FNum, , Result
+    Close FNum
+    FSOFileRead = Result
+
+End Function
+
+' ----------------------------------------------------------------
+'Writes a text file with the contents of a string
+'   - Creates the file if it does not exist
+'   - Overwrites the contents of an existing file without warning
+'   - Returns true if successful
+' ----------------------------------------------------------------
+Private Function FSOFileWrite(FName As String, Contents As String) As Boolean
+
+    If Not FSODeleteFile(FName) Then Exit Function
+
+    Dim FNum As Integer
+    FNum = FreeFile()
+    Open FName For Output As FNum
+    'trailing semi-colon needed to prevent adding blank line at end of file
+    '  see: http://stackoverflow.com/a/9445141/154439
+    Print #FNum, Contents;
+    Close #FNum
+    FSOFileWrite = True
+
+End Function
+'// ################################# END PRIV. SUB/FUNC #################################

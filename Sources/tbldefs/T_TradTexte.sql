@@ -1,12 +1,12 @@
 ﻿CREATE TABLE [T_TradTexte] (
-  [Trad_ID] VARCHAR (100),
+  [CtrParentGuid] VARCHAR (50),
   [PropNom] VARCHAR (30),
   [PropTexte] LONGTEXT ,
-  [LangueCode] LONG  CONSTRAINT [{42B9E965-3965-4A62-B8E2-C08F096C8C7C}] REFERENCES [T_Langues] ([LangueCode]) ON UPDATE CASCADE  ON DELETE CASCADE ,
+  [LangueCode] LONG  CONSTRAINT [T_LanguesT_TradTexte] REFERENCES [T_Langues] ([LangueCode]) ON UPDATE CASCADE ,
   [DateMaJ] DATETIME ,
   [DefLangue] BIT ,
-  [ModPropTexte] BIT ,
+  [ModifTxt] BIT ,
   [Scanner] BIT ,
   [Nouveau] BIT ,
-   CONSTRAINT [PrimaryKey] PRIMARY KEY ([Trad_ID], [PropNom])
+   CONSTRAINT [PrimaryKey] PRIMARY KEY ([CtrParentGuid], [PropNom])
 )

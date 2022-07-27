@@ -7,7 +7,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
-'@Folder("Test")
+'@Folder("Dev")
 ' ------------------------------------------------------
 ' Name     : C_ObjetsAccess
 ' ------------------------------------------------------
@@ -18,20 +18,24 @@ Attribute VB_Exposed = False
 ' Objectif :
 ' Date     : 27/06/2022 - 11:01
 ' DateMod  :
-' Requi    :
+' Requi    : module MD_FSO, MD_DBProp
+'
 ' ------------------------------------------------------
 Option Compare Database
 Option Explicit
 
 '//::::::::::::::::::::::::::::::::::    VARIABLES      ::::::::::::::::::::::::::::::::::
-    Private m_oMsApp            As Access.Application
+    Private m_oMsApp        As Access.Application
+    Private m_bMsAppIsUp    As Boolean
 
-    '// Options définies dans le formulaire.
-    Private m_oMsBase           As DAO.Database
-    Private m_sBaseFullName     As String   '// Chemin\nom complet de la base.
-    Private m_sBaseNom          As String   '// Nom de la base sans extension.
-    Private m_bMsAppIsUp        As Boolean
-    Private m_bMsBaseIsOpen     As Boolean
+    Private m_oMsBase       As DAO.Database
+
+    Private Type TBase
+        Nom         As String   '// Nom de la base sans extension.
+        NomComplet  As String
+        IsOpen      As Boolean
+    End Type
+    Private thisBase As TBase
 '//:::::::::::::::::::::::::::::::::: END VARIABLES ::::::::::::::::::::::::::::::::::::::
 
 '//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&     EVENTS        &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -68,20 +72,21 @@ Public Property Let MsAppIsUp(bNewVal As Boolean)
 End Property
 
 Public Property Get MsBaseIsOpen() As Boolean
-    MsBaseIsOpen = m_bMsBaseIsOpen
+    MsBaseIsOpen = thisBase.IsOpen
 End Property
 Public Property Let MsBaseIsOpen(bNewVal As Boolean)
-    m_bMsBaseIsOpen = IIf((m_oMsApp.CurrentProject.Connection Is Nothing), False, bNewVal)
+    thisBase.IsOpen = IIf((m_oMsApp.CurrentProject.Connection Is Nothing), False, bNewVal)
 End Property
-Public Property Get BaseOuverteFullPathName() As String 'Note: Non utilisé
-    BaseOuverteFullPathName = m_sBaseFullName
-End Property
+'Public Property Get BaseOuverteFullPathName() As String 'TODO: Non utilisé
+'    BaseOuverteFullPathName = thisBase.NomComplet
+'End Property
 Public Property Get BaseOuverteNom() As String
-    BaseOuverteNom = m_sBaseNom
+    BaseOuverteNom = thisBase.Nom
 End Property
-Public Property Get GetLangue() As Long 'Note: Non utilisé
+
+'Public Property Get GetLangue() As Long 'Note: Non utilisé
 '    GetLangue = m_oMsApp.LanguageSettings.LanguageID(msoLanguageIDUI)
-End Property
+'End Property
 '//====================================== END PROP =======================================
 
 '// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ PUBLIC SUB/FUNC   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -138,12 +143,12 @@ Public Function OpenMsBase(sBaseFullName As String) As Boolean
     End If
 
     Dim sObj    As String
-    Dim bRep    As Boolean
+    Dim brep    As Boolean
     Dim bAutoEx As Boolean
 
     '// Voir si la base déjà ouverte (fichier .laccdb)...
-    bRep = FSOCheckFileExist(sBaseFullName, "laccdb")
-    If bRep Then
+    brep = MD_FSO.FSOCheckFileExist(sBaseFullName, "laccdb")
+    If brep Then
         MsgBox "La base " & sBaseFullName & vbCrLf & "est déjà ouverte, opération annuler.", vbExclamation, "OpenMsBase"
         OpenMsBase = False
         Exit Function
@@ -185,14 +190,14 @@ Public Function OpenMsBase(sBaseFullName As String) As Boolean
     '// Vérification si la base est toujours ouverte.
     If (m_oMsApp.CurrentProject.Connection Is Nothing) Then
         MsgBox "La base à était fermée par l'objet " & sObj, vbExclamation, "OpenMsBase"
-        m_bMsBaseIsOpen = True      '// Evite message 'base déjà fermée".
+        thisBase.IsOpen = True      '// Evite message 'base déjà fermée".
         Exit Function
     End If
 
-    m_bMsBaseIsOpen = True                      '// Flag base ouverte.
-    m_sBaseFullName = sBaseFullName             '// Stock le chemin/nom complet.
-    m_sBaseNom = FSOGetBaseName(sBaseFullName)  '// Extraire le nom de l'app...
-    
+    thisBase.IsOpen = True                              '// Flag base ouverte.
+    thisBase.NomComplet = sBaseFullName                 '// Stock le chemin/nom complet.
+    thisBase.Nom = MD_FSO.FSOGetBaseName(sBaseFullName) '// Extraire le nom de l'app...
+
     OpenMsBase = True
 
 SORTIE_OpenMsBase:
@@ -219,7 +224,7 @@ Public Sub CloseMsBase(Optional CloseMsApp As Boolean = False)
     End If
     DoEvents
 
-    m_bMsBaseIsOpen = False
+    thisBase.IsOpen = False
     Set m_oMsBase = Nothing
 
     '// On ferme aussi l'application ?
@@ -240,21 +245,42 @@ ERR_CloseMsBase:
             "Dans  TriSurFormContinu.CCreateFormContinu.CloseMsBase, ligne " & Erl & "."
     Resume SORTIE_CloseMsBase
 End Sub
-'// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ END PUB. SUB/FUNC \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
+Public Function GetPropTxt(PropNom As String) As String
+    If (Len(PropNom) = 0) Then Exit Function
+    Dim sVal As String
+    sVal = MD_DBProp.DBPropTextGet(PropNom, m_oMsBase, False)
+    GetPropTxt = sVal
+End Function
+
+Public Function SetPropTxt(PropNom As String, NouvVal As String) As Boolean
+    If (Len(PropNom) = 0) Then Exit Function
+    Dim brep As Boolean
+    brep = MD_DBProp.DBPropTextSet(PropNom, NouvVal, m_oMsBase)
+    SetPropTxt = brep
+End Function
+
+Public Function CreatePropTxt(PropNom As String, NouvVal As String) As Boolean
+    If (Len(PropNom) = 0) Then Exit Function
+    Dim brep As Boolean
+    brep = MD_DBProp.DBPropTextCreate(PropNom, NouvVal, m_oMsBase)
+    CreatePropTxt = brep
+End Function
+
+'// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ END PUB. SUB/FUNC \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 '// ################################ PRIVATE SUB/FUNC ####################################
 Private Function HasAutoexec(ByRef MsBase As DAO.Database) As Boolean
-    Dim oRst As DAO.Recordset
+    Dim orst As DAO.Recordset
     Dim sSql As String
     
     sSql = "SELECT MSysObjects.Name FROM MSysObjects WHERE MSysObjects.Name = 'AutoExec' AND MSysObjects.Type = -32766"
     
-    Set oRst = MsBase.OpenRecordset(sSql)
-    If Not (oRst.EOF And oRst.BOF) Then HasAutoexec = True
+    Set orst = MsBase.OpenRecordset(sSql)
+    If Not (orst.EOF And orst.BOF) Then HasAutoexec = True
 
-    oRst.Close
-    Set oRst = Nothing
+    orst.Close
+    Set orst = Nothing
 
 End Function
 

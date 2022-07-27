@@ -1,4 +1,4 @@
-﻿SELECT T_Objets.ObjetApp
-FROM T_Objets
-GROUP BY T_Objets.ObjetApp
-ORDER BY T_Objets.ObjetApp;
+﻿SELECT T_App.AppGuid, T_App.AppNom
+FROM T_App
+GROUP BY T_App.AppGuid, T_App.AppNom
+ORDER BY T_App.AppNom;

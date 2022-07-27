@@ -1,5 +1,6 @@
 ﻿Attribute VB_Name = "A_Test"
 '@IgnoreModule
+'@IgnoreModule
 '@Folder("Test")
 Option Compare Database
 Option Explicit
@@ -13,9 +14,3 @@ Option Explicit
 'End Type
 'Dim tbltemps() As tempst
 
-
-
-
-Public Sub fff()
-    DoCmd.OpenForm "F_Recap", , , , , acDialog, "BaseTemp"
-End Sub

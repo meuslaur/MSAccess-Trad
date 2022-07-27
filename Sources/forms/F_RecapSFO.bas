@@ -15,17 +15,13 @@ Begin Form
     Width =10204
     DatasheetFontHeight =11
     ItemSuffix =9
-    Left =3735
-    Top =1380
-    Right =14865
-    Bottom =5100
+    Left =4230
+    Top =2850
+    Right =14430
+    Bottom =4620
     RecSrcDt = Begin
-        0x0e57f48478dbe540
+        0xe47f685a13dce540
     End
-    RecordSource ="SELECT T_Objets.ObjetType, T_Objets.ObjetNom, IIf(Scanner=False,\"=\",Null) AS S"
-        "can, IIf(Nouveau=True,\"=\",Null) AS Nouv FROM T_Objets WHERE (((T_Objets.Scanne"
-        "r)=False)) OR (((T_Objets.Nouveau)=True) AND ((T_Objets.ObjetApp)='BaseTemp - Co"
-        "pie')); "
     Caption ="F_RecapO"
     DatasheetFontName ="Calibri"
     AllowDatasheetView =0
