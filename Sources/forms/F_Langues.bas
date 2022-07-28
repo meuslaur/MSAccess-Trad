@@ -16,10 +16,10 @@ Begin Form
     Width =12472
     DatasheetFontHeight =11
     ItemSuffix =22
-    Left =4635
-    Top =2355
+    Left =4632
+    Top =2352
     Right =17100
-    Bottom =5745
+    Bottom =5748
     DatasheetGridlinesColor =15132391
     AfterInsert ="[Event Procedure]"
     RecSrcDt = Begin
@@ -136,7 +136,7 @@ Begin Form
             GridlineShade =65.0
         End
         Begin FormHeader
-            Height =577
+            Height =579
             Name ="EntêteFormulaire"
             AutoHeight =1
             AlternateBackThemeColorIndex =1
@@ -146,9 +146,9 @@ Begin Form
             Begin
                 Begin Image
                     SizeMode =0
-                    Left =285
+                    Left =288
                     Top =60
-                    Width =495
+                    Width =492
                     Height =495
                     BorderColor =10921638
                     Name ="EnteteImg"
@@ -241,7 +241,7 @@ Begin Form
                         0x6082
                     End
 
-                    LayoutCachedLeft =285
+                    LayoutCachedLeft =288
                     LayoutCachedTop =60
                     LayoutCachedWidth =780
                     LayoutCachedHeight =555
@@ -616,8 +616,8 @@ Begin Form
                     PressedForeColor =4210752
                     WebImagePaddingLeft =2
                     WebImagePaddingTop =2
-                    WebImagePaddingRight =1
-                    WebImagePaddingBottom =1
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
                 End
             End
         End
@@ -636,7 +636,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-'@Folder("Dev")
+'@Folder("Form")
 ' ------------------------------------------------------
 ' Name     : Form_T_Langues
 ' ------------------------------------------------------

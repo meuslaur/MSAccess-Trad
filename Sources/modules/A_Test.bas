@@ -1,6 +1,5 @@
 ﻿Attribute VB_Name = "A_Test"
 '@IgnoreModule
-'@IgnoreModule
 '@Folder("Test")
 Option Compare Database
 Option Explicit

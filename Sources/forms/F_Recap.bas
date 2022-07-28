@@ -524,7 +524,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-'@Folder("Dev")
+'@Folder("Form")
 Option Compare Database
 Option Explicit
 
@@ -546,7 +546,7 @@ Private Sub Form_Open(Cancel As Integer)
 
     Args = Split(Me.OpenArgs(), ";")
 
-    sSql = "SELECT T_Objets.ObjetType, T_Objets.ObjetNom, " & _
+    sSql = "SELECT T_Objets.ObjetType, T_Objets.ObjetNom, T_Objets.Scanner, T_Objets.Nouveau, " & _
            "IIf(Scanner=False,""="",Null) AS Scan, IIf(Nouveau=True,""="",Null) AS Nouv " & _
            "FROM T_Objets " & _
            "WHERE ((T_Objets.AppGuid)='" & Args(0) & "') " & _
@@ -554,17 +554,16 @@ Private Sub Form_Open(Cancel As Integer)
 
     Me.sfO.Form.RecordSource = sSql
 
-    sSql = "SELECT T_ObjetControles.ControlGuid, T_ObjetControles.ControlType, T_ObjetControles.ControlNom, " & _
+    sSql = "SELECT T_ObjetControles.ControlType, T_ObjetControles.ControlNom, T_ObjetControles.Scanner, T_ObjetControles.Nouveau, " & _
            "IIf(T_ObjetControles.[Scanner]=False,""="",Null) AS Scan, " & _
            "IIf(T_ObjetControles.[Nouveau]=True,""="",Null) AS Nouv " & _
            "FROM T_App INNER JOIN (T_Objets INNER JOIN T_ObjetControles " & _
            "ON T_Objets.ObjetGuid = T_ObjetControles.ObjetParentGuid) ON T_App.AppGuid = T_Objets.AppGuid " & _
-           "WHERE ((T_App.AppGuid='" & Args(0) & "')) " & _
-           "ORDER BY T_ObjetControles.ControlType, T_ObjetControles.ControlNom;"
+           "WHERE ((T_App.AppGuid='" & Args(0) & "'));"
 
     Me.sfC.Form.RecordSource = sSql
 
-    sSql = "SELECT T_TradTexte.CtrParentGuid, T_TradTexte.PropNom, T_TradTexte.PropTexte, " & _
+    sSql = "SELECT T_TradTexte.PropNom, T_TradTexte.PropTexte, T_TradTexte.ModifTxt, T_TradTexte.Scanner, T_TradTexte.Nouveau, " & _
            "T_TradTexte.ModifTxt, T_TradTexte.Scanner, T_TradTexte.Nouveau, " & _
            "IIf(T_TradTexte.[Scanner]=False,""="",Null) AS Scan, " & _
            "IIf(ModifTxt=True,""="",Null) AS Modif, " & _
@@ -599,10 +598,14 @@ Private Function AppliqueFiltre(ChkNom As String) As Boolean
 
     Select Case ChkNom
         Case "Nouv"
-            Me.chkModif = False     '// Ne peux pas être Scan et Mod si Nouveau.
+            Me.chkModif = False
             Me.chkScan = False
-        Case "Modif", "Scan"
-            Me.chkNouv = False      '// Ne peux pas être Nouv si Scan ou Modif.
+        Case "Modif"
+            Me.chkNouv = False
+            Me.chkScan = False
+        Case "Scan"
+            Me.chkModif = False
+            Me.chkNouv = False
         Case Else
             Exit Function
     End Select
@@ -614,14 +617,14 @@ Private Function AppliqueFiltre(ChkNom As String) As Boolean
     Dim sFltP   As String
 
     sFltO = "ObjetType='X'"   '// Masque les données car pas de filtre Modif sur Objet et Control.
-    sFltC = "Control_ID='X'"  '// ...
+    sFltC = "ControlType='X'" '// ...
 
-    If (Me.chkNouv) Then sFiltre = "Nouv=True": bFiltre = True
+    If (Me.chkNouv) Then sFiltre = "Nouveau=True": bFiltre = True
 
-    If (Me.chkScan) Then sFiltre = "Scan=False": bFiltre = True
+    If (Me.chkScan) Then sFiltre = "Scanner=False": bFiltre = True
 
     If (Me.chkModif) Then
-        sFltP = "Modif=True"
+        sFltP = "ModifTxt=True"
         If (Len(sFiltre) > 0) Then sFltP = sFltP & " AND " & sFiltre
     Else
         sFltP = sFiltre

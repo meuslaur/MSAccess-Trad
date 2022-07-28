@@ -1,4 +1,6 @@
 #Changelog
+## V 0.45 2022/07/28
+- Correction de bugs.
 
 ## V 0.45 2022/07/26
 C_TradScanText.

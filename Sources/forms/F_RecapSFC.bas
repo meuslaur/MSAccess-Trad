@@ -15,11 +15,11 @@ Begin Form
     GridY =10
     Width =10219
     DatasheetFontHeight =11
-    ItemSuffix =12
-    Left =2556
-    Top =4656
-    Right =13008
-    Bottom =7716
+    ItemSuffix =15
+    Left =852
+    Top =3804
+    Right =11556
+    Bottom =7116
     RecSrcDt = Begin
         0x6a44f48478dbe540
     End
@@ -226,12 +226,49 @@ Begin Form
                     LayoutCachedWidth =2432
                     LayoutCachedHeight =340
                 End
+                Begin TextBox
+                    Visible = NotDefault
+                    TabStop = NotDefault
+                    OverlapFlags =247
+                    IMESentenceMode =3
+                    Left =4535
+                    Width =801
+                    Height =300
+                    TabIndex =4
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    Name ="Scanner"
+                    ControlSource ="Scanner"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =4535
+                    LayoutCachedWidth =5336
+                    LayoutCachedHeight =300
+                End
+                Begin TextBox
+                    Visible = NotDefault
+                    TabStop = NotDefault
+                    OverlapFlags =247
+                    IMESentenceMode =3
+                    Left =5612
+                    Width =801
+                    Height =300
+                    TabIndex =5
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    Name ="Nouveau"
+                    ControlSource ="Nouveau"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =5612
+                    LayoutCachedWidth =6413
+                    LayoutCachedHeight =300
+                End
             End
         End
         Begin FormFooter
             Height =0
             Name ="PiedFormulaire"
-            AutoHeight =1
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
             BackThemeColorIndex =1

@@ -18,10 +18,10 @@ Begin Form
     Width =18425
     DatasheetFontHeight =11
     ItemSuffix =82
-    Left =4212
+    Left =3804
     Top =600
-    Right =22632
-    Bottom =12048
+    Right =21972
+    Bottom =11796
     DatasheetGridlinesColor =15132391
     RecSrcDt = Begin
         0x5c7a48f85bd8e540
@@ -1055,7 +1055,7 @@ Begin Form
                     LayoutCachedTop =623
                     LayoutCachedWidth =7891
                     LayoutCachedHeight =863
-                    TabIndex =11
+                    TabIndex =10
                 End
                 Begin CommandButton
                     TabStop = NotDefault
@@ -1438,7 +1438,7 @@ Begin Form
                     LayoutCachedTop =226
                     LayoutCachedWidth =12995
                     LayoutCachedHeight =466
-                    TabIndex =12
+                    TabIndex =11
                 End
                 Begin Line
                     LineSlant = NotDefault
@@ -1505,7 +1505,7 @@ Begin Form
                     LayoutCachedTop =3741
                     LayoutCachedWidth =12599
                     LayoutCachedHeight =3981
-                    TabIndex =13
+                    TabIndex =12
                 End
                 Begin Line
                     OverlapFlags =127
@@ -1570,7 +1570,7 @@ Begin Form
                     LayoutCachedTop =7290
                     LayoutCachedWidth =11970
                     LayoutCachedHeight =7530
-                    TabIndex =14
+                    TabIndex =13
                 End
                 Begin Line
                     LineSlant = NotDefault
@@ -1585,32 +1585,6 @@ Begin Form
                     LayoutCachedTop =6990
                     LayoutCachedWidth =11850
                     LayoutCachedHeight =7273
-                End
-                Begin CommandButton
-                    OverlapFlags =85
-                    Left =15363
-                    Top =6576
-                    TabIndex =10
-                    ForeColor =4210752
-                    Name ="Commande81"
-                    Caption ="Sup prop"
-                    OnClick ="[Event Procedure]"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =15363
-                    LayoutCachedTop =6576
-                    LayoutCachedWidth =17064
-                    LayoutCachedHeight =6859
-                    BackColor =14461583
-                    BorderColor =14461583
-                    HoverColor =15189940
-                    PressedColor =9917743
-                    HoverForeColor =4210752
-                    PressedForeColor =4210752
-                    WebImagePaddingLeft =3
-                    WebImagePaddingTop =3
-                    WebImagePaddingRight =2
-                    WebImagePaddingBottom =2
                 End
             End
         End
@@ -1653,15 +1627,6 @@ Option Explicit
     Private m_AjoutLangue As Boolean    '// Indique a la liste des langues qu'une nouvelle langue à été saisie dans le form F_Langues.
 '//:::::::::::::::::::::::::::::::::: END VARIABLES ::::::::::::::::::::::::::::::::::::::
 
-Private Sub Commande81_Click()
-    Dim obd As DAO.Database
-    Set obd = ObjetAcc.GetMsBase()
-    Dim brep As Boolean
-    brep = MD_DBProp.DBPropTextDelete(PROP_GUID, obd)
-    Set obd = Nothing
-    
-End Sub
-
 '//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&     EVENTS        &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 Private Sub Form_Load()
 
@@ -1698,9 +1663,9 @@ End Sub
 Private Sub cmbSelectBdd_Click()
     On Error GoTo ERR_cmbSelectBdd
 
-    Dim brep     As Boolean
+    Dim bRep     As Boolean
     Dim sBaseSel As String
-    Dim vtmp     As Variant     '// Pour Split de sBackup.
+    Dim vTmp     As Variant     '// Pour Split de sBackup.
     Dim sRep     As String
     Dim eRep     As eReponse
     Dim sMsg    As String
@@ -1712,24 +1677,24 @@ Private Sub cmbSelectBdd_Click()
 
 '//----- Sauvegarde
     sRep = MD_Utils.GetBackupFileName(sBaseSel)         '// Détermine le nom du fichier de la prochaine sauvegarde...
-    vtmp = Split(sRep, ";")             '// Retourne folder;backup;base
-    Me.txtBddSauve = vtmp(0) & vtmp(1)  '// folder + backup.
+    vTmp = Split(sRep, ";")             '// Retourne folder;backup;base
+    Me.txtBddSauve = vTmp(0) & vTmp(1)  '// folder + backup.
 
     sMsg = "Créez la sauvegarde ?" & vbCrLf & Me.txtBddSauve
     lRep = MsgBox(sMsg, vbQuestion + vbYesNo, "Sauvegarde...")
     If lRep = vbYes Then
-        brep = MD_Utils.CopyFile(sBaseSel, Me.txtBddSauve)  '// Sauvegarde...
-        If (brep = False) Then Exit Sub
+        bRep = MD_Utils.CopyFile(sBaseSel, Me.txtBddSauve)  '// Sauvegarde...
+        If (bRep = False) Then Exit Sub
     End If
 '//----- Sauvegarde
 
-    brep = InitAppEtBase(sBaseSel)         '// Création Access.Application, ouverture de la base....
+    bRep = InitAppEtBase(sBaseSel)         '// Création Access.Application, ouverture de la base....
 
     DoEvents
     DoCmd.Echo True
     DoCmd.Hourglass False
 
-    If (brep = False) Then Exit Sub '// Erreur, on sort.
+    If (bRep = False) Then Exit Sub '// Erreur, on sort.
 
     eRep = ScanTxt.IsNewApp()                 '// Vérifie base déjà scannée...
 
@@ -1742,22 +1707,22 @@ Private Sub cmbSelectBdd_Click()
                    "Les données concernant cette base vont être mise à jour." & vbCrLf & _
                    "Voulez-vous continuer ?"
             lRep = MsgBox(sMsg, vbExclamation + vbYesNo + vbDefaultButton2, "Base déjà enregistrée")
-            If (lRep = vbNo) Then brep = False
+            If (lRep = vbNo) Then bRep = False
 
         Case eReponse.Inconnu           '// Existe pas.
             ScanTxt.ReScannerApp = False
 
         Case eReponse.Faux              '// Guid pas dans la table. 'TODO: CONTROLER
             MsgBox "Erreur GuidApp pas dans la table.", vbCritical, "cmbSelectBdd_Click"
-            brep = False
+            bRep = False
 
         Case eReponse.Erreur            '// Pb correspondance
              MsgBox "Erreur GuidApp/table ne correspondent pas.", vbCritical, "cmbSelectBdd_Click"
-            brep = False
+            bRep = False
 
     End Select
 
-    If (brep = False) Then
+    If (bRep = False) Then
         cmdCloseBd_Click    '// Erreur, on ferme Tout, et on sort.
         Exit Sub
     End If
@@ -1859,16 +1824,16 @@ Private Sub cmdLanceScan_Click()
         Exit Sub
     End If
 
-    Dim brep As Boolean
+    Dim bRep As Boolean
 
     DoCmd.Hourglass True
     
     ScanActif True                                                  '// Affiche les contrôles d'avancement du scan...
     ScanTxt.InitialiseLabelsInfo Me.lbl_InfoScan2, Me.lbl_InfoScan3 '// Initialise les labels texte et d'avancement...
-
     ScanTxt.IDLangApp = Me.zlLangues
+
     ' ------------------------------
-    brep = ScanTxt.ScanObjetsApp(FormType, ReportType)          '// Lance le scan les objets de la base sélectionnée.... 'TODO: Voir le cas ou aucun objets trouvé.
+    bRep = ScanTxt.ScanObjetsApp(FormType, ReportType)          '// Lance le scan les objets de la base sélectionnée.... 'TODO: Voir le cas ou aucun objets trouvé.
     ' ------------------------------
 
     Me.lbl_InfoScan2.Caption = "Fermeture de la base et de l'application...."
@@ -1878,7 +1843,7 @@ Private Sub cmdLanceScan_Click()
 
     DoCmd.Hourglass False
 
-    If brep Then
+    If bRep Then
         Me.zlBases.Requery
         Me.zlBases = ScanTxt.AppGuid()      '// Extraire le nom de la base.
         zlBases_AfterUpdate                 '// MàJ des données...
@@ -1955,7 +1920,7 @@ End Sub
 '// Création de l'objet Application, ouverture de la base
 ' ----------------------------------------------------------------
 Private Function InitAppEtBase(sBase As String) As Boolean
-    Dim brep As Boolean
+    Dim bRep As Boolean
 
     DoCmd.Hourglass True
     DoCmd.Echo False
@@ -1963,19 +1928,19 @@ Private Function InitAppEtBase(sBase As String) As Boolean
     If (ObjetAcc Is Nothing) Then Exit Function
 
     If (ObjetAcc.MsAppIsUp = False) Then
-        brep = ObjetAcc.OpenMsApp()                     '// Création Access.Application...
-        If (brep = False) Then Exit Function
+        bRep = ObjetAcc.OpenMsApp()                     '// Création Access.Application...
+        If (bRep = False) Then Exit Function
     End If
 
     If (ObjetAcc.MsBaseIsOpen = False) Then
-        brep = ObjetAcc.OpenMsBase(sBase)               '// Ouverture de la base...
+        bRep = ObjetAcc.OpenMsBase(sBase)               '// Ouverture de la base...
     End If
 
-    If (brep = False) Then
+    If (bRep = False) Then
         ObjetAcc.CloseMsBase True   '// Problème détecter, on ferme tout, RaZ et on sort.
     End If
 
-    InitAppEtBase = brep
+    InitAppEtBase = bRep
 
 End Function
 

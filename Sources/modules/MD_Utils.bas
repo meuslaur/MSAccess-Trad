@@ -170,12 +170,12 @@ On Error GoTo ERR_GetBackupFileName
     Dim lFor        As Long
     Dim sTest       As String
     Dim sIncrement  As String
-    Dim brep        As Boolean
+    Dim bRep        As Boolean
 
     Set oFSO = MD_FSO.GetFSO()
 
-    brep = MD_FSO.FSOCheckFileExist(FullPathFile)           '// Vérifier si le fichier existe bien...
-    If (brep = False) Then
+    bRep = MD_FSO.FSOCheckFileExist(FullPathFile)           '// Vérifier si le fichier existe bien...
+    If (bRep = False) Then
         MsgBox "Fichier non trouvé" & vbCrLf & "(" & FullPathFile & ")", vbCritical, "GetBackupFileName"
         Exit Function
     End If
@@ -184,8 +184,8 @@ On Error GoTo ERR_GetBackupFileName
     sFile = oFSO.GetFileName(FullPathFile)
     sFolder = sFolder & BACKUP_FOLDER
 
-    brep = MD_FSO.FSOCheckFolderExists(sFolder)             '// Voir si créer le sous dossier 'Backup'...
-    If (brep = False) Then oFSO.CreateFolder sFolder    '// Création du dossier.
+    bRep = MD_FSO.FSOCheckFolderExists(sFolder)             '// Voir si créer le sous dossier 'Backup'...
+    If (bRep = False) Then oFSO.CreateFolder sFolder    '// Création du dossier.
 
     sBase = oFSO.GetBaseName(sFile)
     sExt = "." & oFSO.GetExtensionName(sFile)

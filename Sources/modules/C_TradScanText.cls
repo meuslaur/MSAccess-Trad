@@ -70,7 +70,6 @@ Option Explicit
     Private m_oApp          As Application      '// App externe.
 
     Private m_oBDLocale     As DAO.Database     '// Base Currentdb.
-    Private m_TableTxtObj   As DAO.Recordset    '// Table T_TradTexte pour les forms/Reports.
     Private m_TableTxtCtr   As DAO.Recordset    '// Table T_TradTexte pour les contrôles.
     Private qdfTemp         As DAO.QueryDef
 
@@ -167,54 +166,6 @@ Public Function GetNewGuid() As String
 
 End Function
 
-'----------------------------------------------------------------
-'// Créer la propriété PROP_GUID pour la base en cours.
-'// l'insère dans la table T_App.
-'// Retourne TRUE si ok.
-'----------------------------------------------------------------
-Private Function MaJGuidApp() As Boolean
-    Dim sRes  As String
-    Dim brep  As Boolean
-    Dim sSql  As String
-
-    sRes = ObjetAcc.GetPropTxt(PROP_GUID)   '// Doit retourner "N/A"(non trouvée), sinon erreur.
-
-    If (sRes <> PROP_NA) Then Exit Function '// Erreur contient autre chose que "N/A".
-
-    brep = ObjetAcc.CreatePropTxt(PROP_GUID, thisApp.Guid)      '// Ajout de la prop dans la base...
-    If (brep = False) Then Exit Function    '// Erreur.
-
-    '// MàJ de la table T_App...
-    sSql = "INSERT INTO T_App ( AppGuid, AppNom, CodeLangOrigine ) " & _
-           "VALUES ('" & thisApp.Guid & "', '" & thisApp.Nom & "', " & thisApp.IDLang & ");"
-    ExecuteQdfTemp sSql
-
-    MaJGuidApp = True     '// Tout est ok.
-
-End Function
-
-'----------------------------------------------------------------
-'// Vérifier si le Guid existe dans la table, et les compares.
-'----------------------------------------------------------------
-Private Function CompareGuidAppEtTable(GuidBase As String) As eReponse
-    Dim vRep  As Variant
-    Dim sRep  As String
-    Dim lRes  As Long
-
-    vRep = DLookup("[AppGuid]", "T_App", "[AppGuid]='" & GuidBase & "'")
-    sRep = CStr(Nz(vRep, vbNullString))
-
-    If (sRep = vbNullString) Then CompareGuidAppEtTable = Inconnu   '// Pas dans la table.
-
-    lRes = StrComp(GuidBase, sRep)
-    If (lRes = 0) Then
-        CompareGuidAppEtTable = Valide                              '// Ok correspond.
-    Else
-        CompareGuidAppEtTable = Faux                                '// Ne correspond pas.
-    End If
-
-End Function
-
 ' TextLength
 
 ' Form.Caption
@@ -265,10 +216,10 @@ On Error GoTo ERR_ScanObjetsApp
 
     Dim sSql     As String
     Dim ObjType  As eObjectTypeNum
-    Dim brep     As Boolean
+    Dim bRep     As Boolean
     Dim oBdExt   As DAO.Database
     Dim oRstSys  As DAO.Recordset
-            Dim vtmp As Variant
+    Dim vTmp     As Variant
 
     '// Extraire les objets de la table MsysObjects.
     sSql = "SELECT MsysObjects.Type, MsysObjects.Flags, MsysObjects.Name AS ObjectName FROM MsysObjects " & _
@@ -281,9 +232,9 @@ On Error GoTo ERR_ScanObjetsApp
                   "ORDER BY MsysObjects.Type, MsysObjects.Name;"
 
     If (m_oApp Is Nothing) Then Set m_oApp = ObjetAcc.GetMsApp()            '// Obtenir l'APP externe à utiliser...
-    If (ObjetAcc.MsBaseIsOpen) Then thisApp.Nom = ObjetAcc.BaseOuverteNom() '// Extraire le nom de la base.
+    If (ObjetAcc.MsBaseIsOpen) Then thisApp.Nom = ObjetAcc.BaseOuverteNom()
 
-    Set oBdExt = m_oApp.CurrentDb                                           '// Definir la base externe à utiliser.
+    Set oBdExt = ObjetAcc.GetMsBase()               '// Definir la base externe à utiliser.
     Set oRstSys = oBdExt.OpenRecordset(sSql, dbOpenSnapshot)                '// Ouvre MsysObjects de la base externe.
 
     If (m_oBDLocale Is Nothing) Then Set m_oBDLocale = CodeDb()
@@ -291,7 +242,7 @@ On Error GoTo ERR_ScanObjetsApp
     If m_bBarreInit Then InfoScan.InitialiseBarre oRstSys.RecordCount       '// Initialise la taille de la barre...
 
     '// Reset des champs etats des tables avant le Rescan...
-    If thisApp.ReScan Then brep = ResetEtatsTables(thisApp.Guid)
+    If thisApp.ReScan Then bRep = ResetEtatsTables()
 
     '// Defini la date à utiliser(Champ DateMaJ de T_TradTexte).
     m_DateMaJ = Now()
@@ -299,12 +250,12 @@ On Error GoTo ERR_ScanObjetsApp
     '// Nouvelle app, obtenir un guid...
     If (thisApp.ReScan = False) Then
         thisApp.Guid = MD_Utils.CreateGuid()
-        brep = MaJGuidApp() '// Si trouver, voir si dans la table, si non modifier la prop.
+        bRep = MaJGuidApp() '// Si trouver, voir si dans la table, si non modifier la prop.
         
-        If brep = False Then
-            vtmp = DLookup("[AppGuid]", "T_App", "[AppGuid]='" & thisApp.Guid & "'")
-            If IsNull(vtmp) Then brep = ObjetAcc.SetPropTxt(PROP_GUID, thisApp.Guid)
-            If brep = False Then
+        If bRep = False Then
+            vTmp = DLookup("[AppGuid]", "T_App", "[AppGuid]='" & thisApp.Guid & "'")
+            If IsNull(vTmp) Then bRep = ObjetAcc.SetPropTxt(PROP_GUID, thisApp.Guid)
+            If bRep = False Then
                 MsgBox "Erreur Guid", vbCritical, "ScanObjetsApp"
                 GoTo RESET_ScanObjetsApp
             End If
@@ -319,16 +270,16 @@ On Error GoTo ERR_ScanObjetsApp
                 thisObj.Nom = .Fields("ObjectName").Value
                 ObjType = .Fields("Type").Value
                 thisObj.Type = MD_Utils.GetObjectTypeEnClair(ObjType)   '// Traduire en clair le Type...
-
-                brep = ScanObjet(ObjType)                               '// Enregistre les info...
-
-                If (brep = False) Then Exit Do
+                ' -----------------------
+                bRep = ScanObjet(ObjType)                               '// Enregistre les info...
+                ' -----------------------
+                If (bRep = False) Then Exit Do
                 .MoveNext
             Loop
         End If
     End With
 
-    If brep Then    '// Tout est ok.
+    If bRep Then    '// Tout est ok.
         '// MàJ de la date du scan de l'app.
         sSql = "UPDATE T_App SET T_App.DernierScan = '" & m_DateMaJ & "';"
         ExecuteQdfTemp sSql
@@ -348,14 +299,12 @@ RESET_ScanObjetsApp:
     Set oBdExt = Nothing
     If Not (m_TableTxtCtr Is Nothing) Then m_TableTxtCtr.Close
     Set m_TableTxtCtr = Nothing
-    If Not (m_TableTxtObj Is Nothing) Then m_TableTxtObj.Close
-    Set m_TableTxtObj = Nothing
     Set m_oApp = Nothing
 
 '    If (bRep = False) Then SuppDonneesTexte thisapp.nom    '// Efface tous en cas d'erreur... 'TODO: transactions
 
 SORTIE_ScanObjetsApp:
-    ScanObjetsApp = brep
+    ScanObjetsApp = bRep
     Exit Function
 
 ERR_ScanObjetsApp:
@@ -365,7 +314,7 @@ ERR_ScanObjetsApp:
            "Description: " & Err.Description & _
            Switch(Erl = 0, vbNullString, Erl <> 0, vbCrLf & "Line No: " & Erl), _
            vbOKOnly + vbCritical, "Erreur survenue !"
-    brep = False
+    bRep = False
     Resume SORTIE_ScanObjetsApp
 End Function
 
@@ -399,9 +348,10 @@ On Error GoTo ERR_ScanObjet
 
     Dim oObjet      As Object
     Dim oCtr        As Access.Control
-    Dim brep        As Boolean
+    Dim bRep        As Boolean
     Dim sInfoAvance As String
     Dim sGuid       As String
+    Dim tCtr        As TControl
 
     sInfoAvance = thisObj.Type & " " & thisObj.Nom
     If m_bBarreInit Then InfoScan.UpdateBarre sInfoAvance   '// Affiche l'état d'avancement du scan...
@@ -411,63 +361,138 @@ On Error GoTo ERR_ScanObjet
     If (oObjet Is Nothing) Then Exit Function   '// Erreur, on sort.
 
     thisObj.Caption = LTrim$(oObjet.Caption)
+Debug.Print thisObj.Nom
 
-    If (thisApp.ReScan = False) Then    '// Nouvelle app Création du guid pour l'objet en cours.
-
-        sGuid = MD_Utils.CreateGuid()       '// Création du guid...
-       'TODO: A CONTROLER        If (Len(sGuid) = 0) Then
-        oObjet.Tag = sGuid
-        thisObj.Nouveau = True
-        thisCtr.Nouveau = True
-        thisObj.Guid = sGuid
-    Else
-        sGuid = GetGuidObjet(oObjet)    '// Voir guid si exist.
-
-        If ((Len(oObjet.Tag) = 0) Or (Len(sGuid) = 0)) Then
-            sGuid = MD_Utils.CreateGuid()   '// Pas de tag on créer le guid.
-       'TODO: A CONTROLER        If (Len(sGuid) = 0) Then
-            thisObj.Nouveau = False
-        End If
-           'If (Len(sGuid) = 0) Then 'TODO: A CONTROLER nouvel objet...
-        thisObj.Guid = sGuid
-    End If
+    bRep = CheckIDObjet(oObjet)     '// Vérifier/extraire id Objet...
 
     ' ---------------
-    brep = MajObjet()                                   '// Enregistre les info et le texte à traduire de l'objet (Form, Report)...
+    bRep = MajObjet()                                   '// Enregistre les info et le texte à traduire de l'objet (Form, Report)...
     ' ---------------
 
-    If (brep) Then
+    If (bRep) Then
 
         '// On boucle sur les contrôles de l'objet.
         For Each oCtr In oObjet.Controls
 
             'If (ControlIsVisible(oCtr) = True) Then 'TODO: Ignore les ctr invisibles ?
-                thisCtr.Nom = oCtr.name
-                thisCtr.Type = TypeName(oCtr)
+Debug.Print oCtr.name
                 ' ---------------
-                brep = ScanProprietes(oCtr)             '// Scan les propriétés du contrôle...
+                bRep = ScanProprietes(oCtr)             '// Scan les propriétés du contrôle...
                 ' ---------------
-                If (brep = False) Then Exit For
+                If (bRep = False) Then Exit For
             'End If
         Next
+    End If
 
-        If brep Then CloseObjet thisObj.Nom, ObjType, acSaveYes     '// Femeture de l'objet...
+    If bRep Then
+        CloseObjet thisObj.Nom, ObjType, acSaveYes  '// Ferme et enregistre de l'objet...
     Else
-        CloseObjet thisObj.Nom, ObjType
+        CloseObjet thisObj.Nom, ObjType             '// Ferme sans enregistrer l'objet...
     End If
 
 SORTIE_ScanObjet:
-    ScanObjet = brep
+    ScanObjet = bRep
     Exit Function
 
 ERR_ScanObjet:
     MsgBox "Erreur " & Err.Number & vbCrLf & _
             " (" & Err.Description & ")" & vbCrLf & _
             "Dans  TradAccess.MD_Dev.ScanObjet, ligne " & Erl & "."
-    brep = False
+    bRep = False
     Resume SORTIE_ScanObjet
 End Function
 
+' ----------------------------------------------------------------
+'// Vérifier si nouveau control, extraire ou créer guid, vérifier avec table.
+' ----------------------------------------------------------------
+Private Function CheckIDObjet(ObjVerif As Object) As Boolean
+    Dim sGuid As String
+    Dim sTag  As String
+    Dim vTmp  As Variant
+
+    sGuid = GetGuidObjet(ObjVerif)  '// Extraire guid du tag...
+
+    vTmp = DFirst("[ObjetGuid]", "T_Objets", "[ObjetGuid]='" & sGuid & "'")
+
+    If (Len(sGuid) = 0) Then        '// Pas de guid.
+        sGuid = GetNewGuid()
+        If (IsNull(vTmp)) Then      '//Pas tag pas table, créer et applique.
+
+            thisObj.Nouveau = True
+
+            sTag = ObjVerif.Tag
+            If (Len(sTag) > 0) Then
+                sTag = sTag & ";"
+                Debug.Print "Tag modifier : ", ObjVerif.name, sTag
+'                Stop
+            End If
+            ObjVerif.Tag = sTag & sGuid
+        Else
+            MsgBox "Err Guid, pas de tag mais dans table", vbCritical, "CheckIDCtr"
+            Stop
+            Exit Function
+        End If
+    Else
+
+        If ((Len(sGuid) > 0) And (IsNull(vTmp))) Then
+            MsgBox "Err Guid, tag mais pas dans table", vbCritical, "CheckIDCtr"
+            Stop
+            Exit Function
+        End If
+
+        thisObj.Nouveau = False
+    End If
+
+    thisObj.Guid = sGuid
+    CheckIDObjet = True
+
+End Function
+
+' ----------------------------------------------------------------
+'// Vérifier si nouveau control, extraire ou créer guid, vérifier avec table.
+' ----------------------------------------------------------------
+Private Function CheckIDCtr(CtrVerif As Access.Control) As Boolean
+    Dim sGuid As String
+    Dim sTag  As String
+    Dim vTmp  As Variant
+
+    sGuid = GetGuidObjet(CtrVerif)  '// Extraire guid du tag...
+
+    vTmp = DFirst("[ControlGuid]", "T_ObjetControles", "[ControlGuid]='" & sGuid & "'")
+
+    If (Len(sGuid) = 0) Then        '// Pas de guid.
+        sGuid = GetNewGuid()
+        If (IsNull(vTmp)) Then      '//Pas tag pas table, créer et applique.
+
+            thisCtr.Nouveau = True
+
+            sTag = CtrVerif.Tag
+            If (Len(sTag) > 0) Then
+                sTag = sTag & ";"
+                Debug.Print "Tag modifier : "; thisObj.Nom, CtrVerif.name, sTag
+'                Stop
+            End If
+            CtrVerif.Tag = sTag & sGuid
+        Else
+            MsgBox "Err Guid, pas de tag mais dans table", vbCritical, "CheckIDCtr"
+            Stop
+            Exit Function
+        End If
+    Else
+
+        If ((Len(sGuid) > 0) And (IsNull(vTmp))) Then
+            MsgBox "Err Guid, tag mais pas dans table", vbCritical, "CheckIDCtr"
+            Stop
+            Exit Function
+        End If
+
+        thisCtr.Nouveau = False
+    End If
+
+    thisCtr.Guid = sGuid
+    CheckIDCtr = True
+
+End Function
 ' ----------------------------------------------------------------
 ' Procedure Nom   : MaJObjet
 ' ----------------------------------------------------------------
@@ -490,29 +515,27 @@ Private Function MajObjet() As Boolean
 On Error GoTo ERR_MaJObjet
 
     Dim sSql As String
-    Dim brep As Boolean
+    Dim bRep As Boolean
 
-    brep = MajTableObjet            '// ...
-    If brep = False Then Exit Function
+    bRep = MajTableObjet            '// ...
+    If bRep = False Then Exit Function
 
-    brep = MajTableControlObjet()   '// ...
-    If brep = False Then Exit Function
+    If (Len(thisObj.Caption) = 0) Then MajObjet = True: Exit Function   '// Rien a enregistrer, on sort.
 
-    If (m_TableTxtObj Is Nothing) Then
-        sSql = "SELECT T_TradTexte.CtrParentGuid, T_TradTexte.PropNom, T_TradTexte.PropTexte FROM T_TradTexte;"
-        Set m_TableTxtObj = m_oBDLocale.OpenRecordset(sSql, dbOpenSnapshot)
-    End If
-    brep = MajTexteObjet            '// ...
+    bRep = MajTableControlObjet()   '// ...
+    If bRep = False Then Exit Function
+
+    bRep = MajTexteObjet            '// ...
 
 SORTIE_MaJObjet:
-    MajObjet = brep
+    MajObjet = bRep
     Exit Function
 
 ERR_MaJObjet:
     MsgBox "Erreur " & Err.Number & vbCrLf & _
             " (" & Err.Description & ")" & vbCrLf & _
             "Dans  TradAccess.MD_Dev.MaJObjet, ligne " & Erl & "."
-    brep = False
+    bRep = False
     Resume SORTIE_MaJObjet
 End Function
 
@@ -575,15 +598,16 @@ End Function
 Private Function MajTableControl() As Boolean
 
     Dim sSql As String
-    Dim vtmp As Variant
+    Dim vTmp As Variant
 
-    If (thisObj.Nouveau = False) Then
-        vtmp = DLookup("[ControlGuid]", "T_ObjetControles", "[ControlGuid]='" & thisCtr.Guid & "'")
-        thisCtr.Nouveau = IsNull(vtmp)
-    End If
+'    If (thisCtr.Nouveau = False) Then
+'        vTmp = DLookup("[ControlGuid]", "T_ObjetControles", "[ControlGuid]='" & thisCtr.Guid & "'")
+'        thisCtr.Nouveau = IsNull(vTmp)
+'
+'    End If
 
     If (thisCtr.Nouveau) Then
-        thisCtr.Guid = GetNewGuid()
+'        thisCtr.Guid = GetNewGuid()
         sSql = "INSERT INTO T_ObjetControles " & _
                "(ControlGuid, ControlNom, ControlType, ObjetParentGuid, ControlParentName, Scanner, Nouveau) VALUES " & _
                "('" & thisCtr.Guid & "', '" & thisCtr.Nom & "', '" & thisCtr.Type & "', '" & thisObj.Guid & "', '" & _
@@ -609,6 +633,7 @@ Private Function MajTexteObjet() As Boolean
     Dim sSql  As String
     Dim sTest As String
     Dim sTxt  As String
+    Dim vTmp  As String
     Dim bMod  As Boolean    '// Indique si la valeur de PropTexte à été modifiée.
 
     If (Len(thisObj.Caption) > 2) Then
@@ -626,13 +651,14 @@ Private Function MajTexteObjet() As Boolean
     Else                    '// Déjà enregistrer.
 
         '// Voir si le texte(Caption) à été modifié.
-        m_TableTxtObj.FindFirst "[ObjetGuid]='" & thisObj.Guid & "'"
-        If (StrComp(thisObj.Caption, m_TableTxtObj.Fields("PropTexte").Value, vbBinaryCompare) <> 0) Then bMod = True
+        vTmp = DFirst("[PropTexte]", "T_TradTexte", "[CtrParentGuid]='" & thisObj.Guid & "'")
+        sTest = CStr(vTmp)
+        If (StrComp(thisObj.Caption, sTest, vbBinaryCompare) <> 0) Then bMod = True
 
         sSql = "UPDATE T_TradTexte " & _
                "SET PropTexte='" & sTxt & "', " & _
                "DateMaJ='" & m_DateMaJ & "', " & _
-               "ModPropTexte=" & CInt(bMod) & "," & _
+               "ModifTxt=" & CInt(bMod) & ", " & _
                "Scanner=" & CInt(True) & _
                " WHERE (((T_TradTexte.CtrParentGuid)='" & thisObj.Guid & "'));"
     End If
@@ -653,7 +679,7 @@ End Function
 ' Requi           :
 '
 '=== Paramètres ===
-' ObjControl (Control):
+' ObjCtr (Control):
 '==================
 '
 ' Return Boolean : TRUE si pas de problème.
@@ -662,7 +688,7 @@ End Function
 ' Date    : 23/06/2022 - 11:31
 ' DateMod :
 ' ----------------------------------------------------------------
-Private Function ScanProprietes(ObjControl As Access.Control) As Boolean
+Private Function ScanProprietes(ObjCtr As Access.Control) As Boolean
 On Error GoTo ERR_ScanProprietes
 
 'ControlTipText
@@ -727,37 +753,42 @@ On Error GoTo ERR_ScanProprietes
 'NavigationControl  Caption
 'SubForm            Caption
     Dim sSql As String
-    Dim brep As Boolean
+    Dim bRep As Boolean
     Dim eRep As eReponse    '// Retour function.
 
     '// Extraire le parent du control (page, label, etc.).
-    thisCtr.Parent = IIf((ObjControl.Parent.name <> thisObj.Nom), TypeName(ObjControl.Parent) & "." & ObjControl.Parent.name, vbNullString)
+    thisCtr.Parent = IIf((ObjCtr.Parent.name <> thisObj.Nom), TypeName(ObjCtr.Parent) & "." & ObjCtr.Parent.name, vbNullString)
 
     '// Extraire les texte à utiliser.
     thisTxt.Caption = vbNullString: thisTxt.StatusBarText = vbNullString: thisTxt.ControlTipText = vbNullString
-    thisTxt.Caption = LTrim$(ObjControl.Properties(PROP_CAP).Value)
-    thisTxt.StatusBarText = LTrim$(ObjControl.Properties(PROP_BAR).Value)
-    thisTxt.ControlTipText = LTrim$(ObjControl.Properties(PROP_TIP).Value)
+    thisTxt.Caption = LTrim$(ObjCtr.Properties(PROP_CAP).Value)
+    thisTxt.StatusBarText = LTrim$(ObjCtr.Properties(PROP_BAR).Value)
+    thisTxt.ControlTipText = LTrim$(ObjCtr.Properties(PROP_TIP).Value)
 
     eRep = Texte_A_Enregistrer()        '// Voir si on doit enregistrer le control...
 
     If (eRep = Faux) Then ScanProprietes = True: Exit Function  '// Pas de texte à stocker, on sort.
     If (eRep = Erreur) Then Exit Function                       '// Erreur, on sort.
 
+    thisCtr.Nom = ObjCtr.name
+    thisCtr.Type = TypeName(ObjCtr)
+
+    bRep = CheckIDCtr(ObjCtr)           '// Vérifier/extraire id control...
+
+    '// --------------------
+    bRep = MajTableControl              '// Stock le control...
+    '// --------------------
+
     sSql = "SELECT T_TradTexte.CtrParentGuid, T_TradTexte.PropNom, T_TradTexte.PropTexte FROM T_TradTexte " & _
            "WHERE T_TradTexte.CtrParentGuid='" & thisCtr.Guid & "';"
     Set m_TableTxtCtr = m_oBDLocale.OpenRecordset(sSql, dbOpenSnapshot)
 
-    '// --------------------
-    brep = MajTableControl              '// Stock le control...
-    '// --------------------
-
-    If (brep) Then brep = MajTextePropriete(PROP_CAP, thisTxt.Caption)          '// Stock ses textes...
-    If (brep) Then brep = MajTextePropriete(PROP_TIP, thisTxt.ControlTipText)   '// ...
-    If (brep) Then brep = MajTextePropriete(PROP_BAR, thisTxt.StatusBarText)    '// ...
+    If (bRep) Then bRep = MajTextePropriete(PROP_CAP, thisTxt.Caption)          '// Stock ses textes...
+    If (bRep) Then bRep = MajTextePropriete(PROP_TIP, thisTxt.ControlTipText)   '// ...
+    If (bRep) Then bRep = MajTextePropriete(PROP_BAR, thisTxt.StatusBarText)    '// ...
 
 SORTIE_ScanProprietes:
-    ScanProprietes = brep
+    ScanProprietes = bRep
     Exit Function
 
 ERR_ScanProprietes:
@@ -765,7 +796,7 @@ ERR_ScanProprietes:
     MsgBox "Erreur " & Err.Number & vbCrLf & _
             " (" & Err.Description & ")" & vbCrLf & _
             "Dans  TradAccess.Module1.ScanProprietes, ligne " & Erl & "."
-    brep = False
+    bRep = False
     Resume SORTIE_ScanProprietes
 End Function
 
@@ -821,6 +852,7 @@ Private Function MajTextePropriete(PropNom As String, PropTexte As String) As Bo
         If (eMod <> Inconnu) Then
 
             bMod = IIf(eMod = Faux, False, True)
+
             sSql = "UPDATE T_TradTexte " & _
                    "SET PropTexte='" & sTxt & "', " & _
                    "DateMaJ='" & m_DateMaJ & "', " & _
@@ -938,6 +970,10 @@ ERR_CloseObjet:
     Resume SORTIE_CloseObjet
 End Sub
 
+' ----------------------------------------------------------------
+'// Extraire le guid de l'objet à partir de son tag.
+'// Test la validité de celui-ci.
+' ----------------------------------------------------------------
 Private Function GetGuidObjet(accObj As Object) As String
 On Error GoTo ERR_GetGuidObjet
 
@@ -994,15 +1030,15 @@ End Function
 Private Function ControlIsVisible(oCtr As Control) As Boolean   'Note: Non utilisé en attente ControlIsVisible
 On Error GoTo ERR_ControlIsVisible
 
-    Dim brep As Boolean
-    brep = (oCtr.Visible)
+    Dim bRep As Boolean
+    bRep = (oCtr.Visible)
 
 SORTIE_ControlIsVisible:
-    ControlIsVisible = brep
+    ControlIsVisible = bRep
     Exit Function
 
 ERR_ControlIsVisible:
-    brep = False
+    bRep = False
     Resume SORTIE_ControlIsVisible
 End Function
 
@@ -1066,6 +1102,54 @@ Public Sub InitialiseLabelsInfo(lblTexte As Access.Label, lblBarre As Access.Lab
 End Sub
 
 '----------------------------------------------------------------
+'// Créer la propriété PROP_GUID pour la base en cours.
+'// l'insère dans la table T_App.
+'// Retourne TRUE si ok.
+'----------------------------------------------------------------
+Private Function MaJGuidApp() As Boolean
+    Dim sRes  As String
+    Dim bRep  As Boolean
+    Dim sSql  As String
+
+    sRes = ObjetAcc.GetPropTxt(PROP_GUID)   '// Doit retourner "N/A"(non trouvée), sinon erreur.
+
+    If (sRes <> PROP_NA) Then Exit Function '// Erreur contient autre chose que "N/A".
+
+    bRep = ObjetAcc.CreatePropTxt(PROP_GUID, thisApp.Guid)      '// Ajout de la prop dans la base...
+    If (bRep = False) Then Exit Function    '// Erreur.
+
+    '// MàJ de la table T_App...
+    sSql = "INSERT INTO T_App ( AppGuid, AppNom, CodeLangOrigine ) " & _
+           "VALUES ('" & thisApp.Guid & "', '" & thisApp.Nom & "', " & thisApp.IDLang & ");"
+    ExecuteQdfTemp sSql
+
+    MaJGuidApp = True     '// Tout est ok.
+
+End Function
+
+'----------------------------------------------------------------
+'// Vérifier si le Guid existe dans la table, et les compares.
+'----------------------------------------------------------------
+Private Function CompareGuidAppEtTable(GuidBase As String) As eReponse
+    Dim vRep  As Variant
+    Dim sRep  As String
+    Dim lRes  As Long
+
+    vRep = DLookup("[AppGuid]", "T_App", "[AppGuid]='" & GuidBase & "'")
+    sRep = CStr(Nz(vRep, vbNullString))
+
+    If (sRep = vbNullString) Then CompareGuidAppEtTable = Inconnu   '// Pas dans la table.
+
+    lRes = StrComp(GuidBase, sRep)
+    If (lRes = 0) Then
+        CompareGuidAppEtTable = Valide                              '// Ok correspond.
+    Else
+        CompareGuidAppEtTable = Faux                                '// Ne correspond pas.
+    End If
+
+End Function
+
+'----------------------------------------------------------------
 ' Procedure Nom   : ResetEtatsTables
 ' ----------------------------------------------------------------
 ' Sujet           : Remet a 0 tous les états des objets, contrôles et texte de la base.
@@ -1081,16 +1165,16 @@ End Sub
 ' Date    : 20/07/2022 - 17:34
 ' DateMod :
 ' ----------------------------------------------------------------
-Private Function ResetEtatsTables(GuidApp As String) As Boolean
+Private Function ResetEtatsTables() As Boolean
     Dim sSql As String
-'TODO: A CORRIGER.
-    sSql = "UPDATE (T_Objets INNER JOIN T_ObjetControles ON T_Objets.ObjetGuid = T_ObjetControles.ObjetParentGuid) " & _
-           "INNER JOIN T_TradTexte ON T_ObjetControles.ControlGuid = T_TradTexte.CtrParentGuid " & _
-           "SET T_Objets.Nouveau = False, " & _
-           "T_ObjetControles.Nouveau = False, " & _
-           "T_TradTexte.ModifTxt = False, " & _
-           "T_TradTexte.Nouveau = False" & _
-           "WHERE (((T_Objets.AppGuid)='" & GuidApp & "'));"
+
+    sSql = "UPDATE T_Objets " & _
+           "INNER JOIN (T_ObjetControles " & _
+           "INNER JOIN T_TradTexte ON T_ObjetControles.ControlGuid = T_TradTexte.CtrParentGuid) " & _
+           "ON T_Objets.ObjetGuid = T_ObjetControles.ObjetParentGuid " & _
+           "SET T_Objets.Scanner = 0, T_Objets.Nouveau = 0, T_ObjetControles.Scanner = 0, T_ObjetControles.Nouveau = 0, " & _
+           "T_TradTexte.ModifTxt = 0, T_TradTexte.Scanner = 0, T_TradTexte.Nouveau = 0 " & _
+           "WHERE (((T_Objets.AppGuid)='" & thisApp.Guid & "'));"
 
     ExecuteQdfTemp sSql
 

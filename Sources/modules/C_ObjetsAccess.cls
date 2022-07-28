@@ -143,12 +143,12 @@ Public Function OpenMsBase(sBaseFullName As String) As Boolean
     End If
 
     Dim sObj    As String
-    Dim brep    As Boolean
+    Dim bRep    As Boolean
     Dim bAutoEx As Boolean
 
     '// Voir si la base déjà ouverte (fichier .laccdb)...
-    brep = MD_FSO.FSOCheckFileExist(sBaseFullName, "laccdb")
-    If brep Then
+    bRep = MD_FSO.FSOCheckFileExist(sBaseFullName, "laccdb")
+    If bRep Then
         MsgBox "La base " & sBaseFullName & vbCrLf & "est déjà ouverte, opération annuler.", vbExclamation, "OpenMsBase"
         OpenMsBase = False
         Exit Function
@@ -255,16 +255,16 @@ End Function
 
 Public Function SetPropTxt(PropNom As String, NouvVal As String) As Boolean
     If (Len(PropNom) = 0) Then Exit Function
-    Dim brep As Boolean
-    brep = MD_DBProp.DBPropTextSet(PropNom, NouvVal, m_oMsBase)
-    SetPropTxt = brep
+    Dim bRep As Boolean
+    bRep = MD_DBProp.DBPropTextSet(PropNom, NouvVal, m_oMsBase)
+    SetPropTxt = bRep
 End Function
 
 Public Function CreatePropTxt(PropNom As String, NouvVal As String) As Boolean
     If (Len(PropNom) = 0) Then Exit Function
-    Dim brep As Boolean
-    brep = MD_DBProp.DBPropTextCreate(PropNom, NouvVal, m_oMsBase)
-    CreatePropTxt = brep
+    Dim bRep As Boolean
+    bRep = MD_DBProp.DBPropTextCreate(PropNom, NouvVal, m_oMsBase)
+    CreatePropTxt = bRep
 End Function
 
 '// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ END PUB. SUB/FUNC \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -273,9 +273,9 @@ End Function
 Private Function HasAutoexec(ByRef MsBase As DAO.Database) As Boolean
     Dim orst As DAO.Recordset
     Dim sSql As String
-    
+
     sSql = "SELECT MSysObjects.Name FROM MSysObjects WHERE MSysObjects.Name = 'AutoExec' AND MSysObjects.Type = -32766"
-    
+
     Set orst = MsBase.OpenRecordset(sSql)
     If Not (orst.EOF And orst.BOF) Then HasAutoexec = True
 

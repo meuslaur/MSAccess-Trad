@@ -17,10 +17,10 @@ Begin Form
     Width =13152
     DatasheetFontHeight =11
     ItemSuffix =7
-    Left =795
-    Top =1155
-    Right =18375
-    Bottom =9795
+    Left =792
+    Top =1152
+    Right =18372
+    Bottom =9792
     RecSrcDt = Begin
         0xda02cc18f2d8e540
     End
@@ -399,7 +399,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-'@Folder("Dev")
+'@Folder("Form")
 ' ------------------------------------------------------
 ' Name     : Form_F_Main
 ' ------------------------------------------------------
