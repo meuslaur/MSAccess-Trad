@@ -1069,7 +1069,7 @@ Public Function LangueExtraireFlag(Optional IDLang As Long = 0) As String
     lID = IIf(IDLang = 0, thisApp.IDLang, 0)
 
     sImg = CurrentProject.Path & DOS_DRAP & LTrim$(str$(lID)) & ".png"
-    If MD_FSO.FSOCheckFileExist(sImg) Then
+    If MD_FSO.FSOFileExist(sImg) Then
         LangueExtraireFlag = sImg
     Else
         LangueExtraireFlag = vbNullString

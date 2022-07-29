@@ -168,10 +168,7 @@ On Error GoTo ERR_DBPropsExport
     sPath = CurrentProject.Path
     sExpPath = sPath & sExpPath
 
-    If (MD_FSO.FSOCheckFolderExists(sExpPath) = False) Then
-        MsgBox "Dossier " & sExpPath & " non trouver.", vbCritical, "DBPropsExport"
-        Exit Function
-    End If
+    If (MD_FSO.FSOFolderExist(sExpPath, NonTrouver) = False) Then Exit Function
 
     sFile = sExpPath & "Properties.cvs"
 

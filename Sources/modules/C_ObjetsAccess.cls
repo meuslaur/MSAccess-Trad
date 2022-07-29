@@ -147,7 +147,7 @@ Public Function OpenMsBase(sBaseFullName As String) As Boolean
     Dim bAutoEx As Boolean
 
     '// Voir si la base déjà ouverte (fichier .laccdb)...
-    bRep = MD_FSO.FSOCheckFileExist(sBaseFullName, "laccdb")
+    bRep = MD_FSO.FSOFileExist(sBaseFullName, , "laccdb")
     If bRep Then
         MsgBox "La base " & sBaseFullName & vbCrLf & "est déjà ouverte, opération annuler.", vbExclamation, "OpenMsBase"
         OpenMsBase = False
