@@ -5,7 +5,7 @@
   },
   "Items": {
     "Name": "Trad-Access",
-    "Description": "Outil pour traduction dans Access",
+    "Description": "Outil d'aide a la trraduction de bases",
     "FileName": "Trad-Access.accdb",
     "HelpFile": "",
     "HelpContextId": 0,

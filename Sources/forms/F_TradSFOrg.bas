@@ -17,14 +17,13 @@ Begin Form
     Width =7370
     DatasheetFontHeight =11
     ItemSuffix =13
-    Left =1395
-    Top =3975
-    Right =10215
+    Left =1392
+    Top =3972
+    Right =10212
     Bottom =8580
     RecSrcDt = Begin
-        0x415bf56b09d9e540
+        0xde9d4071d0dce540
     End
-    RecordSource ="R_MainTradOrg"
     Caption ="Requête1"
     DatasheetFontName ="Calibri"
     AllowDatasheetView =0
@@ -131,7 +130,7 @@ Begin Form
             BackThemeColorIndex =1
             Begin
                 Begin TextBox
-                    OverlapFlags =93
+                    OverlapFlags =85
                     IMESentenceMode =3
                     Left =226
                     Top =793
@@ -140,8 +139,8 @@ Begin Form
                     ColumnWidth =3000
                     BorderColor =10921638
                     ForeColor =4210752
-                    Name ="Trad_ID"
-                    ControlSource ="Trad_ID"
+                    Name ="Prop_ID"
+                    ControlSource ="Prop_ID"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =226
@@ -166,7 +165,7 @@ Begin Form
                     LayoutCachedHeight =285
                 End
                 Begin TextBox
-                    OverlapFlags =87
+                    OverlapFlags =95
                     IMESentenceMode =3
                     Left =2267
                     Width =5103
@@ -184,14 +183,14 @@ Begin Form
                     LayoutCachedHeight =1140
                 End
                 Begin TextBox
-                    OverlapFlags =255
+                    OverlapFlags =87
                     IMESentenceMode =3
-                    Left =793
-                    Top =566
-                    Width =1368
+                    Left =56
+                    Top =396
+                    Width =2208
                     Height =330
                     ColumnWidth =2940
-                    TabIndex =4
+                    TabIndex =3
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="DateMaJ"
@@ -199,30 +198,9 @@ Begin Form
                     Format ="General Date"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =793
-                    LayoutCachedTop =566
-                    LayoutCachedWidth =2161
-                    LayoutCachedHeight =896
-                End
-                Begin TextBox
-                    DecimalPlaces =0
-                    OverlapFlags =247
-                    IMESentenceMode =3
-                    Left =226
-                    Top =396
-                    Width =741
-                    Height =330
-                    ColumnWidth =1530
-                    TabIndex =3
-                    BorderColor =10921638
-                    ForeColor =4210752
-                    Name ="LangueCode"
-                    ControlSource ="LangueCode"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =226
+                    LayoutCachedLeft =56
                     LayoutCachedTop =396
-                    LayoutCachedWidth =967
+                    LayoutCachedWidth =2264
                     LayoutCachedHeight =726
                 End
             End

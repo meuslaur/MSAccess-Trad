@@ -10,8 +10,8 @@
     "ForeignTable": "T_ObjetControles",
     "Fields": [
       {
-        "Name": "ObjetGuid",
-        "ForeignName": "ObjetParentGuid"
+        "Name": "Objet_ID",
+        "ForeignName": "IDObjet"
       }
     ]
   }

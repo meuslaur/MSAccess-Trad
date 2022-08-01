@@ -4,7 +4,7 @@ Begin InputTables
     Name ="T_App"
 End
 Begin OutputColumns
-    Expression ="T_App.AppGuid"
+    Expression ="T_App.[App_ID]"
     Expression ="T_App.AppNom"
 End
 Begin OrderBy
@@ -12,7 +12,7 @@ Begin OrderBy
     Flag =0
 End
 Begin Groups
-    Expression ="T_App.AppGuid"
+    Expression ="T_App.[App_ID]"
     GroupLevel =0
     Expression ="T_App.AppNom"
     GroupLevel =0
@@ -31,29 +31,25 @@ Begin
         dbText "Name" ="T_App.AppNom"
         dbLong "AggregateType" ="-1"
     End
-    Begin
-        dbText "Name" ="T_App.AppGuid"
-        dbLong "AggregateType" ="-1"
-    End
 End
 Begin
-    State =2
-    Left =-8
-    Top =-31
-    Right =1614
-    Bottom =854
+    State =0
+    Left =0
+    Top =0
+    Right =1705
+    Bottom =826
     Left =-1
     Top =-1
-    Right =830
-    Bottom =333
+    Right =1677
+    Bottom =329
     Left =0
     Top =0
     ColumnsShown =543
     Begin
-        Left =258
-        Top =12
-        Right =402
-        Bottom =156
+        Left =325
+        Top =15
+        Right =505
+        Bottom =195
         Top =0
         Name ="T_App"
         Name =""

@@ -1,4 +1,0 @@
-﻿CREATE TABLE [T_Guid] (
-  [Guid] GUID  CONSTRAINT [PrimaryKey] PRIMARY KEY UNIQUE NOT NULL,
-  [Test] VARCHAR (30)
-)

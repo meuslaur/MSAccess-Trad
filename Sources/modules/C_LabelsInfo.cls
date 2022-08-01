@@ -9,7 +9,7 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 '@Folder("Dev")
 ' ------------------------------------------------------
-' Name     : C_LabelsInfo
+' Name     : C_TradUtils
 ' ------------------------------------------------------
 ' Kind     : Module de classe
 ' Purpose  : Outils pour l'app TradAccess
@@ -45,9 +45,9 @@ End Sub
 '//---------------------------------------------------------------------------------------
 
 '//==================================       PROP        ==================================
-Public Property Get LongueurBarre() As Long
-    LongueurBarre = m_lNbBarre
-End Property
+'Public Property Get LongueurBarre() As Long
+'    LongueurBarre = m_lNbBarre
+'End Property
 Public Property Let LabelTexte(LabelInfo As Access.Label)
      Set m_LblTexte = LabelInfo
 End Property
@@ -86,7 +86,7 @@ End Sub
 ' DateMod :
 ' ----------------------------------------------------------------
 Public Sub UpdateBarre(NewTexte As String)
-On Error GoTo ERR_testBarre
+On Error GoTo ERR_UpdateBarre
 
     If (m_LblTexte Is Nothing) Then Exit Sub
 
@@ -96,18 +96,16 @@ On Error GoTo ERR_testBarre
 
     m_LblBarre.Caption = String(m_lCompte, "a")
     m_lCompte = m_lCompte + 1
-
-SORTIE_testBarre:
+    
+SORTIE_UpdateBarre:
     Exit Sub
 
-ERR_testBarre:
+ERR_UpdateBarre:
     MsgBox "Erreur " & Err.Number & vbCrLf & _
-            " (" & Err.Description & ")" & vbCrLf & _
-            "Dans  TradAccess.MD_Test.testBarre, ligne " & Erl & "."
-    Resume SORTIE_testBarre
+            " (" & Err.Description & ")", vbCritical, _
+            "C_LabelsInfo.UpdateBarre"
+    Resume SORTIE_UpdateBarre
 End Sub
-
-
 '// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ END PUB. SUB/FUNC \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 '// ################################ PRIVATE SUB/FUNC ####################################

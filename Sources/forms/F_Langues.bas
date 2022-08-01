@@ -16,10 +16,10 @@ Begin Form
     Width =12472
     DatasheetFontHeight =11
     ItemSuffix =22
-    Left =4632
-    Top =2352
+    Left =4635
+    Top =2355
     Right =17100
-    Bottom =5748
+    Bottom =5745
     DatasheetGridlinesColor =15132391
     AfterInsert ="[Event Procedure]"
     RecSrcDt = Begin
@@ -136,7 +136,7 @@ Begin Form
             GridlineShade =65.0
         End
         Begin FormHeader
-            Height =579
+            Height =577
             Name ="EntêteFormulaire"
             AutoHeight =1
             AlternateBackThemeColorIndex =1
@@ -146,9 +146,9 @@ Begin Form
             Begin
                 Begin Image
                     SizeMode =0
-                    Left =288
+                    Left =285
                     Top =60
-                    Width =492
+                    Width =495
                     Height =495
                     BorderColor =10921638
                     Name ="EnteteImg"
@@ -241,7 +241,7 @@ Begin Form
                         0x6082
                     End
 
-                    LayoutCachedLeft =288
+                    LayoutCachedLeft =285
                     LayoutCachedTop =60
                     LayoutCachedWidth =780
                     LayoutCachedHeight =555
@@ -616,8 +616,8 @@ Begin Form
                     PressedForeColor =4210752
                     WebImagePaddingLeft =2
                     WebImagePaddingTop =2
-                    WebImagePaddingRight =2
-                    WebImagePaddingBottom =2
+                    WebImagePaddingRight =1
+                    WebImagePaddingBottom =1
                 End
             End
         End
@@ -636,7 +636,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-'@Folder("Form")
+'@Folder("Dev")
 ' ------------------------------------------------------
 ' Name     : Form_T_Langues
 ' ------------------------------------------------------
@@ -646,7 +646,6 @@ Attribute VB_Exposed = False
 ' Author   : Laurent
 ' Date     : 03/07/2022 - 14:37
 ' DateMod  :
-' Requi    : module MD_Utils, MD_FSO
 ' ------------------------------------------------------
 Option Compare Database
 Option Explicit
@@ -711,11 +710,11 @@ Private Sub cmbSelectImage_Click()
 
     '// Séléction de la base à utiliser.
     sDosFlag = CurrentProject.Path & DOS_DRAP
-    sImgSel = MD_Utils.OuvreBoite("Image png", "*.png", "Sélection de l'image du drapeau.", sDosFlag, FD_TypeFilePicker)
+    sImgSel = OuvreBoite("Image png", "*.png", "Sélection de l'image du drapeau.", sDosFlag, FD_TypeFilePicker)
     If (sImgSel = vbNullString) Then Exit Sub
 
-    sImg = MD_FSO.FSOGetFileName(sImgSel)
-    sImgNom = MD_FSO.FSOGetBaseName(sImgSel)
+    sImg = FSOGetFileName(sImgSel)
+    sImgNom = FSOGetBaseName(sImgSel)
 
     '// Vérifier si le nom correspond au code de la langue.
     If (Me.LangueCode <> Val(sImgNom)) Then

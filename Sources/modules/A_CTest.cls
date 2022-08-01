@@ -32,27 +32,27 @@ Private Type T_Test
     fin As Currency
 End Type
 
-Private Test As T_Test
+Private test As T_Test
 
 Public Property Get Code() As String
-    Code = Test.Code
+    Code = test.Code
 End Property
 Public Property Let Code(ByVal CodeNom As String)
-    Test.Code = CodeNom
+    test.Code = CodeNom
 End Property
 
 Public Property Get Debut() As Currency
-    Debut = Test.Debut
+    Debut = test.Debut
 End Property
 Public Property Let Debut(ByVal DebutTest As Currency)
-    Test.Debut = DebutTest
+    test.Debut = DebutTest
 End Property
 
 Public Property Get fin() As Currency
-    fin = Test.fin
+    fin = test.fin
 End Property
 Public Property Let fin(ByVal FinTest As Currency)
-    Test.fin = FinTest
+    test.fin = FinTest
 End Property
 
 Public Sub LanceTest(Code As String)

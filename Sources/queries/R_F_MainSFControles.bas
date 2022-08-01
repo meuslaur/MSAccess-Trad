@@ -11,8 +11,8 @@ Begin OutputColumns
     Expression ="T_ObjetControles.ControlParentName"
     Expression ="T_ObjetControles.ControlType"
     Expression ="T_ObjetControles.ControlNom"
-    Expression ="T_ObjetControles.ControlGuid"
-    Expression ="T_ObjetControles.ObjetParentGuid"
+    Expression ="T_ObjetControles.Control_ID"
+    Expression ="T_ObjetControles.IDObjet"
 End
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
@@ -45,24 +45,20 @@ Begin
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="T_ObjetControles.ControlGuid"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="T_ObjetControles.ObjetParentGuid"
+        dbText "Name" ="T_ObjetControles.Control_ID"
         dbLong "AggregateType" ="-1"
     End
 End
 Begin
-    State =2
-    Left =-8
-    Top =-31
-    Right =1614
-    Bottom =854
+    State =0
+    Left =85
+    Top =143
+    Right =1619
+    Bottom =949
     Left =-1
     Top =-1
-    Right =1590
-    Bottom =350
+    Right =1506
+    Bottom =363
     Left =0
     Top =0
     ColumnsShown =539

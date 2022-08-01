@@ -10,8 +10,8 @@
     "ForeignTable": "T_Objets",
     "Fields": [
       {
-        "Name": "AppGuid",
-        "ForeignName": "AppGuid"
+        "Name": "App_ID",
+        "ForeignName": "IDApp"
       }
     ]
   }

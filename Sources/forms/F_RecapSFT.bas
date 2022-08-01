@@ -13,13 +13,13 @@ Begin Form
     PictureAlignment =2
     DatasheetGridlinesBehavior =3
     GridY =10
-    Width =10220
+    Width =10204
     DatasheetFontHeight =11
     ItemSuffix =13
-    Left =960
-    Top =972
-    Right =11172
-    Bottom =4740
+    Left =2256
+    Top =912
+    Right =12708
+    Bottom =4812
     RecSrcDt = Begin
         0xb269f48478dbe540
     End
@@ -124,7 +124,7 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =963
+                    Left =1020
                     Width =960
                     Height =315
                     BorderColor =8355711
@@ -132,13 +132,13 @@ Begin Form
                     Name ="lbl_PropNom"
                     Caption ="Propriété"
                     GridlineColor =10921638
-                    LayoutCachedLeft =963
-                    LayoutCachedWidth =1923
+                    LayoutCachedLeft =1020
+                    LayoutCachedWidth =1980
                     LayoutCachedHeight =315
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =1984
+                    Left =2551
                     Width =690
                     Height =315
                     BorderColor =8355711
@@ -146,8 +146,8 @@ Begin Form
                     Name ="lbl_PropTexte"
                     Caption ="Valeur"
                     GridlineColor =10921638
-                    LayoutCachedLeft =1984
-                    LayoutCachedWidth =2674
+                    LayoutCachedLeft =2551
+                    LayoutCachedWidth =3241
                     LayoutCachedHeight =315
                 End
                 Begin Label
@@ -170,50 +170,12 @@ Begin Form
             End
         End
         Begin Section
-            Height =585
+            Height =564
             Name ="Détail"
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
             BackThemeColorIndex =1
             Begin
-                Begin TextBox
-                    OverlapFlags =93
-                    IMESentenceMode =3
-                    Left =907
-                    Width =1761
-                    Height =345
-                    BorderColor =10921638
-                    ForeColor =4210752
-                    Name ="PropNom"
-                    ControlSource ="PropNom"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =907
-                    LayoutCachedWidth =2668
-                    LayoutCachedHeight =345
-                    BackThemeColorIndex =5
-                    BackTint =60.0
-                End
-                Begin TextBox
-                    EnterKeyBehavior = NotDefault
-                    AllowAutoCorrect = NotDefault
-                    ScrollBars =2
-                    OverlapFlags =87
-                    IMESentenceMode =3
-                    Left =2664
-                    Width =7533
-                    Height =585
-                    TabIndex =1
-                    BorderColor =10921638
-                    ForeColor =4210752
-                    Name ="PropTexte"
-                    ControlSource ="PropTexte"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =2664
-                    LayoutCachedWidth =10197
-                    LayoutCachedHeight =585
-                End
                 Begin TextBox
                     Enabled = NotDefault
                     Locked = NotDefault
@@ -226,9 +188,9 @@ Begin Form
                     TextFontFamily =18
                     BackStyle =0
                     IMESentenceMode =3
+                    Top =113
                     Width =284
                     Height =345
-                    TabIndex =2
                     BorderColor =10921638
                     ForeColor =2366701
                     Name ="txtScan"
@@ -236,8 +198,9 @@ Begin Form
                     FontName ="Webdings"
                     GridlineColor =10921638
 
+                    LayoutCachedTop =113
                     LayoutCachedWidth =284
-                    LayoutCachedHeight =345
+                    LayoutCachedHeight =458
                     ThemeFontIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -255,9 +218,10 @@ Begin Form
                     BackStyle =0
                     IMESentenceMode =3
                     Left =284
+                    Top =113
                     Width =284
                     Height =345
-                    TabIndex =3
+                    TabIndex =1
                     BorderColor =10921638
                     Name ="txtModif"
                     ControlSource ="Modif"
@@ -265,8 +229,9 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =284
+                    LayoutCachedTop =113
                     LayoutCachedWidth =568
-                    LayoutCachedHeight =345
+                    LayoutCachedHeight =458
                     ThemeFontIndex =-1
                     ForeThemeColorIndex =8
                     ForeTint =100.0
@@ -284,9 +249,10 @@ Begin Form
                     BackStyle =0
                     IMESentenceMode =3
                     Left =567
+                    Top =113
                     Width =284
                     Height =345
-                    TabIndex =4
+                    TabIndex =2
                     BorderColor =10921638
                     Name ="txtNouv"
                     ControlSource ="Nouv"
@@ -294,19 +260,58 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =567
+                    LayoutCachedTop =113
                     LayoutCachedWidth =851
-                    LayoutCachedHeight =345
+                    LayoutCachedHeight =458
                     ThemeFontIndex =-1
                     ForeThemeColorIndex =9
                     ForeTint =100.0
                     ForeShade =75.0
+                End
+                Begin TextBox
+                    OverlapFlags =93
+                    IMESentenceMode =3
+                    Left =963
+                    Width =1533
+                    Height =345
+                    TabIndex =3
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    Name ="PropNom"
+                    ControlSource ="PropNom"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =963
+                    LayoutCachedWidth =2496
+                    LayoutCachedHeight =345
+                    BackThemeColorIndex =5
+                    BackTint =60.0
+                End
+                Begin TextBox
+                    EnterKeyBehavior = NotDefault
+                    AllowAutoCorrect = NotDefault
+                    ScrollBars =2
+                    OverlapFlags =87
+                    IMESentenceMode =3
+                    Left =2494
+                    Width =7710
+                    Height =564
+                    TabIndex =4
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    Name ="PropTexte"
+                    ControlSource ="PropTexte"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =2494
+                    LayoutCachedWidth =10204
+                    LayoutCachedHeight =564
                 End
             End
         End
         Begin FormFooter
             Height =0
             Name ="PiedFormulaire"
-            AutoHeight =1
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
             BackThemeColorIndex =1

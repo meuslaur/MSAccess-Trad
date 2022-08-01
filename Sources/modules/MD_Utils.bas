@@ -8,20 +8,20 @@
 ' Author   : Laurent
 ' Date     : 18/06/2022 - 14:06
 ' DateMod  : 06/07/2022 - 17:48
-' Requi    : Module : MD_FSO
+' Requi    : Module MD_FSO
 ' ------------------------------------------------------
 Option Compare Database
 Option Explicit
 
 '//::::::::::::::::::::::::::::::::::    VARIABLES      ::::::::::::::::::::::::::::::::::
 '// FileDialog type pour la fonction OuvreBoite
-    Public Enum eFileDialogType
+    Public Enum T_FileDialogType
         FD_TypeFilePicker = 3
         FD_TypeFolderPicker = 4
         FD_TypeFileOpen = 1
         FD_TypeFileSaveAs = 2
     End Enum
-    Public Enum eFileDialogView
+    Public Enum T_FileDialogView
         FD_ViewDetails = 2
         FD_ViewLargeIcons = 6
         FD_ViewList = 1
@@ -34,15 +34,15 @@ Option Explicit
     End Enum
 
     '// Objets Types. (type table MsysObjets)
-    Public Enum eObjectTypeNum
-        TableLocaleType = 1
-        TableOdbcType = 4
-        TableLinkedType = 6
-    '    QueriesType = 5
-        FormType = -32768
-        ReportType = -32764
-    '    MacrosType = -32766
-    '    ModulesType = -32761
+    Public Enum E_ObjectTypeNum
+        TableLocale = 1
+        TableOdbc = 4
+        TableLinked = 6
+        'T_QueriesType = 5
+        ObjetForm = -32768
+        ObjetReport = -32764
+        'T_MacrosType = -32766
+        'T_ModulesType = -32761
     End Enum
 
     '// Valeur de retour pour les functions.
@@ -54,14 +54,14 @@ Option Explicit
         Erreur = 5
     End Enum
 
-    Private Const TABLE_LOCALE  As String = "Table locale"
-    Private Const TABLE_ODBC    As String = "Table liée (ODBC)"
-    Private Const TABLE_LINK    As String = "Table liée"
-'    Private Const C_QUERY       As String = "Requête"
-    Private Const OBJFORM       As String = "Form"
-    Private Const OBJREPORT     As String = "Report"
-'    Private Const C_MACRO       As String = "Macro"
-'    Private Const C_MODULE      As String = "Module"
+    Public Const C_TABLE_LOCALE As String = "Table locale"
+    Public Const C_TABLE_ODBC   As String = "Table liée (ODBC)"
+    Public Const C_TABLE_LINK   As String = "Table liée"
+'    Public Const C_QUERY        As String = "Requête"
+    Public Const C_FORM         As String = "Form"
+    Public Const C_REPORT       As String = "Report"
+'    Public Const C_MACRO        As String = "Macro"
+'    Public Const C_MODULE       As String = "Module"
 
 '//:::::::::::::::::::::::::::::::::: END VARIABLES ::::::::::::::::::::::::::::::::::::::
 
@@ -91,7 +91,7 @@ Public Function OuvreBoite(Optional sFltDes As String = "Tous fichiers", _
                            Optional sFltExt As String = "*.*", _
                            Optional sTitre As String, _
                            Optional sInitialPath As String, _
-                           Optional eDialogType As eFileDialogType = FD_TypeFilePicker) As String
+                           Optional eDialogType As T_FileDialogType = FD_TypeFilePicker) As String
 On Error GoTo ERR_OuvreBoite
 
     Dim oFd             As Object
@@ -133,7 +133,9 @@ SORTIE_OuvreBoite:
 Exit Function
 
 ERR_OuvreBoite:
-    MsgBox Err.Number & vbCrLf & Err.Description, vbCritical, "Gestionnaire d'erreur"
+    MsgBox "Erreur " & Err.Number & vbCrLf & _
+            " (" & Err.Description & ")", vbCritical, _
+            "MD_Utils.OuvreBoite"
     Resume SORTIE_OuvreBoite
 End Function
 
@@ -149,20 +151,22 @@ End Function
 '                   Utilisez Split¨pour extraire les valeurs.
 '                   i.e : C:\Folder1\Folder2\;MyBdName_BackUp(00).accdb;MyBdName.accdb
 '=== Paramètres ===
-' sFullPath (String): Nom compet (i.e : C:\Forlder\bdName.accdb)
+' sFullPath (String)        : Nom compet (i.e : C:\Forlder\bdName.accdb)
+' BackUpFolderName (String) : Sous-Dossier de backup. (defaut 'Backup').
 '==================
 '// Date     : 5/4/2020
-'// DateMod: 18/06/2022 - 13:46
+'// DateMod: 31/07/2022 - 13:42
 '---------------------------------------------------------------------------------------
-Public Function GetBackupFileName(FullPathFile As String) As String
+Public Function GetBackupFileName(FullPathFile As String, Optional BackUpFolderName As String = "\Backup\") As String
 On Error GoTo ERR_GetBackupFileName
 
-    Const BACKUP_FOLDER As String = "Backup\"
+    Const BACKUP_FOLDER As String = "\Backup\"
     Const SUFFIX        As String = "_BackUp("
 
     Dim oFSO        As Object
 
     Dim sFolder     As String
+    Dim sFolderBk   As String
     Dim sFile       As String
     Dim sBase       As String
     Dim sBaseBackUp As String
@@ -177,9 +181,17 @@ On Error GoTo ERR_GetBackupFileName
     bRep = MD_FSO.FSOFileExist(FullPathFile, NonTrouver)    '// Vérifier si le fichier existe bien...
     If (bRep = False) Then Exit Function
 
-    sFolder = oFSO.GetParentFolderName(FullPathFile) & "\"
+    sFolder = oFSO.GetParentFolderName(FullPathFile)
     sFile = oFSO.GetFileName(FullPathFile)
-    sFolder = sFolder & BACKUP_FOLDER
+
+
+    sFolderBk = BackUpFolderName
+    If (sFolderBk <> BACKUP_FOLDER) Then
+        sFolderBk = MD_FSO.AddSlash(BackUpFolderName)   '// Ajoute slashs si besoin...
+        sFolder = sFolder & sFolderBk
+    Else
+        sFolder = sFolder & BACKUP_FOLDER
+    End If
 
     bRep = MD_FSO.FSOMkDirIfNotExist(sFolder, Masquer)  '// Création du dossier.
     If Not bRep Then Exit Function
@@ -203,7 +215,6 @@ On Error GoTo ERR_GetBackupFileName
 
     '// Retourne fullpath dossier backup, nom fichier backup, nom du fichier de la base.
     GetBackupFileName = sFolder & ";" & sBaseBackUp & ";" & sFile
-    Set oFSO = Nothing
 
 SORTIE_GetBackupFileName:
     Exit Function
@@ -237,46 +248,46 @@ Public Function CopyFile(sSource As String, sDest As String) As Boolean     'Not
     Exit Function
 
 CopyFile_Error:
-    Select Case Err.Number
-        Case 70
-            MsgBox "The file is currently in use and therfore is locked and cannot be copied at this" & _
-                    " time. Please ensure that no one is using the file and try again.", vbOKOnly, _
-                    "File Currently in Use"
-        Case 53
-            MsgBox "The Source File '" & sSource & "' could not be found. Please validate the" & _
-                    " location and name of the specifed Source File and try again", vbOKOnly, _
-                    "File Currently in Use"
-        Case Else
+    If Err.Number = 70 Then
+        MsgBox "The file is currently in use and therfore is locked and cannot be copied at this" & _
+                " time. Please ensure that no one is using the file and try again.", vbOKOnly, _
+                "File Currently in Use"
+    ElseIf Err.Number = 53 Then
+        MsgBox "The Source File '" & sSource & "' could not be found. Please validate the" & _
+                " location and name of the specifed Source File and try again", vbOKOnly, _
+                "File Currently in Use"
+        Else
             MsgBox "MS Access has generated the following error" & vbCrLf & vbCrLf & "Error Number: " & _
                     Err.Number & vbCrLf & "Error Source: CopyFile" & vbCrLf & _
                     "Error Description: " & Err.Description, vbCritical, "An Error has Occurred!"
-    End Select
+    End If
     Exit Function
 End Function
 
+
 '// Retourne en clair le type de l'objet.
-Public Function GetObjectTypeEnClair(eType As eObjectTypeNum) As String
+Public Function GetObjectTypeEnClair(eType As E_ObjectTypeNum) As String
     Dim sType As String
 
     Select Case eType
-        Case TableLocaleType
-            sType = TABLE_LOCALE
-        Case TableOdbcType
-            sType = TABLE_ODBC
-        Case TableLinkedType
-            sType = TABLE_LINK
+        Case TableLocale
+'            sType = C_TABLE_LOCALE
+'        Case TableOdbc
+'            sType = C_TABLE_ODBC
+'        Case TableLinked
+'            sType = C_TABLE_LINK
 '        Case QuerieType
 '            sType = C_QUERY
-        Case FormType
-            sType = OBJFORM
-        Case ReportType
-            sType = OBJREPORT
+        Case ObjetForm
+            sType = C_FORM
+        Case ObjetReport
+            sType = C_REPORT
 '        Case T_MacroType
 '            sType = C_MACRO
 '        Case T_ModuleType
 '            sType = C_MODULE
         Case Else
-            sType = "???"   'TODO: stype ="???"
+            sType = "???"   'TODO: sType ="???"
     End Select
 
     GetObjectTypeEnClair = sType
@@ -319,21 +330,21 @@ On Error GoTo ERR_CreateGuid
 
     Set qdf = CurrentDb.CreateQueryDef("")
 
-'    sSql = "CREATE TABLE [T_Guid] ([Guid] GUID  CONSTRAINT [PrimaryKey] PRIMARY KEY UNIQUE NOT NULL, [test] VARCHAR(30))"
+'    sSql = "CREATE TABLE [aTg] ([Guid] GUID  CONSTRAINT [PrimaryKey] PRIMARY KEY UNIQUE NOT NULL, [test] VARCHAR(30))"
 '    qdf.SQL = sSql
 '    qdf.Execute dbFailOnError
 '    CodeDb.TableDefs.Refresh
 
-    sSql = "INSERT INTO T_Guid ( Test ) SELECT 'x';"
+    sSql = "INSERT INTO aTg ( Test ) SELECT 'x';"
     qdf.SQL = sSql
     qdf.Execute dbFailOnError
     qdf.Close
 
-    vGuid = DFirst("[Guid]", "T_Guid")
+    vGuid = DFirst("[Guid]", "aTg")
     sGuid = Application.StringFromGUID(vGuid)
     CreateGuid = sGuid
 
-    sSql = "DELETE T_Guid.* FROM T_Guid;"
+    sSql = "DELETE aTg.* FROM aTg;"
     qdf.SQL = sSql
     qdf.Execute dbFailOnError
     qdf.Close
@@ -349,5 +360,4 @@ ERR_CreateGuid:
             "Trad-Access.MD_Utils.CreateGuid"
     Resume SORTIE_CreateGuid
 End Function
-
 '// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ END PUB. SUB/FUNC \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\

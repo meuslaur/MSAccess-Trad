@@ -10,7 +10,9 @@
 	<xsd:element name="T_App">
 		<xsd:annotation>
 			<xsd:appinfo>
-				<od:index index-name="PrimaryKey" index-key="AppGuid " primary="yes" unique="yes" clustered="no" order="asc"/>
+				<od:index index-name="CodeLangOrigine" index-key="LangueCodeBase " primary="no" unique="no" clustered="no" order="asc"/>
+				<od:index index-name="PrimaryKey" index-key="App_ID " primary="yes" unique="yes" clustered="no" order="asc"/>
+				<od:index index-name="T_LanguesT_App" index-key="LangueCodeBase " primary="no" unique="no" clustered="no" order="asc"/>
 				<od:tableProperty name="Orientation" type="2" value="0"/>
 				<od:tableProperty name="OrderByOn" type="1" value="0"/>
 				<od:tableProperty name="DefaultView" type="2" value="2"/>
@@ -32,7 +34,7 @@
 		</xsd:annotation>
 		<xsd:complexType>
 			<xsd:sequence>
-				<xsd:element name="AppGuid" minOccurs="1" od:jetType="text" od:sqlSType="nvarchar" od:nonNullable="yes">
+				<xsd:element name="App_ID" minOccurs="1" od:jetType="text" od:sqlSType="nvarchar" od:nonNullable="yes">
 					<xsd:annotation>
 						<xsd:appinfo>
 							<od:fieldProperty name="ColumnWidth" type="3" value="-1"/>
@@ -80,7 +82,7 @@
 						</xsd:restriction>
 					</xsd:simpleType>
 				</xsd:element>
-				<xsd:element name="CodeLangOrigine" minOccurs="0" od:jetType="longinteger" od:sqlSType="int" type="xsd:int">
+				<xsd:element name="LangueCodeBase" minOccurs="0" od:jetType="longinteger" od:sqlSType="int" type="xsd:int">
 					<xsd:annotation>
 						<xsd:appinfo>
 							<od:fieldProperty name="ColumnWidth" type="3" value="-1"/>
@@ -94,6 +96,7 @@
 							<od:fieldProperty name="AggregateType" type="4" value="-1"/>
 							<od:fieldProperty name="ResultType" type="2" value="0"/>
 							<od:fieldProperty name="CurrencyLCID" type="4" value="0"/>
+							<od:fieldProperty name="Description" type="10" value="Langue d&amp;apos;origine de l&amp;apos;app"/>
 						</xsd:appinfo>
 					</xsd:annotation>
 				</xsd:element>

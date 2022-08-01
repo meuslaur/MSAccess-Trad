@@ -22,9 +22,9 @@ Begin Form
     DatasheetFontHeight =11
     ItemSuffix =5
     Left =1560
-    Top =1812
+    Top =1815
     Right =7800
-    Bottom =4188
+    Bottom =4185
     RecSrcDt = Begin
         0x7cc519de8adbe540
     End
@@ -168,7 +168,7 @@ Begin Form
                     Height =570
                     BorderColor =8355711
                     ForeColor =6710886
-                    Name ="lblBulleScanInfo"
+                    Name ="Étiquette2"
                     Caption ="(S) - (Objet,Contrôle ou Propriéré)\015\012Indique  non vue lors du scan (Suppri"
                         "mé ou à été renommé)."
                     GridlineColor =10921638
@@ -185,7 +185,7 @@ Begin Form
                     Height =570
                     BorderColor =8355711
                     ForeColor =6710886
-                    Name ="lblBulleNouvInfo"
+                    Name ="Étiquette3"
                     Caption ="(N) - (Objet,Contrôle ou Propriéré)\015\012Indique nouveau (Ajouté ou à été reno"
                         "mmé)."
                     GridlineColor =10921638
@@ -202,7 +202,7 @@ Begin Form
                     Height =675
                     BorderColor =8355711
                     ForeColor =6710886
-                    Name ="lblBulleModifInfo"
+                    Name ="Étiquette4"
                     Caption ="(M) - (Propriété)\015\012Indique que le texte de la propriété à été modifié."
                     GridlineColor =10921638
                     LayoutCachedLeft =397
@@ -219,7 +219,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-'@Folder("Form")
+'@Folder("Dev")
 Option Compare Database
 Option Explicit
 

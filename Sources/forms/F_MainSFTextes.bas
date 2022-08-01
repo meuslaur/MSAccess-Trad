@@ -2,24 +2,24 @@
 VersionRequired =20
 Begin Form
     RecordSelectors = NotDefault
+    AutoCenter = NotDefault
     NavigationButtons = NotDefault
     AllowDeletions = NotDefault
     DividingLines = NotDefault
     AllowAdditions = NotDefault
     AllowEdits = NotDefault
-    ScrollBars =2
+    ScrollBars =0
     ViewsAllowed =1
-    BorderStyle =1
     PictureAlignment =2
     DatasheetGridlinesBehavior =3
     GridY =10
-    Width =11338
+    Width =10545
     DatasheetFontHeight =11
-    ItemSuffix =15
-    Left =1935
-    Top =6315
-    Right =12900
-    Bottom =7890
+    ItemSuffix =14
+    Left =1392
+    Top =264
+    Right =12972
+    Bottom =2820
     RecSrcDt = Begin
         0xb161d64291dbe540
     End
@@ -197,6 +197,7 @@ Begin Form
                     Width =1755
                     Height =315
                     ColumnWidth =3000
+                    TabIndex =1
                     BorderColor =10921638
                     Name ="PropNom"
                     ControlSource ="PropNom"
@@ -215,10 +216,10 @@ Begin Form
                     OverlapFlags =255
                     IMESentenceMode =3
                     Left =2648
-                    Width =8688
+                    Width =7893
                     Height =585
                     ColumnWidth =3000
-                    TabIndex =1
+                    TabIndex =2
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="PropTexte"
@@ -226,8 +227,27 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =2648
-                    LayoutCachedWidth =11336
+                    LayoutCachedWidth =10541
                     LayoutCachedHeight =585
+                End
+                Begin TextBox
+                    Visible = NotDefault
+                    EnterKeyBehavior = NotDefault
+                    OverlapFlags =247
+                    IMESentenceMode =3
+                    Left =5497
+                    Width =918
+                    Height =315
+                    ColumnWidth =3000
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    Name ="PropID"
+                    ControlSource ="PropID"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =5497
+                    LayoutCachedWidth =6415
+                    LayoutCachedHeight =315
                 End
                 Begin TextBox
                     Enabled = NotDefault
@@ -241,7 +261,7 @@ Begin Form
                     IMESentenceMode =3
                     Width =291
                     Height =345
-                    TabIndex =2
+                    TabIndex =3
                     BorderColor =10921638
                     ForeColor =2366701
                     Name ="Scan"
@@ -268,7 +288,7 @@ Begin Form
                     Left =566
                     Width =291
                     Height =345
-                    TabIndex =3
+                    TabIndex =4
                     BorderColor =10921638
                     Name ="Nouv"
                     ControlSource ="Modif"
@@ -298,7 +318,7 @@ Begin Form
                     Left =283
                     Width =292
                     Height =345
-                    TabIndex =4
+                    TabIndex =5
                     BorderColor =10921638
                     Name ="txtNouv"
                     ControlSource ="Nouv"
@@ -312,25 +332,6 @@ Begin Form
                     ForeThemeColorIndex =9
                     ForeTint =100.0
                     ForeShade =75.0
-                End
-                Begin TextBox
-                    Visible = NotDefault
-                    TabStop = NotDefault
-                    OverlapFlags =247
-                    IMESentenceMode =3
-                    Left =6519
-                    Width =1575
-                    Height =315
-                    TabIndex =5
-                    BorderColor =10921638
-                    ForeColor =4210752
-                    Name ="CtrParentGuid"
-                    ControlSource ="CtrParentGuid"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =6519
-                    LayoutCachedWidth =8094
-                    LayoutCachedHeight =315
                 End
             End
         End

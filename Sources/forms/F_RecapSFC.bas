@@ -13,13 +13,13 @@ Begin Form
     PictureAlignment =2
     DatasheetGridlinesBehavior =3
     GridY =10
-    Width =10219
+    Width =10207
     DatasheetFontHeight =11
-    ItemSuffix =15
-    Left =852
-    Top =3804
-    Right =11556
-    Bottom =7116
+    ItemSuffix =9
+    Left =1428
+    Top =972
+    Right =17472
+    Bottom =7128
     RecSrcDt = Begin
         0x6a44f48478dbe540
     End
@@ -108,7 +108,7 @@ Begin Form
                 Begin Label
                     OverlapFlags =85
                     TextAlign =2
-                    Left =283
+                    Left =340
                     Width =225
                     Height =315
                     BorderColor =8355711
@@ -118,8 +118,8 @@ Begin Form
                     Tag ="DetachedLabel"
                     GridlineStyleBottom =1
                     GridlineColor =10921638
-                    LayoutCachedLeft =283
-                    LayoutCachedWidth =508
+                    LayoutCachedLeft =340
+                    LayoutCachedWidth =565
                     LayoutCachedHeight =315
                 End
             End
@@ -136,8 +136,8 @@ Begin Form
                     AllowAutoCorrect = NotDefault
                     OverlapFlags =93
                     IMESentenceMode =3
-                    Left =2437
-                    Width =7782
+                    Left =2662
+                    Width =7536
                     Height =340
                     ColumnWidth =3000
                     TabIndex =3
@@ -147,8 +147,8 @@ Begin Form
                     ControlSource ="ControlNom"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =2437
-                    LayoutCachedWidth =10219
+                    LayoutCachedLeft =2662
+                    LayoutCachedWidth =10198
                     LayoutCachedHeight =340
                     BackThemeColorIndex =9
                     BackTint =30.0
@@ -159,7 +159,7 @@ Begin Form
                     TabStop = NotDefault
                     AllowAutoCorrect = NotDefault
                     OldBorderStyle =0
-                    OverlapFlags =93
+                    OverlapFlags =85
                     TextFontCharSet =2
                     TextFontFamily =18
                     BackStyle =0
@@ -185,23 +185,23 @@ Begin Form
                     TabStop = NotDefault
                     AllowAutoCorrect = NotDefault
                     OldBorderStyle =0
-                    OverlapFlags =87
+                    OverlapFlags =85
                     TextFontCharSet =2
                     TextFontFamily =18
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =283
+                    Left =340
                     Width =284
                     Height =340
                     TabIndex =1
                     BorderColor =10921638
-                    Name ="txtNouv"
+                    Name ="txtModif"
                     ControlSource ="Nouv"
                     FontName ="Webdings"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =283
-                    LayoutCachedWidth =567
+                    LayoutCachedLeft =340
+                    LayoutCachedWidth =624
                     LayoutCachedHeight =340
                     ThemeFontIndex =-1
                     ForeThemeColorIndex =9
@@ -212,8 +212,8 @@ Begin Form
                     TabStop = NotDefault
                     OverlapFlags =87
                     IMESentenceMode =3
-                    Left =623
-                    Width =1809
+                    Left =680
+                    Width =1989
                     Height =340
                     TabIndex =2
                     BorderColor =10921638
@@ -222,53 +222,16 @@ Begin Form
                     ControlSource ="ControlType"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =623
-                    LayoutCachedWidth =2432
+                    LayoutCachedLeft =680
+                    LayoutCachedWidth =2669
                     LayoutCachedHeight =340
-                End
-                Begin TextBox
-                    Visible = NotDefault
-                    TabStop = NotDefault
-                    OverlapFlags =247
-                    IMESentenceMode =3
-                    Left =4535
-                    Width =801
-                    Height =300
-                    TabIndex =4
-                    BorderColor =10921638
-                    ForeColor =4210752
-                    Name ="Scanner"
-                    ControlSource ="Scanner"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =4535
-                    LayoutCachedWidth =5336
-                    LayoutCachedHeight =300
-                End
-                Begin TextBox
-                    Visible = NotDefault
-                    TabStop = NotDefault
-                    OverlapFlags =247
-                    IMESentenceMode =3
-                    Left =5612
-                    Width =801
-                    Height =300
-                    TabIndex =5
-                    BorderColor =10921638
-                    ForeColor =4210752
-                    Name ="Nouveau"
-                    ControlSource ="Nouveau"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =5612
-                    LayoutCachedWidth =6413
-                    LayoutCachedHeight =300
                 End
             End
         End
         Begin FormFooter
             Height =0
             Name ="PiedFormulaire"
+            AutoHeight =1
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
             BackThemeColorIndex =1

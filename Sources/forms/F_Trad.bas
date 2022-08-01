@@ -17,16 +17,16 @@ Begin Form
     Width =13152
     DatasheetFontHeight =11
     ItemSuffix =7
-    Left =792
-    Top =1152
-    Right =18372
-    Bottom =9792
+    Left =3984
+    Top =1524
+    Right =17136
+    Bottom =9900
     RecSrcDt = Begin
         0xda02cc18f2d8e540
     End
     Caption ="F_MainTrad"
+    OnOpen ="[Event Procedure]"
     DatasheetFontName ="Calibri"
-    OnLoad ="[Event Procedure]"
     AllowDatasheetView =0
     FilterOnLoad =0
     OrderByOnLoad =0
@@ -69,6 +69,34 @@ Begin Form
             BorderShade =65.0
             GridlineThemeColorIndex =1
             GridlineShade =65.0
+        End
+        Begin CommandButton
+            Width =1701
+            Height =283
+            FontSize =11
+            FontWeight =400
+            FontName ="Calibri"
+            ForeThemeColorIndex =0
+            ForeTint =75.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+            UseTheme =1
+            Shape =1
+            Gradient =12
+            BackThemeColorIndex =4
+            BackTint =60.0
+            BorderLineStyle =0
+            BorderThemeColorIndex =4
+            BorderTint =60.0
+            ThemeFontIndex =1
+            HoverThemeColorIndex =4
+            HoverTint =40.0
+            PressedThemeColorIndex =4
+            PressedShade =75.0
+            HoverForeThemeColorIndex =0
+            HoverForeTint =75.0
+            PressedForeThemeColorIndex =0
+            PressedForeTint =75.0
         End
         Begin TextBox
             AddColon = NotDefault
@@ -128,6 +156,7 @@ Begin Form
                     TabStop = NotDefault
                     OverlapFlags =85
                     IMESentenceMode =3
+                    ColumnCount =2
                     ListWidth =2085
                     Left =1700
                     Top =453
@@ -135,11 +164,11 @@ Begin Form
                     Height =315
                     BorderColor =10921638
                     ForeColor =3484194
-                    ColumnInfo ="\"\";\"\";\"10\";\"100\""
+                    ColumnInfo ="\"\";\"\";\"\";\"\";\"10\";\"200\""
                     Name ="zlApps"
                     RowSourceType ="Table/Query"
                     RowSource ="RL_Apps"
-                    ColumnWidths ="2086"
+                    ColumnWidths ="0;2087"
                     AfterUpdate ="[Event Procedure]"
                     GridlineColor =10921638
 
@@ -354,6 +383,7 @@ Begin Form
                     Top =850
                     Width =7635
                     Height =4875
+                    TabIndex =1
                     BorderColor =10921638
                     Name ="SF_TradOrg"
                     SourceObject ="Form.F_TradSFOrg"
@@ -371,11 +401,10 @@ Begin Form
                     Top =453
                     Width =7071
                     Height =315
-                    TabIndex =1
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="Texte5"
-                    ControlSource ="=[SF_TradOrg].[Form]![Trad_ID]"
+                    ControlSource ="=[SF_TradOrg].[Form]![Prop_ID]"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =226
@@ -399,7 +428,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-'@Folder("Form")
+'@Folder("Dev")
 ' ------------------------------------------------------
 ' Name     : Form_F_Main
 ' ------------------------------------------------------
@@ -410,7 +439,6 @@ Attribute VB_Exposed = False
 ' Objectif :
 ' Date     : 02/07/2022 - 07:24
 ' DateMod  : 05/07/2022 - 06:11
-' Requi    : Classe : C_TradScanText
 ' ------------------------------------------------------
 Option Compare Database
 Option Explicit
@@ -424,25 +452,43 @@ Option Explicit
 '//====================================== END PROP =======================================
 
 '// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ PUBLIC SUB/FUNC   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+Private m_IDLang As Long
 '// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ END PUB. SUB/FUNC \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 
 
 '//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&     EVENTS        &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
-Private Sub Form_Load()
+Private Sub Form_Open(Cancel As Integer)
     Set ScanTxt = New C_TradScanText    '// Initialisation des classes.
+
+    If IsNull(Me.OpenArgs()) Then Exit Sub
+
+    Me.zlApps = Me.OpenArgs()
+    zlApps_AfterUpdate
+
 End Sub
 
 '// Màj du sf des texte de la langue d'origine.
 Private Sub zlApps_AfterUpdate()
     Dim sSql As String
+    Dim vTmp As Variant
 
-    sSql = "SELECT T_TradTexte.* FROM T_TradTexte " & _
-           "WHERE (((T_TradTexte.DefLangue)=True) AND ((T_TradTexte.Trad_ID) Like ('" & Me.zlApps & "*')));"
+    sSql = "SELECT T_PropTextes.* " & _
+           "FROM T_Objets " & _
+           "INNER JOIN (T_ObjetControles INNER JOIN T_PropTextes " & _
+           "ON T_ObjetControles.Control_ID = T_PropTextes.IDControl) " & _
+           "ON T_Objets.Objet_ID = T_ObjetControles.IDObjet " & _
+           "WHERE (((T_Objets.IDApp)='" & Me.zlApps & "'));"
     Me.SF_TradOrg.Form.RecordSource = sSql
 
-    Me.img_Langue.Picture = AfficheFlag(Me.SF_TradOrg.Form![LangueCode].Value)   '// MàJ de l'image du drapeau....
+    vTmp = DLookup("[LangueCodeBase]", "T_App", "[App_ID]='" & Me.zlApps & "'")
+    If (IsNull(vTmp)) Then
+    Else
+        m_IDLang = CLng(vTmp)
+    End If
+
+    Me.img_Langue.Picture = AfficheFlag(m_IDLang)   '// MàJ de l'image du drapeau....
 
 End Sub
 

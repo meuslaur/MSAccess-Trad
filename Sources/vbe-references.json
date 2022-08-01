@@ -7,6 +7,10 @@
     "DAO": {
       "GUID": "{4AC9E1DA-5BAD-4AC7-86E3-24F4CDCECA28}",
       "Version": "12.0"
+    },
+    "SHDocVw": {
+      "GUID": "{EAB22AC0-30C1-11CF-A7EB-0000C05BAE0B}",
+      "Version": "1.1"
     }
   }
 }

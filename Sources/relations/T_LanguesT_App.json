@@ -4,14 +4,14 @@
     "Description": "Database relationship"
   },
   "Items": {
-    "Name": "T_LanguesT_TradTexte",
+    "Name": "T_LanguesT_App",
     "Attributes": 256,
     "Table": "T_Langues",
-    "ForeignTable": "T_TradTexte",
+    "ForeignTable": "T_App",
     "Fields": [
       {
         "Name": "LangueCode",
-        "ForeignName": "LangueCode"
+        "ForeignName": "LangueCodeBase"
       }
     ]
   }

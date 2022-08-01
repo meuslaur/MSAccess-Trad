@@ -124,9 +124,9 @@ Public Function FSOFileExist(ByVal FullPathFileName As String, _
         sPath = FullPathFileName
     End If
 
-    mRep = mFSO.FileExists(FullPathFileName)
+    mRep = mFSO.FileExists(sPath)
 
-    mMsg = vbCrLf & FullPathFileName
+    mMsg = vbCrLf & sPath
     Select Case Message
         Case MessageFSO.NonTrouver
             If (Not mRep) Then MsgBox "Fichier non trouvé :" & mMsg, vbExclamation, "FSOFileExist"
@@ -238,7 +238,7 @@ End Function
 '   - Overwrites the contents of an existing file without warning
 '   - Returns true if successful
 ' ----------------------------------------------------------------
-Public Function FSOWriteFile(FullPathFileName As String, Contents As String, _
+Public Function FSOFileWrite(FullPathFileName As String, Contents As String, _
                              Optional Message As MessageFSO = 0, _
                              Optional OverwritesFile As Boolean = False) As Boolean
 
@@ -260,7 +260,7 @@ Public Function FSOWriteFile(FullPathFileName As String, Contents As String, _
     Print #FNum, Contents;
     Close #FNum
 
-    FSOWriteFile = True
+    FSOFileWrite = True
 
 End Function
 
@@ -273,7 +273,7 @@ End Function
 '           : is found in the file. https://stackoverflow.com/a/53036838/4121863
 '---------------------------------------------------------------------------------------
 
-Public Function ADOWriteFile(FullPathFileName As String, TextSource As String, _
+Public Function ADOFileWrite(FullPathFileName As String, TextSource As String, _
                              Optional Message As MessageFSO = 0, _
                              Optional OverwritesFile As Boolean = False) As Boolean
 
@@ -301,7 +301,7 @@ Public Function ADOWriteFile(FullPathFileName As String, TextSource As String, _
         .Close
     End With
 
-    ADOWriteFile = True
+    ADOFileWrite = True
 
 End Function
 
@@ -332,7 +332,7 @@ End Function
 ' Purpose   : Read text file.
 '           : Read in UTF-8 encoding, removing a BOM if found at start of file.
 '---------------------------------------------------------------------------------------
-Public Function ADOReadFile(FullPathFileName As String, _
+Public Function ADOFileRead(FullPathFileName As String, _
                             Optional Message As MessageFSO = 0, _
                             Optional Charset As String = "utf-8") As String
 
@@ -360,7 +360,7 @@ Public Function ADOReadFile(FullPathFileName As String, _
     End With
 
     Set oStream = Nothing
-    ADOReadFile = sText
+    ADOFileRead = sText
 
 End Function
 
@@ -380,7 +380,7 @@ Public Function FSOFileAppend(FullPathFileName As String, Contents As String, _
 
     Msg = IIf(CreateIfNotExist, MessageFSO.Masquer, Message)
     
-    mRep = FSOWriteFile(FullPathFileName, Contents, Msg)   '// Création du fichier.
+    mRep = FSOFileWrite(FullPathFileName, Contents, Msg)   '// Création du fichier.
 
     If ((Not mRep) And (Not CreateIfNotExist)) Then Exit Function '// Existe pas et create false, on sort.
 
@@ -445,9 +445,10 @@ SORTIE_FSODeleteFile:
 
 ERR_FSODeleteFile:
     If (Err.Number = 53) Then Resume Next     '// Fichier introuvable
+    mRep = False
     MsgBox "Erreur " & Err.Number & vbCrLf & _
             " (" & Err.Description & ")" & vbCrLf & _
-            "Dans  TradAccess.MD_FSO.FSODeleteFile, ligne " & Erl & "."
+            "Dans  MD_FSO.FSODeleteFile, ligne " & Erl & "."
     Resume SORTIE_FSODeleteFile
 End Function
 
@@ -455,6 +456,7 @@ End Function
 ' Procedure : MkDirIfNotExist
 ' Author    : Adam Waller
 ' Date      : 1/25/2019
+' DateMod   : 31/07/2022 - 13:44(Laurent)
 ' Purpose   : Create folder `Path`. Silently do nothing if it already exists.
 '---------------------------------------------------------------------------------------
 Public Function FSOMkDirIfNotExist(NewPath As String, Optional Message As MessageFSO = 0) As Boolean
@@ -470,7 +472,7 @@ Public Function FSOMkDirIfNotExist(NewPath As String, Optional Message As Messag
     '// Vérifier les dossiers parent.
     sPath = FSOGetParentFolder(NewPath)
     If (Len(sPath) = 0) Then
-        MsgBox "Chemin du dossier non valide :" & vbCrLf & sPath, vbExclamation, "FSOMkDirIfNotExist"
+        MsgBox "Chemin ou non de dossier non valide :" & vbCrLf & NewPath, vbExclamation, "FSOMkDirIfNotExist"
         Exit Function
     End If
 
@@ -519,6 +521,35 @@ Public Function FSOGetLastModifiedDate(PathOrFile As String, Optional Message As
     Set oFolder = Nothing
 
 End Function
+
+'---------------------------------------------------------------------------------------
+' Procedure : AddSlash
+' Author    : Laurent
+' Date      : 31/07/2022 - 13:09
+' Purpose   : Ajoute (suivant option) un slash avant et après le dossier.
+'---------------------------------------------------------------------------------------
+Public Function AddSlash(Dossier As String, _
+                           Optional addLeft As Boolean = True, _
+                           Optional addRight As Boolean = True) As String
+
+    If (Len(Dossier) = 0) Then Exit Function
+    If (mFSO Is Nothing) Then Set mFSO = GetFSO()
+
+    Dim sFolder As String
+    sFolder = Dossier
+
+    If ((Right$(sFolder, 1) <> PathSep) And addRight) Then
+        sFolder = sFolder & PathSep
+    End If
+
+    If ((Left$(sFolder, 1) <> PathSep) And addLeft) Then
+        sFolder = PathSep & sFolder
+    End If
+
+    AddSlash = sFolder
+
+End Function
+
 '// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ END PUB. SUB/FUNC \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 '// ################################ PRIVATE SUB/FUNC ####################################

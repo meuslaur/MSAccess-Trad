@@ -4,14 +4,14 @@
     "Description": "Database relationship"
   },
   "Items": {
-    "Name": "T_ObjetControlesT_TradTexte",
+    "Name": "T_ObjetControlesT_PropTextes",
     "Attributes": 4352,
     "Table": "T_ObjetControles",
-    "ForeignTable": "T_TradTexte",
+    "ForeignTable": "T_PropTextes",
     "Fields": [
       {
-        "Name": "ControlGuid",
-        "ForeignName": "CtrParentGuid"
+        "Name": "Control_ID",
+        "ForeignName": "IDControl"
       }
     ]
   }

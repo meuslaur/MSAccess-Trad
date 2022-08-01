@@ -15,13 +15,17 @@ Begin Form
     Width =10204
     DatasheetFontHeight =11
     ItemSuffix =9
-    Left =4230
-    Top =2850
-    Right =14430
-    Bottom =4620
+    Left =-135
+    Top =375
+    Right =7710
+    Bottom =3840
     RecSrcDt = Begin
-        0xe47f685a13dce540
+        0x79c80a4a8ddce540
     End
+    RecordSource ="SELECT T_Objets.ObjetType, T_Objets.ObjetNom, IIf(Scanner=False,\"=\",Null) AS S"
+        "can, IIf(Nouveau=True,\"=\",Null) AS Nouv FROM T_Objets WHERE (((T_Objets.Scanne"
+        "r)=False)) Or (((T_Objets.Nouveau)=True) And ((T_Objets.[IDApp])='BaseTemp - Cop"
+        "ie')); "
     Caption ="F_RecapO"
     DatasheetFontName ="Calibri"
     AllowDatasheetView =0
@@ -133,7 +137,7 @@ Begin Form
                     AllowAutoCorrect = NotDefault
                     OverlapFlags =93
                     IMESentenceMode =3
-                    Left =623
+                    Left =737
                     Width =1695
                     Height =340
                     ColumnWidth =3000
@@ -143,16 +147,16 @@ Begin Form
                     ControlSource ="ObjetType"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =623
-                    LayoutCachedWidth =2318
+                    LayoutCachedLeft =737
+                    LayoutCachedWidth =2432
                     LayoutCachedHeight =340
                 End
                 Begin TextBox
                     AllowAutoCorrect = NotDefault
                     OverlapFlags =87
                     IMESentenceMode =3
-                    Left =2325
-                    Width =7875
+                    Left =2439
+                    Width =7761
                     Height =340
                     ColumnWidth =3000
                     TabIndex =1
@@ -162,7 +166,7 @@ Begin Form
                     ControlSource ="ObjetNom"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =2325
+                    LayoutCachedLeft =2439
                     LayoutCachedWidth =10200
                     LayoutCachedHeight =340
                     BackThemeColorIndex =4
@@ -174,7 +178,7 @@ Begin Form
                     TabStop = NotDefault
                     AllowAutoCorrect = NotDefault
                     OldBorderStyle =0
-                    OverlapFlags =93
+                    OverlapFlags =85
                     TextFontCharSet =2
                     TextAlign =2
                     TextFontFamily =18
@@ -202,13 +206,13 @@ Begin Form
                     TabStop = NotDefault
                     AllowAutoCorrect = NotDefault
                     OldBorderStyle =0
-                    OverlapFlags =87
+                    OverlapFlags =85
                     TextFontCharSet =2
                     TextAlign =2
                     TextFontFamily =18
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =283
+                    Left =340
                     Width =284
                     Height =340
                     TabIndex =3
@@ -218,8 +222,8 @@ Begin Form
                     FontName ="Webdings"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =283
-                    LayoutCachedWidth =567
+                    LayoutCachedLeft =340
+                    LayoutCachedWidth =624
                     LayoutCachedHeight =340
                     ThemeFontIndex =-1
                     ForeThemeColorIndex =9

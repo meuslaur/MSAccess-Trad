@@ -2,6 +2,7 @@
 VersionRequired =20
 Begin Form
     RecordSelectors = NotDefault
+    AutoCenter = NotDefault
     NavigationButtons = NotDefault
     AllowDeletions = NotDefault
     DividingLines = NotDefault
@@ -9,22 +10,22 @@ Begin Form
     AllowEdits = NotDefault
     ScrollBars =2
     ViewsAllowed =1
-    BorderStyle =1
     PictureAlignment =2
     DatasheetGridlinesBehavior =3
     GridY =10
-    Width =11338
+    Width =10266
     DatasheetFontHeight =11
     ItemSuffix =14
-    Left =1932
-    Top =756
-    Right =12900
-    Bottom =4716
+    Left =7425
+    Top =16380
+    Right =17685
+    Bottom =21150
     RecSrcDt = Begin
         0xe6bed64291dbe540
     End
     RecordSource ="R_F_MainSFControles"
     Caption ="Controles"
+    OnCurrent ="[Event Procedure]"
     DatasheetFontName ="Calibri"
     AllowDatasheetView =0
     FilterOnLoad =0
@@ -100,17 +101,17 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =5896
+                    Left =4932
                     Width =1080
                     Height =315
                     BorderColor =8355711
-                    Name ="lbl_txtControlNom"
+                    Name ="lbl_Control_ID"
                     Caption ="Control"
                     Tag ="DetachedLabel"
                     GridlineStyleBottom =1
                     GridlineColor =10921638
-                    LayoutCachedLeft =5896
-                    LayoutCachedWidth =6976
+                    LayoutCachedLeft =4932
+                    LayoutCachedWidth =6012
                     LayoutCachedHeight =315
                     ForeThemeColorIndex =3
                     ForeTint =100.0
@@ -118,7 +119,7 @@ Begin Form
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =4081
+                    Left =3117
                     Width =1080
                     Height =315
                     BorderColor =8355711
@@ -127,8 +128,8 @@ Begin Form
                     Tag ="DetachedLabel"
                     GridlineStyleBottom =1
                     GridlineColor =10921638
-                    LayoutCachedLeft =4081
-                    LayoutCachedWidth =5161
+                    LayoutCachedLeft =3117
+                    LayoutCachedWidth =4197
                     LayoutCachedHeight =315
                     ForeThemeColorIndex =3
                     ForeTint =100.0
@@ -180,7 +181,7 @@ Begin Form
                     OldBorderStyle =0
                     OverlapFlags =93
                     IMESentenceMode =3
-                    Left =4081
+                    Left =3044
                     Width =1776
                     Height =315
                     ColumnWidth =3000
@@ -191,17 +192,17 @@ Begin Form
                     ControlSource ="ControlType"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =4081
-                    LayoutCachedWidth =5857
+                    LayoutCachedLeft =3044
+                    LayoutCachedWidth =4820
                     LayoutCachedHeight =315
                 End
                 Begin TextBox
                     TabStop = NotDefault
                     OldBorderStyle =0
-                    OverlapFlags =255
+                    OverlapFlags =95
                     IMESentenceMode =3
                     Left =566
-                    Width =3534
+                    Width =2484
                     Height =315
                     ColumnWidth =3000
                     TabIndex =1
@@ -213,17 +214,17 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =566
-                    LayoutCachedWidth =4100
+                    LayoutCachedWidth =3050
                     LayoutCachedHeight =315
                     BackThemeColorIndex =-1
                 End
                 Begin TextBox
                     EnterKeyBehavior = NotDefault
                     OldBorderStyle =0
-                    OverlapFlags =95
+                    OverlapFlags =255
                     IMESentenceMode =3
-                    Left =5854
-                    Width =5475
+                    Left =4817
+                    Width =5445
                     Height =315
                     ColumnWidth =3000
                     TabIndex =3
@@ -234,8 +235,8 @@ Begin Form
                     ControlSource ="ControlNom"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =5854
-                    LayoutCachedWidth =11329
+                    LayoutCachedLeft =4817
+                    LayoutCachedWidth =10262
                     LayoutCachedHeight =315
                     BackThemeColorIndex =9
                     BackTint =30.0
@@ -247,18 +248,18 @@ Begin Form
                     AllowAutoCorrect = NotDefault
                     OverlapFlags =247
                     IMESentenceMode =3
-                    Left =7272
+                    Left =6235
                     Width =1590
                     Height =315
                     ColumnWidth =3000
                     BorderColor =10921638
                     ForeColor =4210752
-                    Name ="ObjetParentGuid"
-                    ControlSource ="ObjetParentGuid"
+                    Name ="ObjetParent_ID"
+                    ControlSource ="IDObjet"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =7272
-                    LayoutCachedWidth =8862
+                    LayoutCachedLeft =6235
+                    LayoutCachedWidth =7825
                     LayoutCachedHeight =315
                 End
                 Begin TextBox
@@ -319,19 +320,19 @@ Begin Form
                     AllowAutoCorrect = NotDefault
                     OverlapFlags =247
                     IMESentenceMode =3
-                    Left =9030
+                    Left =7993
                     Width =1116
                     Height =315
                     ColumnWidth =8010
                     TabIndex =6
                     BorderColor =10921638
                     ForeColor =4210752
-                    Name ="ControlGuid"
-                    ControlSource ="ControlGuid"
+                    Name ="Control_ID"
+                    ControlSource ="Control_ID"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =9030
-                    LayoutCachedWidth =10146
+                    LayoutCachedLeft =7993
+                    LayoutCachedWidth =9109
                     LayoutCachedHeight =315
                 End
             End
@@ -346,3 +347,25 @@ Begin Form
         End
     End
 End
+CodeBehindForm
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = True
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+'@Folder("Dev")
+Option Compare Database
+Option Explicit
+
+Private Sub Form_Current()
+'// Affiche info sur le controle en cours dans le form parent (F_Main).
+    If (Me.ControlType = C_FORM Or Me.ControlType = C_REPORT) Then Exit Sub
+
+    Dim sNom As String
+    Dim lPos As Long
+
+    lPos = InStrRev(Me.Control_ID, ".")
+    sNom = Right$(Me.Control_ID, Len(Me.Control_ID) - lPos)
+
+    Me.Parent.MajControlInfo Nz(Me.ControlParentName, vbNullString), Me.ControlType, sNom
+
+End Sub

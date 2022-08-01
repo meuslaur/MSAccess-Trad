@@ -13,3 +13,13 @@ Option Explicit
 'End Type
 'Dim tbltemps() As tempst
 
+
+
+
+Public Sub ProcedureDeTest()
+
+
+    DoCmd.OpenForm "F_Recap", , , , , acDialog, "BaseTemp"
+
+End Sub
+

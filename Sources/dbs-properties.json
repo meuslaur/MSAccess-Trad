@@ -72,10 +72,6 @@
       "Value": true,
       "Type": 1
     },
-    "GUID": {
-      "Value": "{guid {736DC696-894B-44E1-B9A0-32DFE3EA5FE0}}",
-      "Type": 10
-    },
     "HasOfflineLists": {
       "Value": 70,
       "Type": 3
@@ -101,7 +97,7 @@
       "Type": 4
     },
     "NavPane Width": {
-      "Value": 378,
+      "Value": 480,
       "Type": 4
     },
     "Never Cache": {
@@ -117,7 +113,7 @@
       "Type": 3
     },
     "Property Sheet Label Width": {
-      "Value": 2895,
+      "Value": 2448,
       "Type": 4
     },
     "QueryTimeout": {
@@ -133,7 +129,7 @@
       "Type": 15
     },
     "Show Navigation Pane Search Bar": {
-      "Value": 1,
+      "Value": 0,
       "Type": 4
     },
     "Show Values in Indexed": {

@@ -1,1 +1,14 @@
 Sources/modules/modFileAccess.bas
+Sources/tbldefs/aTC.sql
+Sources/tbldefs/aTC.xml
+Sources/tbldefs/aTO.sql
+Sources/tbldefs/aTO.xml
+Sources/tbldefs/aTT.sql
+Sources/tbldefs/aTT.xml
+Sources/queries/a-To Up.bas
+Sources/forms/aa-Test.bas
+Sources/modules/A_CTest.cls
+Sources/modules/A_Test.bas
+*.log
+Sources/vcs-index.json
+Sources/Export.log

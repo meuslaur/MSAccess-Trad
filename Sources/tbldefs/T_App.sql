@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [T_App] (
-  [AppGuid] VARCHAR (50) CONSTRAINT [PrimaryKey] PRIMARY KEY UNIQUE NOT NULL,
+  [App_ID] VARCHAR (50) CONSTRAINT [PrimaryKey] PRIMARY KEY UNIQUE NOT NULL,
   [AppNom] VARCHAR (100),
-  [CodeLangOrigine] LONG ,
+  [LangueCodeBase] LONG ,
   [DernierScan] DATETIME 
 )

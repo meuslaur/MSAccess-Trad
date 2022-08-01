@@ -17,10 +17,10 @@ Begin Form
     Width =11338
     DatasheetFontHeight =11
     ItemSuffix =37
-    Left =4488
-    Top =348
-    Right =15828
-    Bottom =10764
+    Left =9576
+    Top =1572
+    Right =20916
+    Bottom =13008
     DatasheetGridlinesColor =15132391
     RecSrcDt = Begin
         0x2562231676dbe540
@@ -224,7 +224,6 @@ Begin Form
                     WebImagePaddingTop =3
                     WebImagePaddingRight =2
                     WebImagePaddingBottom =2
-                    Overlaps =1
                 End
                 Begin CheckBox
                     TabStop = NotDefault
@@ -383,7 +382,7 @@ Begin Form
         End
         Begin Section
             CanGrow = NotDefault
-            Height =10941
+            Height =10714
             Name ="Détail"
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
@@ -394,7 +393,7 @@ Begin Form
                     Left =566
                     Top =170
                     Width =10464
-                    Height =2328
+                    Height =1992
                     BorderColor =10921638
                     Name ="sfO"
                     SourceObject ="Form.F_RecapSFO"
@@ -403,7 +402,7 @@ Begin Form
                     LayoutCachedLeft =566
                     LayoutCachedTop =170
                     LayoutCachedWidth =11030
-                    LayoutCachedHeight =2498
+                    LayoutCachedHeight =2162
                     Begin
                         Begin Label
                             Vertical = NotDefault
@@ -413,7 +412,7 @@ Begin Form
                             Left =113
                             Top =170
                             Width =375
-                            Height =2328
+                            Height =1992
                             BorderColor =8355711
                             ForeColor =6710886
                             Name ="lbl_sfO"
@@ -422,7 +421,7 @@ Begin Form
                             LayoutCachedLeft =113
                             LayoutCachedTop =170
                             LayoutCachedWidth =488
-                            LayoutCachedHeight =2498
+                            LayoutCachedHeight =2162
                             BackThemeColorIndex =4
                             BackTint =40.0
                         End
@@ -431,9 +430,9 @@ Begin Form
                 Begin Subform
                     OverlapFlags =85
                     Left =566
-                    Top =2721
-                    Width =10488
-                    Height =3336
+                    Top =2437
+                    Width =10476
+                    Height =3000
                     TabIndex =1
                     BorderColor =10921638
                     Name ="sfC"
@@ -441,9 +440,9 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =566
-                    LayoutCachedTop =2721
-                    LayoutCachedWidth =11054
-                    LayoutCachedHeight =6057
+                    LayoutCachedTop =2437
+                    LayoutCachedWidth =11042
+                    LayoutCachedHeight =5437
                     Begin
                         Begin Label
                             Vertical = NotDefault
@@ -451,18 +450,18 @@ Begin Form
                             OverlapFlags =85
                             TextAlign =2
                             Left =113
-                            Top =2721
+                            Top =2437
                             Width =375
-                            Height =3339
+                            Height =3003
                             BorderColor =8355711
                             ForeColor =6710886
                             Name ="lbl_sfC"
                             Caption ="Contrôles"
                             GridlineColor =10921638
                             LayoutCachedLeft =113
-                            LayoutCachedTop =2721
+                            LayoutCachedTop =2437
                             LayoutCachedWidth =488
-                            LayoutCachedHeight =6060
+                            LayoutCachedHeight =5440
                             BackThemeColorIndex =9
                             BackTint =30.0
                         End
@@ -471,9 +470,9 @@ Begin Form
                 Begin Subform
                     OverlapFlags =85
                     Left =566
-                    Top =6292
-                    Width =10488
-                    Height =4428
+                    Top =5725
+                    Width =10464
+                    Height =4824
                     TabIndex =2
                     BorderColor =10921638
                     Name ="sfT"
@@ -481,9 +480,9 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =566
-                    LayoutCachedTop =6292
-                    LayoutCachedWidth =11054
-                    LayoutCachedHeight =10720
+                    LayoutCachedTop =5725
+                    LayoutCachedWidth =11030
+                    LayoutCachedHeight =10549
                     Begin
                         Begin Label
                             Vertical = NotDefault
@@ -491,18 +490,18 @@ Begin Form
                             OverlapFlags =85
                             TextAlign =2
                             Left =113
-                            Top =6292
+                            Top =5725
                             Width =375
-                            Height =4431
+                            Height =4815
                             BorderColor =8355711
                             ForeColor =6710886
                             Name ="lbl_sfT"
                             Caption ="Propriétés :"
                             GridlineColor =10921638
                             LayoutCachedLeft =113
-                            LayoutCachedTop =6292
+                            LayoutCachedTop =5725
                             LayoutCachedWidth =488
-                            LayoutCachedHeight =10723
+                            LayoutCachedHeight =10540
                             BackThemeColorIndex =5
                             BackTint =60.0
                         End
@@ -524,15 +523,13 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-'@Folder("Form")
+'@Folder("Dev")
 Option Compare Database
 Option Explicit
 
-    Private bFrmInfoIsOpen As Boolean   '// Indique F_InfoRecap est ouvert.
+    Private bFrmInfoIsOpen As Boolean
 
-' ------------------------------------------------------
 '// Chargement de données suvant la base.
-' ------------------------------------------------------
 Private Sub Form_Open(Cancel As Integer)
 
     If IsNull(Me.OpenArgs()) Then
@@ -541,7 +538,7 @@ Private Sub Form_Open(Cancel As Integer)
         Exit Sub
     End If
 
-    Dim Args() As String    '// GuidApp + DateMàj(optional)
+    Dim Args() As String
     Dim sSql   As String
 
     Args = Split(Me.OpenArgs(), ";")
@@ -549,34 +546,35 @@ Private Sub Form_Open(Cancel As Integer)
     sSql = "SELECT T_Objets.ObjetType, T_Objets.ObjetNom, T_Objets.Scanner, T_Objets.Nouveau, " & _
            "IIf(Scanner=False,""="",Null) AS Scan, IIf(Nouveau=True,""="",Null) AS Nouv " & _
            "FROM T_Objets " & _
-           "WHERE ((T_Objets.AppGuid)='" & Args(0) & "') " & _
+           "WHERE ((T_Objets.IDApp)='" & Args(0) & "') " & _
            "ORDER BY T_Objets.ObjetType, T_Objets.ObjetNom;"
 
     Me.sfO.Form.RecordSource = sSql
 
-    sSql = "SELECT T_ObjetControles.ControlType, T_ObjetControles.ControlNom, T_ObjetControles.Scanner, T_ObjetControles.Nouveau, " & _
-           "IIf(T_ObjetControles.[Scanner]=False,""="",Null) AS Scan, " & _
-           "IIf(T_ObjetControles.[Nouveau]=True,""="",Null) AS Nouv " & _
+    sSql = "SELECT T_ObjetControles.Control_ID, T_ObjetControles.ControlType, T_ObjetControles.ControlNom, " & _
+           "T_ObjetControles.Scanner, T_ObjetControles.Nouveau, " & _
+           "IIf(T_ObjetControles.Scanner=False,""="",Null) AS Scan, " & _
+           "IIf(T_ObjetControles.Nouveau=True,""="",Null) AS Nouv " & _
            "FROM T_App INNER JOIN (T_Objets INNER JOIN T_ObjetControles " & _
-           "ON T_Objets.ObjetGuid = T_ObjetControles.ObjetParentGuid) ON T_App.AppGuid = T_Objets.AppGuid " & _
-           "WHERE ((T_App.AppGuid='" & Args(0) & "'));"
+           "ON T_Objets.Objet_ID = T_ObjetControles.IDObjet) ON T_App.App_ID = T_Objets.IDApp " & _
+           "WHERE (((T_App.App_ID)='" & Args(0) & "')) " & _
+           "ORDER BY T_ObjetControles.ControlType, T_ObjetControles.ControlNom;"
 
     Me.sfC.Form.RecordSource = sSql
 
-    sSql = "SELECT T_TradTexte.PropNom, T_TradTexte.PropTexte, T_TradTexte.ModifTxt, T_TradTexte.Scanner, T_TradTexte.Nouveau, " & _
-           "T_TradTexte.ModifTxt, T_TradTexte.Scanner, T_TradTexte.Nouveau, " & _
-           "IIf(T_TradTexte.[Scanner]=False,""="",Null) AS Scan, " & _
-           "IIf(ModifTxt=True,""="",Null) AS Modif, " & _
-           "IIf(T_TradTexte.[Nouveau]=True,""="",Null) AS Nouv " & _
-           "FROM T_App INNER JOIN (T_Objets INNER JOIN (T_ObjetControles " & _
-           "INNER JOIN T_TradTexte ON T_ObjetControles.ControlGuid = T_TradTexte.CtrParentGuid) " & _
-           "ON T_Objets.ObjetGuid = T_ObjetControles.ObjetParentGuid) ON T_App.AppGuid = T_Objets.AppGuid " & _
-           "WHERE ((T_App.AppGuid='" & Args(0) & "'));"
+    sSql = "SELECT T_PropTextes.PropNom, T_PropTextes.PropTexte, T_PropTextes.ModPropTexte, T_PropTextes.Scanner, T_PropTextes.Nouveau, " & _
+           "IIf(T_PropTextes.Scanner=False,""="",Null) AS Scan, " & _
+           "IIf(ModPropTexte=True,""="",Null) AS Modif, " & _
+           "IIf(T_PropTextes.Nouveau=True,""="",Null) AS Nouv " & _
+           "FROM T_App INNER JOIN (T_Objets INNER JOIN (T_ObjetControles INNER JOIN T_PropTextes " & _
+           "ON T_ObjetControles.Control_ID = T_PropTextes.IDControl) " & _
+           "ON T_Objets.Objet_ID = T_ObjetControles.IDObjet) " & _
+           "ON T_App.App_ID = T_Objets.IDApp " & _
+           "WHERE (((T_App.App_ID)='" & Args(0) & "'));"
 
     Me.sfT.Form.RecordSource = sSql
 
-    '// Voir si DatMàJ est passée.
-    If (UBound(Args()) > 0) Then Me.Caption = Me.Caption & " (" & Args(1) & ")"
+'    If (UBound(Args()) > 0) Then Me.lblTitre.Caption = Me.lblTitre.Caption & " (" & Args(1) & ")"
 
 End Sub
 
@@ -589,55 +587,46 @@ Private Sub cmdAfficheInfo_Click()
     DoCmd.OpenForm "F_InfoRecap"
 End Sub
 
-' ------------------------------------------------------
 '// Filtrage suivant choix des chkBox.
-' ------------------------------------------------------
 Private Function AppliqueFiltre(ChkNom As String) As Boolean
 
     If ResetFiltres Then Exit Function
 
+    Dim sFiltre As String
+
     Select Case ChkNom
-        Case "Nouv"
-            Me.chkModif = False
-            Me.chkScan = False
-        Case "Modif"
-            Me.chkNouv = False
-            Me.chkScan = False
         Case "Scan"
             Me.chkModif = False
             Me.chkNouv = False
+            sFiltre = "Scanner=False"
+        Case "Modif"
+            Me.chkScan = False
+            Me.chkNouv = False
+            sFiltre = "ModPropTexte=True"
+        Case "Nouv"
+            Me.chkScan = False
+            Me.chkModif = False
+            sFiltre = "Nouveau=True"
         Case Else
             Exit Function
     End Select
 
-    Dim sFiltre As String
-    Dim bFiltre As Boolean
-    Dim sFltO   As String
-    Dim sFltC   As String
-    Dim sFltP   As String
+    If chkModif Then
 
-    sFltO = "ObjetType='X'"   '// Masque les données car pas de filtre Modif sur Objet et Control.
-    sFltC = "ControlType='X'" '// ...
-
-    If (Me.chkNouv) Then sFiltre = "Nouveau=True": bFiltre = True
-
-    If (Me.chkScan) Then sFiltre = "Scanner=False": bFiltre = True
-
-    If (Me.chkModif) Then
-        sFltP = "ModifTxt=True"
-        If (Len(sFiltre) > 0) Then sFltP = sFltP & " AND " & sFiltre
+        Me.sfO.Form.Filter = "ObjetType='X'"
+        Me.sfO.Form.FilterOn = True
+        Me.sfC.Form.Filter = "Control_ID='X'"
+        Me.sfC.Form.FilterOn = True
+        Me.sfT.Form.Filter = sFiltre
+        Me.sfT.Form.FilterOn = True
     Else
-        sFltP = sFiltre
+        Me.sfO.Form.Filter = sFiltre
+        Me.sfO.Form.FilterOn = True
+        Me.sfC.Form.Filter = sFiltre
+        Me.sfC.Form.FilterOn = True
+        Me.sfT.Form.Filter = sFiltre
+        Me.sfT.Form.FilterOn = True
     End If
-
-    Me.sfO.Form.Filter = IIf(bFiltre, sFiltre, sFltO)
-    Me.sfO.Form.FilterOn = True
-    Me.sfC.Form.Filter = IIf(bFiltre, sFiltre, sFltC)
-    Me.sfC.Form.FilterOn = True
-    Me.sfT.Form.Filter = sFltP
-    Me.sfT.Form.FilterOn = True
-
-    AppliqueFiltre = True
 
 End Function
 

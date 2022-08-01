@@ -10,12 +10,11 @@
 	<xsd:element name="T_Objets">
 		<xsd:annotation>
 			<xsd:appinfo>
-				<od:index index-name="AppGuid" index-key="AppGuid " primary="no" unique="no" clustered="no" order="asc"/>
+				<od:index index-name="IDApp" index-key="IDApp " primary="no" unique="no" clustered="no" order="asc"/>
 				<od:index index-name="Nouveau" index-key="Nouveau " primary="no" unique="no" clustered="no" order="asc"/>
-				<od:index index-name="ObjetGuid" index-key="ObjetGuid " primary="no" unique="yes" clustered="no" order="asc"/>
-				<od:index index-name="PrimaryKey" index-key="ObjetGuid " primary="yes" unique="yes" clustered="no" order="asc"/>
+				<od:index index-name="PrimaryKey" index-key="Objet_ID " primary="yes" unique="yes" clustered="no" order="asc"/>
 				<od:index index-name="Scanner" index-key="Scanner " primary="no" unique="no" clustered="no" order="asc"/>
-				<od:index index-name="T_AppT_Objets" index-key="AppGuid " primary="no" unique="no" clustered="no" order="asc"/>
+				<od:index index-name="T_AppT_Objets" index-key="IDApp " primary="no" unique="no" clustered="no" order="asc"/>
 				<od:tableProperty name="Orientation" type="2" value="0"/>
 				<od:tableProperty name="OrderByOn" type="1" value="0"/>
 				<od:tableProperty name="DefaultView" type="2" value="2"/>
@@ -37,29 +36,21 @@
 		</xsd:annotation>
 		<xsd:complexType>
 			<xsd:sequence>
-				<xsd:element name="ObjetGuid" minOccurs="1" od:jetType="text" od:sqlSType="nvarchar" od:nonNullable="yes">
+				<xsd:element name="Objet_ID" minOccurs="1" od:jetType="longinteger" od:sqlSType="int" od:nonNullable="yes" type="xsd:int">
 					<xsd:annotation>
 						<xsd:appinfo>
 							<od:fieldProperty name="ColumnWidth" type="3" value="-1"/>
 							<od:fieldProperty name="ColumnOrder" type="3" value="0"/>
 							<od:fieldProperty name="ColumnHidden" type="1" value="0"/>
+							<od:fieldProperty name="DecimalPlaces" type="2" value="0"/>
 							<od:fieldProperty name="Required" type="1" value="1"/>
-							<od:fieldProperty name="AllowZeroLength" type="1" value="1"/>
 							<od:fieldProperty name="DisplayControl" type="3" value="109"/>
-							<od:fieldProperty name="IMEMode" type="2" value="0"/>
-							<od:fieldProperty name="IMESentenceMode" type="2" value="3"/>
-							<od:fieldProperty name="UnicodeCompression" type="1" value="1"/>
 							<od:fieldProperty name="TextAlign" type="2" value="0"/>
 							<od:fieldProperty name="AggregateType" type="4" value="-1"/>
 							<od:fieldProperty name="ResultType" type="2" value="0"/>
 							<od:fieldProperty name="CurrencyLCID" type="4" value="0"/>
 						</xsd:appinfo>
 					</xsd:annotation>
-					<xsd:simpleType>
-						<xsd:restriction base="xsd:string">
-							<xsd:maxLength value="50"/>
-						</xsd:restriction>
-					</xsd:simpleType>
 				</xsd:element>
 				<xsd:element name="ObjetNom" minOccurs="1" od:jetType="text" od:sqlSType="nvarchar" od:nonNullable="yes">
 					<xsd:annotation>
@@ -85,14 +76,14 @@
 						</xsd:restriction>
 					</xsd:simpleType>
 				</xsd:element>
-				<xsd:element name="ObjetType" minOccurs="1" od:jetType="text" od:sqlSType="nvarchar" od:nonNullable="yes">
+				<xsd:element name="ObjetType" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
 					<xsd:annotation>
 						<xsd:appinfo>
 							<od:fieldProperty name="ColumnWidth" type="3" value="-1"/>
 							<od:fieldProperty name="ColumnOrder" type="3" value="0"/>
 							<od:fieldProperty name="ColumnHidden" type="1" value="0"/>
-							<od:fieldProperty name="Required" type="1" value="1"/>
-							<od:fieldProperty name="AllowZeroLength" type="1" value="0"/>
+							<od:fieldProperty name="Required" type="1" value="0"/>
+							<od:fieldProperty name="AllowZeroLength" type="1" value="1"/>
 							<od:fieldProperty name="DisplayControl" type="3" value="109"/>
 							<od:fieldProperty name="IMEMode" type="2" value="0"/>
 							<od:fieldProperty name="IMESentenceMode" type="2" value="3"/>
@@ -109,14 +100,14 @@
 						</xsd:restriction>
 					</xsd:simpleType>
 				</xsd:element>
-				<xsd:element name="AppGuid" minOccurs="1" od:jetType="text" od:sqlSType="nvarchar" od:nonNullable="yes">
+				<xsd:element name="IDApp" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
 					<xsd:annotation>
 						<xsd:appinfo>
 							<od:fieldProperty name="ColumnWidth" type="3" value="2685"/>
 							<od:fieldProperty name="ColumnOrder" type="3" value="0"/>
 							<od:fieldProperty name="ColumnHidden" type="1" value="0"/>
-							<od:fieldProperty name="Required" type="1" value="1"/>
-							<od:fieldProperty name="AllowZeroLength" type="1" value="0"/>
+							<od:fieldProperty name="Required" type="1" value="0"/>
+							<od:fieldProperty name="AllowZeroLength" type="1" value="1"/>
 							<od:fieldProperty name="DisplayControl" type="3" value="109"/>
 							<od:fieldProperty name="IMEMode" type="2" value="0"/>
 							<od:fieldProperty name="IMESentenceMode" type="2" value="3"/>

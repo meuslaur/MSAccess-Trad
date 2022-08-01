@@ -15,13 +15,13 @@ Begin Form
     DatasheetGridlinesBehavior =3
     Cycle =1
     GridY =10
-    Width =18425
+    Width =18141
     DatasheetFontHeight =11
-    ItemSuffix =82
-    Left =3804
-    Top =600
-    Right =21972
-    Bottom =11796
+    ItemSuffix =66
+    Left =3348
+    Top =180
+    Right =21492
+    Bottom =11784
     DatasheetGridlinesColor =15132391
     RecSrcDt = Begin
         0x5c7a48f85bd8e540
@@ -236,7 +236,7 @@ Begin Form
             PressedForeThemeColorIndex =1
         End
         Begin FormHeader
-            Height =858
+            Height =1023
             BackColor =3684411
             Name ="EntêteFormulaire"
             AlternateBackThemeColorIndex =1
@@ -296,19 +296,19 @@ Begin Form
                     OverlapFlags =93
                     Left =10374
                     Top =226
-                    Width =331
+                    Width =345
                     Height =331
                     TabIndex =1
                     ForeColor =4210752
                     Name ="cmbSelectBdd"
-                    Caption ="..."
+                    Caption =",,,"
                     OnClick ="[Event Procedure]"
                     ControlTipText ="Sélection de la base..."
                     GridlineColor =10921638
 
                     LayoutCachedLeft =10374
                     LayoutCachedTop =226
-                    LayoutCachedWidth =10705
+                    LayoutCachedWidth =10719
                     LayoutCachedHeight =557
                     UseTheme =0
                     Gradient =0
@@ -397,6 +397,7 @@ Begin Form
                     Overlaps =1
                 End
                 Begin ComboBox
+                    Enabled = NotDefault
                     TabStop = NotDefault
                     OverlapFlags =93
                     IMESentenceMode =3
@@ -448,8 +449,8 @@ Begin Form
                 End
                 Begin Image
                     Visible = NotDefault
-                    Left =16894
-                    Top =283
+                    Left =13379
+                    Top =623
                     Width =405
                     Height =330
                     BorderColor =10921638
@@ -535,10 +536,10 @@ Begin Form
                         0x656e743d37363331368eda75390000000049454e44ae426082
                     End
 
-                    LayoutCachedLeft =16894
-                    LayoutCachedTop =283
-                    LayoutCachedWidth =17299
-                    LayoutCachedHeight =613
+                    LayoutCachedLeft =13379
+                    LayoutCachedTop =623
+                    LayoutCachedWidth =13784
+                    LayoutCachedHeight =953
                     TabIndex =6
                 End
                 Begin Image
@@ -549,6 +550,7 @@ Begin Form
                     Height =480
                     BorderColor =10921638
                     Name ="img_Langue"
+                    Picture ="D:\\Access365\\_Dev\\TradAccess\\Flags\\1033.png"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =16667
@@ -683,13 +685,13 @@ Begin Form
                     OverlapFlags =255
                     Left =56
                     Width =17978
-                    Height =858
+                    Height =1023
                     BorderColor =10921638
                     Name ="boxCache"
                     GridlineColor =10921638
                     LayoutCachedLeft =56
                     LayoutCachedWidth =18034
-                    LayoutCachedHeight =858
+                    LayoutCachedHeight =1023
                     BackThemeColorIndex =3
                     BackShade =25.0
                 End
@@ -711,26 +713,6 @@ Begin Form
                     LayoutCachedWidth =2331
                     LayoutCachedHeight =428
                     ForeTint =20.0
-                End
-                Begin Label
-                    Visible = NotDefault
-                    OverlapFlags =247
-                    Left =2437
-                    Top =113
-                    Width =11175
-                    Height =285
-                    FontSize =10
-                    BorderColor =8355711
-                    ForeColor =16777215
-                    Name ="lbl_InfoScan2"
-                    FontName ="Verdana"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =2437
-                    LayoutCachedTop =113
-                    LayoutCachedWidth =13612
-                    LayoutCachedHeight =398
-                    ThemeFontIndex =-1
-                    ForeTint =0.0
                 End
                 Begin Label
                     Visible = NotDefault
@@ -761,6 +743,26 @@ Begin Form
                     ForeTint =100.0
                     ForeShade =75.0
                 End
+                Begin Label
+                    Visible = NotDefault
+                    OverlapFlags =247
+                    Left =2437
+                    Top =113
+                    Width =11175
+                    Height =285
+                    FontSize =10
+                    BorderColor =8355711
+                    ForeColor =16777215
+                    Name ="lbl_InfoScan2"
+                    FontName ="Verdana"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =2437
+                    LayoutCachedTop =113
+                    LayoutCachedWidth =13612
+                    LayoutCachedHeight =398
+                    ThemeFontIndex =-1
+                    ForeTint =0.0
+                End
             End
         End
         Begin Section
@@ -773,56 +775,51 @@ Begin Form
             BackThemeColorIndex =1
             Begin
                 Begin ListBox
-                    OverlapFlags =119
+                    OverlapFlags =85
                     IMESentenceMode =3
                     ColumnCount =3
-                    Left =13039
-                    Top =510
-                    Width =5163
-                    Height =4485
+                    Left =623
+                    Top =2268
+                    Width =5672
+                    Height =8115
                     ColumnOrder =0
-                    TabIndex =4
                     ForeColor =4210752
-                    BorderColor =5855577
+                    BorderColor =10921638
                     Name ="lstObjets"
                     RowSourceType ="Table/Query"
-                    ColumnWidths ="0;0;5103"
+                    ColumnWidths ="0;737;4822"
                     AfterUpdate ="[Event Procedure]"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =13039
-                    LayoutCachedTop =510
-                    LayoutCachedWidth =18202
-                    LayoutCachedHeight =4995
-                    BackThemeColorIndex =4
-                    BackTint =40.0
-                    BorderShade =35.0
+                    LayoutCachedLeft =623
+                    LayoutCachedTop =2268
+                    LayoutCachedWidth =6295
+                    LayoutCachedHeight =10383
                     Begin
                         Begin Label
+                            Vertical = NotDefault
                             BackStyle =1
-                            OldBorderStyle =1
-                            OverlapFlags =93
+                            OverlapFlags =85
                             TextAlign =2
-                            Left =13039
-                            Top =170
-                            Width =5160
-                            Height =345
+                            Left =113
+                            Top =2253
+                            Width =375
+                            Height =8115
                             FontSize =12
+                            BorderColor =8355711
                             ForeColor =5066061
-                            Name ="lbl_lstObjets"
+                            Name ="lbl_lstObjetsInfo"
                             Caption ="Objets"
                             FontName ="Arial"
                             GridlineColor =10921638
-                            LayoutCachedLeft =13039
-                            LayoutCachedTop =170
-                            LayoutCachedWidth =18199
-                            LayoutCachedHeight =515
+                            LayoutCachedLeft =113
+                            LayoutCachedTop =2253
+                            LayoutCachedWidth =488
+                            LayoutCachedHeight =10368
                             ThemeFontIndex =-1
                             BackThemeColorIndex =4
                             BackTint =60.0
-                            BorderThemeColorIndex =1
-                            BorderTint =100.0
-                            BorderShade =35.0
+                            BorderThemeColorIndex =-1
                             ForeTint =70.0
                             GridlineThemeColorIndex =-1
                         End
@@ -830,30 +827,30 @@ Begin Form
                 End
                 Begin Subform
                     OverlapFlags =85
-                    Left =737
-                    Top =7540
-                    Width =11610
+                    Left =7029
+                    Top =7710
+                    Width =10560
                     Height =2655
-                    TabIndex =7
+                    TabIndex =3
                     BorderColor =10921638
                     Name ="SF_Textes"
                     SourceObject ="Form.F_MainSFTextes"
-                    LinkChildFields ="CtrParentGuid"
-                    LinkMasterFields ="txt_SFControlGuid"
+                    LinkChildFields ="IDControl"
+                    LinkMasterFields ="txt_SFControlID"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =737
-                    LayoutCachedTop =7540
-                    LayoutCachedWidth =12347
-                    LayoutCachedHeight =10195
+                    LayoutCachedLeft =7029
+                    LayoutCachedTop =7710
+                    LayoutCachedWidth =17589
+                    LayoutCachedHeight =10365
                     Begin
                         Begin Label
                             Vertical = NotDefault
                             BackStyle =1
                             OverlapFlags =85
                             TextAlign =2
-                            Left =170
-                            Top =7540
+                            Left =6462
+                            Top =7710
                             Width =375
                             Height =2655
                             FontSize =12
@@ -862,10 +859,10 @@ Begin Form
                             Caption ="Propriétés"
                             FontName ="Arial"
                             GridlineColor =10921638
-                            LayoutCachedLeft =170
-                            LayoutCachedTop =7540
-                            LayoutCachedWidth =545
-                            LayoutCachedHeight =10195
+                            LayoutCachedLeft =6462
+                            LayoutCachedTop =7710
+                            LayoutCachedWidth =6837
+                            LayoutCachedHeight =10365
                             ThemeFontIndex =-1
                             BackThemeColorIndex =5
                             BackTint =60.0
@@ -878,30 +875,30 @@ Begin Form
                 End
                 Begin Subform
                     OverlapFlags =85
-                    Left =737
-                    Top =1928
-                    Width =11610
-                    Height =5040
-                    TabIndex =5
+                    Left =7086
+                    Top =2211
+                    Width =10536
+                    Height =4992
+                    TabIndex =1
                     BorderColor =10921638
                     Name ="SF_Controles"
                     SourceObject ="Form.F_MainSFControles"
-                    LinkChildFields ="ObjetParentGuid"
+                    LinkChildFields ="IDObjet"
                     LinkMasterFields ="lstObjets"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =737
-                    LayoutCachedTop =1928
-                    LayoutCachedWidth =12347
-                    LayoutCachedHeight =6968
+                    LayoutCachedLeft =7086
+                    LayoutCachedTop =2211
+                    LayoutCachedWidth =17622
+                    LayoutCachedHeight =7203
                     Begin
                         Begin Label
                             Vertical = NotDefault
                             BackStyle =1
                             OverlapFlags =85
                             TextAlign =2
-                            Left =170
-                            Top =1928
+                            Left =6519
+                            Top =2211
                             Width =375
                             Height =5040
                             FontSize =12
@@ -910,10 +907,10 @@ Begin Form
                             Caption ="Contrôles"
                             FontName ="Arial"
                             GridlineColor =10921638
-                            LayoutCachedLeft =170
-                            LayoutCachedTop =1928
-                            LayoutCachedWidth =545
-                            LayoutCachedHeight =6968
+                            LayoutCachedLeft =6519
+                            LayoutCachedTop =2211
+                            LayoutCachedWidth =6894
+                            LayoutCachedHeight =7251
                             ThemeFontIndex =-1
                             BackThemeColorIndex =9
                             BackTint =60.0
@@ -932,22 +929,22 @@ Begin Form
                     DecimalPlaces =0
                     OverlapFlags =85
                     IMESentenceMode =3
-                    Left =3231
-                    Top =7143
-                    Width =4251
+                    Left =7143
+                    Top =7313
+                    Width =6231
                     Height =315
                     ColumnOrder =1
-                    TabIndex =6
+                    TabIndex =2
                     BorderColor =10921638
                     ForeColor =4210752
-                    Name ="txt_SFControlGuid"
-                    ControlSource ="=[SF_Controles].[Form]![ControlGuid]"
+                    Name ="txt_SFControlID"
+                    ControlSource ="=[SF_Controles].[Form]![Control_ID]"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =3231
-                    LayoutCachedTop =7143
-                    LayoutCachedWidth =7482
-                    LayoutCachedHeight =7458
+                    LayoutCachedLeft =7143
+                    LayoutCachedTop =7313
+                    LayoutCachedWidth =13374
+                    LayoutCachedHeight =7628
                 End
                 Begin TextBox
                     Visible = NotDefault
@@ -956,29 +953,29 @@ Begin Form
                     AllowAutoCorrect = NotDefault
                     OverlapFlags =85
                     IMESentenceMode =3
-                    Left =9978
-                    Top =7145
+                    Left =16270
+                    Top =7315
                     Width =1356
                     Height =315
                     ColumnOrder =2
-                    TabIndex =8
+                    TabIndex =4
                     BackColor =15921906
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="txtBddSauve"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =9978
-                    LayoutCachedTop =7145
-                    LayoutCachedWidth =11334
-                    LayoutCachedHeight =7460
+                    LayoutCachedLeft =16270
+                    LayoutCachedTop =7315
+                    LayoutCachedWidth =17626
+                    LayoutCachedHeight =7630
                     BackShade =95.0
                     Begin
                         Begin Label
                             OverlapFlags =85
                             TextAlign =3
-                            Left =7994
-                            Top =7145
+                            Left =14286
+                            Top =7315
                             Width =1860
                             Height =315
                             BorderColor =8355711
@@ -986,28 +983,251 @@ Begin Form
                             Name ="lbl_txtBddSauve"
                             Caption ="Sauvegarde :"
                             GridlineColor =10921638
-                            LayoutCachedLeft =7994
-                            LayoutCachedTop =7145
-                            LayoutCachedWidth =9854
-                            LayoutCachedHeight =7460
+                            LayoutCachedLeft =14286
+                            LayoutCachedTop =7315
+                            LayoutCachedWidth =16146
+                            LayoutCachedHeight =7630
                         End
                     End
                 End
                 Begin Line
+                    LineSlant = NotDefault
                     OverlapFlags =93
-                    Left =4914
-                    Top =742
-                    Width =2805
-                    Name ="LineBaseTypes"
+                    Left =2836
+                    Top =345
+                    Width =0
+                    Height =555
+                    Name ="LineBaseObj1"
                     GridlineColor =10921638
-                    LayoutCachedLeft =4914
-                    LayoutCachedTop =742
-                    LayoutCachedWidth =7719
-                    LayoutCachedHeight =742
+                    LayoutCachedLeft =2836
+                    LayoutCachedTop =345
+                    LayoutCachedWidth =2836
+                    LayoutCachedHeight =900
+                End
+                Begin Line
+                    OverlapFlags =95
+                    Left =2836
+                    Top =345
+                    Width =1365
+                    Name ="LineBaseObj2"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =2836
+                    LayoutCachedTop =345
+                    LayoutCachedWidth =4201
+                    LayoutCachedHeight =345
+                End
+                Begin Line
+                    LineSlant = NotDefault
+                    OverlapFlags =93
+                    Left =6122
+                    Top =730
+                    Width =0
+                    Height =525
+                    Name ="LineObjCtrP1"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =6122
+                    LayoutCachedTop =730
+                    LayoutCachedWidth =6122
+                    LayoutCachedHeight =1255
+                End
+                Begin Line
+                    LineSlant = NotDefault
+                    OverlapFlags =93
+                    Left =6128
+                    Top =1247
+                    Width =1605
+                    Height =15
+                    Name ="LineObjCtrP2"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =6128
+                    LayoutCachedTop =1247
+                    LayoutCachedWidth =7733
+                    LayoutCachedHeight =1262
+                End
+                Begin TextBox
+                    Enabled = NotDefault
+                    Locked = NotDefault
+                    TabStop = NotDefault
+                    AllowAutoCorrect = NotDefault
+                    OverlapFlags =223
+                    TextFontFamily =49
+                    IMESentenceMode =3
+                    Left =4195
+                    Top =453
+                    Width =4650
+                    Height =300
+                    ColumnOrder =4
+                    TabIndex =5
+                    LeftMargin =57
+                    ForeColor =5066061
+                    Name ="txtGrObjNom"
+                    ControlSource ="=[lstObjets].[Column](2)"
+                    FontName ="Consolas"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =4195
+                    LayoutCachedTop =453
+                    LayoutCachedWidth =8845
+                    LayoutCachedHeight =753
+                    BackThemeColorIndex =4
+                    BackTint =40.0
+                    BorderThemeColorIndex =0
+                    BorderTint =50.0
+                    BorderShade =100.0
+                    ThemeFontIndex =-1
+                    ForeTint =70.0
+                End
+                Begin TextBox
+                    Enabled = NotDefault
+                    Locked = NotDefault
+                    TabStop = NotDefault
+                    AllowAutoCorrect = NotDefault
+                    OverlapFlags =95
+                    TextAlign =2
+                    TextFontFamily =49
+                    IMESentenceMode =3
+                    Left =4195
+                    Top =113
+                    Width =4650
+                    Height =345
+                    ColumnOrder =5
+                    FontWeight =500
+                    TabIndex =6
+                    ForeColor =5066061
+                    Name ="txtGrObj"
+                    ControlSource ="=[lstObjets].[column](1)"
+                    FontName ="Consolas"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =4195
+                    LayoutCachedTop =113
+                    LayoutCachedWidth =8845
+                    LayoutCachedHeight =458
+                    BackThemeColorIndex =4
+                    BackTint =60.0
+                    BorderThemeColorIndex =0
+                    BorderTint =50.0
+                    BorderShade =100.0
+                    ThemeFontIndex =-1
+                    ForeTint =70.0
+                End
+                Begin Label
+                    BackStyle =1
+                    OldBorderStyle =1
+                    OverlapFlags =223
+                    TextAlign =2
+                    TextFontFamily =49
+                    Left =7710
+                    Top =1133
+                    Width =4815
+                    Height =345
+                    FontWeight =500
+                    BackColor =12029087
+                    BorderColor =8355711
+                    ForeColor =5066061
+                    Name ="lblGrCtrP"
+                    Caption ="Contrôle Parent"
+                    FontName ="Consolas"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =7710
+                    LayoutCachedTop =1133
+                    LayoutCachedWidth =12525
+                    LayoutCachedHeight =1478
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =-1
+                    ForeTint =70.0
+                End
+                Begin Label
+                    BackStyle =1
+                    OldBorderStyle =1
+                    OverlapFlags =93
+                    TextAlign =2
+                    TextFontFamily =49
+                    Left =10601
+                    Top =113
+                    Width =4755
+                    Height =342
+                    FontWeight =500
+                    BorderColor =8355711
+                    ForeColor =5066061
+                    Name ="lblGrCtrType"
+                    Caption ="Contrôle"
+                    FontName ="Consolas"
+                    LayoutCachedLeft =10601
+                    LayoutCachedTop =113
+                    LayoutCachedWidth =15356
+                    LayoutCachedHeight =455
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =9
+                    BackTint =60.0
+                    ForeTint =70.0
+                    GridlineThemeColorIndex =-1
+                End
+                Begin Line
+                    LineSlant = NotDefault
+                    OverlapFlags =95
+                    Left =10884
+                    Top =793
+                    Width =15
+                    Height =381
+                    Name ="LineCtrPCtr"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =10884
+                    LayoutCachedTop =793
+                    LayoutCachedWidth =10899
+                    LayoutCachedHeight =1174
+                End
+                Begin Label
+                    BackStyle =1
+                    OldBorderStyle =1
+                    OverlapFlags =95
+                    TextFontFamily =49
+                    Left =10601
+                    Top =453
+                    Width =4755
+                    Height =315
+                    LeftMargin =57
+                    BorderColor =8355711
+                    ForeColor =5066061
+                    Name ="lblGrCtrNom"
+                    FontName ="Consolas"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =10601
+                    LayoutCachedTop =453
+                    LayoutCachedWidth =15356
+                    LayoutCachedHeight =768
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =9
+                    BackTint =30.0
+                    ForeTint =70.0
+                End
+                Begin Label
+                    BackStyle =1
+                    OldBorderStyle =1
+                    OverlapFlags =87
+                    TextFontFamily =49
+                    Left =7710
+                    Top =1474
+                    Width =4815
+                    Height =360
+                    LeftMargin =57
+                    BackColor =13611711
+                    BorderColor =8355711
+                    ForeColor =5066061
+                    Name ="lblGrCtrPNom"
+                    FontName ="Consolas"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =7710
+                    LayoutCachedTop =1474
+                    LayoutCachedWidth =12525
+                    LayoutCachedHeight =1834
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =-1
+                    ForeTint =70.0
                 End
                 Begin Image
-                    Left =7651
-                    Top =623
+                    Left =3968
+                    Top =226
                     Width =240
                     Height =240
                     BorderColor =10921638
@@ -1051,20 +1271,125 @@ Begin Form
                         0x766f6c612f763db4520000000049454e44ae426082
                     End
 
-                    LayoutCachedLeft =7651
-                    LayoutCachedTop =623
-                    LayoutCachedWidth =7891
-                    LayoutCachedHeight =863
-                    TabIndex =10
+                    LayoutCachedLeft =3968
+                    LayoutCachedTop =226
+                    LayoutCachedWidth =4208
+                    LayoutCachedHeight =466
+                    TabIndex =12
+                End
+                Begin Image
+                    Left =7483
+                    Top =1133
+                    Width =240
+                    Height =240
+                    BorderColor =10921638
+                    Name ="imgFDroite2"
+                    Picture ="ic_FlecheDroite.png"
+                    GridlineColor =10921638
+                    ImageData = Begin
+                        0x89504e470d0a1a0a0000000d49484452000000100000001008060000001ff3ff ,
+                        0x610000000467414d410000afc837058ae900000006624b4744000000000000f9 ,
+                        0x43bb7f000000097048597300000048000000480046c96b3e0000000976704167 ,
+                        0x0000001000000010005cc6adc30000022d4944415438cba5934f48146118c67f ,
+                        0xdfccecceeecc8eebaa0d6359e9a2649821529252d04d2408ba74890eddec9f87 ,
+                        0x40a82ee1b5434511a61b1e2a3c55d4c910a28b64204404750895a012945c5773 ,
+                        0x9d717667be0ea590590abef0c27bfaf1f0bccf23a4946c65b49523da9219ad76 ,
+                        0xac43dfa71727e7e68a97b053cfd12d9051d00d4858a0c44135c13490992400ca ,
+                        0x0a4097347577b591b9d19e4ed7553c23e7df25086dc4ff15ac02420959a9d0d0 ,
+                        0xb693fb373b387962cf3965397c49208f6f0ae011c98e8ccef0ea43c8676972b6 ,
+                        0xf320d72f1fd8e754184f28c8db8432be1e40ac98285a1fb5e2abb76a1b77b5b4 ,
+                        0xb5efa7a4cca27907a4a44bdfe36f0c8fe5df87ba719e7862848481ec4fae011c ,
+                        0x1e0411b3f0942ba6537631dd549b309c4a1aab04c7f686bcfb98e3ced31fb9ec ,
+                        0xa2d64779a2476692ee3a00fdd7c6ad6654bdd7b42b5a347b379619e1cc11a84b ,
+                        0x16b8f722cfeb09e58d1c2869fde38dd8f510f27bc582650857d754e63dc97c01 ,
+                        0xfa47a0a341256ec55022acfaa1adf1c4a4105e701ca3bba9c12e1f77cb595a14 ,
+                        0xa4b7498acb3e83c345cff794014cf5eadf0029eb85a4b7a63675b4b2a68ab759 ,
+                        0x1d57c2f6544076c66736174c8452ed222a8600b98e0265a8b4caae2eda958c4d ,
+                        0x2924625012f1f9fa6519cf571fa2695d84e408ff1165118d394b6a296e5ea134 ,
+                        0x1e50f45ca6a6834929b41e34f160c32e484d4751144ce1b330ebe2f90ca2aad7 ,
+                        0x80f14d2551a8faa7c075999bcd4f7b3ea7d1d45308c6d9a0ac62ab75fe09ccc0 ,
+                        0xd098256667c000000025744558746372656174652d6461746500323030392d31 ,
+                        0x312d31355431363a30383a34312d30373a303024aee1e0000000257445587464 ,
+                        0x6174653a63726561746500323031302d30322d32305432333a32363a31352d30 ,
+                        0x373a3030063b5c810000002574455874646174653a6d6f646966790032303130 ,
+                        0x2d30312d31315430393a31383a33392d30373a3030f05d31b100000035744558 ,
+                        0x744c6963656e736500687474703a2f2f6372656174697665636f6d6d6f6e732e ,
+                        0x6f72672f6c6963656e7365732f4c47504c2f322e312f3bc1b418000000257445 ,
+                        0x58746d6f646966792d6461746500323030392d31312d31355431363a30383a34 ,
+                        0x312d30373a30307b1f97d40000001974455874536f6674776172650041646f62 ,
+                        0x6520496d616765526561647971c9653c0000000d74455874536f75726365004e ,
+                        0x75766f6c61ac4f35f10000003474455874536f757263655f55524c0068747470 ,
+                        0x3a2f2f7777772e69636f6e2d6b696e672e636f6d2f70726f6a656374732f6e75 ,
+                        0x766f6c612f763db4520000000049454e44ae426082
+                    End
+
+                    LayoutCachedLeft =7483
+                    LayoutCachedTop =1133
+                    LayoutCachedWidth =7723
+                    LayoutCachedHeight =1373
+                    TabIndex =13
+                End
+                Begin Image
+                    Left =10792
+                    Top =735
+                    Width =240
+                    Height =240
+                    BorderColor =10921638
+                    Name ="imgFHaut"
+                    Picture ="icFlecheHaut.png"
+                    GridlineColor =10921638
+                    ImageData = Begin
+                        0x89504e470d0a1a0a0000000d49484452000000100000001008060000001ff3ff ,
+                        0x610000000467414d410000afc837058ae900000006624b4744000000000000f9 ,
+                        0x43bb7f000000097048597300000048000000480046c96b3e0000000976704167 ,
+                        0x0000001000000010005cc6adc30000023d4944415438cbc593cb4b54711480bf ,
+                        0xdf7dccf5ce131d1d7542ab31cd1e4614093358b4a8245d24b5c88816629b4492 ,
+                        0x16456da25c4804e9222aa87fa2161104122d340363c07c958616938c58e660ce ,
+                        0x8c3373efaf85e4836cd5a203dfea70be730e9c23a494fc4b28ff540d6800e2d0 ,
+                        0xe33f33529aa4ad974208531aea11143589d8d84fbe6df93d81d8880d7c4bdd68 ,
+                        0xa82bab6b3e597190f964179a29f09680b7748dbfae90ced5fafde6a5bb572334 ,
+                        0x9d0fe30ef82e92c91e434a36b0a9c0960e52d947b7afd4162ac57e867e7ad87b ,
+                        0x22e21288fbd8d28394605b2bac09e40a391b1697bb4ed5870e3436d5f06c14a6 ,
+                        0xe3a09656629457eec4b6bbc973437e19f8b76f3241d6aa0f069cedd73a22f4c7 ,
+                        0x35a2132926a696989c53c894ec03a7a715456bc67081e1592710022c59a066ad ,
+                        0x3bd72f878d05af9fde719bd74ffbf9d437805bb1b135174a709700d1896d9523 ,
+                        0xed75024bc28fd4cdd38d55fbabc3d5f47e8068df24b3d3f16826917853c1170a ,
+                        0x3da0e51763f8839564ad5b28ca3ac162ba615b28bffdcc853003330ac3630946 ,
+                        0xfb4752e87adb62ced13afc3eb6102a48e27541595510d3e76a413aceae0a7c3e ,
+                        0xb3a7ade3a83aeff632342519ec8db2bc947c88ae0ea0cab199b94cf7dc548cad ,
+                        0x4536d53b742291621ca6766ff5127d0177556c4963fc459c8f23b3cc7f9d7d87 ,
+                        0xdbd58900bc0140ebf91c4b1f97eeef873d0e2f9aaa627a9d5b00849412bdf6c9 ,
+                        0xa02af43d39d5c052b4049a7e0e45798594e00f81b44171d40887f3b96ee415a1 ,
+                        0x9be43463ca7a60ec16fffd1b7f012c42d12f6d4e902a00000025744558746372 ,
+                        0x656174652d6461746500323030392d31312d31355431363a30383a34312d3037 ,
+                        0x3a303024aee1e00000002574455874646174653a63726561746500323031302d ,
+                        0x30322d32305432333a32363a31352d30373a3030063b5c810000002574455874 ,
+                        0x646174653a6d6f6469667900323031302d30312d31315430393a31383a34302d ,
+                        0x30373a30306f007d7b00000035744558744c6963656e736500687474703a2f2f ,
+                        0x6372656174697665636f6d6d6f6e732e6f72672f6c6963656e7365732f4c4750 ,
+                        0x4c2f322e312f3bc1b41800000025744558746d6f646966792d64617465003230 ,
+                        0x30392d31312d31355431363a30383a34312d30373a30307b1f97d40000001974 ,
+                        0x455874536f6674776172650041646f626520496d616765526561647971c9653c ,
+                        0x0000000d74455874536f75726365004e75766f6c61ac4f35f100000034744558 ,
+                        0x74536f757263655f55524c00687474703a2f2f7777772e69636f6e2d6b696e67 ,
+                        0x2e636f6d2f70726f6a656374732f6e75766f6c612f763db4520000000049454e ,
+                        0x44ae426082
+                    End
+
+                    LayoutCachedLeft =10792
+                    LayoutCachedTop =735
+                    LayoutCachedWidth =11032
+                    LayoutCachedHeight =975
+                    TabIndex =14
                 End
                 Begin CommandButton
                     TabStop = NotDefault
                     OverlapFlags =85
-                    Left =735
-                    Top =1560
+                    Left =16611
+                    Top =1757
                     Width =975
                     Height =330
-                    TabIndex =1
+                    TabIndex =7
                     ForeColor =4210752
                     Name ="cmdAfficheInfo"
                     Caption =" Info"
@@ -1115,10 +1440,10 @@ Begin Form
                         0x329541f9c60000000049454e44ae426082
                     End
 
-                    LayoutCachedLeft =735
-                    LayoutCachedTop =1560
-                    LayoutCachedWidth =1710
-                    LayoutCachedHeight =1890
+                    LayoutCachedLeft =16611
+                    LayoutCachedTop =1757
+                    LayoutCachedWidth =17586
+                    LayoutCachedHeight =2087
                     PictureCaptionArrangement =5
                     UseTheme =0
                     BackColor =14461583
@@ -1133,35 +1458,32 @@ Begin Form
                     WebImagePaddingBottom =2
                 End
                 Begin ComboBox
-                    LimitToList = NotDefault
                     TabStop = NotDefault
                     AllowAutoCorrect = NotDefault
-                    OverlapFlags =215
+                    OverlapFlags =87
                     IMESentenceMode =3
                     ColumnCount =2
                     ListWidth =2085
-                    Left =1133
-                    Top =581
-                    Width =3861
-                    Height =300
-                    TabIndex =2
+                    Left =1077
+                    Top =1247
+                    Width =3618
+                    Height =315
+                    TabIndex =8
                     BorderColor =10921638
                     ForeColor =3484194
                     ColumnInfo ="\"\";\"\";\"\";\"\";\"10\";\"200\""
                     Name ="zlBases"
                     RowSourceType ="Table/Query"
                     RowSource ="RL_Apps"
-                    ColumnWidths ="0;2086"
+                    ColumnWidths ="0;2087"
                     AfterUpdate ="[Event Procedure]"
-                    OnGotFocus ="=OuvreZl()"
                     ControlTipText ="Liste des applications déjà enregistrées,"
                     GridlineColor =10921638
-                    AllowValueListEdits =0
 
-                    LayoutCachedLeft =1133
-                    LayoutCachedTop =581
-                    LayoutCachedWidth =4994
-                    LayoutCachedHeight =881
+                    LayoutCachedLeft =1077
+                    LayoutCachedTop =1247
+                    LayoutCachedWidth =4695
+                    LayoutCachedHeight =1562
                     BackThemeColorIndex =7
                     BackTint =20.0
                     Begin
@@ -1171,21 +1493,21 @@ Begin Form
                             OverlapFlags =93
                             TextAlign =2
                             TextFontFamily =49
-                            Left =1133
-                            Top =226
-                            Width =3855
-                            Height =360
+                            Left =1077
+                            Top =907
+                            Width =3624
+                            Height =345
                             FontWeight =500
                             BorderColor =8355711
                             ForeColor =5066061
                             Name ="lbl_zlBases"
-                            Caption ="Bases"
+                            Caption ="Base"
                             FontName ="Consolas"
                             GridlineColor =10921638
-                            LayoutCachedLeft =1133
-                            LayoutCachedTop =226
-                            LayoutCachedWidth =4988
-                            LayoutCachedHeight =586
+                            LayoutCachedLeft =1077
+                            LayoutCachedTop =907
+                            LayoutCachedWidth =4701
+                            LayoutCachedHeight =1252
                             ThemeFontIndex =-1
                             BackThemeColorIndex =7
                             BackTint =50.0
@@ -1202,39 +1524,40 @@ Begin Form
                     TextAlign =1
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =2493
-                    Top =1020
+                    Left =2267
+                    Top =1644
                     Width =2046
                     Height =315
+                    TabIndex =9
                     BorderColor =10921638
-                    ForeColor =8355711
                     Name ="txtDateScan"
                     Format ="General Date"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =2493
-                    LayoutCachedTop =1020
-                    LayoutCachedWidth =4539
-                    LayoutCachedHeight =1335
-                    ForeTint =50.0
+                    LayoutCachedLeft =2267
+                    LayoutCachedTop =1644
+                    LayoutCachedWidth =4313
+                    LayoutCachedHeight =1959
+                    ForeThemeColorIndex =7
+                    ForeTint =20.0
                     Begin
                         Begin Label
                             OverlapFlags =85
                             TextAlign =3
-                            Left =1077
-                            Top =1020
-                            Width =1305
+                            Left =566
+                            Top =1644
+                            Width =1590
                             Height =315
                             BorderColor =8355711
-                            ForeColor =10066329
+                            ForeColor =13421772
                             Name ="lbl_txtDateScan"
-                            Caption ="Scan du :"
+                            Caption ="Dernier scan :"
                             GridlineColor =10921638
-                            LayoutCachedLeft =1077
-                            LayoutCachedTop =1020
-                            LayoutCachedWidth =2382
-                            LayoutCachedHeight =1335
-                            ForeTint =40.0
+                            LayoutCachedLeft =566
+                            LayoutCachedTop =1644
+                            LayoutCachedWidth =2156
+                            LayoutCachedHeight =1959
+                            ForeTint =20.0
                         End
                     End
                 End
@@ -1242,11 +1565,11 @@ Begin Form
                     Enabled = NotDefault
                     TabStop = NotDefault
                     OverlapFlags =85
-                    Left =4620
-                    Top =1020
+                    Left =4365
+                    Top =1644
                     Width =330
                     Height =330
-                    TabIndex =9
+                    TabIndex =10
                     ForeColor =4210752
                     Name ="cmdVoirRecap"
                     OnClick ="[Event Procedure]"
@@ -1296,10 +1619,10 @@ Begin Form
                         0x322669643d329541f9c60000000049454e44ae426082
                     End
 
-                    LayoutCachedLeft =4620
-                    LayoutCachedTop =1020
-                    LayoutCachedWidth =4950
-                    LayoutCachedHeight =1350
+                    LayoutCachedLeft =4365
+                    LayoutCachedTop =1644
+                    LayoutCachedWidth =4695
+                    LayoutCachedHeight =1974
                     UseTheme =0
                     BackColor =14461583
                     BorderColor =14461583
@@ -1313,278 +1636,98 @@ Begin Form
                     WebImagePaddingBottom =2
                     Overlaps =1
                 End
-                Begin ComboBox
-                    LimitToList = NotDefault
-                    Enabled = NotDefault
+                Begin CommandButton
                     TabStop = NotDefault
-                    RowSourceTypeInt =1
                     OverlapFlags =85
-                    DecimalPlaces =0
-                    IMESentenceMode =3
-                    ColumnCount =2
-                    Left =7880
-                    Top =959
-                    Width =1761
-                    Height =330
-                    TabIndex =3
-                    BoundColumn =-1
-                    BorderColor =5855577
-                    Name ="zlObjetTypes"
-                    RowSourceType ="Value List"
-                    RowSource ="0;Tous;1;Form;2;Report"
-                    ColumnWidths ="0;1701"
-                    AfterUpdate ="[Event Procedure]"
-                    DefaultValue ="0"
-                    OnGotFocus ="=OuvreZl()"
-                    GridlineColor =10921638
-                    AllowValueListEdits =0
-
-                    LayoutCachedLeft =7880
-                    LayoutCachedTop =959
-                    LayoutCachedWidth =9641
-                    LayoutCachedHeight =1289
-                    BackThemeColorIndex =3
-                    BackShade =90.0
-                    BorderShade =35.0
-                    ForeThemeColorIndex =0
-                    ForeTint =70.0
-                    ForeShade =100.0
-                    Begin
-                        Begin Label
-                            BackStyle =1
-                            OldBorderStyle =1
-                            OverlapFlags =255
-                            TextAlign =2
-                            Left =7869
-                            Top =623
-                            Width =1770
-                            Height =330
-                            ForeColor =5066061
-                            Name ="lbl_zlObjetTypes"
-                            Caption ="Types"
-                            GridlineColor =10921638
-                            LayoutCachedLeft =7869
-                            LayoutCachedTop =623
-                            LayoutCachedWidth =9639
-                            LayoutCachedHeight =953
-                            BackThemeColorIndex =3
-                            BackShade =75.0
-                            BorderThemeColorIndex =1
-                            BorderTint =100.0
-                            BorderShade =35.0
-                            ForeTint =70.0
-                        End
-                    End
-                End
-                Begin Line
-                    OverlapFlags =93
-                    Left =8728
-                    Top =345
-                    Width =4020
-                    Name ="LineTypesObj2"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =8728
-                    LayoutCachedTop =345
-                    LayoutCachedWidth =12748
-                    LayoutCachedHeight =345
-                End
-                Begin Image
-                    Left =12755
-                    Top =226
-                    Width =240
-                    Height =240
-                    BorderColor =10921638
-                    Name ="imgFDroite2"
-                    Picture ="ic_FlecheDroite.png"
-                    GridlineColor =10921638
-                    ImageData = Begin
-                        0x89504e470d0a1a0a0000000d49484452000000100000001008060000001ff3ff ,
-                        0x610000000467414d410000afc837058ae900000006624b4744000000000000f9 ,
-                        0x43bb7f000000097048597300000048000000480046c96b3e0000000976704167 ,
-                        0x0000001000000010005cc6adc30000022d4944415438cba5934f48146118c67f ,
-                        0xdfccecceeecc8eebaa0d6359e9a2649821529252d04d2408ba74890eddec9f87 ,
-                        0x40a82ee1b5434511a61b1e2a3c55d4c910a28b64204404750895a012945c5773 ,
-                        0x9d717667be0ea590590abef0c27bfaf1f0bccf23a4946c65b49523da9219ad76 ,
-                        0xac43dfa71727e7e68a97b053cfd12d9051d00d4858a0c44135c13490992400ca ,
-                        0x0a4097347577b591b9d19e4ed7553c23e7df25086dc4ff15ac02420959a9d0d0 ,
-                        0xb693fb373b387962cf3965397c49208f6f0ae011c98e8ccef0ea43c8676972b6 ,
-                        0xf320d72f1fd8e754184f28c8db8432be1e40ac98285a1fb5e2abb76a1b77b5b4 ,
-                        0xb5efa7a4cca27907a4a44bdfe36f0c8fe5df87ba719e7862848481ec4fae011c ,
-                        0x1e0411b3f0942ba6537631dd549b309c4a1aab04c7f686bcfb98e3ced31fb9ec ,
-                        0xa2d64779a2476692ee3a00fdd7c6ad6654bdd7b42b5a347b379619e1cc11a84b ,
-                        0x16b8f722cfeb09e58d1c2869fde38dd8f510f27bc582650857d754e63dc97c01 ,
-                        0xfa47a0a341256ec55022acfaa1adf1c4a4105e701ca3bba9c12e1f77cb595a14 ,
-                        0xa4b7498acb3e83c345cff794014cf5eadf0029eb85a4b7a63675b4b2a68ab759 ,
-                        0x1d57c2f6544076c66736174c8452ed222a8600b98e0265a8b4caae2eda958c4d ,
-                        0x2924625012f1f9fa6519cf571fa2695d84e408ff1165118d394b6a296e5ea134 ,
-                        0x1e50f45ca6a6834929b41e34f160c32e484d4751144ce1b330ebe2f90ca2aad7 ,
-                        0x80f14d2551a8faa7c075999bcd4f7b3ea7d1d45308c6d9a0ac62ab75fe09ccc0 ,
-                        0xd098256667c000000025744558746372656174652d6461746500323030392d31 ,
-                        0x312d31355431363a30383a34312d30373a303024aee1e0000000257445587464 ,
-                        0x6174653a63726561746500323031302d30322d32305432333a32363a31352d30 ,
-                        0x373a3030063b5c810000002574455874646174653a6d6f646966790032303130 ,
-                        0x2d30312d31315430393a31383a33392d30373a3030f05d31b100000035744558 ,
-                        0x744c6963656e736500687474703a2f2f6372656174697665636f6d6d6f6e732e ,
-                        0x6f72672f6c6963656e7365732f4c47504c2f322e312f3bc1b418000000257445 ,
-                        0x58746d6f646966792d6461746500323030392d31312d31355431363a30383a34 ,
-                        0x312d30373a30307b1f97d40000001974455874536f6674776172650041646f62 ,
-                        0x6520496d616765526561647971c9653c0000000d74455874536f75726365004e ,
-                        0x75766f6c61ac4f35f10000003474455874536f757263655f55524c0068747470 ,
-                        0x3a2f2f7777772e69636f6e2d6b696e672e636f6d2f70726f6a656374732f6e75 ,
-                        0x766f6c612f763db4520000000049454e44ae426082
-                    End
-
-                    LayoutCachedLeft =12755
-                    LayoutCachedTop =226
-                    LayoutCachedWidth =12995
-                    LayoutCachedHeight =466
+                    Left =56
+                    Top =56
+                    Width =360
+                    Height =360
                     TabIndex =11
-                End
-                Begin Line
-                    LineSlant = NotDefault
-                    OverlapFlags =119
-                    Left =8730
-                    Top =346
-                    Width =0
-                    Height =277
-                    Name ="LineTypesObj1"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =8730
-                    LayoutCachedTop =346
-                    LayoutCachedWidth =8730
-                    LayoutCachedHeight =623
-                End
-                Begin Image
-                    Left =12359
-                    Top =3741
-                    Width =240
-                    Height =240
-                    BorderColor =10921638
-                    Name ="imgFGauche1"
-                    Picture ="ic_FlecheGauche.png"
+                    ForeColor =4210752
+                    Name ="Commande65"
+                    Caption ="Commande65"
+                    OnClick ="[Event Procedure]"
+                    Picture ="ic_cmdF_Trad.png"
                     GridlineColor =10921638
                     ImageData = Begin
-                        0x89504e470d0a1a0a0000000d49484452000000100000001008060000001ff3ff ,
-                        0x610000000467414d410000afc837058ae900000006624b4744000000000000f9 ,
-                        0x43bb7f000000097048597300000048000000480046c96b3e0000000976704167 ,
-                        0x0000001000000010005cc6adc3000002404944415438cba5924b48546118869f ,
-                        0xff9f337366e6d84cea4c65d09025628410a65dac50a908da84bb08da44058a20 ,
-                        0x162ddcba10da649b0aa168d1a6166d82a2eb220831f256d8c5442d75129dd1d1 ,
-                        0x9971eee7fc2d440415917ae1836ff1f27c7cbcaf504af13fd2961751d109a92c ,
-                        0xe81ad86d90c88200743b5816449267bd7ea3c35fe429fd1dcaf466ba2e5602c8 ,
-                        0x8df9024cab8048f276a038ff59e7cdd3a5add76a70daf4fdcb8e8d01a6754626 ,
-                        0x32efeacfed6b7e70a7de76a06e37734a62da1c6b5f58392ac0520eb266bbdfe7 ,
-                        0x6ebade78543f525bc6e8a264f8abc5878f61d2680beb03848054ee10d9dcbd93 ,
-                        0xb57b2a1a1baa89bb0b79fa0da2e128dd6f0719fa1eeac5a5df580fe0229169f5 ,
-                        0x16b81b9a5aaa7d5575e5bcfca9d13f6691981c63ac6f28199f4ddec56bb4a1c9 ,
-                        0xe85a40ce7c7db8a6e478c3d56ac6ad429a9f40643e891ae9213613eec7a635e2 ,
-                        0xb2778362695601a4102e97c7c9fb499d572330350732adf04a81c770a6a2a67b ,
-                        0x01a7016e037463e5ebe52289839d6e629976bb7fdbe5c0b14ac35154cc4458e2 ,
-                        0xd72dcaec41be0cfe990f86d52d3cde0e9c465c3d0aac8a5191c0656fc96633f5 ,
-                        0xa35dfd43a1810176180922a6e4536217818af2ad2565be36897a81a5cad7ef81 ,
-                        0x42a1d9de28875e159e0cdd9fe8f9acf2d261108abe293719df5ef2776e3f8194 ,
-                        0xcf372e921031a4bc924e9917823f7e0d5bb341f2dd3966e282185b100ea77f73 ,
-                        0x4d14e2b1928e5373d3b187f3c169f2641a4d13289b93cd01961ce368daa554d2 ,
-                        0x3a1f092d0673992cc26e1f5b93c2bfea2f8dc5e2c3dcdef5c900000025744558 ,
-                        0x746372656174652d6461746500323030392d31312d31355431363a30383a3431 ,
-                        0x2d30373a303024aee1e00000002574455874646174653a637265617465003230 ,
-                        0x31302d30322d32305432333a32363a31352d30373a3030063b5c810000002574 ,
-                        0x455874646174653a6d6f6469667900323031302d30312d31315430393a31383a ,
-                        0x33392d30373a3030f05d31b100000035744558744c6963656e73650068747470 ,
-                        0x3a2f2f6372656174697665636f6d6d6f6e732e6f72672f6c6963656e7365732f ,
-                        0x4c47504c2f322e312f3bc1b41800000025744558746d6f646966792d64617465 ,
-                        0x00323030392d31312d31355431363a30383a34312d30373a30307b1f97d40000 ,
-                        0x001974455874536f6674776172650041646f626520496d616765526561647971 ,
-                        0xc9653c0000000d74455874536f75726365004e75766f6c61ac4f35f100000034 ,
-                        0x74455874536f757263655f55524c00687474703a2f2f7777772e69636f6e2d6b ,
-                        0x696e672e636f6d2f70726f6a656374732f6e75766f6c612f763db45200000000 ,
-                        0x49454e44ae426082
+                        0x89504e470d0a1a0a0000000d4948445200000018000000180806000000e0773d ,
+                        0xf800000006624b4744000000000000f943bb7f000000097048597300001baf00 ,
+                        0x001baf015e1a911c0000000976704167000000180000001800784ca5a6000005 ,
+                        0x8c4944415448c7ad963b6c1cd71985bffb987dcd3ec95dee9234b5646c2f455a ,
+                        0x82cdc84a58580a18384a28b362902a806015ae5c042ea3ca5582408d0b576e9d ,
+                        0x327252cb302c32526151b12009a1094bcb900cbda449ee63969be50c77766e0a ,
+                        0x6a57829b00812e3003dcc79c73ef39ff7fff8117dfc4a5e9e9e22fae5e1d0450 ,
+                        0x2f12f90ef01b294b63beff51abd198abd9f68e7e51e037b4e6e0dab574221cfe ,
+                        0xfdc59b3717d28f1f8b27f5fa4bb2b7c018f37f3fb55a8d03dfb7063efdf4b703 ,
+                        0xbbbb8bfabdf7c4f1ecacfb52287447f408ae5fbf1e5a5c5c7cd575dd70100418 ,
+                        0x63cc336ed3ef9b9306d07b19a554d0fce083d3d9adad3f0e5b5669a558341be7 ,
+                        0xce7d262291dff52492b66d9f0a87c39f28a5060084103d40945200464a010884 ,
+                        0x006330beef131883aad74d2812490d472263bb8d06cb5f7cb17af0d5577faa8d ,
+                        0x8d7dd72350914864d218f3ba94d2164220a5e4e8e808c771c8e7f3d40f5d8c81 ,
+                        0xc1b4cd77074d06123102ff98c35a8dd4cd9b64ab55baaecb97d5aa53ef743efa ,
+                        0x47bd7eef6ead468f40673299a231462aa5104220842008027cdf47290942f2cf ,
+                        0xf55d3a7e40d20e9349da0821682f2f93bd758b58abc5b2e320de78637db7dd5e ,
+                        0x5a79f00021043d93752a952a28a5949412a5144a29badd2ec6188490842c45db ,
+                        0xedd03a3a464a891d0ba3bfff9ee4eddb0cd4eb945d97f6850b5cf8f0c3907dfe ,
+                        0x7c0810c03382783c5e90526a294f868410f8be4f10047403c37ea3cd4fce9c62 ,
+                        0x71ee0cc97884f2371b78376e305ca9d06cb57894cd32fdeebb14de7c3317512a ,
+                        0xd1c3d6275822648c192a97cbb2dbedf6256a369b743a1d7cdf474a897304ce01 ,
+                        0x588121b4bc44687919abd5e273cfa3fbd65bd4d369da1b1bd189f1f1fcf304a4 ,
+                        0x52a9703299cc49290982e024aca4c4f33c2ccb4287e3ec37da948a39ac90a679 ,
+                        0xfb0ee66f7f25d76a712f08e8cccd317be50a5622819452974aa5d1a7d8c71a10 ,
+                        0x972f5fcec462b1443299eccb23a5647f7f1f2160627c8cadafffc5933d8fc9f0 ,
+                        0x7fb06e7cc670adc6a610dc7fe5157ef5fefbbcfcda6b1863e876bbba5028f408 ,
+                        0x9080989999c90921ec1f66b4ebba80206147b8f8e39759f9fa09b7aefd81e8dd ,
+                        0xbb7480bf0f0ea26767498e8cd00b0eadb5ca6432238005080dc842a190d55ac7 ,
+                        0x9e37d81843a7d32191487078e473fbc12613838a49592515b6f8dcf3482c2c10 ,
+                        0x999aa2e71b80524a2693c90210ee9d40a552a9ace77951c77168369b1c1e1ee2 ,
+                        0x380e8787871cb92eab8fb7484505e7a6e3d857cf7177c6667bfa555e7fe71d7c ,
+                        0xa05aade2380e8d4603c7710882207bf6ecd978ef042a1a8d66cbe572b4d96cf6 ,
+                        0xf5f77d9feded6ddaed36d96c8e8ed7a21e5a07f96f8e7ef9530a628627dbdbec ,
+                        0xeeec70d46e53a954fad74a32994ccccfcfe71e3d7a54d68015b3edc1d1a121ab ,
+                        0xbdb545e03844f2793cdba652a9502a95182f16d978f825addd55a2bac0f98b57 ,
+                        0x086546e9767d5aad16e9749a999999bebc4110d8a5526908103a37346447b51e ,
+                        0x0c3d7c2874ab457864047f6d0dd2690072b91c91bd3d6a9ffc19eb6767b173d3 ,
+                        0x78cbf718fef529ac429e783c8ed69ae1e1e17e6d705dd7cee7f37940e9b9b7df ,
+                        0x4e69cfcbf8f53a030b0b58e934349b6c7ffc316e3c4ed7f7d9ba7f9f354f1197 ,
+                        0x6304b951fc9d87b437374965b3fd84f47d1fad75cfe8582a95ca015affa8584c ,
+                        0xc5b2d98cdcdca4b5b2427462026f6d8d70b188761c42a11083972ef1f3336738 ,
+                        0xdedb2359ad62673244c7c600b02c0bc77178563e406b1db26d7b08b0f4a9b1b1 ,
+                        0xb89dc96492f3f3b8df7e8bb7be4eecf46926c7c7196eb749a7d368adc98e8ee2 ,
+                        0x95cb98e36322e3e3108d0230353545b3d9eceffea90f229d4e678bc56254d7eb ,
+                        0xf5ca37abab7ff17dbfd8ed7695b02c54a522c4cecef3eb31c6885eac8bdddd7e ,
+                        0x25eccd2f2d2d899ec9e170f8b8dd6edf999c9cec88a7099100e29cfc653cff71 ,
+                        0x1fe47f8cfd70fe186800adff02c8ba7cb5e500df1a0000002574455874637265 ,
+                        0x6174652d6461746500323030392d31312d31355431373a30323a33372d30373a ,
+                        0x3030870f948f0000002574455874646174653a63726561746500323031302d30 ,
+                        0x312d31315430393a32363a31302d30373a3030d1969d11000000257445587464 ,
+                        0x6174653a6d6f6469667900323031302d30312d31315430393a32363a31302d30 ,
+                        0x373a3030a0cb25ad00000067744558744c6963656e736500687474703a2f2f63 ,
+                        0x72656174697665636f6d6d6f6e732e6f72672f6c6963656e7365732f62792d73 ,
+                        0x612f332e302f206f7220687474703a2f2f6372656174697665636f6d6d6f6e73 ,
+                        0x2e6f72672f6c6963656e7365732f4c47504c2f322e312f5b8f3c630000002574 ,
+                        0x4558746d6f646966792d6461746500323030392d30332d31395431303a35323a ,
+                        0x34382d30363a3030265ab84b0000001374455874536f75726365004f78796765 ,
+                        0x6e2049636f6e73ec18aee80000002774455874536f757263655f55524c006874 ,
+                        0x74703a2f2f7777772e6f787967656e2d69636f6e732e6f72672fef37aacb0000 ,
+                        0x000049454e44ae426082
                     End
 
-                    LayoutCachedLeft =12359
-                    LayoutCachedTop =3741
-                    LayoutCachedWidth =12599
-                    LayoutCachedHeight =3981
-                    TabIndex =12
-                End
-                Begin Line
-                    OverlapFlags =127
-                    Left =12585
-                    Top =3855
-                    Width =454
-                    Name ="LineObjCtr"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =12585
-                    LayoutCachedTop =3855
-                    LayoutCachedWidth =13039
-                    LayoutCachedHeight =3855
-                End
-                Begin Image
-                    Left =11730
-                    Top =7290
-                    Width =240
-                    Height =240
-                    BorderColor =10921638
-                    Name ="imgFBas1"
-                    Picture ="ic_FlecheBas.png"
-                    GridlineColor =10921638
-                    ImageData = Begin
-                        0x89504e470d0a1a0a0000000d49484452000000100000001008060000001ff3ff ,
-                        0x610000000467414d410000afc837058ae900000006624b4744000000000000f9 ,
-                        0x43bb7f000000097048597300000048000000480046c96b3e0000000976704167 ,
-                        0x0000001000000010005cc6adc30000023c4944415438cbc593cd4b546114c67f ,
-                        0xef7befdceb7cf95ddacc485aa652a1d320266d8ce84fc895db7053b988242222 ,
-                        0xa45d6dda98445264e12217452d5c4881104cb44bdc248d4660ea4c33ce87f365 ,
-                        0xf7deb785a422b672d181b339f0fce09ce7394229c5414a1e480de80066cf93a8 ,
-                        0x07c2968282ada51c8ff7128619c571a02a0802b09d0e949cd6cd8a46a5bb7034 ,
-                        0x63c1996cedd2018e05fcbdf787cf51d224d3d1b5c0b389af0f71898be8460e04 ,
-                        0xd88e57b39db1b6d38166e5af23bd214824d29ddb2bc457f34b5e29e9ef0d3178 ,
-                        0xf90ce1ee500f39750b770d080179eb6ae444f5f9ee4813787c6ca261db626d1b ,
-                        0x904a96ae0fde8bb2b092c7e392f40f84a93aecbf46d98a6039ad75f515c3ed91 ,
-                        0x66e65624f15f16eb6beba0d48d9d23d6fadec416738fee8cce5351561c095472 ,
-                        0xf6429b0f25c634d4f8c970b06ea9e8653909d95416e5389348ede50e40d7a0c6 ,
-                        0x3d3235f373fef5fb65821e68690fd170f4504f657d759faa69e47b0272990256 ,
-                        0xb1b488a6df05b5cb46c706a1e2cad46f3f781eb3e2ab059a6a052d9dc70976b4 ,
-                        0xb0bc2e48a52dcab91c68da08f06dcb9abf00c30b86070ce36d32638f8dbefa41 ,
-                        0xa0d2c1e731d8b04d92594531930378819013080952db05a80a41650378fce037 ,
-                        0x6f7efa92999bfd9ca2eb2824b290cf16c1fe1d436a43fb2751d9a01c500a8428 ,
-                        0x62e857a66692696bb3cca9808d9dcd9790720848ff03a076da7140971f0b25f5 ,
-                        0xf8dd6c86427603e02988e9fda22c94528881d8de3108e106f38370996e25451f ,
-                        0x82cc5eb11aafdd02fcd76ffc035eede5e276e52a9b0000002574455874637265 ,
-                        0x6174652d6461746500323030392d31312d31355431363a30383a34312d30373a ,
-                        0x303024aee1e00000002574455874646174653a63726561746500323031302d30 ,
-                        0x322d32305432333a32363a31352d30373a3030063b5c81000000257445587464 ,
-                        0x6174653a6d6f6469667900323031302d30312d31315430393a31383a33392d30 ,
-                        0x373a3030f05d31b100000035744558744c6963656e736500687474703a2f2f63 ,
-                        0x72656174697665636f6d6d6f6e732e6f72672f6c6963656e7365732f4c47504c ,
-                        0x2f322e312f3bc1b41800000025744558746d6f646966792d6461746500323030 ,
-                        0x392d31312d31355431363a30383a34312d30373a30307b1f97d4000000197445 ,
-                        0x5874536f6674776172650041646f626520496d616765526561647971c9653c00 ,
-                        0x00000d74455874536f75726365004e75766f6c61ac4f35f10000003474455874 ,
-                        0x536f757263655f55524c00687474703a2f2f7777772e69636f6e2d6b696e672e ,
-                        0x636f6d2f70726f6a656374732f6e75766f6c612f763db4520000000049454e44 ,
-                        0xae426082
-                    End
-
-                    LayoutCachedLeft =11730
-                    LayoutCachedTop =7290
-                    LayoutCachedWidth =11970
-                    LayoutCachedHeight =7530
-                    TabIndex =13
-                End
-                Begin Line
-                    LineSlant = NotDefault
-                    OverlapFlags =85
-                    Left =11850
-                    Top =6990
-                    Width =0
-                    Height =283
-                    Name ="LineCtrProp"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =11850
-                    LayoutCachedTop =6990
-                    LayoutCachedWidth =11850
-                    LayoutCachedHeight =7273
+                    LayoutCachedLeft =56
+                    LayoutCachedTop =56
+                    LayoutCachedWidth =416
+                    LayoutCachedHeight =416
+                    BackColor =14461583
+                    BorderColor =14461583
+                    HoverColor =15189940
+                    PressedColor =9917743
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =3
+                    WebImagePaddingTop =3
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
                 End
             End
         End
@@ -1613,9 +1756,8 @@ Attribute VB_Exposed = False
 ' Sujet    :
 ' Objectif :
 ' Date     : 27/06/2022 - 11:00
-' DateMod  : 23/07/2022 - 09:40
-' Requi    : module :  MD_Utils
-'            Classe : C_ObjetsAccess, C_TradScanText
+' DateMod  :
+' Requi    :
 ' ------------------------------------------------------
 Option Compare Database
 Option Explicit
@@ -1625,7 +1767,16 @@ Option Explicit
     Private ScanTxt     As C_TradScanText
 
     Private m_AjoutLangue As Boolean    '// Indique a la liste des langues qu'une nouvelle langue à été saisie dans le form F_Langues.
+'    Private m_BaseExiste  As Boolean    '// Indique que la base sélectionnée (boite fichier) est déjà dans la table.
 '//:::::::::::::::::::::::::::::::::: END VARIABLES ::::::::::::::::::::::::::::::::::::::
+
+Private Sub Commande65_Click()
+    If (Not IsNull(Me.zlBases)) Then
+        DoCmd.OpenForm "F_Trad", , , , , , Me.zlBases
+    Else
+        DoCmd.OpenForm "F_Trad"
+    End If
+End Sub
 
 '//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&     EVENTS        &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 Private Sub Form_Load()
@@ -1634,17 +1785,19 @@ Private Sub Form_Load()
     Set ObjetAcc = ScanTxt.GetInstanceObjetAcc()    '// Récupère la classe initialisée.
 
     m_AjoutLangue = False
-    Me.txtBdd.SetFocus
+    Me.zlBases.SetFocus
     Me.txtBdd = "Sélectionnez une base..."
 
 End Sub
 
+'----------------------------------------------------------------
+'// Déclanche class_Terminate() fermerure base et application.
+'----------------------------------------------------------------
 Private Sub Form_Close()
-    On Error GoTo ERR_Form_Close
+On Error GoTo ERR_Form_Close
 
     DoCmd.Hourglass True
 
-    '// Déclanche class_Terminate() fermerure base et application.
     Set ScanTxt = Nothing
     Set ObjetAcc = Nothing
 
@@ -1655,24 +1808,27 @@ SORTIE_Form_Close:
 
 ERR_Form_Close:
     MsgBox "Erreur " & Err.Number & vbCrLf & _
-            " (" & Err.Description & ")" & vbCrLf & _
-            "Dans  CSord.Form_F_CreateForm.Form_Close, ligne " & Erl & "."
+            " (" & Err.Description & ")", vbCritical, _
+            "Form_F_Main.Form_Close"
     Resume SORTIE_Form_Close
 End Sub
 
+'----------------------------------------------------------------
+'// Initialisation classe et objet après selection de la base à utiliser.
+'----------------------------------------------------------------
 Private Sub cmbSelectBdd_Click()
-    On Error GoTo ERR_cmbSelectBdd
+On Error GoTo ERR_cmbSelectBdd_Click
 
-    Dim bRep     As Boolean
-    Dim sBaseSel As String
-    Dim vTmp     As Variant     '// Pour Split de sBackup.
-    Dim sRep     As String
-    Dim eRep     As eReponse
-    Dim sMsg    As String
-    Dim lRep    As Long
+    Dim bRep        As Boolean
+    Dim sRep        As String
+    Dim lRep        As Long
+    Dim sBaseSel    As String
+    Dim eRep        As eReponse
+    Dim sMsg        As String
+    Dim vTmp        As Variant  '// Pour Split de sBackup.
 
     '// Sélection de la base à utiliser.
-    sBaseSel = MD_Utils.OuvreBoite("MS Access", "*.accdb", , , FD_TypeFilePicker)
+    sBaseSel = OuvreBoite("MS Access", "*.accdb", , , FD_TypeFilePicker)
     If (sBaseSel = vbNullString) Then Exit Sub
 
 '//----- Sauvegarde
@@ -1682,28 +1838,29 @@ Private Sub cmbSelectBdd_Click()
 
     sMsg = "Créez la sauvegarde ?" & vbCrLf & Me.txtBddSauve
     lRep = MsgBox(sMsg, vbQuestion + vbYesNo, "Sauvegarde...")
-    If lRep = vbYes Then
+    If (lRep = vbYes) Then
         bRep = MD_Utils.CopyFile(sBaseSel, Me.txtBddSauve)  '// Sauvegarde...
         If (bRep = False) Then Exit Sub
     End If
 '//----- Sauvegarde
 
-    bRep = InitAppEtBase(sBaseSel)         '// Création Access.Application, ouverture de la base....
+    bRep = InitAppEtBase(sBaseSel)  '// Création Access.Application, ouverture de la base....
 
     DoEvents
-    DoCmd.Echo True
-    DoCmd.Hourglass False
+    DoCmd.Hourglass True
+    DoCmd.Echo False
+    If (Not bRep) Then Exit Sub
 
-    If (bRep = False) Then Exit Sub '// Erreur, on sort.
-
-    eRep = ScanTxt.IsNewApp()                 '// Vérifie base déjà scannée...
+    '-------------------------
+    eRep = ScanTxt.IsNewApp()       '// Vérifie base déjà scannée...
+    '-------------------------
 
     Select Case eRep
 
-        Case eReponse.Exist             '// Existe, demande confirmation.
+        Case eReponse.Exist '// Existe, demande confirmation.
 
             ScanTxt.ReScannerApp = True
-            sMsg = "La base '" & ObjetAcc.BaseOuverteNom & "' est déjà enregistrée dans la table T_Objets." & vbCrLf & _
+            sMsg = "La base '" & ObjetAcc.BaseNom & "' est déjà enregistrée dans la table T_Objets." & vbCrLf & _
                    "Les données concernant cette base vont être mise à jour." & vbCrLf & _
                    "Voulez-vous continuer ?"
             lRep = MsgBox(sMsg, vbExclamation + vbYesNo + vbDefaultButton2, "Base déjà enregistrée")
@@ -1713,26 +1870,27 @@ Private Sub cmbSelectBdd_Click()
             ScanTxt.ReScannerApp = False
 
         Case eReponse.Faux              '// Guid pas dans la table. 'TODO: CONTROLER
-            MsgBox "Erreur GuidApp pas dans la table.", vbCritical, "cmbSelectBdd_Click"
+            MsgBox "Erreur App_ID pas dans la table.", vbCritical, "cmbSelectBdd_Click"
             bRep = False
 
         Case eReponse.Erreur            '// Pb correspondance
-             MsgBox "Erreur GuidApp/table ne correspondent pas.", vbCritical, "cmbSelectBdd_Click"
+            MsgBox "Erreur App_ID/table ne correspondent pas.", vbCritical, "cmbSelectBdd_Click"
             bRep = False
 
     End Select
 
     If (bRep = False) Then
-        cmdCloseBd_Click    '// Erreur, on ferme Tout, et on sort.
+        cmdCloseBd_Click    '// Erreur ou refus, on ferme Tout, et on sort.
+        DoCmd.Echo True
         Exit Sub
     End If
 
-    RazForm True        '// Defini les contrôles à afficher/activés.
+    RazForm True
     Me.txtBdd = sBaseSel
- 
+
     If ScanTxt.ReScannerApp Then
         Me.zlLangues = ScanTxt.GetIDLangBase()      '// Extraire la langue d'origine de la base...
-        Me.zlBases = ScanTxt.AppGuid()
+        Me.zlBases = ScanTxt.AppID()
         zlBases_AfterUpdate
 
     Else
@@ -1741,23 +1899,26 @@ Private Sub cmbSelectBdd_Click()
         Me.cmdVoirRecap.Enabled = False
     End If
 
-SORTIE_cmbSelectBdd:
+SORTIE_cmbSelectBdd_Click:
     DoCmd.Echo True
     DoCmd.Hourglass False
     Exit Sub
 
-ERR_cmbSelectBdd:
+ERR_cmbSelectBdd_Click:
     MsgBox "Erreur " & Err.Number & vbCrLf & _
-            " (" & Err.Description & ")" & vbCrLf & _
-            "Dans  TriSurFormContinu.Form_F_CreateForm.cmbSelectBdd_Click, ligne " & Erl & "."
-    Resume SORTIE_cmbSelectBdd
+            " (" & Err.Description & ")", vbCritical, _
+            "Form_F_Main.cmbSelectBdd_Click"
+    Resume SORTIE_cmbSelectBdd_Click
 End Sub
 
+'----------------------------------------------------------------
+'// Ferme la base en cours, réinitialise les champs par défaut...
+'----------------------------------------------------------------
 Private Sub cmdCloseBd_Click()
 
     DoCmd.Hourglass True
 
-    ObjetAcc.CloseMsBase    '// Ferme la base en cours, réinitialise les champs par défaut...
+    ObjetAcc.CloseMsBase
 
     ScanTxt.ReScannerApp = False
     RazForm
@@ -1766,6 +1927,9 @@ Private Sub cmdCloseBd_Click()
 
 End Sub
 
+'----------------------------------------------------------------
+'// Ajout d'une nouvelle langue.
+'----------------------------------------------------------------
 Private Sub zlLangues_NotInList(NewData As String, Response As Integer)
     Dim lRep As Long
 
@@ -1793,14 +1957,15 @@ Private Sub zlLangues_AfterUpdate()
     MaJLangue   '// Affiche le drapeau...
 End Sub
 
-' ----------------------------------------------------------------
+'----------------------------------------------------------------
 '// Ouvre le formulaire de la langue.
-' ----------------------------------------------------------------
+'----------------------------------------------------------------
 Private Sub zlLangues_DblClick(Cancel As Integer)
     If (IsNull(Me.zlLangues)) Then Exit Sub
     DoCmd.OpenForm "F_Langues", acNormal, , , acFormEdit, acDialog, Me.zlLangues
 End Sub
 
+'// Scan la base sélectionnée...
 '----------------------------------------------------------------
 ' Procedure Nom   : cmdLanceScan_Click
 ' ----------------------------------------------------------------
@@ -1816,7 +1981,7 @@ End Sub
 ' ----------------------------------------------------------------
 Private Sub cmdLanceScan_Click()
 
-    '// Vérifier si une langue d'origine défini(Nouveau scan).
+    '// Vérifier si une langue d'origine défini.
     If (IsNull(Me.zlLangues)) Then
         MsgBox "Sélectionnez la langue d'origine de la base" & vbCrLf & "Avant de lancer l'analyse, merci.", vbInformation, "Choisir une langue"
         Me.zlLangues.SetFocus
@@ -1827,13 +1992,12 @@ Private Sub cmdLanceScan_Click()
     Dim bRep As Boolean
 
     DoCmd.Hourglass True
-    
-    ScanActif True                                                  '// Affiche les contrôles d'avancement du scan...
+
+    ScanActif True      '// Affiche les contrôles d'avancement du scan...
     ScanTxt.InitialiseLabelsInfo Me.lbl_InfoScan2, Me.lbl_InfoScan3 '// Initialise les labels texte et d'avancement...
-    ScanTxt.IDLangApp = Me.zlLangues
 
     ' ------------------------------
-    bRep = ScanTxt.ScanObjetsApp(FormType, ReportType)          '// Lance le scan les objets de la base sélectionnée.... 'TODO: Voir le cas ou aucun objets trouvé.
+    bRep = ScanTxt.ScanObjetsApp()      '// Lance le scan les objets de la base sélectionnée.... 'TODO: Voir le cas ou aucun objets trouvé.
     ' ------------------------------
 
     Me.lbl_InfoScan2.Caption = "Fermeture de la base et de l'application...."
@@ -1845,16 +2009,46 @@ Private Sub cmdLanceScan_Click()
 
     If bRep Then
         Me.zlBases.Requery
-        Me.zlBases = ScanTxt.AppGuid()      '// Extraire le nom de la base.
+        Me.zlBases = ScanTxt.AppID()        '// Extraire le nom de la base.
         zlBases_AfterUpdate                 '// MàJ des données...
         DoCmd.OpenForm "F_Recap", , , , , acDialog, Me.zlBases
     End If
 
 End Sub
 
-' ----------------------------------------------------------------
+'----------------------------------------------------------------
+'// Actualise la liste des objets suivant la base sélectionné.
+'----------------------------------------------------------------
+Private Sub zlBases_AfterUpdate()
+
+    If (IsNull(Me.zlBases)) Then
+        Me.cmdVoirRecap.Enabled = False
+'        Me.zlObjetTypes.Enabled = False
+        Exit Sub
+    End If
+
+    Dim vDate As Variant
+
+    DoCmd.Echo False
+
+    MaJListeObjets      '// Charge la liste des objets suivant l'app en cours...
+
+    vDate = DLookup("[DernierScan]", "T_App", "[App_ID]='" & ScanTxt.AppID & "'")
+    Me.txtDateScan = Nz(vDate, vbNullString)
+
+    Me.zlLangues = ScanTxt.GetIDLangBase(Me.zlBases)    '// Extraire la langue d'origine de la base...
+    MaJLangue False                                     '// Affiche le drapeau, vérouille la zl...
+
+    MajLabelsInfo
+    Me.cmdVoirRecap.Enabled = True
+
+    DoCmd.Echo True
+
+End Sub
+
+'----------------------------------------------------------------
 '// Affiche la récap du dernier scan de la base selectionnée.
-' ----------------------------------------------------------------
+'----------------------------------------------------------------
 Private Sub cmdVoirRecap_Click()
     If (IsNull(Me.zlBases)) Then
         Me.zlBases.SetFocus
@@ -1865,80 +2059,38 @@ Private Sub cmdVoirRecap_Click()
     DoCmd.OpenForm "F_Recap", , , , , acDialog, Me.zlBases & ";" & Me.txtDateScan
 End Sub
 
-' ----------------------------------------------------------------
-'// Actualise la liste des objets suivant la base sélectionné.
-' ----------------------------------------------------------------
-Private Sub zlBases_AfterUpdate()
-
-    If (IsNull(Me.zlBases)) Then
-        Me.cmdVoirRecap.Enabled = False
-        Me.zlObjetTypes.Enabled = False
-        Exit Sub
-    End If
-
-    Dim vDate As Variant
-
-    DoCmd.Echo False
-
-    Me.zlObjetTypes = 0
-
-    MaJListeObjets      '// Charge la liste des objets suivant l'app en cours...
-
-    vDate = DFirst("[DernierScan]", "T_App", "[AppGuid] ='" & Me.zlBases & "'")
-    Me.txtDateScan = CDate(vDate)
-
-    Me.zlLangues = ScanTxt.GetIDLangBase(Me.zlBases)    '// Extraire la langue d'origine de la base...
-    MaJLangue False                                     '// Affiche le drapeau, vérouille la zl...
-
-    MajLabelsInfo
-    Me.cmdVoirRecap.Enabled = True
-    Me.zlObjetTypes.Enabled = True
-
-    DoCmd.Echo True
-
-End Sub
-
-Private Sub zlObjetTypes_AfterUpdate()
-    DoCmd.Echo False
-    MaJListeObjets Me.zlObjetTypes.Column(0)
-    DoCmd.Echo True
-End Sub
-
 Private Sub lstObjets_AfterUpdate()
     MajLabelsInfo
 End Sub
 
 Private Sub cmdAfficheInfo_Click()
-    DoCmd.OpenForm "F_InfoRecap"
+    DoCmd.OpenForm "F_InfoRecap" ', , , , , , Me.zlBases & ";" & Me.txtDateScan
 End Sub
 
 '//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& END EVENTS &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 '// ################################ PRIVATE SUB/FUNC ####################################
-
-' ----------------------------------------------------------------
-'// Création de l'objet Application, ouverture de la base
-' ----------------------------------------------------------------
+'----------------------------------------------------------------
+'// Ouvre l'application et charge la base.
+'----------------------------------------------------------------
 Private Function InitAppEtBase(sBase As String) As Boolean
     Dim bRep As Boolean
 
-    DoCmd.Hourglass True
-    DoCmd.Echo False
-
     If (ObjetAcc Is Nothing) Then Exit Function
 
+    DoCmd.Hourglass True
+    DoCmd.Echo False
+    
     If (ObjetAcc.MsAppIsUp = False) Then
-        bRep = ObjetAcc.OpenMsApp()                     '// Création Access.Application...
+        bRep = ObjetAcc.OpenMsApp()                 '// Création Access.Application...
         If (bRep = False) Then Exit Function
     End If
 
     If (ObjetAcc.MsBaseIsOpen = False) Then
-        bRep = ObjetAcc.OpenMsBase(sBase)               '// Ouverture de la base...
+        bRep = ObjetAcc.OpenMsBase(sBase)           '// Ouverture de la base...
     End If
 
-    If (bRep = False) Then
-        ObjetAcc.CloseMsBase True   '// Problème détecter, on ferme tout, RaZ et on sort.
-    End If
+    If (Not bRep) Then ObjetAcc.CloseMsBase True    '// Problème détecter, on ferme tout, RaZ et on sort...
 
     InitAppEtBase = bRep
 
@@ -1947,36 +2099,36 @@ End Function
 ' ----------------------------------------------------------------
 '// Filtre la liste des objets suivant le type choisi.
 ' ----------------------------------------------------------------
-Private Sub MaJListeObjets(Optional TypeObj As Long = 0)
+Private Sub MaJListeObjets() '(Optional TypeObj As Long = 0)
 
     Dim sSql As String
-    Dim sFlt As String
+'    Dim sFlt As String
 
-    sSql = "SELECT T_Objets.ObjetGuid, T_Objets.ObjetType, T_Objets.ObjetNom " & _
+    sSql = "SELECT T_Objets.Objet_ID, T_Objets.ObjetType, T_Objets.ObjetNom " & _
            "FROM T_Objets " & _
-           "WHERE (((T_Objets.AppGuid) = '" & Me.zlBases & "') "
+           "WHERE (((T_Objets.IDApp) = '" & Me.zlBases & "') "
 
-    Select Case TypeObj
-        Case 1
-            sFlt = " AND ((T_Objets.ObjetType) = 'Form') "
-        Case 2
-            sFlt = " AND ((T_Objets.ObjetType) = 'Report') "
-    End Select
+'    Select Case TypeObj
+'        Case 1
+'            sFlt = " AND ((T_Objets.ObjetType) = 'Form') "
+'        Case 2
+'            sFlt = " AND ((T_Objets.ObjetType) = 'Report') "
+'    End Select
 
-    sSql = sSql & sFlt
+'    sSql = sSql & sFlt
     sSql = sSql & ") ORDER BY T_Objets.ObjetType, T_Objets.ObjetNom;"
 
     Me.lstObjets = Null
     Me.lstObjets.RowSource = sSql
     Me.lstObjets.Requery
-    Me.lbl_lstObjets.Caption = IIf(Me.zlObjetTypes = 0, "Objets", Me.zlObjetTypes.Column(1))
+'    Me.lbl_lstObjets.Caption = IIf(Me.zlObjetTypes = 0, "Objets", Me.zlObjetTypes.Column(1))
 
 End Sub
 
-' ----------------------------------------------------------------
+'----------------------------------------------------------------
 '// Affiche l'image de la langue,
 '// maj de la zl, et la vérouille si bEnabledZL est à true.
-' ----------------------------------------------------------------
+'----------------------------------------------------------------
 Private Sub MaJLangue(Optional bEnabledZL As Boolean = True)
     Dim sImg As String
 
@@ -1992,18 +2144,13 @@ Private Sub MaJLangue(Optional bEnabledZL As Boolean = True)
 
 End Sub
 
-' ----------------------------------------------------------------
-'// Active/Désactive des contrôles suivant scan en cours.
-' ----------------------------------------------------------------
 Private Sub ScanActif(ScanEncours As Boolean)
 
     Me.boxCache.Visible = ScanEncours
     Me.lbl_InfoScan1.Visible = ScanEncours
     Me.lbl_InfoScan2.Visible = ScanEncours
     Me.lbl_InfoScan3.Visible = ScanEncours
-    
     Me.zlBases.Enabled = Not ScanEncours
-    Me.zlObjetTypes.Enabled = Not ScanEncours
 
     Me.lstObjets.SetFocus
     Me.cmdLanceScan.Enabled = False
@@ -2014,55 +2161,47 @@ Private Sub ScanActif(ScanEncours As Boolean)
 
 End Sub
 
-' ----------------------------------------------------------------
-'// Definir les prop des contrôle de l'interface suivant l'acion en cours.
-' ----------------------------------------------------------------
+'----------------------------------------------------------------
+'// Applique les valeurs par défaut.
+'----------------------------------------------------------------
 Private Sub RazForm(Optional bActive As Boolean)
 
+    m_AjoutLangue = False
     Me.txtBdd.SetFocus
     Me.txtBdd = "Sélectionnez une base..."
-
-    Me.zlLangues = Null
-    Me.zlLangues.Enabled = bActive
-    m_AjoutLangue = False
-    Me.img_Langue.Picture = vbNullString
-
-    Me.zlBases = Null
-    Me.zlBases.Enabled = Not bActive
-
-    Me.zlObjetTypes = 0
-    Me.zlObjetTypes.Enabled = Not bActive
-
     Me.txtBddSauve = vbNullString
-    If (ScanTxt.ReScannerApp = False) Then Me.txtDateScan = vbNullString
-
+    Me.zlBases = Null
+    If (Not bActive) Then Me.txtDateScan = vbNullString
     Me.lstObjets.RowSource = vbNullString
     Me.lstObjets = Null
+    Me.zlLangues = Null
+    Me.img_Langue.Picture = vbNullString
 
     Me.cmdCloseBd.Visible = bActive
     Me.cmbSelectBdd.Visible = Not bActive
     Me.cmdLanceScan.Enabled = bActive
+    Me.zlBases.Enabled = Not bActive
+    Me.zlLangues.Enabled = bActive
 
 End Sub
 
-'// Synchronise les 2 SF.
 Private Sub MajLabelsInfo()
     If (Me.SF_Controles.Form.Recordset.RecordCount > 0) Then Me.SF_Controles.Form.Recordset.MoveFirst
+    Me.lblGrCtrPNom.Caption = vbNullString
+    Me.lblGrCtrType.Caption = "Contrôle"
+    Me.lblGrCtrNom.Caption = vbNullString
 End Sub
-
-' ----------------------------------------------------------------
-'// Ouvre les zl sur OnGotFocus (=OuvreZl()).
-' ----------------------------------------------------------------
-Private Function OuvreZl() As Boolean
-    Me.ActiveControl.Dropdown
-End Function
 '// ################################# END PRIV. SUB/FUNC #################################
 
 '// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ PUBLIC SUB/FUNC   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-' ----------------------------------------------------------------
-'// Utiliser par le form F_Langues.
-' ----------------------------------------------------------------
 Public Sub AddLangue(AjoutNouvLangue As Boolean)
     m_AjoutLangue = AjoutNouvLangue
 End Sub
+
+Public Sub MajControlInfo(ParentNom As String, CtrType As String, CtrNom As String)
+    Me.lblGrCtrPNom.Caption = IIf(Len(ParentNom) > 0, ParentNom, vbNullString)
+    Me.lblGrCtrType.Caption = IIf(Len(CtrType) > 0, CtrType, vbNullString)
+    Me.lblGrCtrNom.Caption = IIf(Len(CtrNom) > 0, CtrNom, vbNullString)
+End Sub
+
 '// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ END PUB. SUB/FUNC \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
