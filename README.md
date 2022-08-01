@@ -1,3 +1,7 @@
+## 01/08/2022 - Arrêt du développement avec l'utilisation de la propriété `Tag`, car beaucoup trop aléatoire et aucun contrôle sur cette propriété qui peut être modifiée/dupliquée sans aucun contrôle de l'application MsTradAccess.
+
+une nouvelle version est en cours...
+
 # MSAccessTrad
 
 Beta Test [v0.42-1](https://github.com/meuslaur/MSAccess-Trad/tree/beta) traduction Access
