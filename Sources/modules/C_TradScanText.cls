@@ -29,8 +29,16 @@ Option Explicit
     Private Const PROP_BAR  As String = "StatusBarText"
 '    Private Const PROP_VTXT As String = "ValidationText"    'TODO: Table (ValidationText)
 
+'-----------------------------------------
+    '// Filtre le début de la chaine,
+    '// ignore les valeurs sans caractère alphaNum
+    '// ignore les valeurs defini par une source(commence par un '=').
+    Private Const REG_PAT   As String = "(^[a-zA-Z0-9-&éè""'[({]{1,})+([A-Za-zÀ0-9-ÖØ-öø-ÿ& ,.-@~`!@#$%^&*\[\]\{\}()_=+°\\'|;:""\/?>.<,-]){1,}$"
+'-----------------------------------------
+
     Private Type TApp
         ID      As String
+        Num     As Long     '// N° de l'app pour ID (nom des app souvent beaucoup trop long).
         Nom     As String
         IDLang  As Long
         ReScan  As Boolean
@@ -39,7 +47,6 @@ Option Explicit
 
     Private Type TObjet
         ID      As String
-        MsysID  As Long
         Nom     As String
         Type    As String
         Caption As String
@@ -50,6 +57,7 @@ Option Explicit
     Private Type TControl
         ID      As String
         Nom     As String
+        NomChk  As String       '// Nom sans apostrophes.
         Type    As String
         Parent  As String       '// Control parent du contrôle, si existe.
         Nouveau As Boolean      '// Indique nouveau control à enregistrer.
@@ -79,6 +87,11 @@ Option Explicit
 
     Private mRep            As Boolean
     Private m_DateMaJ       As Date             '// Date heure de la créaton ou de la mise à jour.
+    
+    
+    
+    Private mObjNomTmp  As String
+    Private mPrpIgnore  As String
 '//:::::::::::::::::::::::::::::::::: END VARIABLES ::::::::::::::::::::::::::::::::::::::
 
 '//----------------------------------       INIT/TERM       ------------------------------
@@ -135,21 +148,27 @@ End Property
 '// Retourne Exist si tout est ok.
 '----------------------------------------------------------------
 Public Function IsNewApp() As eReponse
-    Dim sRes As String
+    Dim sres As String
     Dim eRep As eReponse
+    Dim vTmp As Variant
 
     thisApp.ID = vbNullString
-    sRes = ObjetAcc.GetPropTxt(PROP_GUID)   '// Obtenir le guid de la base...
-    If (sRes = PROP_NA) Then IsNewApp = Inconnu: Exit Function  '// Inconnue, on sort.
+    sres = ObjetAcc.GetPropTxt(PROP_GUID)   '// Obtenir le guid de la base...
+    If (sres = PROP_NA) Then IsNewApp = Inconnu: Exit Function  '// Inconnue, on sort.
 
-    eRep = CompareGuidAppEtTable(sRes)      '// Vérifier les guid...
+    eRep = CompareGuidAppEtTable(sres)      '// Vérifier les guid...
 
     Select Case eRep
+
         Case eReponse.Valide
-            thisApp.ID = sRes
+            thisApp.ID = sres
+            vTmp = DLookup("[Num]", "T_App", "[App_ID]=" & thisApp.ID)      '// Extraire N° de l'app.
+            thisApp.Num = CLng(vTmp)
             IsNewApp = Exist    '// ok.
+
         Case eReponse.Inconnu   '// Pas dans la table.
             IsNewApp = Faux
+
         Case eReponse.Faux      '// ne correspond pas.
             IsNewApp = Erreur
         Case Else
@@ -242,6 +261,7 @@ On Error GoTo ERR_ScanObjetsApp
 
     '// Boucle sur les objets de la table MsysObjects.
     m_DateMaJ = Now()   '// Defini la date à utiliser.
+mPrpIgnore = vbNullString
 
     '// Nouvelle app, obtenir un id...
     If (Not thisApp.ReScan) Then
@@ -259,7 +279,6 @@ On Error GoTo ERR_ScanObjetsApp
             Do While Not .EOF
                 thisObj.Nom = .Fields("Name").Value
                 ObjType = .Fields("Type").Value
-                thisObj.MsysID = .Fields("id")
                 thisObj.Type = GetObjectTypeEnClair(ObjType)    '// Traduire en clair le Type...
                 '--------------------------
                 mRep = ScanObjet(ObjType)                       '// Enregistre les info...
@@ -274,6 +293,7 @@ On Error GoTo ERR_ScanObjetsApp
         '// MàJ de la date du scan de l'app.
         sSql = "UPDATE T_App SET T_App.DernierScan = '" & m_DateMaJ & "';"
         ExecuteQdfTemp sSql
+        MaJTableTxtIgnore       '///...
     End If
 
 RESET_ScanObjetsApp:
@@ -287,7 +307,7 @@ RESET_ScanObjetsApp:
 '    Set m_TableTxtCtr = Nothing
     Set m_oApp = Nothing
 
-'    If (mrep = False) Then SuppDonneesTexte m_AppNom    '// Efface tous en cas d'erreur... 'TODO: transactions
+'    If (mrep = False) Then SuppDonneesTexte m_AppNom    '// 'NOTE: Efface tous en cas d'erreur...
 
 SORTIE_ScanObjetsApp:
     ScanObjetsApp = mRep
@@ -341,6 +361,12 @@ On Error GoTo ERR_ScanObjet
     If m_bBarreInit Then InfoScan.UpdateBarre sInfoAvance   '// Affiche l'état d'avancement du scan...
     DoEvents
 
+If InStr(1, thisObj.Nom, "'") Then
+    MsgBox thisObj.Nom & "Objet ignoré", vbInformation
+    ScanObjet = True
+    Exit Function
+End If
+
     Set oObjet = GetObjet(thisObj.Nom, ObjType)             '// Ouvre le form mode création pour scan des contrôles...
     If (oObjet Is Nothing) Then mRep = False: Exit Function '// Erreur, on sort.
 
@@ -358,10 +384,19 @@ On Error GoTo ERR_ScanObjet
             'If (ControlIsVisible(oCtr) = True) Then 'TODO: Ignore les ctr invisibles ?
                 thisCtr.Nom = oCtr.name
                 thisCtr.Type = TypeName(oCtr)
+If InStr(1, thisCtr.Nom, "'") Then
+    MsgBox thisCtr.Nom & "contrôle ignoré", vbInformation
+Else
+                
+                
+                If thisCtr.Nom = "Est Closed Date_Label" Then
+                Beep
+                End If
                 '----------------------------
                 mRep = ScanProprietes(oCtr)               '// Scan les propriétés du contrôle...
                 '----------------------------
                 If (mRep = False) Then Exit For
+                End If
             'End If
         Next
     End If
@@ -409,7 +444,7 @@ On Error GoTo ERR_MajObjet
     Dim vTmp As Variant
     Dim lTmp As Long
 
-    thisObj.ID = thisApp.Nom & "." & thisObj.Type & "." & thisObj.Nom
+    thisObj.ID = thisApp.Num & "." & thisObj.Type & "." & thisObj.Nom
 
     mRep = MajTableObjet              '// ...
     If mRep = False Then Exit Function
@@ -454,22 +489,22 @@ On Error GoTo ERR_MajTableObjet
     Dim sSql As String
     Dim vRep As Variant
 
-    vRep = DLookup("[Objet_ID]", "T_Objets", "[Objet_ID]=" & thisObj.MsysID)
+    vRep = DLookup("[Objet_ID]", "T_Objets", "[Objet_ID]='" & thisObj.ID & "'")
 
     If (IsNull(vRep)) Then      '// Nouvel Objet.
 
         thisObj.Nouveau = True
         thisCtr.Nouveau = True
+
         sSql = "INSERT INTO T_Objets " & _
-                "(Objet_ID, ObjetNom, ObjetType, IDApp, Scanner, Nouveau) VALUES (" & _
-                thisObj.MsysID & ", '" & thisObj.Nom & "', '" & thisObj.Type & "', '" & thisApp.ID & "', " & _
+                "(Objet_ID, ObjetNom, ObjetType, IDApp, Scanner, Nouveau) VALUES ('" & _
+                thisObj.ID & "', '" & thisObj.Nom & "', '" & thisObj.Type & "', '" & thisApp.ID & "', " & _
                 CInt(True) & ", " & CInt(True) & ");"
 
     Else                        '// Déjà enregistrer..
-        MajTableObjet = True
         thisObj.Nouveau = False
         sSql = "UPDATE T_Objets SET T_Objets.Scanner=" & CInt(True) & _
-               " WHERE (((T_Objets.Objet_ID)=" & thisObj.MsysID & "));"
+               " WHERE (((T_Objets.Objet_ID)='" & thisObj.ID & "'));"
     End If
 
     ExecuteQdfTemp sSql
@@ -500,7 +535,7 @@ On Error GoTo ERR_MajTableControlObjet
     If (thisObj.Nouveau) Then   '// Nouvel Objet.
         sSql = "INSERT INTO T_ObjetControles " & _
                "(Control_ID, ControlNom, ControlType, IDObjet, Scanner, Nouveau) VALUES " & _
-               "('" & thisObj.ID & "', '" & thisObj.Nom & "', '" & thisObj.Type & "', '" & thisObj.MsysID & _
+               "('" & thisObj.ID & "', '" & thisObj.Nom & "', '" & thisObj.Type & "', '" & thisObj.ID & _
                "', " & CInt(True) & ", " & CInt(True) & ");"
 
     Else                '// Existe déjà.
@@ -543,9 +578,9 @@ On Error GoTo ERR_MajTableControl
     If (thisCtr.Nouveau) Then
         sSql = "INSERT INTO T_ObjetControles " & _
                "(Control_ID, ControlNom, ControlType, IDObjet, ControlParentName, Scanner, Nouveau) VALUES " & _
-               "('" & thisCtr.ID & "', '" & thisCtr.Nom & "', '" & thisCtr.Type & "', '" & thisObj.MsysID & "', '" & _
+               "('" & thisCtr.ID & "', '" & thisCtr.Nom & "', '" & thisCtr.Type & "', '" & thisObj.ID & "', '" & _
                thisCtr.Parent & "', " & CInt(True) & ", " & CInt(True) & ");"
-        
+
     Else
         sSql = "UPDATE T_ObjetControles SET T_ObjetControles.Scanner=" & CInt(True) & _
                " WHERE (((T_ObjetControles.Control_ID)='" & thisCtr.ID & "'));"
@@ -706,14 +741,34 @@ On Error GoTo ERR_ScanProprietes
 'ObjectFrame        Caption
 'NavigationControl  Caption
 'SubForm            Caption
-    Dim eRep As eReponse    '// Retour function.
+    Dim eRep    As eReponse    '// Retour function.
+    Dim sCap    As String
+    Dim sCapTmp As String
 
     '// Extraire le parent du control (page, label, etc.).
     thisCtr.Parent = IIf((ObjControl.Parent.name <> thisObj.Nom), TypeName(ObjControl.Parent) & "." & ObjControl.Parent.name, vbNullString)
 
-    '// Extraire les texte à utiliser.
+    '// Extraire les texte à utiliser. NOTE: peut contenir de retour de ligne (vbNewLine).
     thisTxt.Caption = vbNullString: thisTxt.StatusBarText = vbNullString: thisTxt.ControlTipText = vbNullString
-    thisTxt.Caption = LTrim$(ObjControl.Properties(PROP_CAP).Value)
+
+'TODO: Test filtres
+    thisTxt.Caption = ObjControl.Properties(PROP_CAP).Value
+    sCap = LTrim$(thisTxt.Caption)
+    If (sCap <> vbNullString) Then
+        sCap = RegEx(REG_PAT, sCap, True)       '// Applique la patterne Regex (voir Const REG_PAT)...
+
+        If (sCap = vbNullString) Then
+            If (mObjNomTmp <> thisObj.Nom) Then
+                mPrpIgnore = mPrpIgnore & "<div>----</div><div><font size=3><strong>" & thisObj.Nom & "</strong></font></div><div>----</div><div>"
+                mObjNomTmp = thisObj.Nom
+            End If
+            sCapTmp = RegexReplaceChevrons(thisTxt.Caption)
+            mPrpIgnore = mPrpIgnore & "<div>" & thisCtr.Nom & "" & " : <font color=""#F2F2F2"" style=""BACKGROUND-COLOR:#000080"">" & sCapTmp & "</font></div>"
+        End If
+    End If
+    thisTxt.Caption = sCap
+'TODO: Test filtres
+
     thisTxt.StatusBarText = LTrim$(ObjControl.Properties(PROP_BAR).Value)
     thisTxt.ControlTipText = LTrim$(ObjControl.Properties(PROP_TIP).Value)
 
@@ -729,6 +784,8 @@ On Error GoTo ERR_ScanProprietes
     If (mRep) Then mRep = MajTextePropriete(PROP_CAP, thisTxt.Caption)          '// Stock ses textes...
     If (mRep) Then mRep = MajTextePropriete(PROP_TIP, thisTxt.ControlTipText)   '// ...
     If (mRep) Then mRep = MajTextePropriete(PROP_BAR, thisTxt.StatusBarText)    '// ...
+
+
 
 SORTIE_ScanProprietes:
     ScanProprietes = mRep
@@ -1037,12 +1094,13 @@ End Sub
 '// Retourne TRUE si ok.
 '----------------------------------------------------------------
 Private Function MaJAppID() As Boolean
-    Dim sRes  As String
-    Dim sSql  As String
+    Dim sres As String
+    Dim sSql As String
+    Dim vTmp As Long
 
-    sRes = ObjetAcc.GetPropTxt(PROP_GUID)   '// Doit retourner "N/A"(non trouvée), sinon erreur.
+    sres = ObjetAcc.GetPropTxt(PROP_GUID)   '// Doit retourner "N/A"(non trouvée), sinon erreur.
 
-    If (sRes <> PROP_NA) Then Exit Function '// Erreur contient autre chose que "N/A".
+    If (sres <> PROP_NA) Then Exit Function '// Erreur contient autre chose que "N/A".
 
     mRep = ObjetAcc.CreatePropTxt(PROP_GUID, thisApp.ID)      '// Ajout de la prop dans la base...
     If (mRep = False) Then Exit Function    '// Erreur.
@@ -1051,6 +1109,9 @@ Private Function MaJAppID() As Boolean
     sSql = "INSERT INTO T_App ( App_ID, AppNom, LangueCodeBase ) " & _
            "VALUES ('" & thisApp.ID & "', '" & thisApp.Nom & "', " & thisApp.IDLang & ");"
     ExecuteQdfTemp sSql
+
+    vTmp = DLookup("[Num]", "T_App", "[App_ID]=" & thisApp.ID)      '// Extraire N° de l'app.
+    thisApp.Num = CLng(vTmp)
 
     MaJAppID = True     '// Tout est ok.
 
@@ -1120,6 +1181,22 @@ Private Sub ExecuteQdfTemp(SqlVal As String)
     qdfTemp.Close
 
 End Sub
+
+' ----------------------------------------------------------------
+'// Stock les texte ignorés par les filtres (caption dans ScanPropreties)
+' ----------------------------------------------------------------
+Private Sub MaJTableTxtIgnore()
+    If (Not mPrpIgnore = vbNullString) Then
+        Dim orst As DAO.Recordset
+        Set orst = CurrentDb.OpenRecordset("iT_TextesIgnores", dbOpenTable)
+        With orst
+            .AddNew
+            .Fields(0) = thisApp.ID
+            .Fields(1) = mPrpIgnore
+            .Update
+        End With
+        orst.Close
+        Set orst = Nothing
+    End If
+End Sub
 '// ################################# END PRIV. SUB/FUNC #################################
-
-

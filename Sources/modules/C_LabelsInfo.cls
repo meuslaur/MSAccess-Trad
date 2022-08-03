@@ -28,7 +28,7 @@ Option Explicit
     Private m_LblTexte  As Access.Label     '// Label texte d'info.
     Private m_LblBarre  As Access.Label     '// Label barre.
 
-    Private m_lNbBarre  As Long             '// Dimension label barre.
+'    Private m_lNbBarre  As Long             '// Dimension label barre.
     Private m_lCompte   As Long             '// Compteur pour la barre d'avancement.
 '//:::::::::::::::::::::::::::::::::: END VARIABLES ::::::::::::::::::::::::::::::::::::::
 
@@ -45,8 +45,8 @@ End Sub
 '//---------------------------------------------------------------------------------------
 
 '//==================================       PROP        ==================================
-'Public Property Get LongueurBarre() As Long
-'    LongueurBarre = m_lNbBarre
+'Public Property Let LongueurBarre(NewVal As Long)
+'    m_lNbBarre = NewVal
 'End Property
 Public Property Let LabelTexte(LabelInfo As Access.Label)
      Set m_LblTexte = LabelInfo
@@ -57,13 +57,14 @@ End Property
 '//====================================== END PROP =======================================
 
 '// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ PUBLIC SUB/FUNC   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-Public Sub InitialiseBarre(LongueurBarre As Long)
+Public Sub InitialiseBarre(Longueur As Long)
 
-    If (LongueurBarre = 0) Then Exit Sub
+    If (Longueur = 0) Then Exit Sub
     If (m_LblTexte Is Nothing) Or (m_LblBarre Is Nothing) Then Exit Sub
 
-    m_lNbBarre = LongueurBarre
-    m_LblBarre.Width = LARG_CAR * m_lNbBarre    '// Détermine la dimension de la barre.
+'    Me.LongueurBarre = Longueur
+'    m_LblBarre.Width = LARG_CAR * m_lNbBarre    '// Détermine la dimension de la barre.
+    m_LblBarre.Width = LARG_CAR * Longueur    '// Détermine la dimension de la barre.
     m_lCompte = 1
 End Sub
 

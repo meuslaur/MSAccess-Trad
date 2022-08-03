@@ -16,10 +16,10 @@ Begin Form
     Width =10204
     DatasheetFontHeight =11
     ItemSuffix =13
-    Left =2256
-    Top =912
-    Right =12708
-    Bottom =4812
+    Left =2700
+    Top =8160
+    Right =12900
+    Bottom =12720
     RecSrcDt = Begin
         0xb269f48478dbe540
     End
@@ -272,7 +272,7 @@ Begin Form
                     OverlapFlags =93
                     IMESentenceMode =3
                     Left =963
-                    Width =1533
+                    Width =1593
                     Height =345
                     TabIndex =3
                     BorderColor =10921638
@@ -282,7 +282,7 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =963
-                    LayoutCachedWidth =2496
+                    LayoutCachedWidth =2556
                     LayoutCachedHeight =345
                     BackThemeColorIndex =5
                     BackTint =60.0
@@ -293,8 +293,8 @@ Begin Form
                     ScrollBars =2
                     OverlapFlags =87
                     IMESentenceMode =3
-                    Left =2494
-                    Width =7710
+                    Left =2554
+                    Width =7650
                     Height =564
                     TabIndex =4
                     BorderColor =10921638
@@ -303,7 +303,7 @@ Begin Form
                     ControlSource ="PropTexte"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =2494
+                    LayoutCachedLeft =2554
                     LayoutCachedWidth =10204
                     LayoutCachedHeight =564
                 End

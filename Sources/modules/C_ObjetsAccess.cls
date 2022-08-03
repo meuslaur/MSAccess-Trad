@@ -72,9 +72,9 @@ End Property
 Public Property Let MsBaseIsOpen(NouvelEtat As Boolean)
     m_bMsBaseIsOpen = IIf((m_oMsApp.CurrentProject.Connection Is Nothing), False, NouvelEtat)
 End Property
-'Public Property Get BaseFullPathName() As String 'Note: Non utilisé
-'    BaseFullPathName = m_sBaseFullName
-'End Property
+Public Property Let BaseFullPathName(NewVal As String)
+    m_sBaseFullName = NewVal
+End Property
 Public Property Get BaseNom() As String
     BaseNom = m_sBaseNom
 End Property
@@ -189,7 +189,7 @@ On Error GoTo ERR_OpenMsBase
     End If
 
     m_bMsBaseIsOpen = True                      '// Flag base ouverte.
-    m_sBaseFullName = sBaseFullName             '// Stock le chemin/nom complet.
+    Me.BaseFullPathName = sBaseFullName         '// Stock le chemin/nom complet.
     m_sBaseNom = FSOGetBaseName(sBaseFullName)  '// Extraire le nom de l'app...
     
     OpenMsBase = True
@@ -246,12 +246,12 @@ Public Function GetPropTxt(PropNom As String) As String
     GetPropTxt = sVal
 End Function
 
-Public Function SetPropTxt(PropNom As String, NouvVal As String) As Boolean
-    If (Len(PropNom) = 0) Then Exit Function
-    Dim bRep As Boolean
-    bRep = MD_DBProp.SetTextProp(PropNom, NouvVal, m_oMsBase)
-    SetPropTxt = bRep
-End Function
+'Public Function SetPropTxt(PropNom As String, NouvVal As String) As Boolean
+'    If (Len(PropNom) = 0) Then Exit Function
+'    Dim bRep As Boolean
+'    bRep = MD_DBProp.SetTextProp(PropNom, NouvVal, m_oMsBase)
+'    SetPropTxt = bRep
+'End Function
 
 Public Function CreatePropTxt(PropNom As String, NouvVal As String) As Boolean
     If (Len(PropNom) = 0) Then Exit Function
@@ -264,16 +264,16 @@ End Function
 
 '// ################################ PRIVATE SUB/FUNC ####################################
 Private Function HasAutoexec(ByRef MsBase As DAO.Database) As Boolean
-    Dim oRst As DAO.Recordset
+    Dim orst As DAO.Recordset
     Dim sSql As String
     
     sSql = "SELECT MSysObjects.Name FROM MSysObjects WHERE MSysObjects.Name = 'AutoExec' AND MSysObjects.Type = -32766"
     
-    Set oRst = MsBase.OpenRecordset(sSql)
-    If Not (oRst.EOF And oRst.BOF) Then HasAutoexec = True
+    Set orst = MsBase.OpenRecordset(sSql)
+    If Not (orst.EOF And orst.BOF) Then HasAutoexec = True
 
-    oRst.Close
-    Set oRst = Nothing
+    orst.Close
+    Set orst = Nothing
 
 End Function
 

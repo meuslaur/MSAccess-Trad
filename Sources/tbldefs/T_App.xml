@@ -11,6 +11,7 @@
 		<xsd:annotation>
 			<xsd:appinfo>
 				<od:index index-name="CodeLangOrigine" index-key="LangueCodeBase " primary="no" unique="no" clustered="no" order="asc"/>
+				<od:index index-name="Num" index-key="Num " primary="no" unique="no" clustered="no" order="asc"/>
 				<od:index index-name="PrimaryKey" index-key="App_ID " primary="yes" unique="yes" clustered="no" order="asc"/>
 				<od:index index-name="T_LanguesT_App" index-key="LangueCodeBase " primary="no" unique="no" clustered="no" order="asc"/>
 				<od:tableProperty name="Orientation" type="2" value="0"/>
@@ -54,7 +55,7 @@
 					</xsd:annotation>
 					<xsd:simpleType>
 						<xsd:restriction base="xsd:string">
-							<xsd:maxLength value="50"/>
+							<xsd:maxLength value="40"/>
 						</xsd:restriction>
 					</xsd:simpleType>
 				</xsd:element>
@@ -113,6 +114,19 @@
 							<od:fieldProperty name="TextAlign" type="2" value="0"/>
 							<od:fieldProperty name="AggregateType" type="4" value="-1"/>
 							<od:fieldProperty name="ShowDatePicker" type="3" value="1"/>
+							<od:fieldProperty name="ResultType" type="2" value="0"/>
+							<od:fieldProperty name="CurrencyLCID" type="4" value="0"/>
+						</xsd:appinfo>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="Num" minOccurs="1" od:jetType="autonumber" od:sqlSType="int" od:autoUnique="yes" od:nonNullable="yes" type="xsd:int">
+					<xsd:annotation>
+						<xsd:appinfo>
+							<od:fieldProperty name="ColumnWidth" type="3" value="-1"/>
+							<od:fieldProperty name="ColumnOrder" type="3" value="0"/>
+							<od:fieldProperty name="ColumnHidden" type="1" value="0"/>
+							<od:fieldProperty name="TextAlign" type="2" value="0"/>
+							<od:fieldProperty name="AggregateType" type="4" value="-1"/>
 							<od:fieldProperty name="ResultType" type="2" value="0"/>
 							<od:fieldProperty name="CurrencyLCID" type="4" value="0"/>
 						</xsd:appinfo>

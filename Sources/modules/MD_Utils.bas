@@ -13,6 +13,7 @@
 Option Compare Database
 Option Explicit
 
+'Declare PtrSafe Function CoCreateGuid Lib "ole32.dll" (Guid As GUID_TYPE) As Long
 '//::::::::::::::::::::::::::::::::::    VARIABLES      ::::::::::::::::::::::::::::::::::
 '// FileDialog type pour la fonction OuvreBoite
     Public Enum T_FileDialogType
@@ -54,14 +55,16 @@ Option Explicit
         Erreur = 5
     End Enum
 
-    Public Const C_TABLE_LOCALE As String = "Table locale"
-    Public Const C_TABLE_ODBC   As String = "Table liée (ODBC)"
-    Public Const C_TABLE_LINK   As String = "Table liée"
+'    Public Const C_TABLE_LOCALE As String = "Table locale"
+'    Public Const C_TABLE_ODBC   As String = "Table liée (ODBC)"
+'    Public Const C_TABLE_LINK   As String = "Table liée"
 '    Public Const C_QUERY        As String = "Requête"
     Public Const C_FORM         As String = "Form"
     Public Const C_REPORT       As String = "Report"
 '    Public Const C_MACRO        As String = "Macro"
 '    Public Const C_MODULE       As String = "Module"
+
+    Private oRegex  As Object
 
 '//:::::::::::::::::::::::::::::::::: END VARIABLES ::::::::::::::::::::::::::::::::::::::
 
@@ -270,7 +273,7 @@ Public Function GetObjectTypeEnClair(eType As E_ObjectTypeNum) As String
     Dim sType As String
 
     Select Case eType
-        Case TableLocale
+'        Case TableLocale
 '            sType = C_TABLE_LOCALE
 '        Case TableOdbc
 '            sType = C_TABLE_ODBC
@@ -327,6 +330,7 @@ On Error GoTo ERR_CreateGuid
     Dim sSql    As String
     Dim vGuid() As Byte
     Dim sGuid   As String
+    Dim lPos    As Long
 
     Set qdf = CurrentDb.CreateQueryDef("")
 
@@ -342,13 +346,14 @@ On Error GoTo ERR_CreateGuid
 
     vGuid = DFirst("[Guid]", "aTg")
     sGuid = Application.StringFromGUID(vGuid)
+    lPos = InStr(2, sGuid, "{")
+    sGuid = Mid$(sGuid, lPos, (Len(sGuid) - lPos))
     CreateGuid = sGuid
 
     sSql = "DELETE aTg.* FROM aTg;"
     qdf.SQL = sSql
     qdf.Execute dbFailOnError
     qdf.Close
-
 
 SORTIE_CreateGuid:
     Set qdf = Nothing
@@ -360,4 +365,95 @@ ERR_CreateGuid:
             "Trad-Access.MD_Utils.CreateGuid"
     Resume SORTIE_CreateGuid
 End Function
+
+'---------------------------------------------------------------------------------------
+' Procedure : RegEx
+' Author    : Mike Wolfe <mike@nolongerset.com>
+' Date      : 9/1/2010
+' Purpose   : Perform a regular expression search on a string and return the first match
+'               or the null string if no matches are found.
+' Usage     : If Len(RegEx("\d{1,2}[/-]\d{1,2}[/-]\d{2,4}", txt)) = 0 Then MsgBox "No date in " & txt
+'           : TheDate = RegEx("\d{1,2}[/-]\d{1,2}[/-]\d{2,4}", txt)
+'           : CUSIP = Regex("[A-Za-z0-9]{8}[0-9]",txt)
+'---------------------------------------------------------------------------------------
+Public Function RegEx(Pattern As String, TextToSearch As String, Optional IgnoreCase As Boolean = False) As String
+'    Dim RE As Object
+    Dim REMatches As Object
+
+    If (oRegex Is Nothing) Then Set oRegex = CreateObject("vbscript.regexp")
+'    Set RE = CreateObject("vbscript.regexp")
+
+    With oRegex
+        .MultiLine = True
+        .Global = False
+        .IgnoreCase = IgnoreCase
+        .Pattern = Pattern
+    End With
+
+    Set REMatches = oRegex.Execute(TextToSearch)
+
+    If REMatches.Count > 0 Then
+'        RegEx = REMatches(0)
+        RegEx = TextToSearch
+    Else
+        RegEx = vbNullString
+    End If
+
+    Set REMatches = Nothing
+
+End Function
+
+Function RegexReplaceChevrons(TexteBase As String) As String
+
+    If (oRegex Is Nothing) Then Set oRegex = CreateObject("vbscript.regexp")
+
+    Dim sres As String
+
+    With oRegex
+        .MultiLine = True
+        .Global = True
+        .IgnoreCase = True
+        .Pattern = "([<])"
+    sres = .Replace(TexteBase, "&lt;")
+        .Pattern = "([>])"
+    sres = .Replace(sres, "&gt;")
+    End With
+
+    RegexReplaceChevrons = sres
+
+End Function
+
 '// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ END PUB. SUB/FUNC \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+Public Function RegTest(Txt As String) As String
+    Const REgAT   As String = "(^[a-zA-Z0-9-&éè""'[({]{1,})+([A-Za-zÀ0-9-ÖØ-öø-ÿ& ,.-@~`!@#$%^&*\[\]\{\}()_=+°\\'|;:""\/?>.<,-]){1,}$"
+'    Dim RE As Object
+    Dim REMatches As Object
+'    Dim REMatche  As Object
+
+    If (oRegex Is Nothing) Then Set oRegex = CreateObject("vbscript.regexp")
+'    Set RE = CreateObject("vbscript.regexp")
+
+    With oRegex
+        .MultiLine = True
+        .Global = False
+        .IgnoreCase = True
+        .Pattern = REgAT
+    End With
+
+    Set REMatches = oRegex.Execute(Txt)
+
+    If REMatches.Count > 0 Then
+'        RegEx = REMatches(0)
+        RegTest = Txt
+    Else
+        RegTest = vbNullString
+    End If
+
+'    For Each REMatche In REMatches
+'        Debug.Print REMatche.Value
+'    Next
+
+    Set REMatches = Nothing
+
+End Function

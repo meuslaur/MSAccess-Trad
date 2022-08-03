@@ -69,7 +69,7 @@
       "Type": 15
     },
     "DesignWithData": {
-      "Value": true,
+      "Value": false,
       "Type": 1
     },
     "HasOfflineLists": {
@@ -97,7 +97,7 @@
       "Type": 4
     },
     "NavPane Width": {
-      "Value": 480,
+      "Value": 503,
       "Type": 4
     },
     "Never Cache": {
@@ -113,7 +113,7 @@
       "Type": 3
     },
     "Property Sheet Label Width": {
-      "Value": 2448,
+      "Value": 3360,
       "Type": 4
     },
     "QueryTimeout": {
