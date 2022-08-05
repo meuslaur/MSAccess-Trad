@@ -16,6 +16,7 @@
 				<od:index index-name="PrimaryKey" index-key="Control_ID " primary="yes" unique="yes" clustered="no" order="asc"/>
 				<od:index index-name="Scanner" index-key="Scanner " primary="no" unique="no" clustered="no" order="asc"/>
 				<od:index index-name="T_ObjetsT_ObjetControles" index-key="IDObjet " primary="no" unique="no" clustered="no" order="asc"/>
+				<od:tableProperty name="PublishToWeb" type="2" value="1"/>
 				<od:tableProperty name="Orientation" type="2" value="0"/>
 				<od:tableProperty name="OrderByOn" type="1" value="0"/>
 				<od:tableProperty name="DefaultView" type="2" value="2"/>

@@ -26,6 +26,7 @@ dbByte "DefaultView" ="2"
 dbBoolean "FilterOnLoad" ="0"
 dbBoolean "OrderByOnLoad" ="-1"
 dbBoolean "TotalsRow" ="0"
+dbByte "PublishToWeb" ="1"
 Begin
     Begin
         dbText "Name" ="T_App.AppNom"

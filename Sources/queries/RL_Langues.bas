@@ -18,6 +18,7 @@ dbByte "Orientation" ="0"
 dbByte "DefaultView" ="2"
 dbBoolean "FilterOnLoad" ="0"
 dbBoolean "OrderByOnLoad" ="-1"
+dbByte "PublishToWeb" ="1"
 dbByte "RecordsetType" ="0"
 dbBoolean "TotalsRow" ="0"
 Begin
