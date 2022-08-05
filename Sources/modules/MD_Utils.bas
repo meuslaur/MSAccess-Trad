@@ -316,11 +316,13 @@ End Function
 ' DateMod :
 ' ----------------------------------------------------------------
 Public Function CheckApostrophe(sVal As String) As String
-    Dim sValMod As String
+
     If InStr(1, sVal, "'") Then
-        sValMod = Replace(sVal, "'", "''")
+        CheckApostrophe = Replace(sVal, "'", "''")
+    Else
+        CheckApostrophe = sVal
     End If
-    CheckApostrophe = sValMod
+
 End Function
 
 Public Function CreateGuid() As String
@@ -403,7 +405,7 @@ Public Function RegEx(Pattern As String, TextToSearch As String, Optional Ignore
 
 End Function
 
-Function RegexReplaceChevrons(TexteBase As String) As String
+Public Function RegexReplaceChevrons(TexteBase As String) As String
 
     If (oRegex Is Nothing) Then Set oRegex = CreateObject("vbscript.regexp")
 
@@ -422,38 +424,4 @@ Function RegexReplaceChevrons(TexteBase As String) As String
     RegexReplaceChevrons = sres
 
 End Function
-
 '// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ END PUB. SUB/FUNC \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-
-Public Function RegTest(Txt As String) As String
-    Const REgAT   As String = "(^[a-zA-Z0-9-&éè""'[({]{1,})+([A-Za-zÀ0-9-ÖØ-öø-ÿ& ,.-@~`!@#$%^&*\[\]\{\}()_=+°\\'|;:""\/?>.<,-]){1,}$"
-'    Dim RE As Object
-    Dim REMatches As Object
-'    Dim REMatche  As Object
-
-    If (oRegex Is Nothing) Then Set oRegex = CreateObject("vbscript.regexp")
-'    Set RE = CreateObject("vbscript.regexp")
-
-    With oRegex
-        .MultiLine = True
-        .Global = False
-        .IgnoreCase = True
-        .Pattern = REgAT
-    End With
-
-    Set REMatches = oRegex.Execute(Txt)
-
-    If REMatches.Count > 0 Then
-'        RegEx = REMatches(0)
-        RegTest = Txt
-    Else
-        RegTest = vbNullString
-    End If
-
-'    For Each REMatche In REMatches
-'        Debug.Print REMatche.Value
-'    Next
-
-    Set REMatches = Nothing
-
-End Function

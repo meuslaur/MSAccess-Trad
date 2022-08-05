@@ -428,7 +428,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-'@Folder("Dev")
+'@Folder("Form")
 ' ------------------------------------------------------
 ' Name     : Form_F_Main
 ' ------------------------------------------------------
@@ -484,6 +484,7 @@ Private Sub zlApps_AfterUpdate()
 
     vTmp = DLookup("[LangueCodeBase]", "T_App", "[App_ID]='" & Me.zlApps & "'")
     If (IsNull(vTmp)) Then
+    'TODO: Err code langue.
     Else
         m_IDLang = CLng(vTmp)
     End If

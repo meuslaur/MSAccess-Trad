@@ -15,13 +15,13 @@ Begin Form
     GridY =10
     Width =10207
     DatasheetFontHeight =11
-    ItemSuffix =9
-    Left =2700
-    Top =4872
-    Right =12912
-    Bottom =7608
+    ItemSuffix =11
+    Left =4308
+    Top =5460
+    Right =14520
+    Bottom =8196
     RecSrcDt = Begin
-        0x6a44f48478dbe540
+        0xc5cb98284bdde540
     End
     Caption ="F_RecapC"
     DatasheetFontName ="Calibri"
@@ -122,6 +122,20 @@ Begin Form
                     LayoutCachedWidth =565
                     LayoutCachedHeight =315
                 End
+                Begin Label
+                    OverlapFlags =85
+                    Left =2551
+                    Width =1020
+                    Height =300
+                    BorderColor =8355711
+                    ForeColor =6710886
+                    Name ="lbl_Control"
+                    Caption ="Contrôles"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =2551
+                    LayoutCachedWidth =3571
+                    LayoutCachedHeight =300
+                End
             End
         End
         Begin Section
@@ -159,7 +173,7 @@ Begin Form
                     TabStop = NotDefault
                     AllowAutoCorrect = NotDefault
                     OldBorderStyle =0
-                    OverlapFlags =85
+                    OverlapFlags =93
                     TextFontCharSet =2
                     TextFontFamily =18
                     BackStyle =0
@@ -185,12 +199,12 @@ Begin Form
                     TabStop = NotDefault
                     AllowAutoCorrect = NotDefault
                     OldBorderStyle =0
-                    OverlapFlags =85
+                    OverlapFlags =95
                     TextFontCharSet =2
                     TextFontFamily =18
                     BackStyle =0
                     IMESentenceMode =3
-                    Left =340
+                    Left =283
                     Width =284
                     Height =340
                     TabIndex =1
@@ -200,8 +214,8 @@ Begin Form
                     FontName ="Webdings"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =340
-                    LayoutCachedWidth =624
+                    LayoutCachedLeft =283
+                    LayoutCachedWidth =567
                     LayoutCachedHeight =340
                     ThemeFontIndex =-1
                     ForeThemeColorIndex =9
@@ -212,8 +226,8 @@ Begin Form
                     TabStop = NotDefault
                     OverlapFlags =87
                     IMESentenceMode =3
-                    Left =680
-                    Width =1881
+                    Left =560
+                    Width =2001
                     Height =340
                     TabIndex =2
                     BorderColor =10921638
@@ -222,9 +236,29 @@ Begin Form
                     ControlSource ="ControlType"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =680
+                    LayoutCachedLeft =560
                     LayoutCachedWidth =2561
                     LayoutCachedHeight =340
+                End
+                Begin TextBox
+                    Visible = NotDefault
+                    TabStop = NotDefault
+                    AllowAutoCorrect = NotDefault
+                    OverlapFlags =247
+                    IMESentenceMode =3
+                    Left =5215
+                    Width =789
+                    Height =300
+                    TabIndex =4
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    Name ="IDObjet"
+                    ControlSource ="IDObjet"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =5215
+                    LayoutCachedWidth =6004
+                    LayoutCachedHeight =300
                 End
             End
         End

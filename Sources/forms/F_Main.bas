@@ -18,9 +18,9 @@ Begin Form
     Width =18141
     DatasheetFontHeight =11
     ItemSuffix =67
-    Left =3192
+    Left =3684
     Top =552
-    Right =21336
+    Right =21828
     Bottom =12156
     DatasheetGridlinesColor =15132391
     RecSrcDt = Begin
@@ -712,6 +712,7 @@ Begin Form
                     LayoutCachedTop =113
                     LayoutCachedWidth =2331
                     LayoutCachedHeight =428
+                    ForeThemeColorIndex =-1
                     ForeTint =20.0
                 End
                 Begin Label
@@ -1517,13 +1518,13 @@ Begin Form
                     End
                 End
                 Begin TextBox
+                    Visible = NotDefault
                     Enabled = NotDefault
                     Locked = NotDefault
                     TabStop = NotDefault
                     OldBorderStyle =0
                     OverlapFlags =85
-                    TextAlign =1
-                    BackStyle =0
+                    TextAlign =2
                     IMESentenceMode =3
                     Left =2608
                     Top =1644
@@ -1531,6 +1532,7 @@ Begin Form
                     Height =315
                     TabIndex =9
                     BorderColor =10921638
+                    ForeColor =13421772
                     Name ="txtDateScan"
                     Format ="General Date"
                     GridlineColor =10921638
@@ -1539,9 +1541,10 @@ Begin Form
                     LayoutCachedTop =1644
                     LayoutCachedWidth =4654
                     LayoutCachedHeight =1959
-                    ForeThemeColorIndex =2
+                    BackThemeColorIndex =3
+                    BackShade =25.0
+                    ForeThemeColorIndex =-1
                     ForeTint =100.0
-                    ForeShade =90.0
                     Begin
                         Begin Label
                             OverlapFlags =85
@@ -1568,8 +1571,8 @@ Begin Form
                     Enabled = NotDefault
                     TabStop = NotDefault
                     OverlapFlags =85
-                    Left =1068
-                    Top =564
+                    Left =680
+                    Top =1247
                     Width =330
                     Height =330
                     TabIndex =10
@@ -1622,10 +1625,10 @@ Begin Form
                         0x322669643d329541f9c60000000049454e44ae426082
                     End
 
-                    LayoutCachedLeft =1068
-                    LayoutCachedTop =564
-                    LayoutCachedWidth =1398
-                    LayoutCachedHeight =894
+                    LayoutCachedLeft =680
+                    LayoutCachedTop =1247
+                    LayoutCachedWidth =1010
+                    LayoutCachedHeight =1577
                     UseTheme =0
                     BackColor =14461583
                     BorderColor =14461583
@@ -1640,6 +1643,7 @@ Begin Form
                     Overlaps =1
                 End
                 Begin CommandButton
+                    Enabled = NotDefault
                     TabStop = NotDefault
                     OverlapFlags =85
                     Left =56
@@ -1736,14 +1740,15 @@ Begin Form
                     Enabled = NotDefault
                     TabStop = NotDefault
                     OverlapFlags =85
-                    Left =1440
-                    Top =564
+                    Left =340
+                    Top =1247
                     Width =331
                     Height =331
                     TabIndex =11
                     ForeColor =4210752
                     Name ="cmdTxtIgnore"
                     OnClick ="[Event Procedure]"
+                    ControlTipText ="Liste des textes filtrés."
                     Picture ="ic_FTextesIgnore.png"
                     GridlineColor =10921638
                     ImageData = Begin
@@ -1789,10 +1794,10 @@ Begin Form
                         0x72672fef37aacb0000000049454e44ae426082
                     End
 
-                    LayoutCachedLeft =1440
-                    LayoutCachedTop =564
-                    LayoutCachedWidth =1771
-                    LayoutCachedHeight =895
+                    LayoutCachedLeft =340
+                    LayoutCachedTop =1247
+                    LayoutCachedWidth =671
+                    LayoutCachedHeight =1578
                     UseTheme =0
                     BackColor =14461583
                     BorderColor =14461583
@@ -1861,7 +1866,7 @@ Private Sub Form_Load()
     Set ObjetAcc = ScanTxt.GetInstanceObjetAcc()    '// Récupère la classe initialisée.
 
     m_AjoutLangue = False
-    Me.zlBases.SetFocus
+    Me.txtBdd.SetFocus
     Me.txtBdd = "Sélectionnez une base..."
 
 End Sub
@@ -1912,6 +1917,7 @@ On Error GoTo ERR_cmbSelectBdd_Click
     vTmp = Split(sRep, ";")             '// Retourne folder;backup;base
     Me.txtBddSauve = vTmp(0) & vTmp(1)  '// folder + backup.
 
+    Beep
     sMsg = "Créez la sauvegarde ?" & vbCrLf & Me.txtBddSauve
     lRep = MsgBox(sMsg, vbQuestion + vbYesNo, "Sauvegarde...")
     If (lRep = vbYes) Then
@@ -1923,9 +1929,14 @@ On Error GoTo ERR_cmbSelectBdd_Click
     bRep = InitAppEtBase(sBaseSel)  '// Création Access.Application, ouverture de la base....
 
     DoEvents
+    If (Not bRep) Then
+        Beep
+        MsgBox "Erreur initialisation de l'application", vbCritical, "Initialisation"
+        Exit Sub
+    End If
+
     DoCmd.Hourglass True
     DoCmd.Echo False
-    If (Not bRep) Then Exit Sub
 
     '-------------------------
     eRep = ScanTxt.IsNewApp()       '// Vérifie base déjà scannée...
@@ -1936,6 +1947,7 @@ On Error GoTo ERR_cmbSelectBdd_Click
         Case eReponse.Exist '// Existe, demande confirmation.
 
             ScanTxt.ReScannerApp = True
+            Beep
             sMsg = "La base '" & ObjetAcc.BaseNom & "' est déjà enregistrée dans la table T_Objets." & vbCrLf & _
                    "Les données concernant cette base vont être mise à jour." & vbCrLf & _
                    "Voulez-vous continuer ?"
@@ -2102,6 +2114,8 @@ End Sub
 '----------------------------------------------------------------
 Private Sub zlBases_AfterUpdate()
 
+On Error GoTo ERR_zlBases_AfterUpdate
+
     If (IsNull(Me.zlBases)) Then Exit Sub
 
     Dim vDate As Variant
@@ -2111,6 +2125,7 @@ Private Sub zlBases_AfterUpdate()
     MaJListeObjets      '// Charge la liste des objets suivant l'app en cours...
 
     vDate = DLookup("[DernierScan]", "T_App", "[App_ID]='" & Me.zlBases & "'")
+    Me.txtDateScan.Visible = Not (IsNull(vDate))
     Me.txtDateScan = Nz(vDate, vbNullString)
 
     Me.zlLangues = ScanTxt.GetIDLangBase(Me.zlBases)    '// Extraire la langue d'origine de la base...
@@ -2119,9 +2134,19 @@ Private Sub zlBases_AfterUpdate()
     MajLabelsInfo
     Me.cmdVoirRecap.Enabled = True
     Me.cmdTxtIgnore.Enabled = True
-
+    
+SORTIE_zlBases_AfterUpdate:
     DoCmd.Echo True
+    Exit Sub
 
+ERR_zlBases_AfterUpdate:
+    MsgBox "L’erreur suivante s’est produite" & vbCrLf & vbCrLf & _
+           "Erreur N°: " & Err.Number & vbCrLf & _
+           "Source : Form_F_Main.zlBases_AfterUpdate" & vbCrLf & _
+           "Description: " & Err.Description & _
+           Switch(Erl = 0, vbNullString, Erl <> 0, vbCrLf & "Line No: " & Erl), _
+           vbOKOnly + vbCritical, "Erreur survenue !"
+    Resume SORTIE_zlBases_AfterUpdate
 End Sub
 
 '----------------------------------------------------------------

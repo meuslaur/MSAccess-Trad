@@ -22,9 +22,9 @@ Begin Form
     DatasheetFontHeight =11
     ItemSuffix =5
     Left =1560
-    Top =1815
+    Top =1812
     Right =7800
-    Bottom =4185
+    Bottom =4188
     RecSrcDt = Begin
         0x7cc519de8adbe540
     End
@@ -219,7 +219,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-'@Folder("Dev")
+'@Folder("Form")
 Option Compare Database
 Option Explicit
 

@@ -7,7 +7,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
-'@Folder("Test")
+'@Folder("Dev")
 ' ------------------------------------------------------
 ' Name     : C_ObjetsAccess
 ' ------------------------------------------------------
@@ -176,7 +176,7 @@ On Error GoTo ERR_OpenMsBase
 
         MsgBox "Le Formulaire '" & sObj & "' est ouvert automatiquement au lancement de la base," & vbCrLf & _
                "il doit être fermer pour continuer." & vbCrLf & vbCrLf & _
-               "Note: il peux contenir du code qui vas fermer base ou l'application.", vbExclamation, "OpenMsBase"
+               "Note: il peut contenir du code qui vas fermer la base ou l'application.", vbExclamation, "OpenMsBase"
         '// On ferme l'objet.
         m_oMsApp.DoCmd.Close acForm, sObj
     End If
@@ -264,16 +264,16 @@ End Function
 
 '// ################################ PRIVATE SUB/FUNC ####################################
 Private Function HasAutoexec(ByRef MsBase As DAO.Database) As Boolean
-    Dim orst As DAO.Recordset
+    Dim oRst As DAO.Recordset
     Dim sSql As String
     
     sSql = "SELECT MSysObjects.Name FROM MSysObjects WHERE MSysObjects.Name = 'AutoExec' AND MSysObjects.Type = -32766"
     
-    Set orst = MsBase.OpenRecordset(sSql)
-    If Not (orst.EOF And orst.BOF) Then HasAutoexec = True
+    Set oRst = MsBase.OpenRecordset(sSql)
+    If Not (oRst.EOF And oRst.BOF) Then HasAutoexec = True
 
-    orst.Close
-    Set orst = Nothing
+    oRst.Close
+    Set oRst = Nothing
 
 End Function
 

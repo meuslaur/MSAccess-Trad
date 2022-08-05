@@ -16,10 +16,10 @@ Begin Form
     Width =10266
     DatasheetFontHeight =11
     ItemSuffix =14
-    Left =7425
-    Top =16380
-    Right =17685
-    Bottom =21150
+    Left =11172
+    Top =5136
+    Right =21444
+    Bottom =9864
     RecSrcDt = Begin
         0xe6bed64291dbe540
     End
@@ -228,7 +228,6 @@ Begin Form
                     Height =315
                     ColumnWidth =3000
                     TabIndex =3
-                    LeftMargin =57
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="txtControlNom"
@@ -352,7 +351,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-'@Folder("Dev")
+'@Folder("Form")
 Option Compare Database
 Option Explicit
 

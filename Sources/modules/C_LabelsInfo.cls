@@ -23,10 +23,11 @@ Option Compare Database
 Option Explicit
 
 '//::::::::::::::::::::::::::::::::::    VARIABLES      ::::::::::::::::::::::::::::::::::
-    Private Const LARG_CAR As Long = 182    '// Largeur 1 Caractèrre, Police Webdings size 8, 'TODO: Tester dans d'autre rédolutions
+    Private Const LARG_CAR As Long = 178    '// Largeur 1 Caractèrre, Police Webdings size 8, 'TODO: Tester dans d'autre rédolutions
 
     Private m_LblTexte  As Access.Label     '// Label texte d'info.
     Private m_LblBarre  As Access.Label     '// Label barre.
+    Private m_UseBarre  As Boolean          '// Indique si on utilise la barre.
 
 '    Private m_lNbBarre  As Long             '// Dimension label barre.
     Private m_lCompte   As Long             '// Compteur pour la barre d'avancement.
@@ -54,6 +55,13 @@ End Property
 Public Property Let LabelBarre(LabelBarre As Access.Label)
     Set m_LblBarre = LabelBarre
 End Property
+
+Public Property Get UseBarre() As Boolean
+    UseBarre = m_UseBarre
+End Property
+Public Property Let UseBarre(InitBarre As Boolean)
+    m_UseBarre = InitBarre
+End Property
 '//====================================== END PROP =======================================
 
 '// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ PUBLIC SUB/FUNC   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -62,8 +70,6 @@ Public Sub InitialiseBarre(Longueur As Long)
     If (Longueur = 0) Then Exit Sub
     If (m_LblTexte Is Nothing) Or (m_LblBarre Is Nothing) Then Exit Sub
 
-'    Me.LongueurBarre = Longueur
-'    m_LblBarre.Width = LARG_CAR * m_lNbBarre    '// Détermine la dimension de la barre.
     m_LblBarre.Width = LARG_CAR * Longueur    '// Détermine la dimension de la barre.
     m_lCompte = 1
 End Sub

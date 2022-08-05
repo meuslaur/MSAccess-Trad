@@ -302,6 +302,7 @@ Public Function ADOFileWrite(FullPathFileName As String, TextSource As String, _
     End With
 
     ADOFileWrite = True
+    Set oStream = Nothing
 
 End Function
 
