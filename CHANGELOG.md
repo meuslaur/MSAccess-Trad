@@ -1,4 +1,9 @@
 #Changelog
+## V 0.48 2022/05/04
+- Modifications filtres sur les texte Caption.
+- Ajoute info sur tous les textes ingorés.
+* Correction de bugs.
+
 ## V 0.45 2022/07/28
 - Correction de bugs.
 
