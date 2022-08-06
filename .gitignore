@@ -10,7 +10,5 @@ Sources/forms/aa-Test.bas
 Sources/modules/A_CTest.cls
 Sources/modules/A_Test.bas
 *.log
-Sources/vcs-index.json
 Sources/Export.log
-Sources/vcs-options.json
 Sources/proj-properties.json
