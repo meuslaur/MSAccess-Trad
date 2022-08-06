@@ -380,7 +380,7 @@ End Function
 '---------------------------------------------------------------------------------------
 Public Function RegEx(Pattern As String, TextToSearch As String, Optional IgnoreCase As Boolean = False) As String
 '    Dim RE As Object
-    Dim REMatches As Object
+    Dim ReMatches As Object
 
     If (oRegex Is Nothing) Then Set oRegex = CreateObject("vbscript.regexp")
 '    Set RE = CreateObject("vbscript.regexp")
@@ -392,16 +392,16 @@ Public Function RegEx(Pattern As String, TextToSearch As String, Optional Ignore
         .Pattern = Pattern
     End With
 
-    Set REMatches = oRegex.Execute(TextToSearch)
+    Set ReMatches = oRegex.Execute(TextToSearch)
 
-    If REMatches.Count > 0 Then
+    If ReMatches.Count > 0 Then
 '        RegEx = REMatches(0)
         RegEx = TextToSearch
     Else
         RegEx = vbNullString
     End If
 
-    Set REMatches = Nothing
+    Set ReMatches = Nothing
 
 End Function
 
