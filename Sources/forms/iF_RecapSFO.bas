@@ -16,17 +16,21 @@ Begin Form
     Width =10204
     DatasheetFontHeight =11
     ItemSuffix =12
-    Left =2472
-    Top =2664
-    Right =12672
-    Bottom =4392
-    RecSrcDt = Begin
-        0xc5cb98284bdde540
-    End
+    Left =10536
+    Top =3444
+    Right =20736
+    Bottom =5172
+    Filter ="Scanner=False"
+    RecordSource ="SELECT T_Objets.Objet_ID, T_Objets.ObjetType, T_Objets.ObjetNom, T_Objets.Scanne"
+        "r, T_Objets.Nouveau, IIf(Scanner=False,\"=\",Null) AS Scan, IIf(Nouveau=True,\"="
+        "\",Null) AS Nouv FROM T_Objets WHERE ((T_Objets.IDApp)='{0E2F38D2-3B4E-4999-ABBC"
+        "-E57CD58F0D95}') ORDER BY T_Objets.ObjetType, T_Objets.ObjetNom; "
     Caption ="F_RecapO"
     DatasheetFontName ="Calibri"
     AllowDatasheetView =0
     FilterOnLoad =0
+    OrderByOnLoad =0
+    OrderByOnLoad =0
     ShowPageMargins =0
     DisplayOnSharePointSite =1
     AllowLayoutView =0
@@ -135,6 +139,7 @@ Begin Form
                     LayoutCachedHeight =315
                 End
                 Begin Image
+                    BackStyle =1
                     SizeMode =0
                     Left =2604
                     Top =36

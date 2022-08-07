@@ -19,11 +19,11 @@ Begin Form
     GridY =10
     Width =11338
     DatasheetFontHeight =11
-    ItemSuffix =38
-    Left =1512
-    Top =576
-    Right =12852
-    Bottom =11844
+    ItemSuffix =58
+    Left =9576
+    Top =1356
+    Right =20916
+    Bottom =13416
     DatasheetGridlinesColor =15132391
     RecSrcDt = Begin
         0x2562231676dbe540
@@ -34,6 +34,8 @@ Begin Form
     DatasheetFontName ="Calibri"
     AllowDatasheetView =0
     FilterOnLoad =0
+    OrderByOnLoad =0
+    OrderByOnLoad =0
     ShowPageMargins =0
     DisplayOnSharePointSite =1
     AllowLayoutView =0
@@ -242,160 +244,6 @@ Begin Form
                     WebImagePaddingRight =2
                     WebImagePaddingBottom =2
                 End
-                Begin CheckBox
-                    TabStop = NotDefault
-                    OverlapFlags =85
-                    Left =3634
-                    Top =176
-                    TabIndex =1
-                    BorderColor =10921638
-                    Name ="chkScan"
-                    AfterUpdate ="=AppliqueFiltre(\"Scan\")"
-                    DefaultValue ="0"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =3634
-                    LayoutCachedTop =176
-                    LayoutCachedWidth =3894
-                    LayoutCachedHeight =416
-                    Begin
-                        Begin Label
-                            OverlapFlags =85
-                            TextFontCharSet =2
-                            TextFontFamily =18
-                            Left =3237
-                            Top =120
-                            Width =284
-                            Height =340
-                            ForeColor =2366701
-                            Name ="lbl_chkScan"
-                            Caption ="="
-                            FontName ="Webdings"
-                            GridlineColor =10921638
-                            LayoutCachedLeft =3237
-                            LayoutCachedTop =120
-                            LayoutCachedWidth =3521
-                            LayoutCachedHeight =460
-                            ThemeFontIndex =-1
-                            BorderThemeColorIndex =1
-                            BorderTint =100.0
-                            BorderShade =65.0
-                            ForeThemeColorIndex =-1
-                            ForeTint =100.0
-                        End
-                    End
-                End
-                Begin CheckBox
-                    TabStop = NotDefault
-                    OverlapFlags =85
-                    Left =4365
-                    Top =169
-                    TabIndex =2
-                    BorderColor =10921638
-                    Name ="chkModif"
-                    AfterUpdate ="=AppliqueFiltre(\"Modif\")"
-                    DefaultValue ="0"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =4365
-                    LayoutCachedTop =169
-                    LayoutCachedWidth =4625
-                    LayoutCachedHeight =409
-                    Begin
-                        Begin Label
-                            OverlapFlags =85
-                            TextFontCharSet =2
-                            TextAlign =2
-                            TextFontFamily =18
-                            Left =3968
-                            Top =113
-                            Width =284
-                            Height =345
-                            Name ="lbl_chkModif"
-                            Caption ="="
-                            FontName ="Webdings"
-                            GridlineColor =10921638
-                            LayoutCachedLeft =3968
-                            LayoutCachedTop =113
-                            LayoutCachedWidth =4252
-                            LayoutCachedHeight =458
-                            ThemeFontIndex =-1
-                            BorderThemeColorIndex =1
-                            BorderTint =100.0
-                            BorderShade =65.0
-                            ForeThemeColorIndex =8
-                            ForeTint =100.0
-                            ForeShade =75.0
-                        End
-                    End
-                End
-                Begin CheckBox
-                    TabStop = NotDefault
-                    OverlapFlags =85
-                    Left =5159
-                    Top =169
-                    TabIndex =3
-                    BorderColor =10921638
-                    Name ="chkNouv"
-                    AfterUpdate ="=AppliqueFiltre(\"Nouv\")"
-                    DefaultValue ="0"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =5159
-                    LayoutCachedTop =169
-                    LayoutCachedWidth =5419
-                    LayoutCachedHeight =409
-                    GridlineThemeColorIndex =-1
-                    Begin
-                        Begin Label
-                            OverlapFlags =85
-                            TextFontCharSet =2
-                            TextAlign =2
-                            TextFontFamily =18
-                            Left =4762
-                            Top =113
-                            Width =284
-                            Height =340
-                            BorderColor =10921638
-                            ForeColor =3506772
-                            Name ="lbl_chkNouv"
-                            Caption ="="
-                            FontName ="Webdings"
-                            GridlineColor =10921638
-                            LayoutCachedLeft =4762
-                            LayoutCachedTop =113
-                            LayoutCachedWidth =5046
-                            LayoutCachedHeight =453
-                            ThemeFontIndex =-1
-                            BackThemeColorIndex =-1
-                            BorderThemeColorIndex =-1
-                            BorderTint =100.0
-                            BorderShade =65.0
-                            ForeThemeColorIndex =-1
-                            ForeTint =100.0
-                            ForeShade =75.0
-                            GridlineThemeColorIndex =-1
-                        End
-                    End
-                End
-                Begin Label
-                    OverlapFlags =85
-                    TextAlign =3
-                    Left =340
-                    Top =113
-                    Width =2556
-                    Height =315
-                    BorderColor =8355711
-                    ForeColor =13421772
-                    Name ="lblChksInfo"
-                    Caption ="Afficher uniquement :"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =340
-                    LayoutCachedTop =113
-                    LayoutCachedWidth =2896
-                    LayoutCachedHeight =428
-                    ForeTint =20.0
-                End
                 Begin Image
                     Left =7256
                     Top =170
@@ -537,13 +385,13 @@ Begin Form
                     LayoutCachedTop =170
                     LayoutCachedWidth =7448
                     LayoutCachedHeight =362
-                    TabIndex =4
+                    TabIndex =2
                 End
                 Begin Label
                     OverlapFlags =85
                     Left =7540
                     Top =113
-                    Width =2016
+                    Width =2388
                     Height =300
                     BorderColor =8355711
                     ForeColor =13421772
@@ -552,9 +400,207 @@ Begin Form
                     GridlineColor =10921638
                     LayoutCachedLeft =7540
                     LayoutCachedTop =113
-                    LayoutCachedWidth =9556
+                    LayoutCachedWidth =9928
                     LayoutCachedHeight =413
                     ForeTint =20.0
+                End
+                Begin OptionGroup
+                    SpecialEffect =0
+                    OldBorderStyle =0
+                    OverlapFlags =85
+                    Left =2947
+                    Top =56
+                    Width =3342
+                    Height =451
+                    TabIndex =1
+                    BorderColor =10921638
+                    Name ="grpChk"
+                    AfterUpdate ="[Event Procedure]"
+                    DefaultValue ="4"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =2947
+                    LayoutCachedTop =56
+                    LayoutCachedWidth =6289
+                    LayoutCachedHeight =507
+                    Begin
+                        Begin Label
+                            BackStyle =1
+                            OverlapFlags =85
+                            TextAlign =3
+                            Left =406
+                            Top =113
+                            Width =2472
+                            Height =300
+                            BackColor =3684411
+                            BorderColor =8355711
+                            ForeColor =13421772
+                            Name ="Étiquette48"
+                            Caption ="Afficher uniquement :"
+                            GridlineColor =10921638
+                            LayoutCachedLeft =406
+                            LayoutCachedTop =113
+                            LayoutCachedWidth =2878
+                            LayoutCachedHeight =413
+                            BackThemeColorIndex =-1
+                            BackTint =25.0
+                            ForeTint =20.0
+                        End
+                        Begin CheckBox
+                            SpecialEffect =2
+                            OverlapFlags =87
+                            Left =3004
+                            Top =141
+                            OptionValue =1
+                            BorderColor =10921638
+                            Name ="chkScan2"
+                            GridlineColor =10921638
+
+                            LayoutCachedLeft =3004
+                            LayoutCachedTop =141
+                            LayoutCachedWidth =3264
+                            LayoutCachedHeight =381
+                            Begin
+                                Begin Label
+                                    OverlapFlags =247
+                                    TextFontCharSet =2
+                                    TextFontFamily =18
+                                    Left =3234
+                                    Top =113
+                                    Width =288
+                                    Height =288
+                                    BorderColor =8355711
+                                    ForeColor =2366701
+                                    Name ="lblchkScan2"
+                                    Caption ="="
+                                    FontName ="Webdings"
+                                    GridlineColor =10921638
+                                    LayoutCachedLeft =3234
+                                    LayoutCachedTop =113
+                                    LayoutCachedWidth =3522
+                                    LayoutCachedHeight =401
+                                    ThemeFontIndex =-1
+                                    ForeThemeColorIndex =-1
+                                    ForeTint =100.0
+                                End
+                            End
+                        End
+                        Begin CheckBox
+                            SpecialEffect =2
+                            OverlapFlags =87
+                            Left =3684
+                            Top =141
+                            TabIndex =1
+                            OptionValue =2
+                            BorderColor =10921638
+                            Name ="chkModif2"
+                            GridlineColor =10921638
+
+                            LayoutCachedLeft =3684
+                            LayoutCachedTop =141
+                            LayoutCachedWidth =3944
+                            LayoutCachedHeight =381
+                            Begin
+                                Begin Label
+                                    OverlapFlags =247
+                                    TextFontCharSet =2
+                                    TextFontFamily =18
+                                    Left =3914
+                                    Top =113
+                                    Width =288
+                                    Height =288
+                                    BorderColor =8355711
+                                    Name ="lblchkModif2"
+                                    Caption ="="
+                                    FontName ="Webdings"
+                                    GridlineColor =10921638
+                                    LayoutCachedLeft =3914
+                                    LayoutCachedTop =113
+                                    LayoutCachedWidth =4202
+                                    LayoutCachedHeight =401
+                                    ThemeFontIndex =-1
+                                    ForeThemeColorIndex =8
+                                    ForeTint =100.0
+                                    ForeShade =75.0
+                                End
+                            End
+                        End
+                        Begin CheckBox
+                            SpecialEffect =2
+                            OverlapFlags =87
+                            Left =4364
+                            Top =141
+                            TabIndex =2
+                            OptionValue =3
+                            BorderColor =10921638
+                            Name ="chkNouv2"
+                            GridlineColor =10921638
+
+                            LayoutCachedLeft =4364
+                            LayoutCachedTop =141
+                            LayoutCachedWidth =4624
+                            LayoutCachedHeight =381
+                            Begin
+                                Begin Label
+                                    OverlapFlags =247
+                                    TextFontCharSet =2
+                                    TextFontFamily =18
+                                    Left =4594
+                                    Top =113
+                                    Width =288
+                                    Height =288
+                                    BorderColor =8355711
+                                    ForeColor =3506772
+                                    Name ="lblchkNouv2"
+                                    Caption ="="
+                                    FontName ="Webdings"
+                                    GridlineColor =10921638
+                                    LayoutCachedLeft =4594
+                                    LayoutCachedTop =113
+                                    LayoutCachedWidth =4882
+                                    LayoutCachedHeight =401
+                                    ThemeFontIndex =-1
+                                    ForeThemeColorIndex =-1
+                                    ForeTint =100.0
+                                End
+                            End
+                        End
+                        Begin CheckBox
+                            SpecialEffect =2
+                            OverlapFlags =87
+                            Left =5045
+                            Top =141
+                            TabIndex =3
+                            OptionValue =4
+                            BorderColor =10921638
+                            Name ="chkTout"
+                            GridlineColor =10921638
+
+                            LayoutCachedLeft =5045
+                            LayoutCachedTop =141
+                            LayoutCachedWidth =5305
+                            LayoutCachedHeight =381
+                            Begin
+                                Begin Label
+                                    OverlapFlags =247
+                                    Left =5275
+                                    Top =113
+                                    Width =960
+                                    Height =300
+                                    BorderColor =8355711
+                                    ForeColor =13421772
+                                    Name ="lblchkTout"
+                                    Caption ="Tout"
+                                    GridlineColor =10921638
+                                    LayoutCachedLeft =5275
+                                    LayoutCachedTop =113
+                                    LayoutCachedWidth =6235
+                                    LayoutCachedHeight =413
+                                    ForeTint =20.0
+                                End
+                            End
+                        End
+                    End
                 End
             End
         End
@@ -715,7 +761,6 @@ Option Explicit
     End Enum
     Private thisFiltre  As E_FiltreSf
     Private mFltPrec    As E_FiltreSf   '// Filtre précedent sur les SF.
-    Private mFltChk     As Boolean      '// Filtre en cour avec les checkbox.
 '//:::::::::::::::::::::::::::::::::: END VARIABLES ::::::::::::::::::::::::::::::::::::::
 
 ' ----------------------------------------------------------------
@@ -761,7 +806,8 @@ Private Sub Form_Open(Cancel As Integer)
            "ON T_ObjetControles.Control_ID = T_PropTextes.IDControl) " & _
            "ON T_Objets.Objet_ID = T_ObjetControles.IDObjet) " & _
            "ON T_App.App_ID = T_Objets.IDApp " & _
-           "WHERE (((T_App.App_ID)='" & Args(0) & "'));"
+           "WHERE (((T_App.App_ID)='" & Args(0) & "')) " & _
+           "ORDER BY T_PropTextes.Prop_ID;"
 
     Me.sfT.Form.RecordSource = sSql
 
@@ -773,81 +819,57 @@ Private Sub Form_Close()
     If mFrmInfoIsOpen Then DoCmd.Close acForm, "iF_InfoRecap"
 End Sub
 
+' ----------------------------------------------------------------
+'// Filtrage suivant choix des chkBox.
+' ----------------------------------------------------------------
+Private Sub grpChk_AfterUpdate()
+
+    Dim sFiltre As String
+
+    Select Case Me.grpChk
+        Case 1      '// Scan
+            sFiltre = "Scanner=False"
+
+        Case 2      '// Modif
+            Me.sfO.Form.Filter = "ObjetType='X'"
+            Me.sfO.Form.FilterOn = True
+            Me.sfC.Form.Filter = "Control_ID='X'"
+            Me.sfC.Form.FilterOn = True
+            sFiltre = "ModPropTexte=True"
+            Me.sfT.Form.Filter = sFiltre
+            Me.sfT.Form.FilterOn = True
+            Exit Sub
+
+        Case 3      '// Nouv
+            sFiltre = "Nouveau=True"
+
+        Case 4      '// Tout
+            sFiltre = vbNullString
+    End Select
+
+    Me.sfO.Form.Filter = sFiltre
+    Me.sfO.Form.FilterOn = True
+    Me.sfC.Form.Filter = sFiltre
+    Me.sfC.Form.FilterOn = True
+    Me.sfT.Form.Filter = sFiltre
+    Me.sfT.Form.FilterOn = True
+
+End Sub
+
 Private Sub cmdAfficheInfo_Click()
     mFrmInfoIsOpen = True
     DoCmd.OpenForm "iF_InfoRecap"
 End Sub
 
 ' ----------------------------------------------------------------
-'// Filtrage suivant choix des chkBox.
-' ----------------------------------------------------------------
-Private Function AppliqueFiltre(ChkNom As String) As Boolean
-
-    If ResetFiltres Then Exit Function
-
-    Dim sFiltre As String
-
-    Select Case ChkNom
-        Case "Scan"
-            Me.chkModif = False
-            Me.chkNouv = False
-            sFiltre = "Scanner=False"
-        Case "Modif"
-            Me.chkScan = False
-            Me.chkNouv = False
-            sFiltre = "ModPropTexte=True"
-        Case "Nouv"
-            Me.chkScan = False
-            Me.chkModif = False
-            sFiltre = "Nouveau=True"
-        Case Else
-            Exit Function
-    End Select
-
-    If Me.chkModif Then
-
-        Me.sfO.Form.Filter = "ObjetType='X'"
-        Me.sfO.Form.FilterOn = True
-        Me.sfC.Form.Filter = "Control_ID='X'"
-        Me.sfC.Form.FilterOn = True
-        Me.sfT.Form.Filter = sFiltre
-        Me.sfT.Form.FilterOn = True
-    Else
-        Me.sfO.Form.Filter = sFiltre
-        Me.sfO.Form.FilterOn = True
-        Me.sfC.Form.Filter = sFiltre
-        Me.sfC.Form.FilterOn = True
-        Me.sfT.Form.Filter = sFiltre
-        Me.sfT.Form.FilterOn = True
-    End If
-
-    mFltChk = True
-
-End Function
-
-Private Function ResetFiltres() As Boolean
-    If (Me.chkScan = False) And (Me.chkNouv = False) And (Me.chkModif = False) Then
-        Me.sfO.Form.FilterOn = False
-        Me.sfC.Form.FilterOn = False
-        Me.sfT.Form.FilterOn = False
-        ResetFiltres = True
-        mFltChk = False
-    End If
-End Function
-
-' ----------------------------------------------------------------
 '// Utilisée par les sf iF_RecapSFO et iF_RecapSFT, Filtre sur dbClick.
 ' ----------------------------------------------------------------
 Public Function FiltreDbClick(ValFiltre As String, FiltreObjet As Boolean) As Boolean
 
-    If mFltChk Then     '// Filtre en cours sur checkbox ?
-        Me.chkScan = False: Me.chkNouv = False: Me.chkModif = False
-        mFltChk = False
-    End If
+    If (Me.grpChk <> 4) Then Me.grpChk = 4
 
     '// Si 2ème dbClick sur le même filtre on reset les filtres.
     If ((mFltPrec = Texte) Or ((mFltPrec = Objet) And (FiltreObjet = True))) Then
-        ResetFiltres
         Me.sfO.Form.Controls("imgFiltre").BackStyle = 0
         Me.sfT.Form.Controls("imgFiltre").BackStyle = 0
         mFltPrec = Aucun

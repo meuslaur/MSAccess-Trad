@@ -18,16 +18,24 @@ Begin Form
     DatasheetFontHeight =11
     ItemSuffix =17
     Left =10536
-    Top =9264
+    Top =9000
     Right =20736
-    Bottom =13824
-    RecSrcDt = Begin
-        0xfa2899284bdde540
-    End
+    Bottom =13560
+    Filter ="Scanner=False"
+    RecordSource ="SELECT T_PropTextes.Prop_ID, T_PropTextes.PropNom, T_PropTextes.PropTexte, T_Pro"
+        "pTextes.IDControl, T_PropTextes.ModPropTexte, T_PropTextes.Scanner, T_PropTextes"
+        ".Nouveau, IIf(T_PropTextes.Scanner=False,\"=\",Null) AS Scan, IIf(ModPropTexte=T"
+        "rue,\"=\",Null) AS Modif, IIf(T_PropTextes.Nouveau=True,\"=\",Null) AS Nouv FROM"
+        " T_App INNER JOIN (T_Objets INNER JOIN (T_ObjetControles INNER JOIN T_PropTextes"
+        " ON T_ObjetControles.Control_ID = T_PropTextes.IDControl) ON T_Objets.Objet_ID ="
+        " T_ObjetControles.IDObjet) ON T_App.App_ID = T_Objets.IDApp WHERE (((T_App.App_I"
+        "D)='{0E2F38D2-3B4E-4999-ABBC-E57CD58F0D95}')) ORDER BY T_PropTextes.Prop_ID; "
     Caption ="F_RecapT"
     DatasheetFontName ="Calibri"
     AllowDatasheetView =0
     FilterOnLoad =0
+    OrderByOnLoad =0
+    OrderByOnLoad =0
     ShowPageMargins =0
     DisplayOnSharePointSite =1
     AllowLayoutView =0

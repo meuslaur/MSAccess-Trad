@@ -789,6 +789,9 @@ Begin Form
                     BorderColor =10921638
                     Name ="lstObjets"
                     RowSourceType ="Table/Query"
+                    RowSource ="SELECT T_Objets.Objet_ID, T_Objets.ObjetType, T_Objets.ObjetNom FROM T_Objets WH"
+                        "ERE (((T_Objets.IDApp) = '{CB11111D-A386-4DC1-B073-806619034819}') ) ORDER BY T_"
+                        "Objets.ObjetType, T_Objets.ObjetNom; "
                     ColumnWidths ="0;737;4822"
                     AfterUpdate ="[Event Procedure]"
                     GridlineColor =10921638
@@ -1153,7 +1156,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =5066061
                     Name ="lblGrCtrType"
-                    Caption ="Contrôle"
+                    Caption ="CommandButton"
                     FontName ="Consolas"
                     LayoutCachedLeft =10601
                     LayoutCachedTop =113
@@ -1192,6 +1195,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =5066061
                     Name ="lblGrCtrNom"
+                    Caption ="cmdPrint"
                     FontName ="Consolas"
                     GridlineColor =10921638
                     LayoutCachedLeft =10601
@@ -1458,6 +1462,7 @@ Begin Form
                     WebImagePaddingTop =3
                     WebImagePaddingRight =2
                     WebImagePaddingBottom =2
+                    Overlaps =1
                 End
                 Begin ComboBox
                     TabStop = NotDefault
@@ -1479,7 +1484,7 @@ Begin Form
                     RowSource ="RL_Apps"
                     ColumnWidths ="0;2087"
                     AfterUpdate ="[Event Procedure]"
-                    OnGotFocus ="[Event Procedure]"
+                    OnDblClick ="[Event Procedure]"
                     ControlTipText ="Liste des applications déjà enregistrées,"
                     GridlineColor =10921638
 
@@ -1519,7 +1524,6 @@ Begin Form
                     End
                 End
                 Begin TextBox
-                    Visible = NotDefault
                     Enabled = NotDefault
                     Locked = NotDefault
                     TabStop = NotDefault
@@ -1569,7 +1573,6 @@ Begin Form
                     End
                 End
                 Begin CommandButton
-                    Enabled = NotDefault
                     TabStop = NotDefault
                     OverlapFlags =85
                     Left =680
@@ -1736,9 +1739,9 @@ Begin Form
                     WebImagePaddingTop =3
                     WebImagePaddingRight =2
                     WebImagePaddingBottom =2
+                    Overlaps =1
                 End
                 Begin CommandButton
-                    Enabled = NotDefault
                     TabStop = NotDefault
                     OverlapFlags =85
                     Left =340
@@ -1810,6 +1813,7 @@ Begin Form
                     WebImagePaddingTop =3
                     WebImagePaddingRight =2
                     WebImagePaddingBottom =2
+                    Overlaps =1
                 End
             End
         End
@@ -2017,7 +2021,7 @@ Private Sub cmdCloseBd_Click()
 
 End Sub
 
-Private Sub zlBases_GotFocus()
+Private Sub zlBases_DblClick(Cancel As Integer)
     Me.zlBases.Dropdown
 End Sub
 

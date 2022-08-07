@@ -157,6 +157,7 @@ Begin Form
                     RowSource ="RL_Apps"
                     ColumnWidths ="0;2089"
                     AfterUpdate ="[Event Procedure]"
+                    OnDblClick ="[Event Procedure]"
                     ControlTipText ="Applications enregistrées."
                     GridlineColor =10921638
                     AllowValueListEdits =0
@@ -412,6 +413,10 @@ Private Sub Form_Open(Cancel As Integer)
     Me.zlBases = Me.OpenArgs()
     zlBases_AfterUpdate
 
+End Sub
+
+Private Sub zlBases_DblClick(Cancel As Integer)
+    Me.zlBases.Dropdown
 End Sub
 
 Private Sub zlBases_AfterUpdate()

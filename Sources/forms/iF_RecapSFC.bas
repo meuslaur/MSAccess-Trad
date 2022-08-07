@@ -17,17 +17,24 @@ Begin Form
     Width =10207
     DatasheetFontHeight =11
     ItemSuffix =11
-    Left =4308
-    Top =5460
-    Right =14520
-    Bottom =8196
-    RecSrcDt = Begin
-        0xc5cb98284bdde540
-    End
+    Left =10536
+    Top =5712
+    Right =20748
+    Bottom =8448
+    Filter ="Scanner=False"
+    RecordSource ="SELECT T_ObjetControles.Control_ID, T_ObjetControles.ControlType, T_ObjetControl"
+        "es.ControlNom, T_ObjetControles.IDObjet, T_ObjetControles.Scanner, T_ObjetContro"
+        "les.Nouveau, IIf(T_ObjetControles.Scanner=False,\"=\",Null) AS Scan, IIf(T_Objet"
+        "Controles.Nouveau=True,\"=\",Null) AS Nouv FROM T_App INNER JOIN (T_Objets INNER"
+        " JOIN T_ObjetControles ON T_Objets.Objet_ID = T_ObjetControles.IDObjet) ON T_App"
+        ".App_ID = T_Objets.IDApp WHERE (((T_App.App_ID)='{0E2F38D2-3B4E-4999-ABBC-E57CD5"
+        "8F0D95}')) ORDER BY T_ObjetControles.ControlType, T_ObjetControles.ControlNom; "
     Caption ="F_RecapC"
     DatasheetFontName ="Calibri"
     AllowDatasheetView =0
     FilterOnLoad =0
+    OrderByOnLoad =0
+    OrderByOnLoad =0
     ShowPageMargins =0
     DisplayOnSharePointSite =1
     AllowLayoutView =0
