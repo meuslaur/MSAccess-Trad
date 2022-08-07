@@ -14,15 +14,14 @@ Begin Form
     ViewsAllowed =1
     PictureAlignment =2
     DatasheetGridlinesBehavior =3
-    Cycle =1
     GridY =10
-    Width =18141
+    Width =18368
     DatasheetFontHeight =11
-    ItemSuffix =67
-    Left =3684
-    Top =552
-    Right =21828
-    Bottom =12156
+    ItemSuffix =69
+    Left =2412
+    Top =132
+    Right =20784
+    Bottom =12360
     DatasheetGridlinesColor =15132391
     RecSrcDt = Begin
         0x5c7a48f85bd8e540
@@ -685,13 +684,13 @@ Begin Form
                     OldBorderStyle =0
                     OverlapFlags =255
                     Left =56
-                    Width =17978
+                    Width =18254
                     Height =1023
                     BorderColor =10921638
                     Name ="boxCache"
                     GridlineColor =10921638
                     LayoutCachedLeft =56
-                    LayoutCachedWidth =18034
+                    LayoutCachedWidth =18310
                     LayoutCachedHeight =1023
                     BackThemeColorIndex =3
                     BackShade =25.0
@@ -769,105 +768,51 @@ Begin Form
         End
         Begin Section
             CanGrow = NotDefault
-            Height =10601
+            Height =11225
             Name ="Détail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
             BackThemeColorIndex =1
             Begin
-                Begin ListBox
-                    OverlapFlags =85
-                    IMESentenceMode =3
-                    ColumnCount =3
-                    Left =623
-                    Top =2268
-                    Width =5672
-                    Height =8115
-                    ColumnOrder =0
-                    ForeColor =4210752
-                    BorderColor =10921638
-                    Name ="lstObjets"
-                    RowSourceType ="Table/Query"
-                    RowSource ="SELECT T_Objets.Objet_ID, T_Objets.ObjetType, T_Objets.ObjetNom FROM T_Objets WH"
-                        "ERE (((T_Objets.IDApp) = '{CB11111D-A386-4DC1-B073-806619034819}') ) ORDER BY T_"
-                        "Objets.ObjetType, T_Objets.ObjetNom; "
-                    ColumnWidths ="0;737;4822"
-                    AfterUpdate ="[Event Procedure]"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =623
-                    LayoutCachedTop =2268
-                    LayoutCachedWidth =6295
-                    LayoutCachedHeight =10383
-                    Begin
-                        Begin Label
-                            Vertical = NotDefault
-                            BackStyle =1
-                            OverlapFlags =85
-                            TextAlign =2
-                            Left =113
-                            Top =2253
-                            Width =375
-                            Height =8115
-                            FontSize =12
-                            BorderColor =8355711
-                            ForeColor =5066061
-                            Name ="lbl_lstObjetsInfo"
-                            Caption ="Objets"
-                            FontName ="Arial"
-                            GridlineColor =10921638
-                            LayoutCachedLeft =113
-                            LayoutCachedTop =2253
-                            LayoutCachedWidth =488
-                            LayoutCachedHeight =10368
-                            ThemeFontIndex =-1
-                            BackThemeColorIndex =4
-                            BackTint =60.0
-                            BorderThemeColorIndex =-1
-                            ForeTint =70.0
-                            GridlineThemeColorIndex =-1
-                        End
-                    End
-                End
                 Begin Subform
                     OverlapFlags =85
-                    Left =7029
-                    Top =7710
+                    Left =7596
+                    Top =7767
                     Width =10560
-                    Height =2655
+                    Height =3264
                     TabIndex =3
                     BorderColor =10921638
                     Name ="SF_Textes"
                     SourceObject ="Form.F_MainSFTextes"
-                    LinkChildFields ="IDControl"
-                    LinkMasterFields ="txt_SFControlID"
+                    LinkChildFields ="IDChild"
+                    LinkMasterFields ="txt_SFChildID"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =7029
-                    LayoutCachedTop =7710
-                    LayoutCachedWidth =17589
-                    LayoutCachedHeight =10365
+                    LayoutCachedLeft =7596
+                    LayoutCachedTop =7767
+                    LayoutCachedWidth =18156
+                    LayoutCachedHeight =11031
                     Begin
                         Begin Label
                             Vertical = NotDefault
                             BackStyle =1
                             OverlapFlags =85
                             TextAlign =2
-                            Left =6462
-                            Top =7710
+                            Left =7029
+                            Top =7767
                             Width =375
-                            Height =2655
+                            Height =3231
                             FontSize =12
                             BorderColor =8355711
                             Name ="F_ObjetControlesÉtiquette"
                             Caption ="Propriétés"
                             FontName ="Arial"
                             GridlineColor =10921638
-                            LayoutCachedLeft =6462
-                            LayoutCachedTop =7710
-                            LayoutCachedWidth =6837
-                            LayoutCachedHeight =10365
+                            LayoutCachedLeft =7029
+                            LayoutCachedTop =7767
+                            LayoutCachedWidth =7404
+                            LayoutCachedHeight =10998
                             ThemeFontIndex =-1
                             BackThemeColorIndex =5
                             BackTint =60.0
@@ -880,9 +825,9 @@ Begin Form
                 End
                 Begin Subform
                     OverlapFlags =85
-                    Left =7086
-                    Top =2211
-                    Width =10536
+                    Left =7653
+                    Top =2268
+                    Width =10524
                     Height =4992
                     TabIndex =1
                     BorderColor =10921638
@@ -892,30 +837,30 @@ Begin Form
                     LinkMasterFields ="lstObjets"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =7086
-                    LayoutCachedTop =2211
-                    LayoutCachedWidth =17622
-                    LayoutCachedHeight =7203
+                    LayoutCachedLeft =7653
+                    LayoutCachedTop =2268
+                    LayoutCachedWidth =18177
+                    LayoutCachedHeight =7260
                     Begin
                         Begin Label
                             Vertical = NotDefault
                             BackStyle =1
                             OverlapFlags =85
                             TextAlign =2
-                            Left =6519
-                            Top =2211
+                            Left =7086
+                            Top =2268
                             Width =375
-                            Height =5040
+                            Height =4992
                             FontSize =12
                             BorderColor =8355711
                             Name ="F_ObjetControles1Étiquette"
                             Caption ="Contrôles"
                             FontName ="Arial"
                             GridlineColor =10921638
-                            LayoutCachedLeft =6519
-                            LayoutCachedTop =2211
-                            LayoutCachedWidth =6894
-                            LayoutCachedHeight =7251
+                            LayoutCachedLeft =7086
+                            LayoutCachedTop =2268
+                            LayoutCachedWidth =7461
+                            LayoutCachedHeight =7260
                             ThemeFontIndex =-1
                             BackThemeColorIndex =9
                             BackTint =60.0
@@ -934,22 +879,22 @@ Begin Form
                     DecimalPlaces =0
                     OverlapFlags =85
                     IMESentenceMode =3
-                    Left =7143
-                    Top =7313
+                    Left =7710
+                    Top =7370
                     Width =6231
                     Height =315
                     ColumnOrder =1
                     TabIndex =2
                     BorderColor =10921638
                     ForeColor =4210752
-                    Name ="txt_SFControlID"
-                    ControlSource ="=[SF_Controles].[Form]![Control_ID]"
+                    Name ="txt_SFChildID"
+                    ControlSource ="=[SF_Controles].[Form]![txtChild_ID]"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =7143
-                    LayoutCachedTop =7313
-                    LayoutCachedWidth =13374
-                    LayoutCachedHeight =7628
+                    LayoutCachedLeft =7710
+                    LayoutCachedTop =7370
+                    LayoutCachedWidth =13941
+                    LayoutCachedHeight =7685
                 End
                 Begin TextBox
                     Visible = NotDefault
@@ -958,8 +903,8 @@ Begin Form
                     AllowAutoCorrect = NotDefault
                     OverlapFlags =85
                     IMESentenceMode =3
-                    Left =16270
-                    Top =7315
+                    Left =16837
+                    Top =7372
                     Width =1356
                     Height =315
                     ColumnOrder =2
@@ -970,17 +915,17 @@ Begin Form
                     Name ="txtBddSauve"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =16270
-                    LayoutCachedTop =7315
-                    LayoutCachedWidth =17626
-                    LayoutCachedHeight =7630
+                    LayoutCachedLeft =16837
+                    LayoutCachedTop =7372
+                    LayoutCachedWidth =18193
+                    LayoutCachedHeight =7687
                     BackShade =95.0
                     Begin
                         Begin Label
                             OverlapFlags =85
                             TextAlign =3
-                            Left =14286
-                            Top =7315
+                            Left =14853
+                            Top =7372
                             Width =1860
                             Height =315
                             BorderColor =8355711
@@ -988,10 +933,10 @@ Begin Form
                             Name ="lbl_txtBddSauve"
                             Caption ="Sauvegarde :"
                             GridlineColor =10921638
-                            LayoutCachedLeft =14286
-                            LayoutCachedTop =7315
-                            LayoutCachedWidth =16146
-                            LayoutCachedHeight =7630
+                            LayoutCachedLeft =14853
+                            LayoutCachedTop =7372
+                            LayoutCachedWidth =16713
+                            LayoutCachedHeight =7687
                         End
                     End
                 End
@@ -1391,8 +1336,8 @@ Begin Form
                 Begin CommandButton
                     TabStop = NotDefault
                     OverlapFlags =85
-                    Left =16611
-                    Top =1757
+                    Left =17178
+                    Top =1814
                     Width =975
                     Height =330
                     TabIndex =7
@@ -1446,10 +1391,10 @@ Begin Form
                         0x329541f9c60000000049454e44ae426082
                     End
 
-                    LayoutCachedLeft =16611
-                    LayoutCachedTop =1757
-                    LayoutCachedWidth =17586
-                    LayoutCachedHeight =2087
+                    LayoutCachedLeft =17178
+                    LayoutCachedTop =1814
+                    LayoutCachedWidth =18153
+                    LayoutCachedHeight =2144
                     PictureCaptionArrangement =5
                     UseTheme =0
                     BackColor =14461583
@@ -1815,6 +1760,57 @@ Begin Form
                     WebImagePaddingBottom =2
                     Overlaps =1
                 End
+                Begin ListBox
+                    OverlapFlags =85
+                    IMESentenceMode =3
+                    ColumnCount =3
+                    Left =623
+                    Top =2326
+                    Width =6237
+                    Height =8617
+                    ForeColor =4210752
+                    BorderColor =10921638
+                    Name ="lstObjets"
+                    RowSourceType ="Table/Query"
+                    ColumnWidths ="0;1304;4824"
+                    AfterUpdate ="[Event Procedure]"
+                    GridlineColor =10921638
+                    AllowValueListEdits =0
+
+                    LayoutCachedLeft =623
+                    LayoutCachedTop =2326
+                    LayoutCachedWidth =6860
+                    LayoutCachedHeight =10943
+                    Begin
+                        Begin Label
+                            Vertical = NotDefault
+                            BackStyle =1
+                            OverlapFlags =85
+                            TextAlign =2
+                            Left =113
+                            Top =2324
+                            Width =375
+                            Height =8619
+                            FontSize =12
+                            BorderColor =8355711
+                            ForeColor =5066061
+                            Name ="lbl_lstObjets"
+                            Caption ="Objets"
+                            FontName ="Arial"
+                            GridlineColor =10921638
+                            LayoutCachedLeft =113
+                            LayoutCachedTop =2324
+                            LayoutCachedWidth =488
+                            LayoutCachedHeight =10943
+                            ThemeFontIndex =-1
+                            BackThemeColorIndex =4
+                            BackTint =60.0
+                            BorderThemeColorIndex =-1
+                            ForeTint =70.0
+                            GridlineThemeColorIndex =-1
+                        End
+                    End
+                End
             End
         End
         Begin FormFooter
@@ -1992,6 +1988,8 @@ On Error GoTo ERR_cmbSelectBdd_Click
         Me.cmdVoirRecap.Enabled = False
         Me.cmdTxtIgnore.Enabled = False
     End If
+
+    MsgBox "Vous pouvez lancer le scan", vbInformation, "Base ouverte"
 
 SORTIE_cmbSelectBdd_Click:
     DoCmd.Echo True

@@ -2,17 +2,17 @@
 	<xsd:element name="dataroot">
 		<xsd:complexType>
 			<xsd:sequence>
-				<xsd:element ref="T_PropTextes" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="T_ObjetChildTextes" minOccurs="0" maxOccurs="unbounded"/>
 			</xsd:sequence>
 			<xsd:attribute name="generated" type="xsd:dateTime"/>
 		</xsd:complexType>
 	</xsd:element>
-	<xsd:element name="T_PropTextes">
+	<xsd:element name="T_ObjetChildTextes">
 		<xsd:annotation>
 			<xsd:appinfo>
-				<od:index index-name="IDControl" index-key="IDControl " primary="no" unique="no" clustered="no" order="asc"/>
+				<od:index index-name="IDControl" index-key="IDChild " primary="no" unique="no" clustered="no" order="asc"/>
 				<od:index index-name="PrimaryKey" index-key="Prop_ID " primary="yes" unique="yes" clustered="no" order="asc"/>
-				<od:index index-name="T_ObjetControlesT_PropTextes" index-key="IDControl " primary="no" unique="no" clustered="no" order="asc"/>
+				<od:index index-name="T_ObjetChildsT_PropTextes" index-key="IDChild " primary="no" unique="no" clustered="no" order="asc"/>
 				<od:tableProperty name="Orientation" type="2" value="0"/>
 				<od:tableProperty name="OrderByOn" type="1" value="0"/>
 				<od:tableProperty name="DefaultView" type="2" value="2"/>
@@ -108,7 +108,7 @@
 						</xsd:restriction>
 					</xsd:simpleType>
 				</xsd:element>
-				<xsd:element name="IDControl" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
+				<xsd:element name="IDChild" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
 					<xsd:annotation>
 						<xsd:appinfo>
 							<od:fieldProperty name="ColumnWidth" type="3" value="-1"/>

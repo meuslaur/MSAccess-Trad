@@ -1,8 +1,8 @@
-﻿CREATE TABLE [T_PropTextes] (
+﻿CREATE TABLE [T_ObjetChildTextes] (
   [Prop_ID] VARCHAR (100) CONSTRAINT [PrimaryKey] PRIMARY KEY UNIQUE NOT NULL,
   [PropNom] VARCHAR (30),
   [PropTexte] LONGTEXT ,
-  [IDControl] VARCHAR (100),
+  [IDChild] VARCHAR (100),
   [DateMaJ] DATETIME ,
   [ModPropTexte] BIT ,
   [Scanner] BIT ,

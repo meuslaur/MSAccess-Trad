@@ -1,14 +1,14 @@
 ﻿Operation =1
 Option =0
 Begin InputTables
-    Name ="T_PropTextes"
+    Name ="T_ObjetChildTextes"
 End
 Begin OutputColumns
-    Expression ="T_PropTextes.Prop_ID"
-    Expression ="T_PropTextes.PropNom"
-    Expression ="T_PropTextes.PropTexte"
-    Expression ="T_PropTextes.DateMaJ"
-    Expression ="T_PropTextes.IDControl"
+    Expression ="[T_ObjetChildTextes].Prop_ID"
+    Expression ="[T_ObjetChildTextes].PropNom"
+    Expression ="[T_ObjetChildTextes].PropTexte"
+    Expression ="[T_ObjetChildTextes].DateMaJ"
+    Expression ="[T_ObjetChildTextes].IDChild"
     Alias ="Modif"
     Expression ="IIf(ModPropTexte=True,\"=\",Null)"
     Alias ="Scan"
@@ -53,10 +53,6 @@ Begin
     End
     Begin
         dbText "Name" ="T_PropTextes.DateMaJ"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="T_PropTextes.IDControl"
         dbLong "AggregateType" ="-1"
     End
 End

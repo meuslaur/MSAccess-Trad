@@ -55,10 +55,10 @@ Option Explicit
         Erreur = 5
     End Enum
 
-'    Public Const C_TABLE_LOCALE As String = "Table locale"
-'    Public Const C_TABLE_ODBC   As String = "Table liée (ODBC)"
-'    Public Const C_TABLE_LINK   As String = "Table liée"
-'    Public Const C_QUERY        As String = "Requête"
+    Public Const C_TABLE_LOCALE As String = "Table_local"
+    Public Const C_TABLE_LINK   As String = "Table_Linked"
+'    Public Const C_TABLE_ODBC   As String = "Table_ODBC"
+'    Public Const C_QUERY        As String = "Query"
     Public Const C_FORM         As String = "Form"
     Public Const C_REPORT       As String = "Report"
 '    Public Const C_MACRO        As String = "Macro"
@@ -273,12 +273,12 @@ Public Function GetObjectTypeEnClair(eType As E_ObjectTypeNum) As String
     Dim sType As String
 
     Select Case eType
-'        Case TableLocale
-'            sType = C_TABLE_LOCALE
+        Case TableLocale
+            sType = C_TABLE_LOCALE
 '        Case TableOdbc
 '            sType = C_TABLE_ODBC
-'        Case TableLinked
-'            sType = C_TABLE_LINK
+        Case TableLinked
+            sType = C_TABLE_LINK
 '        Case QuerieType
 '            sType = C_QUERY
         Case ObjetForm

@@ -47,16 +47,17 @@ Option Explicit
 
     Private Type TObjet
 '        ID      As String
-        IDNet   As String       '// ID et Nom nettoyer des apostrophes (').
-        Nom     As String
-        NomNet  As String
-        Type    As String
-        Caption As String
-        Nouveau As Boolean      '// Indique nouvel objet à enregistrer.
+        IDNet    As String      '// ID et Nom nettoyer des apostrophes (').
+        Nom      As String
+        NomNet   As String
+        Type     As String
+        Caption  As String
+        Nouveau  As Boolean     '// Indique nouvel objet à enregistrer.
+        TxtField As Boolean     '// Indique si la table contient des champs txt ou memo.
     End Type
     Private thisObj As TObjet
 
-    Private Type TControl
+    Private Type TChilds        '// Enfants des objets.
 '        ID      As String
         IDNet   As String       '// ID et Nom nettoyer des apostrophes (').
         Nom     As String
@@ -65,7 +66,7 @@ Option Explicit
         Parent  As String       '// Control parent du contrôle, si existe.
         Nouveau As Boolean      '// Indique nouveau control à enregistrer.
     End Type
-    Private thisCtr As TControl
+    Private thisChild As TChilds
 
     Private Type TTexte
         ID              As String
@@ -82,8 +83,8 @@ Option Explicit
     Private m_oBDLocale     As DAO.Database     '// Base Currentdb.
     Private qdfTemp         As DAO.QueryDef
 '    Private m_TableControl  As DAO.Recordset    '// Table T_Controles.
-'    Private m_TableTxtObj   As DAO.Recordset    '// Table T_PropTextes pour les forms/Reports.
-'    Private m_TableTxtCtr   As DAO.Recordset    '// Table T_PropTextes pour les contrôles.
+'    Private m_TableTxtObj   As DAO.Recordset    '// Table T_ObjetChildTextes pour les forms/Reports.
+'    Private m_TableTxtCtr   As DAO.Recordset    '// Table T_ObjetChildTextes pour les contrôles.
 
 
     Private InfoScan        As C_LabelsInfo     '// Affichage info texte et barre lors du scan.
@@ -230,20 +231,14 @@ On Error GoTo ERR_ScanObjetsApp
     Dim oRstSys As DAO.Recordset
     Dim ObjType As E_ObjectTypeNum
     Dim sSql    As String
+    Dim sInfoAvance As String
 
     '// Extraire les objets de la table MsysObjects.
-'    sSql = "SELECT MsysObjects.Type, MsysObjects.Flags, MsysObjects.Name AS ObjectName FROM MsysObjects " & _
-'           "WHERE (((MsysObjects.Flags)>=0) AND ((MsysObjects.Type)=" & eObjectType1
     sSql = "SELECT  MsysObjects.id, MsysObjects.Type, MsysObjects.Name " & _
            "FROM MsysObjects " & _
-           "WHERE (((MsysObjects.Type) = " & ObjetForm & " Or (MsysObjects.Type) = " & ObjetReport & ")) " & _
+           "WHERE (((MsysObjects.Type) = " & ObjetForm & " Or (MsysObjects.Type) = " & ObjetReport & " Or (MsysObjects.Type) = " & TableLocale & " Or (MsysObjects.Type) = " & TableLinked & ") " & _
+           "AND ((MsysObjects.Name) Not Like '~*' And (MsysObjects.Name) Not Like 'MSys*')  AND ((MsysObjects.Flags)>=0)) " & _
            "ORDER BY MsysObjects.Type, MsysObjects.Name;"
-
-'    If (eObjectType2) Then sSql = sSql & " Or (MsysObjects.Type)=" & eObjectType2
-'    If (eObjectType3) Then sSql = sSql & " Or (MsysObjects.Type)=" & eObjectType3
-           
-'    sSql = sSql & ") AND ((MsysObjects.Name) Not Like '~*' And (MsysObjects.Name) Not Like 'MSys*'))" & _
-'                  "ORDER BY MsysObjects.Type, MsysObjects.Name;"
 
     If (m_oApp Is Nothing) Then Set m_oApp = ObjetAcc.GetMsApp()            '// Obtenir l'APP externe à utiliser...
     If (ObjetAcc.MsBaseIsOpen) Then thisApp.Nom = ObjetAcc.BaseNom()    '// Extraire le nom de la base.
@@ -283,10 +278,26 @@ On Error GoTo ERR_ScanObjetsApp
                 thisObj.NomNet = MD_Utils.CheckApostrophe(thisObj.Nom)
                 ObjType = .Fields("Type").Value
                 thisObj.Type = GetObjectTypeEnClair(ObjType)    '// Traduire en clair le Type...
-                '--------------------------
-                mRep = ScanObjet(ObjType)                       '// Enregistre les info...
-                '--------------------------
-                If (Not mRep) Then Exit Do
+
+                sInfoAvance = thisObj.Type & " " & thisObj.Nom
+                If InfoScan.UseBarre Then InfoScan.UpdateBarre sInfoAvance  '// Affiche l'état d'avancement du scan...
+                DoEvents
+
+                If (ObjType = ObjetForm Or ObjType = ObjetReport) Then
+                    '--------------------------
+                    mRep = ScanObjet(ObjType)                       '// Enregistre les info forms/reports...
+                    '--------------------------
+                    If (Not mRep) Then Exit Do
+                End If
+
+                If (ObjType = TableLocale Or ObjType = TableLinked) Then
+                    '--------------------------
+                    mRep = ScanTables(thisObj.Nom)                  '// Enregistre les info Tables...
+                    '--------------------------
+                    If (Not mRep) Then Exit Do
+
+                End If
+
                 .MoveNext
             Loop
         End If
@@ -358,13 +369,8 @@ On Error GoTo ERR_ScanObjet
 
     Dim oObjet      As Object
     Dim oCtr        As Access.Control
-    Dim sInfoAvance As String
 
-    sInfoAvance = thisObj.Type & " " & thisObj.Nom
-    If InfoScan.UseBarre Then InfoScan.UpdateBarre sInfoAvance  '// Affiche l'état d'avancement du scan...
-    DoEvents
-
-    Set oObjet = GetObjet(thisObj.Nom, ObjType)             '// Ouvre le form mode création pour scan des contrôles...
+    Set oObjet = GetObjet(thisObj.Nom, ObjType)             '// Ouvre le form/report mode création pour scan des contrôles...
     If (oObjet Is Nothing) Then mRep = False: Exit Function '// Erreur, on sort.
 
     thisObj.Caption = LTrim$(oObjet.Caption)
@@ -379,14 +385,14 @@ On Error GoTo ERR_ScanObjet
         For Each oCtr In oObjet.Controls
 
             'If (ControlIsVisible(oCtr) = True) Then 'TODO: Ignore les ctr invisibles ?
-                thisCtr.Nom = oCtr.name
-                thisCtr.NomNet = MD_Utils.CheckApostrophe(thisCtr.Nom)
-                thisCtr.Type = TypeName(oCtr)
+                thisChild.Nom = oCtr.name
+                thisChild.NomNet = MD_Utils.CheckApostrophe(thisChild.Nom)
+                thisChild.Type = TypeName(oCtr)
                 '// Extraire le parent du control (page, label, etc.).
-                thisCtr.Parent = IIf((oCtr.Parent.name <> thisObj.Nom), TypeName(oCtr.Parent) & "." & oCtr.Parent.name, vbNullString)
+                thisChild.Parent = IIf((oCtr.Parent.name <> thisObj.Nom), TypeName(oCtr.Parent) & "." & oCtr.Parent.name, vbNullString)
 
                 '----------------------------
-                mRep = ScanProprietes(oCtr)               '// Scan les propriétés du contrôle...
+                mRep = ScanObjChilds(oCtr)               '// Scan les propriétés du contrôle...
                 '----------------------------
 
                 If (mRep = False) Then Exit For
@@ -412,13 +418,76 @@ ERR_ScanObjet:
 End Function
 
 ' ----------------------------------------------------------------
+'// Stock les champs texte/memo des tables.
+' DateMod: 07/08/2022 - 18:25
+' ----------------------------------------------------------------
+Private Function ScanTables(TableNom As String) As Boolean
+On Error GoTo ERR_ScanTables
+
+    Dim oRstTab As DAO.Recordset
+    Dim oFld    As DAO.Field
+    Dim sSql    As String
+    Dim vRep    As Variant
+
+    thisObj.IDNet = thisApp.Num & "." & thisObj.Type & "." & thisObj.NomNet
+
+    mRep = MajTableObjet              '// ...
+    If mRep = False Then Exit Function
+
+    Set oRstTab = ObjetAcc.GetRecordset(thisObj.Nom)
+    If oRstTab Is Nothing Then Exit Function
+
+    '// On boucle sur les champs de la table.
+    thisObj.TxtField = False
+    For Each oFld In oRstTab.Fields
+
+        '// Voir si la table contient des champs Texte ou Memo.
+        If ((oFld.Type = dbMemo) Or (oFld.Type = dbText)) Then
+
+            thisObj.TxtField = True
+
+            thisChild.Nom = oFld.name
+            thisChild.NomNet = MD_Utils.CheckApostrophe(thisChild.Nom)
+            thisChild.Type = IIf(oFld.Type = dbMemo, "dbMeno", "dbText")
+
+'            thisFld.Texte = oFld.Value
+'            thisFld.Texte = CheckTxtIgnore(oFld.Value)      '// Filtrage texte...
+            thisChild.IDNet = thisObj.IDNet & "." & thisChild.NomNet
+            '-------------------------
+            mRep = MajTableChild()          '// Stock le champ...
+            '-------------------------
+            If (mRep = False) Then Exit For
+
+        End If
+'    If (mRep) Then mRep = MajTableChildPropTexte(PROP_CAP, thisTxt.Caption)          '// Stock ses textes...
+    Next
+
+'    If thisObj.TxtField Then ExecuteQdfTemp sSql    '// Champs texte trouvés, on enregistre la table.
+
+    ObjetAcc.CloseOpenRecordset
+    ScanTables = True
+
+SORTIE_ScanTables:
+    Exit Function
+
+ERR_ScanTables:
+    MsgBox "L’erreur suivante s’est produite" & vbCrLf & vbCrLf & _
+           "Erreur N°: " & Err.Number & vbCrLf & _
+           "Source : C_TradScanText.ScanTables" & vbCrLf & _
+           "Description: " & Err.Description & _
+           Switch(Erl = 0, vbNullString, Erl <> 0, vbCrLf & "Line No: " & Erl), _
+           vbOKOnly + vbCritical, "Erreur survenue !"
+    Resume SORTIE_ScanTables
+End Function
+
+' ----------------------------------------------------------------
 ' Procedure Nom   : MaJObjet
 ' ----------------------------------------------------------------
 ' Sujet           : Stock les forms/report, et leur prop texte Caption à traduire.
 ' Procedure Kind  : Function
 ' Procedure Access: Private
 ' Objectif        :
-' Requi           : MajTableObjet, MajTableControl, MajTexteObjet.
+' Requi           : MajTableObjet, MajTableObjetProp, MajTableObjetTexte.
 '
 '=== Paramètres ===
 '==================
@@ -438,7 +507,7 @@ On Error GoTo ERR_MajObjet
 '    thisObj.ID = thisApp.Num & "." & thisObj.Type & "." & thisObj.Nom
     thisObj.IDNet = thisApp.Num & "." & thisObj.Type & "." & thisObj.NomNet
 
-    mRep = MajTableObjet              '// ...
+    mRep = MajTableObjet                    '// ...
     If mRep = False Then Exit Function
 
     lTmp = Len(thisObj.Caption)
@@ -447,15 +516,15 @@ On Error GoTo ERR_MajObjet
 
     '// Voir si à déjà été enregistrer.
     If ((lTmp = 0) And (Not thisObj.Nouveau)) Then
-        vTmp = DLookup("[Control_ID]", "T_ObjetControles", "[Control_ID]='" & thisObj.IDNet & "'")
+        vTmp = DLookup("[Child_ID]", "T_ObjetChilds", "[Child_ID]='" & thisObj.IDNet & "'")
         If IsNull(vTmp) Then GoTo SORTIE_MajObjet                                   '// Jamais enregistrer et caption vide, on sort.
     End If
 
-    mRep = MajTableControlObjet()     '// ...
+    mRep = MajTableObjetProp()              '// ...
     If (mRep = False) Then Exit Function
 
     thisTxt.ID = thisObj.IDNet & "." & PROP_CAP
-    mRep = MajTexteObjet              '// ...
+    mRep = MajTableObjetTexte              '// ...
 
 SORTIE_MajObjet:
     MajObjet = mRep
@@ -476,7 +545,6 @@ End Function
 '// Stock les objets (forms/reports).
 '--------------------------------------------------------------
 Private Function MajTableObjet() As Boolean
-On Error GoTo ERR_MajTableObjet
 
     Dim sSql As String
     Dim vRep As Variant
@@ -486,7 +554,7 @@ On Error GoTo ERR_MajTableObjet
     If (IsNull(vRep)) Then      '// Nouvel Objet.
 
         thisObj.Nouveau = True
-        thisCtr.Nouveau = True
+        thisChild.Nouveau = True
 
         sSql = "INSERT INTO T_Objets " & _
                 "(Objet_ID, ObjetNom, ObjetType, IDApp, Scanner, Nouveau) " & _
@@ -502,105 +570,36 @@ On Error GoTo ERR_MajTableObjet
     ExecuteQdfTemp sSql
     MajTableObjet = True
 
-SORTIE_MajTableObjet:
-    Exit Function
-
-ERR_MajTableObjet:
-    mRep = False
-    MsgBox "L’erreur suivante s’est produite" & vbCrLf & vbCrLf & _
-           "Erreur N°: " & Err.Number & vbCrLf & _
-           "Source : C_TradScanText.MajTableObjet" & vbCrLf & _
-           "Description: " & Err.Description & _
-           Switch(Erl = 0, vbNullString, Erl <> 0, vbCrLf & "Line No: " & Erl), _
-           vbOKOnly + vbCritical, "Erreur survenue !"
-    Resume SORTIE_MajTableObjet
 End Function
 
 '--------------------------------------------------------------
-'// Stock les contrôles de l'objet en cours (Les forms et reports sont aussi stocker ici pour leur prop caption).
+'// Pour la prop Caption des forms et des reports.
 '--------------------------------------------------------------
-Private Function MajTableControlObjet() As Boolean
-On Error GoTo ERR_MajTableControlObjet
+Private Function MajTableObjetProp() As Boolean
 
     Dim sSql As String
 
     If (thisObj.Nouveau) Then   '// Nouvel Objet.
-        sSql = "INSERT INTO T_ObjetControles " & _
-               "(Control_ID, ControlNom, ControlType, IDObjet, Scanner, Nouveau) " & _
+        sSql = "INSERT INTO T_ObjetChilds " & _
+               "(Child_ID, ChildNom, ChildType, IDObjet, Scanner, Nouveau) " & _
                "VALUES ('" & thisObj.IDNet & "', '" & thisObj.NomNet & "', '" & thisObj.Type & "', '" & _
                thisObj.IDNet & "', " & CInt(True) & ", " & CInt(True) & ");"
 
     Else                '// Existe déjà.
-        sSql = "UPDATE T_ObjetControles SET T_ObjetControles.Scanner=" & CInt(True) & _
-               " WHERE (((T_ObjetControles.Control_ID)='" & thisObj.IDNet & "'));"
+        sSql = "UPDATE T_ObjetChilds SET T_ObjetChilds.Scanner=" & CInt(True) & _
+               " WHERE (((T_ObjetChilds.Child_ID)='" & thisObj.IDNet & "'));"
     End If
 
     ExecuteQdfTemp sSql
-    MajTableControlObjet = True
+    MajTableObjetProp = True
 
-SORTIE_MajTableControlObjet:
-    Exit Function
-
-ERR_MajTableControlObjet:
-    mRep = False
-    MsgBox "L’erreur suivante s’est produite" & vbCrLf & vbCrLf & _
-           "Erreur N°: " & Err.Number & vbCrLf & _
-           "Source : C_TradScanText.MajTableControlObjet" & vbCrLf & _
-           "Description: " & Err.Description & _
-           Switch(Erl = 0, vbNullString, Erl <> 0, vbCrLf & "Line No: " & Erl), _
-           vbOKOnly + vbCritical, "Erreur survenue !"
-    Resume SORTIE_MajTableControlObjet
 End Function
 
 '--------------------------------------------------------------
-'// Stock les contrôles de l'objet en cours.
-'--------------------------------------------------------------
-Private Function MajTableControl() As Boolean
-On Error GoTo ERR_MajTableControl
-
-    Dim sSql As String
-    Dim vTmp As Variant
-
-    '// Si déjà scanner, voir si déjà enregistrer (nouv ctr ajouter dans l'objet).
-    If (Not thisObj.Nouveau) Then
-        vTmp = DLookup("[Control_ID]", "T_ObjetControles", "[Control_ID]='" & thisCtr.IDNet & "'")
-        thisCtr.Nouveau = IsNull(vTmp)
-    End If
-
-    If (thisCtr.Nouveau) Then
-        sSql = "INSERT INTO T_ObjetControles " & _
-               "(Control_ID, ControlNom, ControlType, IDObjet, ControlParentName, Scanner, Nouveau) " & _
-               "VALUES ('" & thisCtr.IDNet & "', '" & thisCtr.NomNet & "', '" & thisCtr.Type & "', '" & _
-               thisObj.IDNet & "', '" & thisCtr.Parent & "', " & CInt(True) & ", " & CInt(True) & ");"
-
-    Else
-        sSql = "UPDATE T_ObjetControles SET T_ObjetControles.Scanner=" & CInt(True) & _
-               " WHERE (((T_ObjetControles.Control_ID)='" & thisCtr.IDNet & "'));"
-    End If      '// Nouvel objet on passe directement a Execute.
-
-    ExecuteQdfTemp sSql
-    MajTableControl = True
-
-SORTIE_MajTableControl:
-    Exit Function
-
-ERR_MajTableControl:
-    mRep = False
-    MsgBox "L’erreur suivante s’est produite" & vbCrLf & vbCrLf & _
-           "Erreur N°: " & Err.Number & vbCrLf & _
-           "Source : C_TradScanText.MajTableControl" & vbCrLf & _
-           "Description: " & Err.Description & _
-           Switch(Erl = 0, vbNullString, Erl <> 0, vbCrLf & "Line No: " & Erl), _
-           vbOKOnly + vbCritical, "Erreur survenue !"
-    Resume SORTIE_MajTableControl
-End Function
-
-'--------------------------------------------------------------
-'// Utiliser que pour les forms et les reports (MajTextePropriete pour les contrôles).
+'// Utiliser que pour les forms et les reports (MajTableChildPropTexte pour les contrôles).
 '// On stock les valeurs même vide pour les forms et les reports.
 '--------------------------------------------------------------
-Private Function MajTexteObjet() As Boolean
-On Error GoTo ERR_MajTexteObjet
+Private Function MajTableObjetTexte() As Boolean
 
     Dim sSql  As String
     Dim sTest As String
@@ -615,44 +614,32 @@ On Error GoTo ERR_MajTexteObjet
 
     If thisObj.Nouveau Then     '// Nouveau.
 
-        sSql = "INSERT INTO T_PropTextes " & _
-               "(Prop_ID, PropNom, PropTexte, IDControl, DateMaJ, Scanner, Nouveau) " & _
+        sSql = "INSERT INTO T_ObjetChildTextes " & _
+               "(Prop_ID, PropNom, PropTexte, IDChild, DateMaJ, Scanner, Nouveau) " & _
                "VALUES ('" & thisTxt.ID & "', '" & PROP_CAP & "', '" & sTxt & "', '" & thisObj.IDNet & "', '" & _
                m_DateMaJ & "', " & CInt(True) & ", " & CInt(True) & ");"
 
     Else                    '// Déjà enregistrer.
 
         '// Voir si le texte à été modifié.
-        vTmp = DLookup("[PropTexte]", "T_PropTextes", "[Prop_ID]='" & thisTxt.ID & "'")
+        vTmp = DLookup("[PropTexte]", "T_ObjetChildTextes", "[Prop_ID]='" & thisTxt.ID & "'")
         If (StrComp(thisObj.Caption, CStr(Nz(vTmp, vbNullString)), vbBinaryCompare) <> 0) Then bMod = True
 
-        sSql = "UPDATE T_PropTextes " & _
+        sSql = "UPDATE T_ObjetChildTextes " & _
                "SET PropTexte='" & sTxt & "', " & _
                "DateMaJ='" & m_DateMaJ & "', " & _
                "ModPropTexte=" & CInt(bMod) & "," & _
                "Scanner=" & CInt(True) & _
-               " WHERE (((T_PropTextes.Prop_ID)='" & thisTxt.ID & "'));"
+               " WHERE (((T_ObjetChildTextes.Prop_ID)='" & thisTxt.ID & "'));"
     End If
 
     ExecuteQdfTemp sSql
-    MajTexteObjet = True
+    MajTableObjetTexte = True
 
-SORTIE_MajTexteObjet:
-    Exit Function
-
-ERR_MajTexteObjet:
-    mRep = False
-    MsgBox "L’erreur suivante s’est produite" & vbCrLf & vbCrLf & _
-           "Erreur N°: " & Err.Number & vbCrLf & _
-           "Source : C_TradScanText.MajTexteObjet" & vbCrLf & _
-           "Description: " & Err.Description & _
-           Switch(Erl = 0, vbNullString, Erl <> 0, vbCrLf & "Line No: " & Erl), _
-           vbOKOnly + vbCritical, "Erreur survenue !"
-    Resume SORTIE_MajTexteObjet
 End Function
 
 '----------------------------------------------------------------
-' Procedure Nom   : ScanProprietes
+' Procedure Nom   : ScanObjChilds
 ' ----------------------------------------------------------------
 ' Sujet           : Vérifier si du texte à traduire pour le control, (caption, tiptext, bartext)
 ' Procedure Kind  : Function
@@ -670,8 +657,8 @@ End Function
 ' Date    : 23/06/2022 - 11:31
 ' DateMod :
 ' ----------------------------------------------------------------
-Private Function ScanProprietes(ByRef ObjControl As Access.Control) As Boolean
-On Error GoTo ERR_ScanProprietes
+Private Function ScanObjChilds(ByRef ObjControl As Access.Control) As Boolean
+On Error GoTo ERR_ScanObjChilds
 
 'ControlTipText
 ' acLabel-acTextBox-acListBox-acComboBox-acCommandButton-acOptionButton-
@@ -739,47 +726,76 @@ On Error GoTo ERR_ScanProprietes
     '// Extraire les texte à utiliser. NOTE: peut contenir de retour de ligne (vbNewLine).
     thisTxt.Caption = vbNullString: thisTxt.StatusBarText = vbNullString: thisTxt.ControlTipText = vbNullString
 
-    thisTxt.Caption = ObjControl.Properties(PROP_CAP).Value
     '----------------------------------
-    thisTxt.Caption = CheckTxtIgnore()      '// Filtrage texte Caption...
+    thisTxt.Caption = CheckTxtIgnore(ObjControl.Properties(PROP_CAP).Value)     '// Filtrage texte Caption...
     '----------------------------------
 
     thisTxt.StatusBarText = LTrim$(ObjControl.Properties(PROP_BAR).Value)
     thisTxt.ControlTipText = LTrim$(ObjControl.Properties(PROP_TIP).Value)
 
-    thisCtr.IDNet = thisObj.IDNet & "." & thisCtr.NomNet
+    thisChild.IDNet = thisObj.IDNet & "." & thisChild.NomNet
 
     eRep = Texte_A_Enregistrer()        '// Voir si on doit enregistrer le control...
 
-    If (eRep = Faux) Then ScanProprietes = True: Exit Function  '// Pas de texte à stocker, on sort.
+    If (eRep = Faux) Then ScanObjChilds = True: Exit Function  '// Pas de texte à stocker, on sort.
     If (eRep = Erreur) Then Exit Function                       '// Erreur, on sort.
 
     '-------------------------
-    mRep = MajTableControl              '// Stock le control...
+    mRep = MajTableChild        '// Stock le control...
     '-------------------------
 
-    If (mRep) Then mRep = MajTextePropriete(PROP_CAP, thisTxt.Caption)          '// Stock ses textes...
-    If (mRep) Then mRep = MajTextePropriete(PROP_TIP, thisTxt.ControlTipText)   '// ...
-    If (mRep) Then mRep = MajTextePropriete(PROP_BAR, thisTxt.StatusBarText)    '// ...
+    If (mRep) Then mRep = MajTableChildPropTexte(PROP_CAP, thisTxt.Caption)         '// Stock ses textes...
+    If (mRep) Then mRep = MajTableChildPropTexte(PROP_TIP, thisTxt.ControlTipText)  '// ...
+    If (mRep) Then mRep = MajTableChildPropTexte(PROP_BAR, thisTxt.StatusBarText)   '// ...
 
-SORTIE_ScanProprietes:
-    ScanProprietes = mRep
+SORTIE_ScanObjChilds:
+    ScanObjChilds = mRep
     Exit Function
 
-ERR_ScanProprietes:
+ERR_ScanObjChilds:
     If (Err.Number = 2455) Then Resume Next     '// Propriété inexistante.
 '    mRep = False
     MsgBox "L’erreur suivante s’est produite" & vbCrLf & vbCrLf & _
            "Erreur N°: " & Err.Number & vbCrLf & _
-           "Source : C_TradScanText.ScanProprietes" & vbCrLf & _
+           "Source : C_TradScanText.ScanObjChilds" & vbCrLf & _
            "Description: " & Err.Description & _
            Switch(Erl = 0, vbNullString, Erl <> 0, vbCrLf & "Line No: " & Erl), _
            vbOKOnly + vbCritical, "Erreur survenue !"
-    Resume SORTIE_ScanProprietes
+    Resume SORTIE_ScanObjChilds
+End Function
+
+'--------------------------------------------------------------
+'// Stock les enfants de l'objet en cours.
+'--------------------------------------------------------------
+Private Function MajTableChild() As Boolean
+
+    Dim sSql As String
+    Dim vTmp As Variant
+
+    '// Si déjà scanner, voir si déjà enregistrer (nouv ctr ajouter dans l'objet).
+    If (Not thisObj.Nouveau) Then
+        vTmp = DLookup("[Child_ID]", "T_ObjetChilds", "[Child_ID]='" & thisChild.IDNet & "'")
+        thisChild.Nouveau = IsNull(vTmp)
+    End If
+
+    If (thisChild.Nouveau) Then
+        sSql = "INSERT INTO T_ObjetChilds " & _
+               "(Child_ID, ChildNom, ChildType, IDObjet, ControlParentName, Scanner, Nouveau) " & _
+               "VALUES ('" & thisChild.IDNet & "', '" & thisChild.NomNet & "', '" & thisChild.Type & "', '" & _
+               thisObj.IDNet & "', '" & thisChild.Parent & "', " & CInt(True) & ", " & CInt(True) & ");"
+
+    Else
+        sSql = "UPDATE T_ObjetChilds SET T_ObjetChilds.Scanner=" & CInt(True) & _
+               " WHERE (((T_ObjetChilds.Child_ID)='" & thisChild.IDNet & "'));"
+    End If      '// Nouvel objet on passe directement a Execute.
+
+    ExecuteQdfTemp sSql
+    MajTableChild = True
+
 End Function
 
 '----------------------------------------------------------------
-' Procedure Nom   : MajTextePropriete
+' Procedure Nom   : MajTableChildPropTexte
 ' ----------------------------------------------------------------
 ' Sujet           : Stock les textes pour chaque propriété du contrôle.
 ' Procedure Kind  : Function
@@ -797,8 +813,7 @@ End Function
 ' Date    : 17/07/2022 - 13:11
 ' DateMod :
 ' ----------------------------------------------------------------
-Private Function MajTextePropriete(PropNom As String, PropTexte As String) As Boolean
-On Error GoTo ERR_MajTextePropriete
+Private Function MajTableChildPropTexte(PropNom As String, PropTexte As String) As Boolean
 
     Dim sSql    As String
     Dim sTest   As String
@@ -806,12 +821,12 @@ On Error GoTo ERR_MajTextePropriete
     Dim bMod    As Boolean      '// 1 modifier 0 non modifier.
     Dim eMod    As eReponse     '// Retour function.
 
-    thisTxt.ID = thisCtr.IDNet & "." & PropNom
+    thisTxt.ID = thisChild.IDNet & "." & PropNom
 
 'TODO: Test nom trop long
 If Len(thisTxt.ID) > 100 Then
     mPrpIgnore = mPrpIgnore & "<div>" & PropNom & " : <font color=white style=""BACKGROUND-COLOR:#FF0000"">" & thisTxt.ID & "</font></div>"
-    MajTextePropriete = True
+    MajTableChildPropTexte = True
     Exit Function
 End If
 'TODO: Test nom trop long
@@ -822,17 +837,17 @@ End If
         sTxt = IIf(sTest <> vbNullString, sTest, PropTexte)
     End If
 
-    If thisCtr.Nouveau Then     '// Nouveau control.
+    If thisChild.Nouveau Then       '// Nouveau control.
 
         '// Ignore la propriété si elle ne contient pas de texte à traduire.
-        If (Len(PropTexte) < 3) Then MajTextePropriete = True: Exit Function  '// Rien a faire, on sort.
+        If (Len(PropTexte) < 3) Then MajTableChildPropTexte = True: Exit Function  '// Rien a faire, on sort.
 
-        sSql = "INSERT INTO T_PropTextes " & _
-               "(Prop_ID, PropNom, PropTexte, IDControl, DateMaJ, Scanner, Nouveau) " & _
-               "VALUES ('" & thisTxt.ID & "', '" & PropNom & "', '" & sTxt & "', '" & thisCtr.IDNet & "', '" & _
+        sSql = "INSERT INTO T_ObjetChildTextes " & _
+               "(Prop_ID, PropNom, PropTexte, IDChild, DateMaJ, Scanner, Nouveau) " & _
+               "VALUES ('" & thisTxt.ID & "', '" & PropNom & "', '" & sTxt & "', '" & thisChild.IDNet & "', '" & _
                m_DateMaJ & "', " & CInt(True) & ", " & CInt(True) & ");"
 
-    Else                        '// Déjà enregistrer.
+    Else                            '// Déjà enregistrer.
 
         eMod = TexteModifier(PropTexte)         '// Vérifier ce qu'il faut faire avec le texte...
 
@@ -842,33 +857,65 @@ End If
         If (eMod <> Inconnu) Then
 
             bMod = IIf(eMod = Faux, False, True)
-            sSql = "UPDATE T_PropTextes " & _
+            sSql = "UPDATE T_ObjetChildTextes " & _
                    "SET PropTexte='" & sTxt & "', " & _
                    "DateMaJ='" & m_DateMaJ & "', " & _
                    "ModPropTexte=" & CInt(bMod) & ", " & _
                    "Scanner=" & CInt(True) & _
-                   " WHERE (((T_PropTextes.Prop_ID)='" & thisTxt.ID & "'));"
+                   " WHERE (((T_ObjetChildTextes.Prop_ID)='" & thisTxt.ID & "'));"
         Else
-           MajTextePropriete = True: Exit Function  '// Rien a faire, on sort.
+           MajTableChildPropTexte = True
+           Exit Function  '// Rien a faire, on sort.
         End If
     End If
 
     ExecuteQdfTemp sSql
-    MajTextePropriete = True
+    MajTableChildPropTexte = True
     
-SORTIE_MajTextePropriete:
-    Exit Function
-
-ERR_MajTextePropriete:
-    mRep = False
-    MsgBox "L’erreur suivante s’est produite" & vbCrLf & vbCrLf & _
-           "Erreur N°: " & Err.Number & vbCrLf & _
-           "Source : C_TradScanText.MajTextePropriete" & vbCrLf & _
-           "Description: " & Err.Description & _
-           Switch(Erl = 0, vbNullString, Erl <> 0, vbCrLf & "Line No: " & Erl), _
-           vbOKOnly + vbCritical, "Erreur survenue !"
-    Resume SORTIE_MajTextePropriete
 End Function
+'
+''--------------------------------------------------------------
+''// Stock les champs txt de la table en cours.
+''--------------------------------------------------------------
+'Private Function MajTableFields() As Boolean
+'On Error GoTo ERR_MajTableFields
+'
+'    Dim sSql As String
+'    Dim vTmp As Variant
+'
+'    '// Si déjà scanner, voir si déjà enregistrer (nouv ctr ajouter dans l'objet).
+'    If (Not thisObj.Nouveau) Then
+'        vTmp = DLookup("[Child_ID]", "T_ObjetChilds", "[Child_ID]='" & thisFld.IDNet & "'")
+'        thisFld.Nouveau = IsNull(vTmp)
+'    End If
+'
+'    If (thisFld.Nouveau) Then
+'        sSql = "INSERT INTO T_ObjetChilds " & _
+'               "(Child_ID, ChildNom, ChildType, IDObjet, ControlParentName, Scanner, Nouveau) " & _
+'               "VALUES ('" & thisFld.IDNet & "', '" & thisFld.NomNet & "', '" & thisFld.Type & "', '" & _
+'               thisObj.IDNet & "', '" & vbNullString & "', " & CInt(True) & ", " & CInt(True) & ");"
+'
+'    Else
+'        sSql = "UPDATE T_ObjetChilds SET T_ObjetChilds.Scanner=" & CInt(True) & _
+'               " WHERE (((T_ObjetChilds.Child_ID)='" & thisFld.IDNet & "'));"
+'    End If      '// Nouvel objet on passe directement a Execute.
+'
+'    ExecuteQdfTemp sSql
+'    MajTableFields = True
+'
+'SORTIE_MajTableFields:
+'    Exit Function
+'
+'ERR_MajTableFields:
+'    mRep = False
+'    MsgBox "L’erreur suivante s’est produite" & vbCrLf & vbCrLf & _
+'           "Erreur N°: " & Err.Number & vbCrLf & _
+'           "Source : C_TradScanText.MajTableFields" & vbCrLf & _
+'           "Description: " & Err.Description & _
+'           Switch(Erl = 0, vbNullString, Erl <> 0, vbCrLf & "Line No: " & Erl), _
+'           vbOKOnly + vbCritical, "Erreur survenue !"
+'    Resume SORTIE_MajTableFields
+'End Function
 
 '--------------------------------------------------------------
 '// Voir si nouveau control et si du texte à enregistrer
@@ -894,7 +941,7 @@ Private Function TexteModifier(TexteOrg As String) As eReponse
     Dim sTxt As String
     Dim vTmp As Variant
 
-    vTmp = DLookup("[PropTexte]", "T_PropTextes", "[Prop_ID]='" & thisTxt.ID & "'")
+    vTmp = DLookup("[PropTexte]", "T_ObjetChildTextes", "[Prop_ID]='" & thisTxt.ID & "'")
     sTxt = IIf(IsNull(vTmp), PROP_NA, CStr(Nz(vTmp, vbNullString)))
 
     If (sTxt = PROP_NA) Then
@@ -1142,13 +1189,13 @@ End Function
 Private Function ResetEtatsTables() As Boolean
     Dim sSql As String
 
-    sSql = "UPDATE (T_Objets INNER JOIN T_ObjetControles " & _
-           "ON T_Objets.Objet_ID = T_ObjetControles.IDObjet) " & _
-           "INNER JOIN T_PropTextes " & _
-           "ON T_ObjetControles.Control_ID = T_PropTextes.IDControl " & _
+    sSql = "UPDATE (T_Objets INNER JOIN T_ObjetChilds " & _
+           "ON T_Objets.Objet_ID = T_ObjetChilds.IDObjet) " & _
+           "INNER JOIN T_ObjetChildTextes " & _
+           "ON T_ObjetChilds.Child_ID = T_ObjetChildTextes.IDChild " & _
            "SET T_Objets.Scanner = 0, T_Objets.Nouveau = 0, " & _
-           "T_ObjetControles.Scanner = 0, T_ObjetControles.Nouveau = 0, " & _
-           "T_PropTextes.Scanner = 0, T_PropTextes.ModPropTexte = 0, T_PropTextes.Nouveau = 0 " & _
+           "T_ObjetChilds.Scanner = 0, T_ObjetChilds.Nouveau = 0, " & _
+           "T_ObjetChildTextes.Scanner = 0, T_ObjetChildTextes.ModPropTexte = 0, T_ObjetChildTextes.Nouveau = 0 " & _
            "WHERE (((T_Objets.IDApp)='" & thisApp.ID & "'));"
 
     ExecuteQdfTemp sSql
@@ -1202,17 +1249,18 @@ Private Sub MaJTableTxtIgnore()
 End Sub
 
 ' ----------------------------------------------------------------
+'// TxtCheck teexte à vérifier.
 '// Stock dans la table iT_TextesIgnores tous les textes rejetés par les filtres.
 '// Retourne Null string si ne passe pas les filtres, sinon retourne le texte d'origine.
 ' ----------------------------------------------------------------
-Private Function CheckTxtIgnore() As String
+Private Function CheckTxtIgnore(TxtCheck As String) As String
     Dim sCap    As String
     Dim sCapTmp As String
 
-    sCap = thisTxt.Caption
+    sCap = TxtCheck
     If (sCap <> vbNullString) Then
 
-        sCapTmp = LTrim$(thisTxt.Caption)
+        sCapTmp = LTrim$(TxtCheck)
         sCap = RegEx(REG_PAT, sCapTmp, True)            '// Applique la pattern Regex (voir Const REG_PAT)...
     
         If (sCap = vbNullString) Then                   '// Rejet Regex, on stock le texte ingoré.
@@ -1220,10 +1268,10 @@ Private Function CheckTxtIgnore() As String
                     mPrpIgnore = mPrpIgnore & "<div>----</div><div><font size=3><strong>" & thisObj.Type & "." & thisObj.Nom & "</strong></font></div><div>----</div><div>"
                     mObjNomTmp = thisObj.Nom
             End If
-            sCapTmp = RegexReplaceChevrons(thisTxt.Caption) '// Peux contenir des '< >'...
-            mPrpIgnore = mPrpIgnore & "<div>" & thisCtr.Type & "." & thisCtr.Nom & " : <font color=""#F2F2F2"" style=""BACKGROUND-COLOR:#000080"">" & sCapTmp & "</font></div>"
+            sCapTmp = RegexReplaceChevrons(TxtCheck)    '// Peux contenir des '< >'...
+            mPrpIgnore = mPrpIgnore & "<div>" & thisChild.Type & "." & thisChild.Nom & " : <font color=""#F2F2F2"" style=""BACKGROUND-COLOR:#000080"">" & sCapTmp & "</font></div>"
         Else
-            sCap = thisTxt.Caption                      '// Passe les filtres retroune le texte d'origine.
+            sCap = TxtCheck                             '// Passe les filtres retroune le texte d'origine.
         End If
     End If
 

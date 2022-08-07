@@ -17,18 +17,13 @@ Begin Form
     Width =10207
     DatasheetFontHeight =11
     ItemSuffix =11
-    Left =10536
-    Top =5712
-    Right =20748
-    Bottom =8448
-    Filter ="Scanner=False"
-    RecordSource ="SELECT T_ObjetControles.Control_ID, T_ObjetControles.ControlType, T_ObjetControl"
-        "es.ControlNom, T_ObjetControles.IDObjet, T_ObjetControles.Scanner, T_ObjetContro"
-        "les.Nouveau, IIf(T_ObjetControles.Scanner=False,\"=\",Null) AS Scan, IIf(T_Objet"
-        "Controles.Nouveau=True,\"=\",Null) AS Nouv FROM T_App INNER JOIN (T_Objets INNER"
-        " JOIN T_ObjetControles ON T_Objets.Objet_ID = T_ObjetControles.IDObjet) ON T_App"
-        ".App_ID = T_Objets.IDApp WHERE (((T_App.App_ID)='{0E2F38D2-3B4E-4999-ABBC-E57CD5"
-        "8F0D95}')) ORDER BY T_ObjetControles.ControlType, T_ObjetControles.ControlNom; "
+    Left =4044
+    Top =3384
+    Right =14256
+    Bottom =6120
+    RecSrcDt = Begin
+        0xe7f6e04a93dde540
+    End
     Caption ="F_RecapC"
     DatasheetFontName ="Calibri"
     AllowDatasheetView =0
@@ -166,7 +161,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="ControlNom"
-                    ControlSource ="ControlNom"
+                    ControlSource ="ChildNom"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =2554
@@ -241,7 +236,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="ControlType"
-                    ControlSource ="ControlType"
+                    ControlSource ="ChildType"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =560

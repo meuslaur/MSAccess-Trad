@@ -1,2 +1,2 @@
-﻿SELECT IIf(Scanner=False,"=",Null) AS Scan, IIf(Nouveau=True,"=",Null) AS Nouv, T_ObjetControles.ControlParentName, T_ObjetControles.ControlType, T_ObjetControles.ControlNom, T_ObjetControles.Control_ID, T_ObjetControles.IDObjet
-FROM T_ObjetControles;
+﻿SELECT IIf(Scanner=False,"=",Null) AS Scan, IIf(Nouveau=True,"=",Null) AS Nouv, T_ObjetChilds.ControlParentName, T_ObjetChilds.ChildType, T_ObjetChilds.ChildNom, T_ObjetChilds.Child_ID, T_ObjetChilds.IDObjet
+FROM T_ObjetChilds;

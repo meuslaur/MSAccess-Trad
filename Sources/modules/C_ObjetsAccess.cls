@@ -26,6 +26,7 @@ Option Explicit
 '//::::::::::::::::::::::::::::::::::    VARIABLES      ::::::::::::::::::::::::::::::::::
     Private m_oMsApp            As Access.Application
     Private m_oMsBase           As DAO.Database
+    Private m_oRst              As DAO.Recordset
 
     Private m_sBaseFullName     As String   '// Chemin\nom complet de la base.
     Private m_sBaseNom          As String   '// Nom de la base sans extension.
@@ -45,6 +46,7 @@ Private Sub Class_Terminate()
     If (MsAppIsUp And (Not m_oMsApp Is Nothing)) Then m_oMsApp.Quit
     DoEvents
 
+    CloseOpenRecordset
     Set m_oMsBase = Nothing
     Set m_oMsApp = Nothing
 
@@ -204,6 +206,10 @@ ERR_OpenMsBase:
     Resume SORTIE_OpenMsBase
 End Function
 
+' ----------------------------------------------------------------
+'// Femeture de la base.
+'// si CloseMsApp = True : quitte l'application
+' ----------------------------------------------------------------
 Public Sub CloseMsBase(Optional CloseMsApp As Boolean = False)
 On Error GoTo ERR_CloseMsBase
 
@@ -239,6 +245,9 @@ ERR_CloseMsBase:
     Resume SORTIE_CloseMsBase
 End Sub
 
+' ----------------------------------------------------------------
+'// Extraire prop de l'application
+' ----------------------------------------------------------------
 Public Function GetPropTxt(PropNom As String) As String
     If (Len(PropNom) = 0) Then Exit Function
     Dim sVal As String
@@ -256,19 +265,55 @@ End Function
 Public Function CreatePropTxt(PropNom As String, NouvVal As String) As Boolean
     If (Len(PropNom) = 0) Then Exit Function
     Dim bRep As Boolean
-    bRep = MD_DBProp.CreatePropText(PropNom, NouvVal, m_oMsBase)
+    bRep = MD_DBProp.CreatePropText(PropNom, NouvVal, m_oMsBase, False)
     CreatePropTxt = bRep
 End Function
+
+' ----------------------------------------------------------------
+'// Retourne le recodset RstNom.
+' ----------------------------------------------------------------
+Public Function GetRecordset(RstNom As String) As DAO.Recordset
+On Error GoTo ERR_GetRecordset
+
+    If (Len(RstNom) = 0) Then Exit Function
+    If (Not m_oRst Is Nothing) Then m_oRst.Close
+
+    Set m_oRst = m_oMsBase.OpenRecordset(RstNom, dbOpenSnapshot, dbReadOnly)
+    Set GetRecordset = m_oRst
+
+    
+SORTIE_GetRecordset:
+    Exit Function
+
+ERR_GetRecordset:
+    MsgBox "L’erreur suivante s’est produite" & vbCrLf & vbCrLf & _
+           "Erreur N°: " & Err.Number & vbCrLf & _
+           "Source : C_ObjetsAccess.GetRecordset" & vbCrLf & _
+           "Description: " & Err.Description & _
+           Switch(Erl = 0, vbNullString, Erl <> 0, vbCrLf & "Line No: " & Erl), _
+           vbOKOnly + vbCritical, "Erreur survenue !"
+    Resume SORTIE_GetRecordset
+End Function
+
+Public Sub CloseOpenRecordset()
+    If (Not m_oRst Is Nothing) Then m_oRst.Close
+    Set m_oRst = Nothing
+End Sub
+
 '// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ END PUB. SUB/FUNC \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 
 '// ################################ PRIVATE SUB/FUNC ####################################
+
+' ----------------------------------------------------------------
+'// Vérifier si macro autoExec existe. (True si oui)
+' ----------------------------------------------------------------
 Private Function HasAutoexec(ByRef MsBase As DAO.Database) As Boolean
     Dim oRst As DAO.Recordset
     Dim sSql As String
-    
+
     sSql = "SELECT MSysObjects.Name FROM MSysObjects WHERE MSysObjects.Name = 'AutoExec' AND MSysObjects.Type = -32766"
-    
+
     Set oRst = MsBase.OpenRecordset(sSql)
     If Not (oRst.EOF And oRst.BOF) Then HasAutoexec = True
 
@@ -277,6 +322,9 @@ Private Function HasAutoexec(ByRef MsBase As DAO.Database) As Boolean
 
 End Function
 
+' ----------------------------------------------------------------
+'// Retourne le nom du form lancer a l'ouverture de la base.
+' ----------------------------------------------------------------
 Private Function GetStartUpForm(ByRef MsBase As DAO.Database) As String
     Dim oProp As DAO.Property
 

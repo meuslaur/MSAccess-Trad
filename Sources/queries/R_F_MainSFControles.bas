@@ -1,18 +1,18 @@
 ﻿Operation =1
 Option =0
 Begin InputTables
-    Name ="T_ObjetControles"
+    Name ="T_ObjetChilds"
 End
 Begin OutputColumns
     Alias ="Scan"
     Expression ="IIf(Scanner=False,\"=\",Null)"
     Alias ="Nouv"
     Expression ="IIf(Nouveau=True,\"=\",Null)"
-    Expression ="T_ObjetControles.ControlParentName"
-    Expression ="T_ObjetControles.ControlType"
-    Expression ="T_ObjetControles.ControlNom"
-    Expression ="T_ObjetControles.Control_ID"
-    Expression ="T_ObjetControles.IDObjet"
+    Expression ="T_ObjetChilds.ControlParentName"
+    Expression ="T_ObjetChilds.ChildType"
+    Expression ="T_ObjetChilds.ChildNom"
+    Expression ="T_ObjetChilds.Child_ID"
+    Expression ="T_ObjetChilds.IDObjet"
 End
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
@@ -33,22 +33,6 @@ Begin
         dbText "Name" ="Nouv"
         dbLong "AggregateType" ="-1"
     End
-    Begin
-        dbText "Name" ="T_ObjetControles.ControlNom"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="T_ObjetControles.ControlParentName"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="T_ObjetControles.ControlType"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="T_ObjetControles.Control_ID"
-        dbLong "AggregateType" ="-1"
-    End
 End
 Begin
     State =0
@@ -59,17 +43,17 @@ Begin
     Left =-1
     Top =-1
     Right =1506
-    Bottom =363
+    Bottom =321
     Left =0
     Top =0
     ColumnsShown =539
     Begin
-        Left =48
-        Top =12
-        Right =280
-        Bottom =211
+        Left =60
+        Top =15
+        Right =240
+        Bottom =195
         Top =0
-        Name ="T_ObjetControles"
+        Name ="T_ObjetChilds"
         Name =""
     End
 End

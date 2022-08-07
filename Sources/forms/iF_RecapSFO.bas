@@ -16,15 +16,13 @@ Begin Form
     Width =10204
     DatasheetFontHeight =11
     ItemSuffix =12
-    Left =10536
-    Top =3444
-    Right =20736
-    Bottom =5172
-    Filter ="Scanner=False"
-    RecordSource ="SELECT T_Objets.Objet_ID, T_Objets.ObjetType, T_Objets.ObjetNom, T_Objets.Scanne"
-        "r, T_Objets.Nouveau, IIf(Scanner=False,\"=\",Null) AS Scan, IIf(Nouveau=True,\"="
-        "\",Null) AS Nouv FROM T_Objets WHERE ((T_Objets.IDApp)='{0E2F38D2-3B4E-4999-ABBC"
-        "-E57CD58F0D95}') ORDER BY T_Objets.ObjetType, T_Objets.ObjetNom; "
+    Left =2988
+    Top =3852
+    Right =13188
+    Bottom =5580
+    RecSrcDt = Begin
+        0xb281ea4b93dde540
+    End
     Caption ="F_RecapO"
     DatasheetFontName ="Calibri"
     AllowDatasheetView =0

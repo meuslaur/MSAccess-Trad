@@ -4,10 +4,10 @@
     "Description": "Database relationship"
   },
   "Items": {
-    "Name": "T_ObjetsT_ObjetControles",
+    "Name": "T_ObjetsT_ObjetChilds",
     "Attributes": 4352,
     "Table": "T_Objets",
-    "ForeignTable": "T_ObjetControles",
+    "ForeignTable": "T_ObjetChilds",
     "Fields": [
       {
         "Name": "Objet_ID",

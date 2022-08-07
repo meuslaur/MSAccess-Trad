@@ -475,11 +475,11 @@ Private Sub zlApps_AfterUpdate()
     Dim sSql As String
     Dim vTmp As Variant
 
-    sSql = "SELECT T_PropTextes.* " & _
+    sSql = "SELECT T_ObjetChildTextes.* " & _
            "FROM T_Objets " & _
-           "INNER JOIN (T_ObjetControles INNER JOIN T_PropTextes " & _
-           "ON T_ObjetControles.Control_ID = T_PropTextes.IDControl) " & _
-           "ON T_Objets.Objet_ID = T_ObjetControles.IDObjet " & _
+           "INNER JOIN (T_ObjetChilds INNER JOIN T_ObjetChildTextes " & _
+           "ON T_ObjetChilds.Child_ID = T_ObjetChildTextes.IDChild) " & _
+           "ON T_Objets.Objet_ID = T_ObjetChilds.IDObjet " & _
            "WHERE (((T_Objets.IDApp)='" & Me.zlApps & "'));"
     Me.SF_TradOrg.Form.RecordSource = sSql
 

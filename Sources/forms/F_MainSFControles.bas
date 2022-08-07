@@ -3,39 +3,32 @@ VersionRequired =20
 PublishOption =1
 Begin Form
     RecordSelectors = NotDefault
-    AutoCenter = NotDefault
     NavigationButtons = NotDefault
     AllowDeletions = NotDefault
     DividingLines = NotDefault
     AllowAdditions = NotDefault
     AllowEdits = NotDefault
     ScrollBars =2
-    ViewsAllowed =1
     PictureAlignment =2
     DatasheetGridlinesBehavior =3
     GridY =10
-    Width =10266
+    Width =10262
     DatasheetFontHeight =11
-    ItemSuffix =14
-    Left =11172
-    Top =5136
-    Right =21444
-    Bottom =9864
+    Top =480
+    Right =15660
+    Bottom =4080
     RecSrcDt = Begin
-        0xe6bed64291dbe540
+        0x6965100493dde540
     End
     RecordSource ="R_F_MainSFControles"
-    Caption ="Controles"
     OnCurrent ="[Event Procedure]"
     DatasheetFontName ="Calibri"
-    AllowDatasheetView =0
     FilterOnLoad =0
     ShowPageMargins =0
     DisplayOnSharePointSite =1
     AllowLayoutView =0
     DatasheetAlternateBackColor =15921906
     DatasheetGridlinesColor12 =0
-    FitToScreen =1
     DatasheetBackThemeColorIndex =1
     BorderThemeColorIndex =3
     ThemeFontIndex =1
@@ -106,8 +99,8 @@ Begin Form
                     Width =1080
                     Height =315
                     BorderColor =8355711
-                    Name ="lbl_Control_ID"
-                    Caption ="Control"
+                    Name ="lbl_Child_ID"
+                    Caption ="Nom"
                     Tag ="DetachedLabel"
                     GridlineStyleBottom =1
                     GridlineColor =10921638
@@ -124,7 +117,7 @@ Begin Form
                     Width =1080
                     Height =315
                     BorderColor =8355711
-                    Name ="lbl_Type"
+                    Name ="lbl_ChildType"
                     Caption ="Type"
                     Tag ="DetachedLabel"
                     GridlineStyleBottom =1
@@ -185,12 +178,10 @@ Begin Form
                     Left =3044
                     Width =1776
                     Height =315
-                    ColumnWidth =3000
-                    TabIndex =2
                     BorderColor =10921638
                     ForeColor =4210752
-                    Name ="txtControlType"
-                    ControlSource ="ControlType"
+                    Name ="txtChildType"
+                    ControlSource ="ChildType"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =3044
@@ -205,7 +196,6 @@ Begin Form
                     Left =566
                     Width =2484
                     Height =315
-                    ColumnWidth =3000
                     TabIndex =1
                     BackColor =13611711
                     BorderColor =10921638
@@ -227,12 +217,11 @@ Begin Form
                     Left =4817
                     Width =5445
                     Height =315
-                    ColumnWidth =3000
-                    TabIndex =3
+                    TabIndex =2
                     BorderColor =10921638
                     ForeColor =4210752
-                    Name ="txtControlNom"
-                    ControlSource ="ControlNom"
+                    Name ="txtChildlNom"
+                    ControlSource ="ChildNom"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =4817
@@ -251,10 +240,10 @@ Begin Form
                     Left =6235
                     Width =1590
                     Height =315
-                    ColumnWidth =3000
+                    TabIndex =3
                     BorderColor =10921638
                     ForeColor =4210752
-                    Name ="ObjetParent_ID"
+                    Name ="txtIDObjet"
                     ControlSource ="IDObjet"
                     GridlineColor =10921638
 
@@ -323,12 +312,11 @@ Begin Form
                     Left =7993
                     Width =1116
                     Height =315
-                    ColumnWidth =8010
                     TabIndex =6
                     BorderColor =10921638
                     ForeColor =4210752
-                    Name ="Control_ID"
-                    ControlSource ="Control_ID"
+                    Name ="txtChild_ID"
+                    ControlSource ="Child_ID"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =7993
@@ -340,7 +328,6 @@ Begin Form
         Begin FormFooter
             Height =0
             Name ="PiedFormulaire"
-            AutoHeight =1
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
             BackThemeColorIndex =1
@@ -352,20 +339,19 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-'@Folder("Form")
 Option Compare Database
 Option Explicit
 
+'// Affiche info sur l'enfant en cours dans le form parent (F_Main).
 Private Sub Form_Current()
-'// Affiche info sur le controle en cours dans le form parent (F_Main).
-    If (Me.ControlType = C_FORM Or Me.ControlType = C_REPORT) Then Exit Sub
+    If (Me.ChildType = C_FORM Or Me.ChildType = C_REPORT) Then Exit Sub
 
     Dim sNom As String
     Dim lPos As Long
 
-    lPos = InStrRev(Me.Control_ID, ".")
-    sNom = Right$(Me.Control_ID, Len(Me.Control_ID) - lPos)
+    lPos = InStrRev(Me.Child_ID, ".")
+    sNom = Right$(Me.Child_ID, Len(Me.Child_ID) - lPos)
 
-    Me.Parent.MajControlInfo Nz(Me.ControlParentName, vbNullString), Me.ControlType, sNom
+    Me.Parent.MajControlInfo Nz(Me.ControlParentName, vbNullString), Me.ChildType, sNom
 
 End Sub

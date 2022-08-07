@@ -4,5 +4,6 @@
   [ObjetType] VARCHAR (30),
   [IDApp] VARCHAR (40),
   [Scanner] BIT ,
-  [Nouveau] BIT 
+  [Nouveau] BIT ,
+  [Ignorer] BIT 
 )

@@ -10,3 +10,5 @@ Sources/modules/A_Test.bas
 *.log
 Sources/Export.log
 Sources/proj-properties.json
+Sources/queries/%22T_Objets%22 et %22T_ObjetChilds%22 sans correspondance.bas
+Sources/queries/%22T_Objets%22 et %22T_ObjetChilds%22 sans correspondance.sql

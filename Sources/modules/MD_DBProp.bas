@@ -27,7 +27,7 @@ Option Explicit
 ' ------------------------------------------------------
 '// Créer la prop 'PropNom'(Text), retourne TRUE si c'est fait.
 ' ------------------------------------------------------
-Public Function CreatePropText(PropNom As String, PropVal As String, ByRef BDSelect As DAO.Database) As Boolean
+Public Function CreatePropText(PropNom As String, PropVal As String, Optional ByRef BDSelect As DAO.Database, Optional errMsg As Boolean = True) As Boolean
 
     Dim oPrp As Property
 
@@ -42,8 +42,10 @@ Public Function CreatePropText(PropNom As String, PropVal As String, ByRef BDSel
             CreatePropText = True
 
         Case True
-            mMsg = "La propriété '" & PropNom & "' existe déjà."
-            MsgBox mMsg, vbCritical, "CreatePropText"
+            If errMsg Then
+                mMsg = "La propriété '" & PropNom & "' existe déjà."
+                MsgBox mMsg, vbCritical, "CreatePropText"
+            End If
     End Select
 
     Set m_BdSelect = Nothing
@@ -53,7 +55,7 @@ End Function
 ' ------------------------------------------------------
 '// Supprime la prop, retourne TRUE si c'est fait.
 ' ------------------------------------------------------
-Public Function DeleteProp(PropNom As String, ByRef BDSelect As DAO.Database) As Boolean
+Public Function DeleteProp(PropNom As String, Optional ByRef BDSelect As DAO.Database, Optional errMsg As Boolean = True) As Boolean
 
     Set m_BdSelect = IIf(BDSelect Is Nothing, CodeDb, BDSelect)
 
@@ -65,8 +67,10 @@ Public Function DeleteProp(PropNom As String, ByRef BDSelect As DAO.Database) As
             DeleteProp = True
 
         Case False
-            mMsg = "Propriété '" & PropNom & "' inconnue."
-            MsgBox mMsg, vbCritical, "DeleteProp"
+            If errMsg Then
+                mMsg = "Propriété '" & PropNom & "' inconnue."
+                MsgBox mMsg, vbCritical, "DeleteProp"
+            End If
     End Select
 
     Set m_BdSelect = Nothing
@@ -76,11 +80,11 @@ End Function
 ' ------------------------------------------------------
 '// Retoune la valeur de la prop 'PropNom'(text), nullstring si la prop n'existe pas,
 ' ------------------------------------------------------
-Public Function GetTextProp(PropNom As String, ByRef BDSelect As DAO.Database, Optional errMsg As Boolean = True) As String
+Public Function GetTextProp(PropNom As String, Optional ByRef BDSelect As DAO.Database, Optional errMsg As Boolean = True) As String
 
     Set m_BdSelect = IIf(BDSelect Is Nothing, CodeDb, BDSelect)
 
-    mRep = PropExist(PropNom)     '// Retourne la valeur de la prop si elle existe....
+    mRep = PropExist(PropNom)     '// Test si la prop PropNom existe....
 
     Select Case mRep
         Case True
@@ -101,7 +105,7 @@ End Function
 ' ------------------------------------------------------
 '// Applique la valeur sur la prop 'PropNom'(text). Retourne TRUE si c'est fait.
 ' ------------------------------------------------------
-Public Function SetTextProp(PropNom As String, NouvVal As String, ByRef BDSelect As DAO.Database, Optional errMsg As Boolean = True) As Boolean
+Public Function SetTextProp(PropNom As String, NouvVal As String, Optional ByRef BDSelect As DAO.Database, Optional errMsg As Boolean = True) As Boolean
 
     Set m_BdSelect = IIf(BDSelect Is Nothing, CodeDb, BDSelect)
 
@@ -144,7 +148,7 @@ End Function
 ' Date    : 24/07/2022 - 11:56
 ' DateMod :
 ' ----------------------------------------------------------------
-Public Function ExportProps(ExportFolder As String, BDSelect As DAO.Database, _
+Public Function ExportProps(ExportFolder As String, Optional BDSelect As DAO.Database, _
                                 Optional OnlyPropUser As Boolean = False) As Boolean
 On Error GoTo ERR_ExportProps
 

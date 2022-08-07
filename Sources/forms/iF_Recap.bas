@@ -21,9 +21,9 @@ Begin Form
     DatasheetFontHeight =11
     ItemSuffix =58
     Left =9576
-    Top =1356
+    Top =1620
     Right =20916
-    Bottom =13416
+    Bottom =12888
     DatasheetGridlinesColor =15132391
     RecSrcDt = Begin
         0x2562231676dbe540
@@ -787,27 +787,28 @@ Private Sub Form_Open(Cancel As Integer)
 
     Me.sfO.Form.RecordSource = sSql
 
-    sSql = "SELECT T_ObjetControles.Control_ID, T_ObjetControles.ControlType, T_ObjetControles.ControlNom, T_ObjetControles.IDObjet, " & _
-           "T_ObjetControles.Scanner, T_ObjetControles.Nouveau, " & _
-           "IIf(T_ObjetControles.Scanner=False,""="",Null) AS Scan, " & _
-           "IIf(T_ObjetControles.Nouveau=True,""="",Null) AS Nouv " & _
-           "FROM T_App INNER JOIN (T_Objets INNER JOIN T_ObjetControles " & _
-           "ON T_Objets.Objet_ID = T_ObjetControles.IDObjet) ON T_App.App_ID = T_Objets.IDApp " & _
+    sSql = "SELECT T_ObjetChilds.Child_ID, T_ObjetChilds.ChildType, T_ObjetChilds.ChildNom, T_ObjetChilds.IDObjet, " & _
+           "T_ObjetChilds.Scanner, T_ObjetChilds.Nouveau, " & _
+           "IIf(T_ObjetChilds.Scanner=False,""="",Null) AS Scan, " & _
+           "IIf(T_ObjetChilds.Nouveau=True,""="",Null) AS Nouv " & _
+           "FROM T_App INNER JOIN (T_Objets INNER JOIN T_ObjetChilds " & _
+           "ON T_Objets.Objet_ID = T_ObjetChilds.IDObjet) ON T_App.App_ID = T_Objets.IDApp " & _
            "WHERE (((T_App.App_ID)='" & Args(0) & "')) " & _
-           "ORDER BY T_ObjetControles.ControlType, T_ObjetControles.ControlNom;"
+           "ORDER BY T_ObjetChilds.ChildType, T_ObjetChilds.ChildNom;"
 
     Me.sfC.Form.RecordSource = sSql
 
-    sSql = "SELECT T_PropTextes.Prop_ID, T_PropTextes.PropNom, T_PropTextes.PropTexte, T_PropTextes.IDControl, T_PropTextes.ModPropTexte, T_PropTextes.Scanner, T_PropTextes.Nouveau, " & _
-           "IIf(T_PropTextes.Scanner=False,""="",Null) AS Scan, " & _
+    sSql = "SELECT T_ObjetChildTextes.Prop_ID, T_ObjetChildTextes.PropNom, T_ObjetChildTextes.PropTexte, T_ObjetChildTextes.IDChild, " & _
+           "T_ObjetChildTextes.ModPropTexte, T_ObjetChildTextes.Scanner, T_ObjetChildTextes.Nouveau, " & _
+           "IIf(T_ObjetChildTextes.Scanner=False,""="",Null) AS Scan, " & _
            "IIf(ModPropTexte=True,""="",Null) AS Modif, " & _
-           "IIf(T_PropTextes.Nouveau=True,""="",Null) AS Nouv " & _
-           "FROM T_App INNER JOIN (T_Objets INNER JOIN (T_ObjetControles INNER JOIN T_PropTextes " & _
-           "ON T_ObjetControles.Control_ID = T_PropTextes.IDControl) " & _
-           "ON T_Objets.Objet_ID = T_ObjetControles.IDObjet) " & _
+           "IIf(T_ObjetChildTextes.Nouveau=True,""="",Null) AS Nouv " & _
+           "FROM T_App INNER JOIN (T_Objets INNER JOIN (T_ObjetChilds INNER JOIN T_ObjetChildTextes " & _
+           "ON T_ObjetChilds.Child_ID = T_ObjetChildTextes.IDChild) " & _
+           "ON T_Objets.Objet_ID = T_ObjetChilds.IDObjet) " & _
            "ON T_App.App_ID = T_Objets.IDApp " & _
            "WHERE (((T_App.App_ID)='" & Args(0) & "')) " & _
-           "ORDER BY T_PropTextes.Prop_ID;"
+           "ORDER BY T_ObjetChildTextes.Prop_ID;"
 
     Me.sfT.Form.RecordSource = sSql
 
@@ -833,7 +834,7 @@ Private Sub grpChk_AfterUpdate()
         Case 2      '// Modif
             Me.sfO.Form.Filter = "ObjetType='X'"
             Me.sfO.Form.FilterOn = True
-            Me.sfC.Form.Filter = "Control_ID='X'"
+            Me.sfC.Form.Filter = "Child_ID='X'"
             Me.sfC.Form.FilterOn = True
             sFiltre = "ModPropTexte=True"
             Me.sfT.Form.Filter = sFiltre
@@ -861,6 +862,18 @@ Private Sub cmdAfficheInfo_Click()
     DoCmd.OpenForm "iF_InfoRecap"
 End Sub
 
+Private Sub ResetFiltres()
+
+    Me.sfO.Form.Controls("imgFiltre").BackStyle = 0
+    Me.sfT.Form.Controls("imgFiltre").BackStyle = 0
+    mFltPrec = Aucun
+
+    Me.sfO.Form.FilterOn = False
+    Me.sfC.Form.FilterOn = False
+    Me.sfT.Form.FilterOn = False
+
+End Sub
+
 ' ----------------------------------------------------------------
 '// Utilisée par les sf iF_RecapSFO et iF_RecapSFT, Filtre sur dbClick.
 ' ----------------------------------------------------------------
@@ -870,9 +883,7 @@ Public Function FiltreDbClick(ValFiltre As String, FiltreObjet As Boolean) As Bo
 
     '// Si 2ème dbClick sur le même filtre on reset les filtres.
     If ((mFltPrec = Texte) Or ((mFltPrec = Objet) And (FiltreObjet = True))) Then
-        Me.sfO.Form.Controls("imgFiltre").BackStyle = 0
-        Me.sfT.Form.Controls("imgFiltre").BackStyle = 0
-        mFltPrec = Aucun
+        ResetFiltres
         Exit Function
     End If
 
@@ -895,9 +906,9 @@ Public Function FiltreDbClick(ValFiltre As String, FiltreObjet As Boolean) As Bo
             Me.sfO.Form.Controls("imgFiltre").BackStyle = 1
             Me.sfT.Form.Controls("imgFiltre").BackStyle = 1
 
-            Me.sfC.Form.Filter = "[Control_ID]='" & ValFiltre & "'"
+            Me.sfC.Form.Filter = "[Child_ID]='" & ValFiltre & "'"
             Me.sfC.Form.FilterOn = True
-            Me.sfT.Form.Filter = "[IDControl]='" & ValFiltre & "'"
+            Me.sfT.Form.Filter = "[IDChild]='" & ValFiltre & "'"
             Me.sfT.Form.FilterOn = True
             Me.sfO.Form.Filter = "[Objet_ID]= '" & Me.sfC.Form![IDObjet] & "'"
             Me.sfO.Form.FilterOn = True
