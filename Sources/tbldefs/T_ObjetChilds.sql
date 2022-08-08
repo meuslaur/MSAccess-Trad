@@ -5,5 +5,6 @@
   [IDObjet] VARCHAR (100),
   [ControlParentName] VARCHAR (50),
   [Scanner] BIT ,
-  [Nouveau] BIT 
+  [Nouveau] BIT ,
+  [Ignorer] BIT 
 )

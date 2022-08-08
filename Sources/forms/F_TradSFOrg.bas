@@ -25,7 +25,7 @@ Begin Form
     RecSrcDt = Begin
         0xde9d4071d0dce540
     End
-    Caption ="Requête1"
+    Caption =" "
     DatasheetFontName ="Calibri"
     AllowDatasheetView =0
     FilterOnLoad =0

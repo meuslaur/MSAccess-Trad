@@ -7,6 +7,7 @@ Begin Form
     AllowDeletions = NotDefault
     DividingLines = NotDefault
     AllowAdditions = NotDefault
+    FilterOn = NotDefault
     AllowEdits = NotDefault
     ScrollBars =2
     ViewsAllowed =1
@@ -16,14 +17,16 @@ Begin Form
     Width =10204
     DatasheetFontHeight =11
     ItemSuffix =12
-    Left =2988
-    Top =3852
-    Right =13188
-    Bottom =5580
-    RecSrcDt = Begin
-        0xb281ea4b93dde540
-    End
-    Caption ="F_RecapO"
+    Left =10536
+    Top =3324
+    Right =20736
+    Bottom =5052
+    Filter ="Nouveau=True"
+    RecordSource ="SELECT T_Objets.Objet_ID, T_Objets.ObjetType, T_Objets.ObjetNom, T_Objets.Scanne"
+        "r, T_Objets.Nouveau, IIf(Scanner=False,\"=\",Null) AS Scan, IIf(Nouveau=True,\"="
+        "\",Null) AS Nouv FROM T_Objets WHERE ((T_Objets.IDApp)='{43FE1D94-4294-486F-A6EC"
+        "-25EAADB8D3CB}') ORDER BY T_Objets.ObjetType, T_Objets.ObjetNom; "
+    Caption =" "
     DatasheetFontName ="Calibri"
     AllowDatasheetView =0
     FilterOnLoad =0

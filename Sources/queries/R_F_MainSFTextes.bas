@@ -39,22 +39,6 @@ Begin
         dbText "Name" ="Nouv"
         dbLong "AggregateType" ="-1"
     End
-    Begin
-        dbText "Name" ="T_PropTextes.Prop_ID"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="T_PropTextes.PropTexte"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="T_PropTextes.PropNom"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="T_PropTextes.DateMaJ"
-        dbLong "AggregateType" ="-1"
-    End
 End
 Begin
     State =2

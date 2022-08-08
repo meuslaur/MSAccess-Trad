@@ -17,15 +17,15 @@ Begin Form
     Width =10545
     DatasheetFontHeight =11
     ItemSuffix =14
-    Left =1392
-    Top =264
-    Right =12972
-    Bottom =2820
+    Left =3612
+    Top =3084
+    Right =13908
+    Bottom =5364
     RecSrcDt = Begin
         0xb161d64291dbe540
     End
     RecordSource ="R_F_MainSFTextes"
-    Caption ="T_TradTexte"
+    Caption =" "
     DatasheetFontName ="Calibri"
     AllowDatasheetView =0
     FilterOnLoad =0
@@ -203,6 +203,7 @@ Begin Form
                     Name ="PropNom"
                     ControlSource ="PropNom"
                     GridlineColor =10921638
+                    ShowDatePicker =0
 
                     LayoutCachedLeft =907
                     LayoutCachedWidth =2662
@@ -226,6 +227,7 @@ Begin Form
                     Name ="PropTexte"
                     ControlSource ="PropTexte"
                     GridlineColor =10921638
+                    ShowDatePicker =0
 
                     LayoutCachedLeft =2648
                     LayoutCachedWidth =10541
@@ -245,6 +247,7 @@ Begin Form
                     Name ="PropID"
                     ControlSource ="PropID"
                     GridlineColor =10921638
+                    ShowDatePicker =0
 
                     LayoutCachedLeft =5497
                     LayoutCachedWidth =6415

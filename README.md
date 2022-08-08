@@ -1,6 +1,6 @@
 # MSAccessTrad
 
-Beta Test [v0.42-1](https://github.com/meuslaur/MSAccess-Trad/tree/beta) traduction Access
+Alpha [v0.49] Outil d'aide pour traduction des textes dans une bases Access
 
 # Formulaire F_Main
 

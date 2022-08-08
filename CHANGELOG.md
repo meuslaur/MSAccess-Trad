@@ -1,4 +1,11 @@
 #Changelog
+## V 0.49 2022/08/08
+- Procédure de sauvegarde avant de lancer le scan de la base.
+- Ajout du form `F_Ignores` permettant d'ignorés certains objets (par la suite pour ses enfants aussi)
+- Ajoute Scan des tables (loin d'être fini en cours de dev).
+- Correction de bugs (très moches).
+- a suivre...
+
 ## V 0.48 2022/05/04
 - Modifications filtres sur les texte Caption.
 - Ajoute info sur tous les textes ingorés.

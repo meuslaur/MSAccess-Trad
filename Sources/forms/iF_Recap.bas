@@ -21,9 +21,9 @@ Begin Form
     DatasheetFontHeight =11
     ItemSuffix =58
     Left =9576
-    Top =1620
+    Top =1656
     Right =20916
-    Bottom =12888
+    Bottom =12816
     DatasheetGridlinesColor =15132391
     RecSrcDt = Begin
         0x2562231676dbe540
@@ -161,22 +161,344 @@ Begin Form
             BorderShade =65.0
             ShowPageHeaderAndPageFooter =1
         End
-        Begin FormHeader
-            Height =566
-            BackColor =3684411
-            Name ="EntêteFormulaire"
+        Begin Section
+            CanGrow = NotDefault
+            Height =11168
+            Name ="Détail"
+            AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
-            BackThemeColorIndex =3
-            BackShade =25.0
+            BackThemeColorIndex =1
             Begin
+                Begin Subform
+                    OverlapFlags =85
+                    Left =566
+                    Top =566
+                    Width =10464
+                    Height =1992
+                    BorderColor =10921638
+                    Name ="sfO"
+                    SourceObject ="Form.iF_RecapSFO"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =566
+                    LayoutCachedTop =566
+                    LayoutCachedWidth =11030
+                    LayoutCachedHeight =2558
+                    Begin
+                        Begin Label
+                            Vertical = NotDefault
+                            BackStyle =1
+                            OverlapFlags =85
+                            TextAlign =2
+                            Left =113
+                            Top =566
+                            Width =375
+                            Height =1992
+                            BorderColor =8355711
+                            ForeColor =6710886
+                            Name ="lbl_sfO"
+                            Caption ="Objets"
+                            GridlineColor =10921638
+                            LayoutCachedLeft =113
+                            LayoutCachedTop =566
+                            LayoutCachedWidth =488
+                            LayoutCachedHeight =2558
+                            BackThemeColorIndex =4
+                            BackTint =40.0
+                        End
+                    End
+                End
+                Begin Subform
+                    OverlapFlags =85
+                    Left =566
+                    Top =2777
+                    Width =10476
+                    Height =3000
+                    TabIndex =1
+                    BorderColor =10921638
+                    Name ="sfC"
+                    SourceObject ="Form.iF_RecapSFC"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =566
+                    LayoutCachedTop =2777
+                    LayoutCachedWidth =11042
+                    LayoutCachedHeight =5777
+                    Begin
+                        Begin Label
+                            Vertical = NotDefault
+                            BackStyle =1
+                            OverlapFlags =85
+                            TextAlign =2
+                            Left =113
+                            Top =2777
+                            Width =375
+                            Height =3003
+                            BorderColor =8355711
+                            ForeColor =6710886
+                            Name ="lbl_sfC"
+                            Caption ="Contrôles"
+                            GridlineColor =10921638
+                            LayoutCachedLeft =113
+                            LayoutCachedTop =2777
+                            LayoutCachedWidth =488
+                            LayoutCachedHeight =5780
+                            BackThemeColorIndex =9
+                            BackTint =30.0
+                        End
+                    End
+                End
+                Begin Subform
+                    OverlapFlags =85
+                    Left =566
+                    Top =5952
+                    Width =10464
+                    Height =4824
+                    TabIndex =2
+                    BorderColor =10921638
+                    Name ="sfT"
+                    SourceObject ="Form.iF_RecapSFT"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =566
+                    LayoutCachedTop =5952
+                    LayoutCachedWidth =11030
+                    LayoutCachedHeight =10776
+                    Begin
+                        Begin Label
+                            Vertical = NotDefault
+                            BackStyle =1
+                            OverlapFlags =85
+                            TextAlign =2
+                            Left =113
+                            Top =5952
+                            Width =375
+                            Height =4815
+                            BorderColor =8355711
+                            ForeColor =6710886
+                            Name ="lbl_sfT"
+                            Caption ="Propriétés :"
+                            GridlineColor =10921638
+                            LayoutCachedLeft =113
+                            LayoutCachedTop =5952
+                            LayoutCachedWidth =488
+                            LayoutCachedHeight =10767
+                            BackThemeColorIndex =5
+                            BackTint =60.0
+                        End
+                    End
+                End
+                Begin OptionGroup
+                    TabStop = NotDefault
+                    SpecialEffect =0
+                    OldBorderStyle =0
+                    OverlapFlags =85
+                    Left =4581
+                    Top =56
+                    Width =3342
+                    Height =451
+                    TabIndex =3
+                    BorderColor =10921638
+                    Name ="grpChk"
+                    AfterUpdate ="[Event Procedure]"
+                    DefaultValue ="4"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =4581
+                    LayoutCachedTop =56
+                    LayoutCachedWidth =7923
+                    LayoutCachedHeight =507
+                    Begin
+                        Begin Label
+                            BackStyle =1
+                            OverlapFlags =85
+                            TextAlign =3
+                            Left =2040
+                            Top =113
+                            Width =2472
+                            Height =300
+                            BackColor =3684411
+                            BorderColor =8355711
+                            ForeColor =13421772
+                            Name ="lblgrpChk"
+                            Caption ="Afficher uniquement :"
+                            GridlineColor =10921638
+                            LayoutCachedLeft =2040
+                            LayoutCachedTop =113
+                            LayoutCachedWidth =4512
+                            LayoutCachedHeight =413
+                            BackThemeColorIndex =-1
+                            BackTint =25.0
+                            ForeTint =20.0
+                        End
+                        Begin CheckBox
+                            SpecialEffect =2
+                            OverlapFlags =87
+                            Left =4638
+                            Top =141
+                            OptionValue =1
+                            BorderColor =10921638
+                            Name ="chkScan"
+                            ControlTipText ="Non scanner"
+                            GridlineColor =10921638
+
+                            LayoutCachedLeft =4638
+                            LayoutCachedTop =141
+                            LayoutCachedWidth =4898
+                            LayoutCachedHeight =381
+                            Begin
+                                Begin Label
+                                    OverlapFlags =247
+                                    TextFontCharSet =2
+                                    TextFontFamily =18
+                                    Left =4868
+                                    Top =113
+                                    Width =288
+                                    Height =288
+                                    BorderColor =8355711
+                                    ForeColor =2366701
+                                    Name ="lblchkScan"
+                                    Caption ="="
+                                    FontName ="Webdings"
+                                    GridlineColor =10921638
+                                    LayoutCachedLeft =4868
+                                    LayoutCachedTop =113
+                                    LayoutCachedWidth =5156
+                                    LayoutCachedHeight =401
+                                    ThemeFontIndex =-1
+                                    ForeThemeColorIndex =-1
+                                    ForeTint =100.0
+                                End
+                            End
+                        End
+                        Begin CheckBox
+                            SpecialEffect =2
+                            OverlapFlags =87
+                            Left =5318
+                            Top =141
+                            TabIndex =1
+                            OptionValue =2
+                            BorderColor =10921638
+                            Name ="chkModif"
+                            ControlTipText ="Modifier"
+                            GridlineColor =10921638
+
+                            LayoutCachedLeft =5318
+                            LayoutCachedTop =141
+                            LayoutCachedWidth =5578
+                            LayoutCachedHeight =381
+                            Begin
+                                Begin Label
+                                    OverlapFlags =247
+                                    TextFontCharSet =2
+                                    TextFontFamily =18
+                                    Left =5548
+                                    Top =113
+                                    Width =288
+                                    Height =288
+                                    BorderColor =8355711
+                                    Name ="lblchkModif"
+                                    Caption ="="
+                                    FontName ="Webdings"
+                                    GridlineColor =10921638
+                                    LayoutCachedLeft =5548
+                                    LayoutCachedTop =113
+                                    LayoutCachedWidth =5836
+                                    LayoutCachedHeight =401
+                                    ThemeFontIndex =-1
+                                    ForeThemeColorIndex =8
+                                    ForeTint =100.0
+                                    ForeShade =75.0
+                                End
+                            End
+                        End
+                        Begin CheckBox
+                            SpecialEffect =2
+                            OverlapFlags =87
+                            Left =5998
+                            Top =141
+                            TabIndex =2
+                            OptionValue =3
+                            BorderColor =10921638
+                            Name ="chkNouv"
+                            ControlTipText ="Nouveau"
+                            GridlineColor =10921638
+
+                            LayoutCachedLeft =5998
+                            LayoutCachedTop =141
+                            LayoutCachedWidth =6258
+                            LayoutCachedHeight =381
+                            Begin
+                                Begin Label
+                                    OverlapFlags =247
+                                    TextFontCharSet =2
+                                    TextFontFamily =18
+                                    Left =6228
+                                    Top =113
+                                    Width =288
+                                    Height =288
+                                    BorderColor =8355711
+                                    ForeColor =3506772
+                                    Name ="lblchkNouv"
+                                    Caption ="="
+                                    FontName ="Webdings"
+                                    GridlineColor =10921638
+                                    LayoutCachedLeft =6228
+                                    LayoutCachedTop =113
+                                    LayoutCachedWidth =6516
+                                    LayoutCachedHeight =401
+                                    ThemeFontIndex =-1
+                                    ForeThemeColorIndex =-1
+                                    ForeTint =100.0
+                                End
+                            End
+                        End
+                        Begin CheckBox
+                            SpecialEffect =2
+                            OverlapFlags =87
+                            Left =6679
+                            Top =141
+                            TabIndex =3
+                            OptionValue =4
+                            BorderColor =10921638
+                            Name ="chkTout"
+                            GridlineColor =10921638
+
+                            LayoutCachedLeft =6679
+                            LayoutCachedTop =141
+                            LayoutCachedWidth =6939
+                            LayoutCachedHeight =381
+                            Begin
+                                Begin Label
+                                    OverlapFlags =247
+                                    Left =6909
+                                    Top =113
+                                    Width =960
+                                    Height =300
+                                    BorderColor =8355711
+                                    ForeColor =13421772
+                                    Name ="lblchkTout"
+                                    Caption ="Tout"
+                                    GridlineColor =10921638
+                                    LayoutCachedLeft =6909
+                                    LayoutCachedTop =113
+                                    LayoutCachedWidth =7869
+                                    LayoutCachedHeight =413
+                                    ForeTint =20.0
+                                End
+                            End
+                        End
+                    End
+                End
                 Begin CommandButton
                     TabStop = NotDefault
                     OverlapFlags =85
-                    Left =10034
+                    Left =10091
                     Top =113
                     Width =960
                     Height =330
+                    TabIndex =4
                     ForeColor =4210752
                     Name ="cmdAfficheInfo"
                     Caption =" Info"
@@ -227,9 +549,9 @@ Begin Form
                         0x329541f9c60000000049454e44ae426082
                     End
 
-                    LayoutCachedLeft =10034
+                    LayoutCachedLeft =10091
                     LayoutCachedTop =113
-                    LayoutCachedWidth =10994
+                    LayoutCachedWidth =11051
                     LayoutCachedHeight =443
                     PictureCaptionArrangement =5
                     UseTheme =0
@@ -245,10 +567,10 @@ Begin Form
                     WebImagePaddingBottom =2
                 End
                 Begin Image
-                    Left =7256
-                    Top =170
-                    Width =192
-                    Height =192
+                    Left =4138
+                    Top =10885
+                    Width =227
+                    Height =227
                     BorderColor =10921638
                     Name ="imgFiltre"
                     Picture ="ic_Filtre.png"
@@ -381,364 +703,29 @@ Begin Form
                         0x5b0000000049454e44ae426082
                     End
 
-                    LayoutCachedLeft =7256
-                    LayoutCachedTop =170
-                    LayoutCachedWidth =7448
-                    LayoutCachedHeight =362
-                    TabIndex =2
+                    LayoutCachedLeft =4138
+                    LayoutCachedTop =10885
+                    LayoutCachedWidth =4365
+                    LayoutCachedHeight =11112
+                    TabIndex =5
                 End
                 Begin Label
                     OverlapFlags =85
-                    Left =7540
-                    Top =113
+                    Left =4422
+                    Top =10828
                     Width =2388
                     Height =300
                     BorderColor =8355711
-                    ForeColor =13421772
-                    Name ="lbl_imgFiltreInfo"
+                    ForeColor =6710886
+                    Name ="lblimgFiltre"
                     Caption ="(Db Click on/off filtre)"
                     GridlineColor =10921638
-                    LayoutCachedLeft =7540
-                    LayoutCachedTop =113
-                    LayoutCachedWidth =9928
-                    LayoutCachedHeight =413
-                    ForeTint =20.0
-                End
-                Begin OptionGroup
-                    SpecialEffect =0
-                    OldBorderStyle =0
-                    OverlapFlags =85
-                    Left =2947
-                    Top =56
-                    Width =3342
-                    Height =451
-                    TabIndex =1
-                    BorderColor =10921638
-                    Name ="grpChk"
-                    AfterUpdate ="[Event Procedure]"
-                    DefaultValue ="4"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =2947
-                    LayoutCachedTop =56
-                    LayoutCachedWidth =6289
-                    LayoutCachedHeight =507
-                    Begin
-                        Begin Label
-                            BackStyle =1
-                            OverlapFlags =85
-                            TextAlign =3
-                            Left =406
-                            Top =113
-                            Width =2472
-                            Height =300
-                            BackColor =3684411
-                            BorderColor =8355711
-                            ForeColor =13421772
-                            Name ="Étiquette48"
-                            Caption ="Afficher uniquement :"
-                            GridlineColor =10921638
-                            LayoutCachedLeft =406
-                            LayoutCachedTop =113
-                            LayoutCachedWidth =2878
-                            LayoutCachedHeight =413
-                            BackThemeColorIndex =-1
-                            BackTint =25.0
-                            ForeTint =20.0
-                        End
-                        Begin CheckBox
-                            SpecialEffect =2
-                            OverlapFlags =87
-                            Left =3004
-                            Top =141
-                            OptionValue =1
-                            BorderColor =10921638
-                            Name ="chkScan2"
-                            GridlineColor =10921638
-
-                            LayoutCachedLeft =3004
-                            LayoutCachedTop =141
-                            LayoutCachedWidth =3264
-                            LayoutCachedHeight =381
-                            Begin
-                                Begin Label
-                                    OverlapFlags =247
-                                    TextFontCharSet =2
-                                    TextFontFamily =18
-                                    Left =3234
-                                    Top =113
-                                    Width =288
-                                    Height =288
-                                    BorderColor =8355711
-                                    ForeColor =2366701
-                                    Name ="lblchkScan2"
-                                    Caption ="="
-                                    FontName ="Webdings"
-                                    GridlineColor =10921638
-                                    LayoutCachedLeft =3234
-                                    LayoutCachedTop =113
-                                    LayoutCachedWidth =3522
-                                    LayoutCachedHeight =401
-                                    ThemeFontIndex =-1
-                                    ForeThemeColorIndex =-1
-                                    ForeTint =100.0
-                                End
-                            End
-                        End
-                        Begin CheckBox
-                            SpecialEffect =2
-                            OverlapFlags =87
-                            Left =3684
-                            Top =141
-                            TabIndex =1
-                            OptionValue =2
-                            BorderColor =10921638
-                            Name ="chkModif2"
-                            GridlineColor =10921638
-
-                            LayoutCachedLeft =3684
-                            LayoutCachedTop =141
-                            LayoutCachedWidth =3944
-                            LayoutCachedHeight =381
-                            Begin
-                                Begin Label
-                                    OverlapFlags =247
-                                    TextFontCharSet =2
-                                    TextFontFamily =18
-                                    Left =3914
-                                    Top =113
-                                    Width =288
-                                    Height =288
-                                    BorderColor =8355711
-                                    Name ="lblchkModif2"
-                                    Caption ="="
-                                    FontName ="Webdings"
-                                    GridlineColor =10921638
-                                    LayoutCachedLeft =3914
-                                    LayoutCachedTop =113
-                                    LayoutCachedWidth =4202
-                                    LayoutCachedHeight =401
-                                    ThemeFontIndex =-1
-                                    ForeThemeColorIndex =8
-                                    ForeTint =100.0
-                                    ForeShade =75.0
-                                End
-                            End
-                        End
-                        Begin CheckBox
-                            SpecialEffect =2
-                            OverlapFlags =87
-                            Left =4364
-                            Top =141
-                            TabIndex =2
-                            OptionValue =3
-                            BorderColor =10921638
-                            Name ="chkNouv2"
-                            GridlineColor =10921638
-
-                            LayoutCachedLeft =4364
-                            LayoutCachedTop =141
-                            LayoutCachedWidth =4624
-                            LayoutCachedHeight =381
-                            Begin
-                                Begin Label
-                                    OverlapFlags =247
-                                    TextFontCharSet =2
-                                    TextFontFamily =18
-                                    Left =4594
-                                    Top =113
-                                    Width =288
-                                    Height =288
-                                    BorderColor =8355711
-                                    ForeColor =3506772
-                                    Name ="lblchkNouv2"
-                                    Caption ="="
-                                    FontName ="Webdings"
-                                    GridlineColor =10921638
-                                    LayoutCachedLeft =4594
-                                    LayoutCachedTop =113
-                                    LayoutCachedWidth =4882
-                                    LayoutCachedHeight =401
-                                    ThemeFontIndex =-1
-                                    ForeThemeColorIndex =-1
-                                    ForeTint =100.0
-                                End
-                            End
-                        End
-                        Begin CheckBox
-                            SpecialEffect =2
-                            OverlapFlags =87
-                            Left =5045
-                            Top =141
-                            TabIndex =3
-                            OptionValue =4
-                            BorderColor =10921638
-                            Name ="chkTout"
-                            GridlineColor =10921638
-
-                            LayoutCachedLeft =5045
-                            LayoutCachedTop =141
-                            LayoutCachedWidth =5305
-                            LayoutCachedHeight =381
-                            Begin
-                                Begin Label
-                                    OverlapFlags =247
-                                    Left =5275
-                                    Top =113
-                                    Width =960
-                                    Height =300
-                                    BorderColor =8355711
-                                    ForeColor =13421772
-                                    Name ="lblchkTout"
-                                    Caption ="Tout"
-                                    GridlineColor =10921638
-                                    LayoutCachedLeft =5275
-                                    LayoutCachedTop =113
-                                    LayoutCachedWidth =6235
-                                    LayoutCachedHeight =413
-                                    ForeTint =20.0
-                                End
-                            End
-                        End
-                    End
+                    LayoutCachedLeft =4422
+                    LayoutCachedTop =10828
+                    LayoutCachedWidth =6810
+                    LayoutCachedHeight =11128
                 End
             End
-        End
-        Begin Section
-            CanGrow = NotDefault
-            Height =10714
-            Name ="Détail"
-            AlternateBackThemeColorIndex =1
-            AlternateBackShade =95.0
-            BackThemeColorIndex =1
-            Begin
-                Begin Subform
-                    OverlapFlags =85
-                    Left =566
-                    Top =170
-                    Width =10464
-                    Height =1992
-                    BorderColor =10921638
-                    Name ="sfO"
-                    SourceObject ="Form.iF_RecapSFO"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =566
-                    LayoutCachedTop =170
-                    LayoutCachedWidth =11030
-                    LayoutCachedHeight =2162
-                    Begin
-                        Begin Label
-                            Vertical = NotDefault
-                            BackStyle =1
-                            OverlapFlags =85
-                            TextAlign =2
-                            Left =113
-                            Top =170
-                            Width =375
-                            Height =1992
-                            BorderColor =8355711
-                            ForeColor =6710886
-                            Name ="lbl_sfO"
-                            Caption ="Objets"
-                            GridlineColor =10921638
-                            LayoutCachedLeft =113
-                            LayoutCachedTop =170
-                            LayoutCachedWidth =488
-                            LayoutCachedHeight =2162
-                            BackThemeColorIndex =4
-                            BackTint =40.0
-                        End
-                    End
-                End
-                Begin Subform
-                    OverlapFlags =85
-                    Left =566
-                    Top =2437
-                    Width =10476
-                    Height =3000
-                    TabIndex =1
-                    BorderColor =10921638
-                    Name ="sfC"
-                    SourceObject ="Form.iF_RecapSFC"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =566
-                    LayoutCachedTop =2437
-                    LayoutCachedWidth =11042
-                    LayoutCachedHeight =5437
-                    Begin
-                        Begin Label
-                            Vertical = NotDefault
-                            BackStyle =1
-                            OverlapFlags =85
-                            TextAlign =2
-                            Left =113
-                            Top =2437
-                            Width =375
-                            Height =3003
-                            BorderColor =8355711
-                            ForeColor =6710886
-                            Name ="lbl_sfC"
-                            Caption ="Contrôles"
-                            GridlineColor =10921638
-                            LayoutCachedLeft =113
-                            LayoutCachedTop =2437
-                            LayoutCachedWidth =488
-                            LayoutCachedHeight =5440
-                            BackThemeColorIndex =9
-                            BackTint =30.0
-                        End
-                    End
-                End
-                Begin Subform
-                    OverlapFlags =85
-                    Left =566
-                    Top =5725
-                    Width =10464
-                    Height =4824
-                    TabIndex =2
-                    BorderColor =10921638
-                    Name ="sfT"
-                    SourceObject ="Form.iF_RecapSFT"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =566
-                    LayoutCachedTop =5725
-                    LayoutCachedWidth =11030
-                    LayoutCachedHeight =10549
-                    Begin
-                        Begin Label
-                            Vertical = NotDefault
-                            BackStyle =1
-                            OverlapFlags =85
-                            TextAlign =2
-                            Left =113
-                            Top =5725
-                            Width =375
-                            Height =4815
-                            BorderColor =8355711
-                            ForeColor =6710886
-                            Name ="lbl_sfT"
-                            Caption ="Propriétés :"
-                            GridlineColor =10921638
-                            LayoutCachedLeft =113
-                            LayoutCachedTop =5725
-                            LayoutCachedWidth =488
-                            LayoutCachedHeight =10540
-                            BackThemeColorIndex =5
-                            BackTint =60.0
-                        End
-                    End
-                End
-            End
-        End
-        Begin FormFooter
-            Height =0
-            Name ="PiedFormulaire"
-            AlternateBackThemeColorIndex =1
-            AlternateBackShade =95.0
-            BackThemeColorIndex =1
         End
     End
 End

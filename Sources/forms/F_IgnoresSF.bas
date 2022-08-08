@@ -3,42 +3,32 @@ VersionRequired =20
 PublishOption =1
 Begin Form
     RecordSelectors = NotDefault
-    AutoCenter = NotDefault
-    NavigationButtons = NotDefault
     AllowDeletions = NotDefault
     DividingLines = NotDefault
     AllowAdditions = NotDefault
-    FilterOn = NotDefault
-    AllowEdits = NotDefault
+    AllowDesignChanges = NotDefault
     ScrollBars =2
     ViewsAllowed =1
     PictureAlignment =2
     DatasheetGridlinesBehavior =3
     GridY =10
-    Width =10207
+    Width =7370
     DatasheetFontHeight =11
     ItemSuffix =11
-    Left =10536
-    Top =5532
-    Right =20748
-    Bottom =8268
-    Filter ="Nouveau=True"
-    RecordSource ="SELECT T_ObjetChilds.Child_ID, T_ObjetChilds.ChildType, T_ObjetChilds.ChildNom, "
-        "T_ObjetChilds.IDObjet, T_ObjetChilds.Scanner, T_ObjetChilds.Nouveau, IIf(T_Objet"
-        "Childs.Scanner=False,\"=\",Null) AS Scan, IIf(T_ObjetChilds.Nouveau=True,\"=\",N"
-        "ull) AS Nouv FROM T_App INNER JOIN (T_Objets INNER JOIN T_ObjetChilds ON T_Objet"
-        "s.Objet_ID = T_ObjetChilds.IDObjet) ON T_App.App_ID = T_Objets.IDApp WHERE (((T_"
-        "App.App_ID)='{43FE1D94-4294-486F-A6EC-25EAADB8D3CB}')) ORDER BY T_ObjetChilds.Ch"
-        "ildType, T_ObjetChilds.ChildNom; "
-    Caption =" "
+    Left =4320
+    Top =3408
+    Right =11688
+    Bottom =11820
+    RecSrcDt = Begin
+        0x0c38e801b4dde540
+    End
+    RecordSource ="R_F_IgnoresSf"
+    OnOpen ="[Event Procedure]"
     DatasheetFontName ="Calibri"
     AllowDatasheetView =0
-    FilterOnLoad =0
-    OrderByOnLoad =0
-    OrderByOnLoad =0
+    FilterOnLoad =255
     ShowPageMargins =0
     DisplayOnSharePointSite =1
-    AllowLayoutView =0
     DatasheetAlternateBackColor =15921906
     DatasheetGridlinesColor12 =0
     FitToScreen =1
@@ -90,7 +80,7 @@ Begin Form
             GridlineShade =65.0
         End
         Begin FormHeader
-            Height =315
+            Height =300
             Name ="EntêteFormulaire"
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
@@ -99,155 +89,142 @@ Begin Form
             Begin
                 Begin Label
                     OverlapFlags =85
-                    TextAlign =2
-                    Left =57
-                    Width =180
-                    Height =315
-                    BorderColor =8355711
-                    ForeColor =6710886
-                    Name ="lbl_txtScan"
-                    Caption ="S"
-                    Tag ="DetachedLabel"
-                    GridlineStyleBottom =1
-                    GridlineColor =10921638
-                    LayoutCachedLeft =57
-                    LayoutCachedWidth =237
-                    LayoutCachedHeight =315
-                End
-                Begin Label
-                    OverlapFlags =85
-                    TextAlign =2
-                    Left =340
-                    Width =225
-                    Height =315
-                    BorderColor =8355711
-                    ForeColor =6710886
-                    Name ="lbl_txtNouv"
-                    Caption ="N"
-                    Tag ="DetachedLabel"
-                    GridlineStyleBottom =1
-                    GridlineColor =10921638
-                    LayoutCachedLeft =340
-                    LayoutCachedWidth =565
-                    LayoutCachedHeight =315
-                End
-                Begin Label
-                    OverlapFlags =85
-                    Left =2551
-                    Width =1020
+                    TextAlign =1
+                    Width =1128
                     Height =300
                     BorderColor =8355711
                     ForeColor =6710886
-                    Name ="lbl_Control"
-                    Caption ="Contrôles"
+                    Name ="lbl_ObjetType"
+                    Caption ="Type"
+                    Tag ="DetachedLabel"
+                    GridlineStyleBottom =1
                     GridlineColor =10921638
-                    LayoutCachedLeft =2551
-                    LayoutCachedWidth =3571
+                    LayoutCachedWidth =1128
+                    LayoutCachedHeight =300
+                End
+                Begin Label
+                    OverlapFlags =85
+                    TextAlign =1
+                    Left =1757
+                    Width =2052
+                    Height =300
+                    BorderColor =8355711
+                    ForeColor =6710886
+                    Name ="lbl_ObjetNom"
+                    Caption ="Nom"
+                    Tag ="DetachedLabel"
+                    GridlineStyleBottom =1
+                    GridlineColor =10921638
+                    LayoutCachedLeft =1757
+                    LayoutCachedWidth =3809
+                    LayoutCachedHeight =300
+                End
+                Begin Label
+                    OverlapFlags =85
+                    TextAlign =2
+                    Left =6462
+                    Width =900
+                    Height =300
+                    BorderColor =8355711
+                    ForeColor =6710886
+                    Name ="lbl_Ignorer"
+                    Caption ="Ignorer"
+                    Tag ="DetachedLabel"
+                    GridlineStyleBottom =1
+                    GridlineColor =10921638
+                    LayoutCachedLeft =6462
+                    LayoutCachedWidth =7362
                     LayoutCachedHeight =300
                 End
             End
         End
         Begin Section
-            Height =340
+            Height =300
             Name ="Détail"
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
             BackThemeColorIndex =1
             Begin
                 Begin TextBox
-                    EnterKeyBehavior = NotDefault
+                    Locked = NotDefault
                     AllowAutoCorrect = NotDefault
                     OverlapFlags =93
                     IMESentenceMode =3
-                    Left =2554
-                    Width =7644
-                    Height =340
+                    Width =1704
+                    Height =300
+                    ColumnWidth =3000
+                    TabIndex =2
+                    BorderColor =10921638
+                    ForeColor =4210752
+                    Name ="txtObjetType"
+                    ControlSource ="ObjetType"
+                    GridlineColor =10921638
+                    ShowDatePicker =0
+
+                    LayoutCachedWidth =1704
+                    LayoutCachedHeight =300
+                    BackThemeColorIndex =3
+                    BackShade =90.0
+                End
+                Begin TextBox
+                    Locked = NotDefault
+                    AllowAutoCorrect = NotDefault
+                    OverlapFlags =95
+                    IMESentenceMode =3
+                    Left =1700
+                    Width =5100
+                    Height =300
                     ColumnWidth =3000
                     TabIndex =3
                     BorderColor =10921638
                     ForeColor =4210752
-                    Name ="ControlNom"
-                    ControlSource ="ChildNom"
+                    Name ="txtObjetNom"
+                    ControlSource ="ObjetNom"
                     GridlineColor =10921638
+                    ShowDatePicker =0
 
-                    LayoutCachedLeft =2554
-                    LayoutCachedWidth =10198
-                    LayoutCachedHeight =340
-                    BackThemeColorIndex =9
-                    BackTint =30.0
+                    LayoutCachedLeft =1700
+                    LayoutCachedWidth =6800
+                    LayoutCachedHeight =300
+                    BackThemeColorIndex =4
+                    BackTint =40.0
                 End
-                Begin TextBox
-                    Enabled = NotDefault
-                    Locked = NotDefault
-                    TabStop = NotDefault
-                    AllowAutoCorrect = NotDefault
-                    OldBorderStyle =0
-                    OverlapFlags =93
-                    TextFontCharSet =2
-                    TextFontFamily =18
-                    BackStyle =0
-                    IMESentenceMode =3
-                    Width =284
-                    Height =340
+                Begin CheckBox
+                    OverlapFlags =85
+                    Left =6973
+                    Top =56
+                    TabIndex =4
                     BorderColor =10921638
-                    ForeColor =2366701
-                    Name ="txtScan"
-                    ControlSource ="Scan"
-                    FontName ="Webdings"
+                    Name ="chkIgnorer"
+                    ControlSource ="Ignorer"
                     GridlineColor =10921638
 
-                    LayoutCachedWidth =284
-                    LayoutCachedHeight =340
-                    ThemeFontIndex =-1
-                    ForeThemeColorIndex =-1
-                    ForeTint =100.0
+                    LayoutCachedLeft =6973
+                    LayoutCachedTop =56
+                    LayoutCachedWidth =7233
+                    LayoutCachedHeight =296
                 End
                 Begin TextBox
-                    Enabled = NotDefault
-                    Locked = NotDefault
+                    Visible = NotDefault
                     TabStop = NotDefault
+                    EnterKeyBehavior = NotDefault
                     AllowAutoCorrect = NotDefault
-                    OldBorderStyle =0
-                    OverlapFlags =95
-                    TextFontCharSet =2
-                    TextFontFamily =18
-                    BackStyle =0
+                    OverlapFlags =247
                     IMESentenceMode =3
-                    Left =283
-                    Width =284
-                    Height =340
-                    TabIndex =1
-                    BorderColor =10921638
-                    Name ="txtModif"
-                    ControlSource ="Nouv"
-                    FontName ="Webdings"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =283
-                    LayoutCachedWidth =567
-                    LayoutCachedHeight =340
-                    ThemeFontIndex =-1
-                    ForeThemeColorIndex =9
-                    ForeTint =100.0
-                    ForeShade =75.0
-                End
-                Begin TextBox
-                    TabStop = NotDefault
-                    OverlapFlags =87
-                    IMESentenceMode =3
-                    Left =560
-                    Width =2001
-                    Height =340
-                    TabIndex =2
+                    Left =4365
+                    Width =954
+                    Height =300
+                    ColumnWidth =3000
                     BorderColor =10921638
                     ForeColor =4210752
-                    Name ="ControlType"
-                    ControlSource ="ChildType"
+                    Name ="txtObjet_ID"
+                    ControlSource ="Objet_ID"
                     GridlineColor =10921638
+                    ShowDatePicker =0
 
-                    LayoutCachedLeft =560
-                    LayoutCachedWidth =2561
-                    LayoutCachedHeight =340
+                    LayoutCachedLeft =4365
+                    LayoutCachedWidth =5319
+                    LayoutCachedHeight =300
                 End
                 Begin TextBox
                     Visible = NotDefault
@@ -255,18 +232,20 @@ Begin Form
                     AllowAutoCorrect = NotDefault
                     OverlapFlags =247
                     IMESentenceMode =3
-                    Left =5215
-                    Width =789
+                    Left =5612
+                    Width =1023
                     Height =300
-                    TabIndex =4
+                    ColumnWidth =3000
+                    TabIndex =1
                     BorderColor =10921638
                     ForeColor =4210752
-                    Name ="IDObjet"
-                    ControlSource ="IDObjet"
+                    Name ="txtIDApp"
+                    ControlSource ="IDApp"
                     GridlineColor =10921638
+                    ShowDatePicker =0
 
-                    LayoutCachedLeft =5215
-                    LayoutCachedWidth =6004
+                    LayoutCachedLeft =5612
+                    LayoutCachedWidth =6635
                     LayoutCachedHeight =300
                 End
             End
@@ -281,3 +260,23 @@ Begin Form
         End
     End
 End
+CodeBehindForm
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = True
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Compare Database
+Option Explicit
+
+Private Sub Form_Open(Cancel As Integer)
+
+    On Error Resume Next
+    '// Empeche l'ouverture indépendante.
+    If (Me.Parent.name = "") Then
+        If Err.Number = 2452 Then
+            Cancel = True
+            DoCmd.Close
+        End If
+    End If
+
+End Sub

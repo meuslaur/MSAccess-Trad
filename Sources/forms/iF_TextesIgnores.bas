@@ -20,7 +20,6 @@ Begin Form
     Top =528
     Right =13332
     Bottom =11856
-    Filter ="[ID]='{43FE1D94-4294-486F-A6EC-25EAADB8D3CB}'"
     RecSrcDt = Begin
         0x4f224c0d4cdde540
     End
@@ -157,7 +156,7 @@ Begin Form
                     RowSource ="RL_Apps"
                     ColumnWidths ="0;2089"
                     AfterUpdate ="[Event Procedure]"
-                    OnDblClick ="[Event Procedure]"
+                    OnGotFocus ="=OuvreZl()"
                     ControlTipText ="Applications enregistrées."
                     GridlineColor =10921638
                     AllowValueListEdits =0
@@ -415,10 +414,6 @@ Private Sub Form_Open(Cancel As Integer)
 
 End Sub
 
-Private Sub zlBases_DblClick(Cancel As Integer)
-    Me.zlBases.Dropdown
-End Sub
-
 Private Sub zlBases_AfterUpdate()
 
     Me.Filter = "[ID]='" & Me.zlBases & "'"
@@ -431,3 +426,10 @@ Private Sub zlBases_AfterUpdate()
     Me.txt_Texte.Enabled = Not (IsNull(Me.txt_Texte))
 
 End Sub
+
+' ----------------------------------------------------------------
+'// Ouvre les zl sur OnGotFocus (=OuvreZl()).
+' ----------------------------------------------------------------
+Private Function OuvreZl() As Boolean
+    Me.ActiveControl.Dropdown
+End Function

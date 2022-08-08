@@ -17,16 +17,17 @@ Begin Form
     GridY =10
     Width =18368
     DatasheetFontHeight =11
-    ItemSuffix =69
-    Left =2412
-    Top =132
-    Right =20784
-    Bottom =12360
+    ItemSuffix =70
+    Left =3372
+    Top =336
+    Right =21744
+    Bottom =12564
     DatasheetGridlinesColor =15132391
     RecSrcDt = Begin
         0x5c7a48f85bd8e540
     End
-    Caption ="Analyse/extraction des textes des bases"
+    Caption ="Scan les textes des objets, de ses enfants et de leurs propriétés, d'une base de"
+        " données."
     OnClose ="[Event Procedure]"
     DatasheetFontName ="Calibri"
     OnLoad ="[Event Procedure]"
@@ -257,6 +258,7 @@ Begin Form
                     ForeColor =4210752
                     Name ="txtBdd"
                     GridlineColor =10921638
+                    ShowDatePicker =0
 
                     LayoutCachedLeft =2551
                     LayoutCachedTop =226
@@ -550,7 +552,6 @@ Begin Form
                     Height =480
                     BorderColor =10921638
                     Name ="img_Langue"
-                    Picture ="D:\\Access365\\_Dev\\TradAccess\\Flags\\1033.png"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =16667
@@ -717,6 +718,26 @@ Begin Form
                 End
                 Begin Label
                     Visible = NotDefault
+                    OverlapFlags =247
+                    Left =2437
+                    Top =113
+                    Width =11175
+                    Height =285
+                    FontSize =10
+                    BorderColor =8355711
+                    ForeColor =16777215
+                    Name ="lbl_InfoScan2"
+                    FontName ="Verdana"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =2437
+                    LayoutCachedTop =113
+                    LayoutCachedWidth =13612
+                    LayoutCachedHeight =398
+                    ThemeFontIndex =-1
+                    ForeTint =0.0
+                End
+                Begin Label
+                    Visible = NotDefault
                     FontItalic = NotDefault
                     OldBorderStyle =1
                     OverlapFlags =247
@@ -743,26 +764,6 @@ Begin Form
                     ForeThemeColorIndex =9
                     ForeTint =100.0
                     ForeShade =75.0
-                End
-                Begin Label
-                    Visible = NotDefault
-                    OverlapFlags =247
-                    Left =2437
-                    Top =113
-                    Width =11175
-                    Height =285
-                    FontSize =10
-                    BorderColor =8355711
-                    ForeColor =16777215
-                    Name ="lbl_InfoScan2"
-                    FontName ="Verdana"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =2437
-                    LayoutCachedTop =113
-                    LayoutCachedWidth =13612
-                    LayoutCachedHeight =398
-                    ThemeFontIndex =-1
-                    ForeTint =0.0
                 End
             End
         End
@@ -914,6 +915,7 @@ Begin Form
                     ForeColor =4210752
                     Name ="txtBddSauve"
                     GridlineColor =10921638
+                    ShowDatePicker =0
 
                     LayoutCachedLeft =16837
                     LayoutCachedTop =7372
@@ -1014,6 +1016,7 @@ Begin Form
                     ControlSource ="=[lstObjets].[Column](2)"
                     FontName ="Consolas"
                     GridlineColor =10921638
+                    ShowDatePicker =0
 
                     LayoutCachedLeft =4195
                     LayoutCachedTop =453
@@ -1048,6 +1051,7 @@ Begin Form
                     ControlSource ="=[lstObjets].[column](1)"
                     FontName ="Consolas"
                     GridlineColor =10921638
+                    ShowDatePicker =0
 
                     LayoutCachedLeft =4195
                     LayoutCachedTop =113
@@ -1226,7 +1230,7 @@ Begin Form
                     LayoutCachedTop =226
                     LayoutCachedWidth =4208
                     LayoutCachedHeight =466
-                    TabIndex =13
+                    TabIndex =14
                 End
                 Begin Image
                     Left =7483
@@ -1278,7 +1282,7 @@ Begin Form
                     LayoutCachedTop =1133
                     LayoutCachedWidth =7723
                     LayoutCachedHeight =1373
-                    TabIndex =14
+                    TabIndex =15
                 End
                 Begin Image
                     Left =10792
@@ -1331,7 +1335,7 @@ Begin Form
                     LayoutCachedTop =735
                     LayoutCachedWidth =11032
                     LayoutCachedHeight =975
-                    TabIndex =15
+                    TabIndex =16
                 End
                 Begin CommandButton
                     TabStop = NotDefault
@@ -1342,7 +1346,7 @@ Begin Form
                     Height =330
                     TabIndex =7
                     ForeColor =4210752
-                    Name ="cmdAfficheInfo"
+                    Name ="cmdFrmInfoCoul"
                     Caption =" Info"
                     OnClick ="[Event Procedure]"
                     Picture ="ic_Aide.png"
@@ -1429,7 +1433,7 @@ Begin Form
                     RowSource ="RL_Apps"
                     ColumnWidths ="0;2087"
                     AfterUpdate ="[Event Procedure]"
-                    OnDblClick ="[Event Procedure]"
+                    OnGotFocus ="=OuvreZl()"
                     ControlTipText ="Liste des applications déjà enregistrées,"
                     GridlineColor =10921638
 
@@ -1472,6 +1476,7 @@ Begin Form
                     Enabled = NotDefault
                     Locked = NotDefault
                     TabStop = NotDefault
+                    AllowAutoCorrect = NotDefault
                     OldBorderStyle =0
                     OverlapFlags =85
                     TextAlign =2
@@ -1486,6 +1491,7 @@ Begin Form
                     Name ="txtDateScan"
                     Format ="General Date"
                     GridlineColor =10921638
+                    ShowDatePicker =0
 
                     LayoutCachedLeft =2608
                     LayoutCachedTop =1644
@@ -1526,9 +1532,9 @@ Begin Form
                     Height =330
                     TabIndex =10
                     ForeColor =4210752
-                    Name ="cmdVoirRecap"
+                    Name ="cmdFrmRecap"
                     OnClick ="[Event Procedure]"
-                    ControlTipText ="Affiche la récap du dernier scan,,,"
+                    ControlTipText ="Affiche la récap du dernier scan."
                     Picture ="ic_cmdRecap.png"
                     GridlineColor =10921638
                     ImageData = Begin
@@ -1599,7 +1605,7 @@ Begin Form
                     Top =56
                     Width =360
                     Height =360
-                    TabIndex =12
+                    TabIndex =13
                     ForeColor =4210752
                     Name ="Commande65"
                     Caption ="Commande65"
@@ -1695,9 +1701,9 @@ Begin Form
                     Height =331
                     TabIndex =11
                     ForeColor =4210752
-                    Name ="cmdTxtIgnore"
+                    Name ="cmdFrmTxtIgnore"
                     OnClick ="[Event Procedure]"
-                    ControlTipText ="Liste des textes filtrés."
+                    ControlTipText ="Liste des textes filtrés lors du scan."
                     Picture ="ic_FTextesIgnore.png"
                     GridlineColor =10921638
                     ImageData = Begin
@@ -1810,6 +1816,70 @@ Begin Form
                             GridlineThemeColorIndex =-1
                         End
                     End
+                End
+                Begin CommandButton
+                    TabStop = NotDefault
+                    OverlapFlags =85
+                    Left =340
+                    Top =907
+                    Width =331
+                    Height =331
+                    TabIndex =12
+                    ForeColor =4210752
+                    Name ="cmdFrmIgnores"
+                    OnClick ="[Event Procedure]"
+                    ControlTipText ="Sélection des objets à ignorés..."
+                    Picture ="ic_cmbF_Ignores.png"
+                    GridlineColor =10921638
+                    ImageData = Begin
+                        0x89504e470d0a1a0a0000000d49484452000000100000001008060000001ff3ff ,
+                        0x610000000467414d410000b18f0bfc6105000000017352474200aece1ce90000 ,
+                        0x00206348524d00007a26000080840000fa00000080e8000075300000ea600000 ,
+                        0x3a98000017709cba513c00000006624b4744000000000000f943bb7f00000009 ,
+                        0x7048597300000dd700000dd70142289b78000000097670416700000010000000 ,
+                        0x10005cc6adc3000001924944415438cb95913f4b5b5118879ff7bd37d725da2a ,
+                        0x194a1767cd2ad8a55b0a11151c5dec22fa151c1c9cfc000e3a164aa138b895a4 ,
+                        0x6693a0208160c82045474d161b1acdbf13319e0ee6c67b9358ea0f0e8703e7f7 ,
+                        0xbccfe1084f790b4cf3ba9c0355ff90b4af0c9004707d82b5969bdf1554055545 ,
+                        0x445011a4bb1041ba77a3d1684fc30d3a398e3e95f479f7010221c85080768baa ,
+                        0xfa0c095a0c490f20dda20fd0e0f4ff0100a1723fe0a584001228ab6acfec5f00 ,
+                        0xed3708164484762e47796d8dd6d151ef99ad6c966222f1fd97eac7b081c8807a ,
+                        0x696f0f6f7999522ac53b405c97ebfd7dbc959571d36c7ef3dd92d6da9fc6181c ,
+                        0xc70901eab91c97bbbb44a6a6b83f3bc33e3ce0c4e3b40b855a279d9e1b30e8cf ,
+                        0xe8ec2cb78502eec1015e2c8605ee32999ac9e7e716ac3d7911e01b586be9743a ,
+                        0x98629191488447636856abce1f6b47067e6118a894cd62363688361a54a00e3c ,
+                        0xc6604ce0c70e2c86009ee70dc04ed7d7996c34b882fa05ccbb700f1c4ec29b0a ,
+                        0x7cf147c5809961369f606209b6cab0ba0dc7009bf0e13d7c2dc3e7bf3419a551 ,
+                        0xf3d65d0500000025744558746372656174652d6461746500323030392d31312d ,
+                        0x31355431373a30323a33342d30373a3030b6e78e120000002574455874646174 ,
+                        0x653a63726561746500323031302d30312d31315430393a32343a32352d30373a ,
+                        0x303009d465680000002574455874646174653a6d6f6469667900323031302d30 ,
+                        0x312d31315430393a32343a32352d30373a30307889ddd400000067744558744c ,
+                        0x6963656e736500687474703a2f2f6372656174697665636f6d6d6f6e732e6f72 ,
+                        0x672f6c6963656e7365732f62792d73612f332e302f206f7220687474703a2f2f ,
+                        0x6372656174697665636f6d6d6f6e732e6f72672f6c6963656e7365732f4c4750 ,
+                        0x4c2f322e312f5b8f3c6300000025744558746d6f646966792d64617465003230 ,
+                        0x30392d30362d30335430393a35383a31332d30363a30302c9a65570000001374 ,
+                        0x455874536f75726365004f787967656e2049636f6e73ec18aee8000000277445 ,
+                        0x5874536f757263655f55524c00687474703a2f2f7777772e6f787967656e2d69 ,
+                        0x636f6e732e6f72672fef37aacb0000000049454e44ae426082
+                    End
+
+                    LayoutCachedLeft =340
+                    LayoutCachedTop =907
+                    LayoutCachedWidth =671
+                    LayoutCachedHeight =1238
+                    UseTheme =0
+                    BackColor =14461583
+                    BorderColor =14461583
+                    HoverColor =15189940
+                    PressedColor =9917743
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =3
+                    WebImagePaddingTop =3
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
                 End
             End
         End
@@ -1980,13 +2050,14 @@ On Error GoTo ERR_cmbSelectBdd_Click
     If ScanTxt.ReScannerApp Then
         Me.zlLangues = ScanTxt.GetIDLangBase()      '// Extraire la langue d'origine de la base...
         Me.zlBases = ScanTxt.AppID()
-        zlBases_AfterUpdate
+        ActiveCmbBases      '// Active les boutons.
+        MaJLangue           '// Affiche le drapeau...
 
     Else
         Me.zlLangues.SetFocus
         Me.zlLangues.Dropdown
-        Me.cmdVoirRecap.Enabled = False
-        Me.cmdTxtIgnore.Enabled = False
+        Me.zlBases = Null
+        ActiveCmbBases      '// Désactive les boutons.
     End If
 
     MsgBox "Vous pouvez lancer le scan", vbInformation, "Base ouverte"
@@ -2017,10 +2088,6 @@ Private Sub cmdCloseBd_Click()
     Me.txtBdd = "Sélectionnez un base..."
     DoCmd.Hourglass False
 
-End Sub
-
-Private Sub zlBases_DblClick(Cancel As Integer)
-    Me.zlBases.Dropdown
 End Sub
 
 '----------------------------------------------------------------
@@ -2117,8 +2184,6 @@ End Sub
 '----------------------------------------------------------------
 Private Sub zlBases_AfterUpdate()
 
-On Error GoTo ERR_zlBases_AfterUpdate
-
     If (IsNull(Me.zlBases)) Then Exit Sub
 
     Dim vDate As Variant
@@ -2135,54 +2200,51 @@ On Error GoTo ERR_zlBases_AfterUpdate
     MaJLangue False                                     '// Affiche le drapeau, vérouille la zl...
 
     MajLabelsInfo
-    Me.cmdVoirRecap.Enabled = True
-    Me.cmdTxtIgnore.Enabled = True
-    
+    ActiveCmbBases      '// Active les boutons
+
 SORTIE_zlBases_AfterUpdate:
     DoCmd.Echo True
     Exit Sub
 
-ERR_zlBases_AfterUpdate:
-    MsgBox "L’erreur suivante s’est produite" & vbCrLf & vbCrLf & _
-           "Erreur N°: " & Err.Number & vbCrLf & _
-           "Source : Form_F_Main.zlBases_AfterUpdate" & vbCrLf & _
-           "Description: " & Err.Description & _
-           Switch(Erl = 0, vbNullString, Erl <> 0, vbCrLf & "Line No: " & Erl), _
-           vbOKOnly + vbCritical, "Erreur survenue !"
-    Resume SORTIE_zlBases_AfterUpdate
-End Sub
-
-'----------------------------------------------------------------
-'// Affiche la récap du dernier scan de la base selectionnée.
-'----------------------------------------------------------------
-Private Sub cmdVoirRecap_Click()
-    If (IsNull(Me.zlBases)) Then
-        Me.zlBases.SetFocus
-        Me.cmdVoirRecap.Enabled = False
-        Exit Sub
-    End If
-
-    DoCmd.OpenForm "iF_Recap", , , , , acDialog, Me.zlBases & ";" & Me.txtDateScan
-End Sub
-
-Private Sub cmdTxtIgnore_Click()
-    If (IsNull(Me.zlBases)) Then
-        Me.zlBases.SetFocus
-        Me.cmdTxtIgnore.Enabled = False
-        Exit Sub
-    End If
-
-    DoCmd.OpenForm "iF_TextesIgnores", , , , , , Me.zlBases
 End Sub
 
 Private Sub lstObjets_AfterUpdate()
     MajLabelsInfo
 End Sub
 
-Private Sub cmdAfficheInfo_Click()
+'----------------------------------------------------------------
+'// Affiche la récap du dernier scan de la base selectionnée.
+'----------------------------------------------------------------
+Private Sub cmdFrmRecap_Click()
+    If Not ActiveCmbBases Then Exit Sub
+    DoCmd.OpenForm "iF_Recap", , , , , acDialog, Me.zlBases & ";" & Me.txtDateScan
+End Sub
+
+Private Sub cmdFrmInfoCoul_Click()
     DoCmd.OpenForm "iF_InfoRecap" ', , , , , , Me.zlBases & ";" & Me.txtDateScan
 End Sub
 
+Private Sub cmdFrmTxtIgnore_Click()
+    If Not ActiveCmbBases Then Exit Sub
+    DoCmd.OpenForm "iF_TextesIgnores", , , , , , Me.zlBases
+End Sub
+Private Sub cmdFrmIgnores_Click()
+    If Not ActiveCmbBases Then Exit Sub
+    DoCmd.OpenForm "F_Ignores", , , , , , Me.zlBases & ";" & Me.zlBases.Column(1)
+End Sub
+
+Private Function ActiveCmbBases() As Boolean
+    Dim bActiveCmb  As Boolean
+
+    bActiveCmb = Not IsNull(Me.zlBases)
+    If (Not bActiveCmb) Then Me.zlBases.SetFocus
+    
+    Me.cmdFrmRecap.Enabled = bActiveCmb
+    Me.cmdFrmTxtIgnore.Enabled = bActiveCmb
+    Me.cmdFrmIgnores.Enabled = bActiveCmb
+    ActiveCmbBases = bActiveCmb
+
+End Function
 '//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& END EVENTS &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 '// ################################ PRIVATE SUB/FUNC ####################################
@@ -2307,6 +2369,14 @@ Private Sub MajLabelsInfo()
     Me.lblGrCtrType.Caption = "Contrôle"
     Me.lblGrCtrNom.Caption = vbNullString
 End Sub
+
+' ----------------------------------------------------------------
+'// Ouvre les zl sur OnGotFocus (=OuvreZl()).
+' ----------------------------------------------------------------
+Private Function OuvreZl() As Boolean
+    Me.ActiveControl.Dropdown
+End Function
+
 '// ################################# END PRIV. SUB/FUNC #################################
 
 '// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ PUBLIC SUB/FUNC   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\

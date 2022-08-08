@@ -14,13 +14,15 @@ Begin Form
     GridY =10
     Width =10262
     DatasheetFontHeight =11
-    Top =480
-    Right =15660
-    Bottom =4080
+    Left =3900
+    Top =3516
+    Right =14160
+    Bottom =8244
     RecSrcDt = Begin
         0x6965100493dde540
     End
     RecordSource ="R_F_MainSFControles"
+    Caption =" "
     OnCurrent ="[Event Procedure]"
     DatasheetFontName ="Calibri"
     FilterOnLoad =0
@@ -183,6 +185,7 @@ Begin Form
                     Name ="txtChildType"
                     ControlSource ="ChildType"
                     GridlineColor =10921638
+                    ShowDatePicker =0
 
                     LayoutCachedLeft =3044
                     LayoutCachedWidth =4820
@@ -203,6 +206,7 @@ Begin Form
                     Name ="txtControlParentName"
                     ControlSource ="ControlParentName"
                     GridlineColor =10921638
+                    ShowDatePicker =0
 
                     LayoutCachedLeft =566
                     LayoutCachedWidth =3050
@@ -223,6 +227,7 @@ Begin Form
                     Name ="txtChildlNom"
                     ControlSource ="ChildNom"
                     GridlineColor =10921638
+                    ShowDatePicker =0
 
                     LayoutCachedLeft =4817
                     LayoutCachedWidth =10262
@@ -318,6 +323,7 @@ Begin Form
                     Name ="txtChild_ID"
                     ControlSource ="Child_ID"
                     GridlineColor =10921638
+                    ShowDatePicker =0
 
                     LayoutCachedLeft =7993
                     LayoutCachedWidth =9109

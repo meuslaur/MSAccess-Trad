@@ -3,6 +3,7 @@ VersionRequired =20
 PublishOption =1
 Begin Form
     AllowFilters = NotDefault
+    PopUp = NotDefault
     RecordSelectors = NotDefault
     MaxButton = NotDefault
     MinButton = NotDefault
@@ -22,14 +23,14 @@ Begin Form
     Width =6236
     DatasheetFontHeight =11
     ItemSuffix =5
-    Left =1560
-    Top =1812
-    Right =7800
-    Bottom =4188
+    Left =7044
+    Top =4500
+    Right =13284
+    Bottom =6864
     RecSrcDt = Begin
         0x7cc519de8adbe540
     End
-    Caption ="F_RecapInfo"
+    Caption ="Informations sur les couleurs"
     DatasheetFontName ="Calibri"
     OnKeyUp ="[Event Procedure]"
     AllowDatasheetView =0
@@ -170,8 +171,8 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =6710886
                     Name ="Étiquette2"
-                    Caption ="(S) - (Objet,Contrôle ou Propriéré)\015\012Indique  non vue lors du scan (Suppri"
-                        "mé ou à été renommé)."
+                    Caption ="(S) - (Objets,Enfants,Propriétés)\015\012Indique  non vue lors du scan (Supprimé"
+                        " ou a été renommé)."
                     GridlineColor =10921638
                     LayoutCachedLeft =397
                     LayoutCachedTop =113
@@ -187,8 +188,8 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =6710886
                     Name ="Étiquette3"
-                    Caption ="(N) - (Objet,Contrôle ou Propriéré)\015\012Indique nouveau (Ajouté ou à été reno"
-                        "mmé)."
+                    Caption ="(N) - (Objets,Enfants,Propriétés)\015\012Indique nouveau (Ajouté ou a été renomm"
+                        "é)."
                     GridlineColor =10921638
                     LayoutCachedLeft =397
                     LayoutCachedTop =850
@@ -204,7 +205,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =6710886
                     Name ="Étiquette4"
-                    Caption ="(M) - (Propriété)\015\012Indique que le texte de la propriété à été modifié."
+                    Caption ="(M) - (Propriétés)\015\012Indique que le texte de la propriété a été modifié."
                     GridlineColor =10921638
                     LayoutCachedLeft =397
                     LayoutCachedTop =1587

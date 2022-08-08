@@ -449,6 +449,7 @@ On Error GoTo ERR_ScanTables
             thisChild.Nom = oFld.name
             thisChild.NomNet = MD_Utils.CheckApostrophe(thisChild.Nom)
             thisChild.Type = IIf(oFld.Type = dbMemo, "dbMeno", "dbText")
+            thisChild.Parent = vbNullString
 
 '            thisFld.Texte = oFld.Value
 '            thisFld.Texte = CheckTxtIgnore(oFld.Value)      '// Filtrage texte...
