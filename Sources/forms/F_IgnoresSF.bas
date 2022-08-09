@@ -265,6 +265,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+'@Folder("Form")
 Option Compare Database
 Option Explicit
 
@@ -272,11 +273,10 @@ Private Sub Form_Open(Cancel As Integer)
 
     On Error Resume Next
     '// Empeche l'ouverture indépendante.
-    If (Me.Parent.name = "") Then
+    If (Me.Parent.name = vbNullString) Then
         If Err.Number = 2452 Then
             Cancel = True
             DoCmd.Close
         End If
     End If
-
 End Sub

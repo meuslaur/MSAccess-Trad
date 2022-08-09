@@ -265,6 +265,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+'@Folder("Form")
 Option Compare Database
 Option Explicit
 
@@ -297,7 +298,7 @@ Private Function OuvreZl() As Boolean
     Me.ActiveControl.Dropdown
 End Function
 
-Private Function FiltreSF()
+Private Function FiltreSF() As Boolean
     Dim sFiltreT As String
 
     sFiltreT = IIf(IsNull(Me.zlObjetTypes), vbNullString, "[ObjetType]='" & Me.zlObjetTypes & "'")

@@ -19,11 +19,11 @@ Begin Form
     GridY =10
     Width =11338
     DatasheetFontHeight =11
-    ItemSuffix =58
-    Left =9576
-    Top =1656
-    Right =20916
-    Bottom =12816
+    ItemSuffix =67
+    Left =1956
+    Top =816
+    Right =13296
+    Bottom =11976
     DatasheetGridlinesColor =15132391
     RecSrcDt = Begin
         0x2562231676dbe540
@@ -477,7 +477,7 @@ Begin Form
                                     Width =960
                                     Height =300
                                     BorderColor =8355711
-                                    ForeColor =13421772
+                                    ForeColor =6710886
                                     Name ="lblchkTout"
                                     Caption ="Tout"
                                     GridlineColor =10921638
@@ -485,7 +485,6 @@ Begin Form
                                     LayoutCachedTop =113
                                     LayoutCachedWidth =7869
                                     LayoutCachedHeight =413
-                                    ForeTint =20.0
                                 End
                             End
                         End
@@ -748,6 +747,7 @@ Option Explicit
     End Enum
     Private thisFiltre  As E_FiltreSf
     Private mFltPrec    As E_FiltreSf   '// Filtre précedent sur les SF.
+'    Private mPrecChk    As Long         '// CheckBox précedement cochée.
 '//:::::::::::::::::::::::::::::::::: END VARIABLES ::::::::::::::::::::::::::::::::::::::
 
 ' ----------------------------------------------------------------
@@ -813,6 +813,7 @@ End Sub
 Private Sub grpChk_AfterUpdate()
 
     Dim sFiltre As String
+    
 
     Select Case Me.grpChk
         Case 1      '// Scan
@@ -831,7 +832,7 @@ Private Sub grpChk_AfterUpdate()
         Case 3      '// Nouv
             sFiltre = "Nouveau=True"
 
-        Case 4      '// Tout
+        Case 4, Null      '// Tout
             sFiltre = vbNullString
     End Select
 

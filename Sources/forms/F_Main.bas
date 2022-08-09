@@ -18,9 +18,8 @@ Begin Form
     Width =18368
     DatasheetFontHeight =11
     ItemSuffix =70
-    Left =3372
-    Top =336
-    Right =21744
+    Top =588
+    Right =16512
     Bottom =12564
     DatasheetGridlinesColor =15132391
     RecSrcDt = Begin
@@ -747,7 +746,7 @@ Begin Form
                     Top =454
                     Width =255
                     Height =300
-                    FontSize =8
+                    FontSize =10
                     FontWeight =700
                     BorderColor =8355711
                     Name ="lbl_InfoScan3"
@@ -2202,7 +2201,6 @@ Private Sub zlBases_AfterUpdate()
     MajLabelsInfo
     ActiveCmbBases      '// Active les boutons
 
-SORTIE_zlBases_AfterUpdate:
     DoCmd.Echo True
     Exit Sub
 
@@ -2237,7 +2235,7 @@ Private Function ActiveCmbBases() As Boolean
     Dim bActiveCmb  As Boolean
 
     bActiveCmb = Not IsNull(Me.zlBases)
-    If (Not bActiveCmb) Then Me.zlBases.SetFocus
+    If ((Not bActiveCmb) And (Me.zlBases.Enabled = True)) Then Me.zlBases.SetFocus
     
     Me.cmdFrmRecap.Enabled = bActiveCmb
     Me.cmdFrmTxtIgnore.Enabled = bActiveCmb

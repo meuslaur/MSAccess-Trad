@@ -12,3 +12,7 @@ Sources/Export.log
 Sources/proj-properties.json
 Sources/queries/%22T_Objets%22 et %22T_ObjetChilds%22 sans correspondance.bas
 Sources/queries/%22T_Objets%22 et %22T_ObjetChilds%22 sans correspondance.sql
+Sources/modules/clsOptionGroup.cls
+Sources/modules/clsOptionbutton.cls
+Sources/forms/a_test.bas
+Sources/modules/A_TestTbl.bas

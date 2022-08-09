@@ -1,4 +1,6 @@
 ﻿Attribute VB_Name = "A_TestTbl"
+'@IgnoreModule
+'@Folder("Test")
 Option Compare Database
 Option Explicit
 
@@ -11,3 +13,4 @@ Public Sub rrr()
            "ORDER BY MsysObjects.Type, MsysObjects.Name;"
 
 End Sub
+

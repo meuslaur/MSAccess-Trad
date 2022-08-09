@@ -120,7 +120,7 @@
 							<od:fieldProperty name="DisplayControl" type="3" value="109"/>
 							<od:fieldProperty name="IMEMode" type="2" value="0"/>
 							<od:fieldProperty name="IMESentenceMode" type="2" value="3"/>
-							<od:fieldProperty name="UnicodeCompression" type="1" value="1"/>
+							<od:fieldProperty name="UnicodeCompression" type="1" value="0"/>
 							<od:fieldProperty name="TextAlign" type="2" value="0"/>
 							<od:fieldProperty name="AggregateType" type="4" value="-1"/>
 							<od:fieldProperty name="ResultType" type="2" value="0"/>

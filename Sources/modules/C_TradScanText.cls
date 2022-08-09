@@ -42,6 +42,7 @@ Option Explicit
         Nom     As String
         IDLang  As Long
         ReScan  As Boolean      '// Indique base déjà scannée.
+        Track   As Boolean      '// Voir si l'option 'Track Name AutoCorrect Info' de la base est activée.
     End Type
     Private thisApp As TApp
 
@@ -96,6 +97,21 @@ Option Explicit
     Private mPrpIgnore      As String           '// ""
 '//:::::::::::::::::::::::::::::::::: END VARIABLES ::::::::::::::::::::::::::::::::::::::
 
+
+'// Formulaires Type=32768
+'// Tables      Type=1
+'SELECT MSysNameMap.GUID FROM MSysNameMap
+'WHERE (((MSysNameMap.Name)='iF_Recap') AND ((MSysNameMap.Type)=32768));
+
+
+
+
+
+
+
+
+
+
 '//----------------------------------       INIT/TERM       ------------------------------
 Private Sub Class_Initialize()
 
@@ -105,8 +121,6 @@ Private Sub Class_Initialize()
     Set m_oBDLocale = CodeDb()
 
     If (qdfTemp Is Nothing) Then Set qdfTemp = m_oBDLocale.CreateQueryDef("")
-
-    InfoScan.UseBarre = False
 
 End Sub
 
@@ -118,6 +132,7 @@ Private Sub Class_Terminate()
     Set ObjetAcc = Nothing      '// Reset tous les objets.
     Set m_oApp = Nothing
     Set InfoScan = Nothing
+
 End Sub
 '//---------------------------------------------------------------------------------------
 
@@ -231,7 +246,7 @@ On Error GoTo ERR_ScanObjetsApp
     Dim oRstSys As DAO.Recordset
     Dim ObjType As E_ObjectTypeNum
     Dim sSql    As String
-    Dim sInfoAvance As String
+    Dim sBarreVal As String
 
     '// Extraire les objets de la table MsysObjects.
     sSql = "SELECT  MsysObjects.id, MsysObjects.Type, MsysObjects.Name " & _
@@ -240,15 +255,17 @@ On Error GoTo ERR_ScanObjetsApp
            "AND ((MsysObjects.Name) Not Like '~*' And (MsysObjects.Name) Not Like 'MSys*')  AND ((MsysObjects.Flags)>=0)) " & _
            "ORDER BY MsysObjects.Type, MsysObjects.Name;"
 
-    If (m_oApp Is Nothing) Then Set m_oApp = ObjetAcc.GetMsApp()            '// Obtenir l'APP externe à utiliser...
-    If (ObjetAcc.MsBaseIsOpen) Then thisApp.Nom = ObjetAcc.BaseNom()    '// Extraire le nom de la base.
+    Set m_oApp = ObjetAcc.GetMsApp          '// Obtenir l'APP externe à utiliser...
+    Set oBdExt = ObjetAcc.GetMsBase         '// Definir la base externe à utiliser...
 
-    Set oBdExt = ObjetAcc.GetMsBase()                           '// Definir la base externe à utiliser.
+    thisApp.Nom = ObjetAcc.BaseNom
+    thisApp.Track = ObjetAcc.OptionTrackNameObjet
+
     Set oRstSys = oBdExt.OpenRecordset(sSql, dbOpenSnapshot, dbReadOnly)   '// Ouvre MsysObjects de la base externe.
 
     If (m_oBDLocale Is Nothing) Then Set m_oBDLocale = CodeDb()
 
-    If InfoScan.UseBarre Then InfoScan.InitialiseBarre oRstSys.RecordCount  '// Initialise la taille de la barre...
+    If InfoScan.BarreIsUp Then InfoScan.SetLengthBarre "a", oRstSys.RecordCount     '// Initialise la taille de la barre...
 
     If thisApp.ReScan Then
         mRep = ResetEtatsTables()                       '// Reset des champs etats des tables avant le scan...
@@ -279,20 +296,20 @@ On Error GoTo ERR_ScanObjetsApp
                 ObjType = .Fields("Type").Value
                 thisObj.Type = GetObjectTypeEnClair(ObjType)    '// Traduire en clair le Type...
 
-                sInfoAvance = thisObj.Type & " " & thisObj.Nom
-                If InfoScan.UseBarre Then InfoScan.UpdateBarre sInfoAvance  '// Affiche l'état d'avancement du scan...
+                sBarreVal = thisObj.Type & " " & thisObj.Nom
+                If InfoScan.BarreIsUp Then InfoScan.UpdateBarre sBarreVal   '// Affiche l'état d'avancement du scan...
                 DoEvents
 
                 If (ObjType = ObjetForm Or ObjType = ObjetReport) Then
                     '--------------------------
-                    mRep = ScanObjet(ObjType)                       '// Enregistre les info forms/reports...
+                    mRep = ScanObjet(ObjType)           '// Enregistre les info forms/reports...
                     '--------------------------
                     If (Not mRep) Then Exit Do
                 End If
 
                 If (ObjType = TableLocale Or ObjType = TableLinked) Then
                     '--------------------------
-                    mRep = ScanTables(thisObj.Nom)                  '// Enregistre les info Tables...
+                    mRep = ScanTables()                 '// Enregistre les info Tables...
                     '--------------------------
                     If (Not mRep) Then Exit Do
 
@@ -421,13 +438,13 @@ End Function
 '// Stock les champs texte/memo des tables.
 ' DateMod: 07/08/2022 - 18:25
 ' ----------------------------------------------------------------
-Private Function ScanTables(TableNom As String) As Boolean
+Private Function ScanTables() As Boolean
 On Error GoTo ERR_ScanTables
 
     Dim oRstTab As DAO.Recordset
     Dim oFld    As DAO.Field
-    Dim sSql    As String
-    Dim vRep    As Variant
+'    Dim sSql    As String
+'    Dim vRep    As Variant
 
     thisObj.IDNet = thisApp.Num & "." & thisObj.Type & "." & thisObj.NomNet
 
@@ -1114,11 +1131,8 @@ End Function
 
 Public Sub InitialiseLabelsInfo(lblTexte As Access.Label, lblBarre As Access.Label)
 '// Initialise les controles label à utiliser pour afficher les info et la barre d'avancement.
-    InfoScan.LabelBarre = lblBarre
-    InfoScan.LabelTexte = lblTexte
-    InfoScan.UseBarre = True
+    InfoScan.InitialiseLabels lblBarre, lblTexte
 End Sub
-
 
 '----------------------------------------------------------------
 '// Créer la propriété PROP_GUID pour la base en cours.

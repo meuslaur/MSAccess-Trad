@@ -154,7 +154,7 @@ On Error GoTo ERR_ExportProps
 
     If (Len(ExportFolder) = 0) Then Exit Function
 
-    Dim obd         As DAO.Database
+    Dim oBd         As DAO.Database
     Dim oFSO        As Object
 
     Dim TxtFile     As Variant  '// FSO TextFile.
@@ -175,31 +175,31 @@ On Error GoTo ERR_ExportProps
     sFile = sExpPath & "Properties.cvs"
 
     Set oFSO = MD_FSO.GetFSO
-    Set obd = IIf(BDSelect Is Nothing, CodeDb, BDSelect)
+    Set oBd = IIf(BDSelect Is Nothing, CodeDb, BDSelect)
 
     Set TxtFile = oFSO.CreateTextFile(sFile, True)
     TxtFile.WriteLine Join(Array("Index", "Nom", "Valeur"), vbTab)
 
     If (OnlyPropUser = False) Then
-        For iProp = 0 To obd.Properties.Count - 1
-            Set Prop = obd.Properties(iProp)
+        For iProp = 0 To oBd.Properties.Count - 1
+            Set Prop = oBd.Properties(iProp)
             TxtFile.WriteLine Join(Array(iProp, Prop.name, Prop.Value), vbTab)
         Next
     End If
 
-    For Each Prop In obd.Containers("Databases").Documents("UserDefined").Properties
+    For Each Prop In oBd.Containers("Databases").Documents("UserDefined").Properties
         TxtFile.WriteLine Join(Array(iProp, Prop.name, Prop.Value), vbTab)        '// commence Item 8
     Next
 
     TxtFile.Close
-    obd.Close
+    oBd.Close
 
     ExportProps = True
 
 SORTIE_ExportProps:
     Set TxtFile = Nothing
     Set oFSO = Nothing
-    Set obd = Nothing
+    Set oBd = Nothing
     Exit Function
 
 ERR_ExportProps:

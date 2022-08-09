@@ -80,6 +80,9 @@ End Property
 Public Property Get BaseNom() As String
     BaseNom = m_sBaseNom
 End Property
+Public Property Get OptionTrackNameObjet() As Boolean
+    OptionTrackNameObjet = m_oMsApp.GetOption("Track Name AutoCorrect Info")
+End Property
 'Public Property Get GetLangue() As Long 'Note: Non utilisé
 '    GetLangue = m_oMsApp.LanguageSettings.LanguageID(msoLanguageIDUI)
 'End Property
@@ -281,7 +284,6 @@ On Error GoTo ERR_GetRecordset
     Set m_oRst = m_oMsBase.OpenRecordset(RstNom, dbOpenSnapshot, dbReadOnly)
     Set GetRecordset = m_oRst
 
-    
 SORTIE_GetRecordset:
     Exit Function
 
