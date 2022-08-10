@@ -6,7 +6,7 @@
   "Items": {
     "MergeBuildDate": null,
     "FullBuildDate": null,
-    "ExportDate": "10/08/2022 19:14:38",
+    "ExportDate": "10/08/2022 19:24:16",
     "FullExportDate": "07/08/2022 07:40:18",
     "OptionsHash": "39cfc42",
     "LastMergedCommit": "",
@@ -98,26 +98,26 @@
           "FilePropertiesHash": "bcb2473"
         },
         "iF_Recap.bas": {
-          "ExportDate": "09/08/2022 18:55:21",
+          "ExportDate": "10/08/2022 19:24:16",
           "Hash": "e38ce22",
-          "SourceModified": "09/08/2022 18:55:21",
-          "FilePropertiesHash": "79a8a0d"
+          "SourceModified": "10/08/2022 19:24:16",
+          "FilePropertiesHash": "8d49628"
         },
         "iF_RecapSFC.bas": {
-          "ExportDate": "09/08/2022 18:55:21",
-          "SourceModified": "09/08/2022 18:55:21",
-          "FilePropertiesHash": "a08491b"
+          "ExportDate": "10/08/2022 19:24:16",
+          "SourceModified": "10/08/2022 19:24:16",
+          "FilePropertiesHash": "78da8cf"
         },
         "iF_RecapSFO.bas": {
-          "ExportDate": "09/08/2022 18:55:21",
-          "SourceModified": "09/08/2022 18:55:21",
-          "FilePropertiesHash": "2f8a940",
+          "ExportDate": "10/08/2022 19:24:16",
+          "SourceModified": "10/08/2022 19:24:16",
+          "FilePropertiesHash": "22d4abd",
           "Hash": "1857406"
         },
         "iF_RecapSFT.bas": {
-          "ExportDate": "09/08/2022 18:55:21",
-          "SourceModified": "09/08/2022 18:55:21",
-          "FilePropertiesHash": "09855dc",
+          "ExportDate": "10/08/2022 19:24:16",
+          "SourceModified": "10/08/2022 19:24:16",
+          "FilePropertiesHash": "7d8417f",
           "Hash": "c7d5a8f"
         },
         "iF_TextesIgnores.bas": {
@@ -204,7 +204,7 @@
       "Project": {
         "project.json": {
           "Hash": "19c3478",
-          "ExportDate": "10/08/2022 19:14:36",
+          "ExportDate": "10/08/2022 19:24:15",
           "SourceModified": "01/08/2022 17:42:00",
           "FilePropertiesHash": "fae01b6"
         }
@@ -226,24 +226,24 @@
           "FilePropertiesHash": "6ee64fd"
         },
         "R_F_MainSFControles.bas": {
-          "ExportDate": "10/08/2022 19:14:37",
-          "SourceModified": "10/08/2022 19:14:37",
-          "FilePropertiesHash": "f6833fb"
+          "ExportDate": "10/08/2022 19:24:16",
+          "SourceModified": "10/08/2022 19:24:16",
+          "FilePropertiesHash": "7f7d1cb"
         },
         "R_F_MainSFTextes.bas": {
-          "ExportDate": "10/08/2022 19:14:37",
-          "SourceModified": "10/08/2022 19:14:37",
-          "FilePropertiesHash": "14c4d6c"
+          "ExportDate": "10/08/2022 19:24:16",
+          "SourceModified": "10/08/2022 19:24:16",
+          "FilePropertiesHash": "19e4cb1"
         },
         "RL_Apps.bas": {
-          "ExportDate": "10/08/2022 19:14:37",
-          "SourceModified": "10/08/2022 19:14:37",
-          "FilePropertiesHash": "3ff90bc"
+          "ExportDate": "10/08/2022 19:24:16",
+          "SourceModified": "10/08/2022 19:24:16",
+          "FilePropertiesHash": "0a7f108"
         },
         "RL_Langues.bas": {
-          "ExportDate": "10/08/2022 19:14:37",
-          "SourceModified": "10/08/2022 19:14:37",
-          "FilePropertiesHash": "83e1938"
+          "ExportDate": "10/08/2022 19:24:16",
+          "SourceModified": "10/08/2022 19:24:16",
+          "FilePropertiesHash": "0fe0875"
         }
       },
       "Tables": {
@@ -311,7 +311,7 @@
       "VB Project": {
         "vbe-project.json": {
           "Hash": "1932bef",
-          "ExportDate": "10/08/2022 19:14:36",
+          "ExportDate": "10/08/2022 19:24:15",
           "SourceModified": "01/08/2022 17:42:00",
           "FilePropertiesHash": "d6106a4"
         }
@@ -319,7 +319,7 @@
       "VBE References": {
         "vbe-references.json": {
           "Hash": "36d0673",
-          "ExportDate": "10/08/2022 19:14:36",
+          "ExportDate": "10/08/2022 19:24:15",
           "SourceModified": "10/08/2022 16:01:54",
           "FilePropertiesHash": "5e3b2ff"
         }

@@ -17,16 +17,16 @@ Begin Form
     Width =10207
     DatasheetFontHeight =11
     ItemSuffix =11
-    Left =2916
-    Top =4692
-    Right =13128
-    Bottom =7428
+    Left =10536
+    Top =5532
+    Right =20748
+    Bottom =8268
     RecordSource ="SELECT T_ObjetChilds.Child_ID, T_ObjetChilds.ChildType, T_ObjetChilds.ChildNom, "
         "T_ObjetChilds.IDObjet, T_ObjetChilds.Scanner, T_ObjetChilds.Nouveau, IIf(T_Objet"
         "Childs.Scanner=False,\"=\",Null) AS Scan, IIf(T_ObjetChilds.Nouveau=True,\"=\",N"
         "ull) AS Nouv FROM T_App INNER JOIN (T_Objets INNER JOIN T_ObjetChilds ON T_Objet"
         "s.Objet_ID = T_ObjetChilds.IDObjet) ON T_App.App_ID = T_Objets.IDApp WHERE (((T_"
-        "App.App_ID)='{A909D840-260E-4D88-A8D7-B26A7FF86E8C}')) ORDER BY T_ObjetChilds.Ch"
+        "App.App_ID)='{4AD0E663-0E09-4951-9E4D-BC64E0A328D3}')) ORDER BY T_ObjetChilds.Ch"
         "ildType, T_ObjetChilds.ChildNom; "
     Caption =" "
     DatasheetFontName ="Calibri"

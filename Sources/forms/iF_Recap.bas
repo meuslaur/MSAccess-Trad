@@ -20,10 +20,10 @@ Begin Form
     Width =11338
     DatasheetFontHeight =11
     ItemSuffix =67
-    Left =1956
-    Top =816
-    Right =13296
-    Bottom =11976
+    Left =9576
+    Top =1656
+    Right =20916
+    Bottom =12816
     DatasheetGridlinesColor =15132391
     RecSrcDt = Begin
         0x2562231676dbe540
@@ -335,25 +335,25 @@ Begin Form
                         Begin CheckBox
                             SpecialEffect =2
                             OverlapFlags =87
-                            Left =4638
-                            Top =141
+                            Left =4644
+                            Top =172
                             OptionValue =1
                             BorderColor =10921638
                             Name ="chkScan"
                             ControlTipText ="Non scanner"
                             GridlineColor =10921638
 
-                            LayoutCachedLeft =4638
-                            LayoutCachedTop =141
-                            LayoutCachedWidth =4898
-                            LayoutCachedHeight =381
+                            LayoutCachedLeft =4644
+                            LayoutCachedTop =172
+                            LayoutCachedWidth =4904
+                            LayoutCachedHeight =412
                             Begin
                                 Begin Label
                                     OverlapFlags =247
                                     TextFontCharSet =2
                                     TextFontFamily =18
-                                    Left =4868
-                                    Top =113
+                                    Left =4874
+                                    Top =144
                                     Width =288
                                     Height =288
                                     BorderColor =8355711
@@ -362,10 +362,10 @@ Begin Form
                                     Caption ="="
                                     FontName ="Webdings"
                                     GridlineColor =10921638
-                                    LayoutCachedLeft =4868
-                                    LayoutCachedTop =113
-                                    LayoutCachedWidth =5156
-                                    LayoutCachedHeight =401
+                                    LayoutCachedLeft =4874
+                                    LayoutCachedTop =144
+                                    LayoutCachedWidth =5162
+                                    LayoutCachedHeight =432
                                     ThemeFontIndex =-1
                                     ForeThemeColorIndex =-1
                                     ForeTint =100.0
@@ -375,8 +375,8 @@ Begin Form
                         Begin CheckBox
                             SpecialEffect =2
                             OverlapFlags =87
-                            Left =5318
-                            Top =141
+                            Left =5324
+                            Top =172
                             TabIndex =1
                             OptionValue =2
                             BorderColor =10921638
@@ -384,17 +384,17 @@ Begin Form
                             ControlTipText ="Modifier"
                             GridlineColor =10921638
 
-                            LayoutCachedLeft =5318
-                            LayoutCachedTop =141
-                            LayoutCachedWidth =5578
-                            LayoutCachedHeight =381
+                            LayoutCachedLeft =5324
+                            LayoutCachedTop =172
+                            LayoutCachedWidth =5584
+                            LayoutCachedHeight =412
                             Begin
                                 Begin Label
                                     OverlapFlags =247
                                     TextFontCharSet =2
                                     TextFontFamily =18
-                                    Left =5548
-                                    Top =113
+                                    Left =5554
+                                    Top =144
                                     Width =288
                                     Height =288
                                     BorderColor =8355711
@@ -402,10 +402,10 @@ Begin Form
                                     Caption ="="
                                     FontName ="Webdings"
                                     GridlineColor =10921638
-                                    LayoutCachedLeft =5548
-                                    LayoutCachedTop =113
-                                    LayoutCachedWidth =5836
-                                    LayoutCachedHeight =401
+                                    LayoutCachedLeft =5554
+                                    LayoutCachedTop =144
+                                    LayoutCachedWidth =5842
+                                    LayoutCachedHeight =432
                                     ThemeFontIndex =-1
                                     ForeThemeColorIndex =8
                                     ForeTint =100.0
@@ -416,8 +416,8 @@ Begin Form
                         Begin CheckBox
                             SpecialEffect =2
                             OverlapFlags =87
-                            Left =5998
-                            Top =141
+                            Left =6004
+                            Top =172
                             TabIndex =2
                             OptionValue =3
                             BorderColor =10921638
@@ -425,17 +425,17 @@ Begin Form
                             ControlTipText ="Nouveau"
                             GridlineColor =10921638
 
-                            LayoutCachedLeft =5998
-                            LayoutCachedTop =141
-                            LayoutCachedWidth =6258
-                            LayoutCachedHeight =381
+                            LayoutCachedLeft =6004
+                            LayoutCachedTop =172
+                            LayoutCachedWidth =6264
+                            LayoutCachedHeight =412
                             Begin
                                 Begin Label
                                     OverlapFlags =247
                                     TextFontCharSet =2
                                     TextFontFamily =18
-                                    Left =6228
-                                    Top =113
+                                    Left =6234
+                                    Top =144
                                     Width =288
                                     Height =288
                                     BorderColor =8355711
@@ -444,10 +444,10 @@ Begin Form
                                     Caption ="="
                                     FontName ="Webdings"
                                     GridlineColor =10921638
-                                    LayoutCachedLeft =6228
-                                    LayoutCachedTop =113
-                                    LayoutCachedWidth =6516
-                                    LayoutCachedHeight =401
+                                    LayoutCachedLeft =6234
+                                    LayoutCachedTop =144
+                                    LayoutCachedWidth =6522
+                                    LayoutCachedHeight =432
                                     ThemeFontIndex =-1
                                     ForeThemeColorIndex =-1
                                     ForeTint =100.0
@@ -457,23 +457,23 @@ Begin Form
                         Begin CheckBox
                             SpecialEffect =2
                             OverlapFlags =87
-                            Left =6679
-                            Top =141
+                            Left =6685
+                            Top =172
                             TabIndex =3
                             OptionValue =4
                             BorderColor =10921638
                             Name ="chkTout"
                             GridlineColor =10921638
 
-                            LayoutCachedLeft =6679
-                            LayoutCachedTop =141
-                            LayoutCachedWidth =6939
-                            LayoutCachedHeight =381
+                            LayoutCachedLeft =6685
+                            LayoutCachedTop =172
+                            LayoutCachedWidth =6945
+                            LayoutCachedHeight =412
                             Begin
                                 Begin Label
                                     OverlapFlags =247
-                                    Left =6909
-                                    Top =113
+                                    Left =6915
+                                    Top =144
                                     Width =960
                                     Height =300
                                     BorderColor =8355711
@@ -481,10 +481,10 @@ Begin Form
                                     Name ="lblchkTout"
                                     Caption ="Tout"
                                     GridlineColor =10921638
-                                    LayoutCachedLeft =6909
-                                    LayoutCachedTop =113
-                                    LayoutCachedWidth =7869
-                                    LayoutCachedHeight =413
+                                    LayoutCachedLeft =6915
+                                    LayoutCachedTop =144
+                                    LayoutCachedWidth =7875
+                                    LayoutCachedHeight =444
                                 End
                             End
                         End
