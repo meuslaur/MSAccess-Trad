@@ -409,19 +409,19 @@ Public Function RegexReplaceChevrons(TexteBase As String) As String
 
     If (oRegex Is Nothing) Then Set oRegex = CreateObject("vbscript.regexp")
 
-    Dim sres As String
+    Dim sRes As String
 
     With oRegex
         .MultiLine = True
         .Global = True
         .IgnoreCase = True
         .Pattern = "([<])"
-    sres = .Replace(TexteBase, "&lt;")
+    sRes = .Replace(TexteBase, "&lt;")
         .Pattern = "([>])"
-    sres = .Replace(sres, "&gt;")
+    sRes = .Replace(sRes, "&gt;")
     End With
 
-    RegexReplaceChevrons = sres
+    RegexReplaceChevrons = sRes
 
 End Function
 '// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ END PUB. SUB/FUNC \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\

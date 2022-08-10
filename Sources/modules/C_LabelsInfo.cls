@@ -143,6 +143,7 @@ Private Sub InitialiseTailleBarre()
 
     sTexte = String(m_NbChar, m_CharBar)
 
+    WizHook.Key = 51488399
     WizHook.TwipsFromFont m_LblBarre.FontName, m_LblBarre.FontSize, m_LblBarre.FontWeight, _
                           m_LblBarre.FontItalic, m_LblBarre.FontUnderline, 0, _
                           sTexte, 0, lWidth, lHeight

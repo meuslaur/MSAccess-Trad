@@ -18,9 +18,10 @@ Begin Form
     Width =18368
     DatasheetFontHeight =11
     ItemSuffix =70
-    Top =588
-    Right =16512
-    Bottom =12564
+    Left =2940
+    Top =204
+    Right =21060
+    Bottom =12576
     DatasheetGridlinesColor =15132391
     RecSrcDt = Begin
         0x5c7a48f85bd8e540
@@ -236,9 +237,9 @@ Begin Form
             PressedForeThemeColorIndex =1
         End
         Begin FormHeader
-            Height =1023
+            Height =1133
             BackColor =3684411
-            Name ="EntêteFormulaire"
+            Name ="F_Entete"
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
             BackThemeColorIndex =3
@@ -256,6 +257,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="txtBdd"
+                    Tag ="1"
                     GridlineColor =10921638
                     ShowDatePicker =0
 
@@ -281,6 +283,7 @@ Begin Form
                             Name ="lbl_txtBdd"
                             Caption ="Ouvrir une base  :"
                             FontName ="Arial"
+                            Tag ="1"
                             GridlineColor =10921638
                             LayoutCachedLeft =113
                             LayoutCachedTop =226
@@ -304,6 +307,7 @@ Begin Form
                     Name ="cmbSelectBdd"
                     Caption =",,,"
                     OnClick ="[Event Procedure]"
+                    Tag ="1"
                     ControlTipText ="Sélection de la base..."
                     GridlineColor =10921638
 
@@ -338,6 +342,7 @@ Begin Form
                     ForeColor =4210752
                     Name ="cmdCloseBd"
                     OnClick ="[Event Procedure]"
+                    Tag ="1"
                     ControlTipText ="Fermeture la base."
                     GridlineColor =10921638
                     ImageData = Begin
@@ -411,13 +416,15 @@ Begin Form
                     TabIndex =3
                     BorderColor =10921638
                     ForeColor =3484194
-                    ColumnInfo ="\"\";\"0000\";\"\";\"\";\"10\";\"100\""
+                    ColumnInfo ="\"\";\"\";\"\";\"\";\"10\";\"100\""
                     Name ="zlLangues"
                     RowSourceType ="Table/Query"
                     RowSource ="RL_Langues"
                     ColumnWidths ="0;2250"
                     AfterUpdate ="[Event Procedure]"
                     OnDblClick ="[Event Procedure]"
+                    OnMouseDown ="=OuvreZl()"
+                    Tag ="1"
                     OnNotInList ="[Event Procedure]"
                     ControlTipText ="Db Click pour Afficher la langue...\015\012Ou saisissez une valeur pour ajouter "
                         "une langue,"
@@ -439,6 +446,7 @@ Begin Form
                             ForeColor =13421772
                             Name ="lbl_zlLangues"
                             Caption ="Langue de la base:"
+                            Tag ="1"
                             GridlineColor =10921638
                             LayoutCachedLeft =10941
                             LayoutCachedTop =226
@@ -450,12 +458,13 @@ Begin Form
                 End
                 Begin Image
                     Visible = NotDefault
-                    Left =13379
-                    Top =623
+                    Left =10941
+                    Top =226
                     Width =405
                     Height =330
                     BorderColor =10921638
                     Name ="img_NoLangue"
+                    Tag ="1"
                     Picture ="0000.png"
                     GridlineColor =10921638
                     ImageData = Begin
@@ -537,10 +546,10 @@ Begin Form
                         0x656e743d37363331368eda75390000000049454e44ae426082
                     End
 
-                    LayoutCachedLeft =13379
-                    LayoutCachedTop =623
-                    LayoutCachedWidth =13784
-                    LayoutCachedHeight =953
+                    LayoutCachedLeft =10941
+                    LayoutCachedTop =226
+                    LayoutCachedWidth =11346
+                    LayoutCachedHeight =556
                     TabIndex =6
                 End
                 Begin Image
@@ -551,6 +560,7 @@ Begin Form
                     Height =480
                     BorderColor =10921638
                     Name ="img_Langue"
+                    Tag ="1"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =16667
@@ -562,7 +572,7 @@ Begin Form
                 Begin CommandButton
                     Enabled = NotDefault
                     TabStop = NotDefault
-                    OverlapFlags =93
+                    OverlapFlags =85
                     Left =17347
                     Top =113
                     Width =570
@@ -571,6 +581,7 @@ Begin Form
                     ForeColor =4210752
                     Name ="cmdLanceScan"
                     OnClick ="[Event Procedure]"
+                    Tag ="1"
                     ControlTipText ="Lance l'analyse des objets de la base de données,"
                     Picture ="ic_Actulise.png"
                     GridlineColor =10921638
@@ -677,49 +688,11 @@ Begin Form
                     WebImagePaddingBottom =2
                     Overlaps =1
                 End
-                Begin Rectangle
-                    Visible = NotDefault
-                    SpecialEffect =0
-                    BackStyle =1
-                    OldBorderStyle =0
-                    OverlapFlags =255
-                    Left =56
-                    Width =18254
-                    Height =1023
-                    BorderColor =10921638
-                    Name ="boxCache"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =56
-                    LayoutCachedWidth =18310
-                    LayoutCachedHeight =1023
-                    BackThemeColorIndex =3
-                    BackShade =25.0
-                End
                 Begin Label
                     Visible = NotDefault
                     OverlapFlags =247
-                    TextAlign =3
-                    Left =396
-                    Top =113
-                    Width =1935
-                    Height =315
-                    BorderColor =8355711
-                    ForeColor =13421772
-                    Name ="lbl_InfoScan1"
-                    Caption ="Analyse :"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =396
-                    LayoutCachedTop =113
-                    LayoutCachedWidth =2331
-                    LayoutCachedHeight =428
-                    ForeThemeColorIndex =-1
-                    ForeTint =20.0
-                End
-                Begin Label
-                    Visible = NotDefault
-                    OverlapFlags =247
-                    Left =2437
-                    Top =113
+                    Left =2608
+                    Top =283
                     Width =11175
                     Height =285
                     FontSize =10
@@ -727,23 +700,45 @@ Begin Form
                     ForeColor =16777215
                     Name ="lbl_InfoScan2"
                     FontName ="Verdana"
+                    Tag ="0"
                     GridlineColor =10921638
-                    LayoutCachedLeft =2437
-                    LayoutCachedTop =113
-                    LayoutCachedWidth =13612
-                    LayoutCachedHeight =398
+                    LayoutCachedLeft =2608
+                    LayoutCachedTop =283
+                    LayoutCachedWidth =13783
+                    LayoutCachedHeight =568
                     ThemeFontIndex =-1
                     ForeTint =0.0
                 End
                 Begin Label
                     Visible = NotDefault
+                    OverlapFlags =215
+                    TextAlign =3
+                    Left =623
+                    Top =283
+                    Width =1935
+                    Height =315
+                    BorderColor =8355711
+                    ForeColor =13421772
+                    Name ="lbl_InfoScan1"
+                    Caption ="Analyse :"
+                    Tag ="0"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =623
+                    LayoutCachedTop =283
+                    LayoutCachedWidth =2558
+                    LayoutCachedHeight =598
+                    ForeThemeColorIndex =-1
+                    ForeTint =20.0
+                End
+                Begin Label
+                    Visible = NotDefault
                     FontItalic = NotDefault
                     OldBorderStyle =1
-                    OverlapFlags =247
+                    OverlapFlags =85
                     TextFontCharSet =2
                     TextFontFamily =18
-                    Left =2444
-                    Top =454
+                    Left =2608
+                    Top =737
                     Width =255
                     Height =300
                     FontSize =10
@@ -752,11 +747,12 @@ Begin Form
                     Name ="lbl_InfoScan3"
                     Caption ="a"
                     FontName ="Webdings"
+                    Tag ="0"
                     GridlineColor =10921638
-                    LayoutCachedLeft =2444
-                    LayoutCachedTop =454
-                    LayoutCachedWidth =2699
-                    LayoutCachedHeight =754
+                    LayoutCachedLeft =2608
+                    LayoutCachedTop =737
+                    LayoutCachedWidth =2863
+                    LayoutCachedHeight =1037
                     ThemeFontIndex =-1
                     BackThemeColorIndex =7
                     BackTint =20.0
@@ -769,7 +765,7 @@ Begin Form
         Begin Section
             CanGrow = NotDefault
             Height =11225
-            Name ="Détail"
+            Name ="F_Detail"
             AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
@@ -1432,7 +1428,7 @@ Begin Form
                     RowSource ="RL_Apps"
                     ColumnWidths ="0;2087"
                     AfterUpdate ="[Event Procedure]"
-                    OnGotFocus ="=OuvreZl()"
+                    OnMouseDown ="=OuvreZl()"
                     ControlTipText ="Liste des applications déjà enregistrées,"
                     GridlineColor =10921638
 
@@ -1884,7 +1880,7 @@ Begin Form
         End
         Begin FormFooter
             Height =0
-            Name ="PiedFormulaire"
+            Name ="F_Pied"
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
             BackThemeColorIndex =2
@@ -1917,8 +1913,7 @@ Option Explicit
     Private ObjetAcc    As C_ObjetsAccess
     Private ScanTxt     As C_TradScanText
 
-    Private m_AjoutLangue As Boolean    '// Indique a la liste des langues qu'une nouvelle langue à été saisie dans le form F_Langues.
-'    Private m_BaseExiste  As Boolean    '// Indique que la base sélectionnée (boite fichier) est déjà dans la table.
+    Private m_AjoutLangue As Long       '// Indique a la liste des langues qu'une nouvelle langue à été saisie dans le form F_Langues.
 '//:::::::::::::::::::::::::::::::::: END VARIABLES ::::::::::::::::::::::::::::::::::::::
 
 Private Sub Commande65_Click()
@@ -1945,23 +1940,13 @@ End Sub
 '// Déclanche class_Terminate() fermerure base et application.
 '----------------------------------------------------------------
 Private Sub Form_Close()
-On Error GoTo ERR_Form_Close
-
-    DoCmd.Hourglass True
 
     Set ScanTxt = Nothing
     Set ObjetAcc = Nothing
 
-SORTIE_Form_Close:
     DoCmd.Echo True
     DoCmd.Hourglass False
-    Exit Sub
 
-ERR_Form_Close:
-    MsgBox "Erreur " & Err.Number & vbCrLf & _
-            " (" & Err.Description & ")", vbCritical, _
-            "Form_F_Main.Form_Close"
-    Resume SORTIE_Form_Close
 End Sub
 
 '----------------------------------------------------------------
@@ -1971,10 +1956,10 @@ Private Sub cmbSelectBdd_Click()
 On Error GoTo ERR_cmbSelectBdd_Click
 
     Dim bRep        As Boolean
+    Dim eRep        As eReponse
     Dim sRep        As String
     Dim lRep        As Long
     Dim sBaseSel    As String
-    Dim eRep        As eReponse
     Dim sMsg        As String
     Dim vTmp        As Variant  '// Pour Split de sBackup.
 
@@ -1996,77 +1981,59 @@ On Error GoTo ERR_cmbSelectBdd_Click
     End If
 '//----- Sauvegarde
 
-    bRep = InitAppEtBase(sBaseSel)  '// Création Access.Application, ouverture de la base....
-
-    DoEvents
-    If (Not bRep) Then
-        Beep
-        MsgBox "Erreur initialisation de l'application", vbCritical, "Initialisation"
-        Exit Sub
-    End If
-
     DoCmd.Hourglass True
     DoCmd.Echo False
+
+    bRep = InitAppEtBase(sBaseSel)  '// Création Access.Application, ouverture de la base....
+    If (Not bRep) Then Exit Sub
 
     '-------------------------
     eRep = ScanTxt.IsNewApp()       '// Vérifie base déjà scannée...
     '-------------------------
 
-    Select Case eRep
+    RazForm True
 
-        Case eReponse.Exist '// Existe, demande confirmation.
+    Select Case eRep
+        Case eReponse.Erreur        '// Erreur ou refus, on ferme Tout, et on sort.
+
+            cmdCloseBd_Click
+            DoCmd.Echo True
+            DoCmd.Hourglass False
+            Exit Sub
+
+        Case eReponse.Valide        '// Déjà scannée.
 
             ScanTxt.ReScannerApp = True
-            Beep
-            sMsg = "La base '" & ObjetAcc.BaseNom & "' est déjà enregistrée dans la table T_Objets." & vbCrLf & _
-                   "Les données concernant cette base vont être mise à jour." & vbCrLf & _
-                   "Voulez-vous continuer ?"
-            lRep = MsgBox(sMsg, vbExclamation + vbYesNo + vbDefaultButton2, "Base déjà enregistrée")
-            If (lRep = vbNo) Then bRep = False
+            Me.zlLangues = ScanTxt.GetIDLangBase()      '// Extraire la langue d'origine de la base...
+            Me.zlBases = ScanTxt.AppID()
+            ActiveCmbBases  '// Active les boutons.
+            MaJLangue False '// Affiche le drapeau.
 
-        Case eReponse.Inconnu           '// Existe pas.
+        Case eReponse.Inconnu       '// Nouvelle app.
+
+            Me.zlLangues.SetFocus
             ScanTxt.ReScannerApp = False
-
-        Case eReponse.Faux              '// Guid pas dans la table.
-            MsgBox "Erreur App_ID pas dans la table.", vbCritical, "cmbSelectBdd_Click"
-            bRep = False
-
-        Case eReponse.Erreur            '// Pb correspondance
-            MsgBox "Erreur App_ID/table ne correspondent pas.", vbCritical, "cmbSelectBdd_Click"
-            bRep = False
+            Me.zlBases = Null
+            ActiveCmbBases  '// Désactive les boutons.
 
     End Select
 
-    If (bRep = False) Then
-        cmdCloseBd_Click    '// Erreur ou refus, on ferme Tout, et on sort.
-        DoCmd.Echo True
-        Exit Sub
-    End If
-
-    RazForm True
     Me.txtBdd = sBaseSel
 
-    If ScanTxt.ReScannerApp Then
-        Me.zlLangues = ScanTxt.GetIDLangBase()      '// Extraire la langue d'origine de la base...
-        Me.zlBases = ScanTxt.AppID()
-        ActiveCmbBases      '// Active les boutons.
-        MaJLangue           '// Affiche le drapeau...
-
-    Else
-        Me.zlLangues.SetFocus
-        Me.zlLangues.Dropdown
-        Me.zlBases = Null
-        ActiveCmbBases      '// Désactive les boutons.
-    End If
+    DoCmd.Echo True
+    DoCmd.Hourglass False
 
     MsgBox "Vous pouvez lancer le scan", vbInformation, "Base ouverte"
 
+    If Not ScanTxt.ReScannerApp Then Me.zlLangues.Dropdown
+    
+
 SORTIE_cmbSelectBdd_Click:
-    DoCmd.Echo True
-    DoCmd.Hourglass False
     Exit Sub
 
 ERR_cmbSelectBdd_Click:
+    DoCmd.Echo True
+    DoCmd.Hourglass False
     MsgBox "Erreur " & Err.Number & vbCrLf & _
             " (" & Err.Description & ")", vbCritical, _
             "Form_F_Main.cmbSelectBdd_Click"
@@ -2089,42 +2056,35 @@ Private Sub cmdCloseBd_Click()
 
 End Sub
 
+Private Sub zlLangues_DblClick(Cancel As Integer)
+    DoCmd.OpenForm "F_Langues", acNormal, , , acFormEdit, acDialog, Me.zlLangues
+    Me.zlLangues.Requery
+End Sub
+
 '----------------------------------------------------------------
 '// Ajout d'une nouvelle langue.
 '----------------------------------------------------------------
 Private Sub zlLangues_NotInList(NewData As String, Response As Integer)
-    Dim lRep As Long
-
-    lRep = MsgBox("Ajouter cette nouvelle langue ?", vbQuestion + vbYesNo, "Nouvelle langue")
-    If lRep = vbNo Then
-        Response = acDataErrContinue
-        Me.zlLangues.Undo
-        Exit Sub
-    End If
-
-    '// Ajout d'une langue...
-    DoCmd.OpenForm "F_Langues", acNormal, , , acFormAdd, acDialog, NewData
-    If m_AjoutLangue Then
-        Response = acDataErrAdded
-    Else
-        Response = acDataErrContinue
-        Me.zlLangues.Undo
-    End If
-
-    m_AjoutLangue = False
-
-End Sub
-
-Private Sub zlLangues_AfterUpdate()
-    MaJLangue   '// Affiche le drapeau...
+    Response = acDataErrContinue
+    Me.zlLangues.Undo
 End Sub
 
 '----------------------------------------------------------------
 '// Ouvre le formulaire de la langue.
 '----------------------------------------------------------------
-Private Sub zlLangues_DblClick(Cancel As Integer)
-    If (IsNull(Me.zlLangues)) Then Exit Sub
-    DoCmd.OpenForm "F_Langues", acNormal, , , acFormEdit, acDialog, Me.zlLangues
+Private Sub zlLangues_AfterUpdate()
+
+    If (IsNull(Me.zlLangues)) Then Me.zlLangues = 0
+
+    If (Me.zlLangues = -1) Then
+        m_AjoutLangue = 0
+        DoCmd.OpenForm "F_Langues", acNormal, , , acFormAdd, acDialog, Me.zlLangues
+        If (m_AjoutLangue <> 0) Then Me.zlLangues = m_AjoutLangue
+        Me.zlLangues.Requery
+    End If
+
+    MaJLangue   '// Affiche le drapeau...
+
 End Sub
 
 '// Scan la base sélectionnée...
@@ -2156,6 +2116,7 @@ Private Sub cmdLanceScan_Click()
     DoCmd.Hourglass True
 
     ScanActif True      '// Affiche les contrôles d'avancement du scan...
+
     ScanTxt.InitialiseLabelsInfo Me.lbl_InfoScan2, Me.lbl_InfoScan3 '// Initialise les labels texte et d'avancement...
 
     ' ------------------------------
@@ -2266,7 +2227,13 @@ Private Function InitAppEtBase(sBase As String) As Boolean
         bRep = ObjetAcc.OpenMsBase(sBase)           '// Ouverture de la base...
     End If
 
-    If (Not bRep) Then ObjetAcc.CloseMsBase True    '// Problème détecter, on ferme tout, RaZ et on sort...
+    If (Not bRep) Then
+        ObjetAcc.CloseMsBase True    '// Problème détecter, on ferme tout, RaZ et on sort...
+        Beep
+        MsgBox "Erreur initialisation de l'application", vbCritical, "Initialisation"
+        DoCmd.Hourglass False
+        DoCmd.Echo True
+    End If
 
     InitAppEtBase = bRep
 
@@ -2322,17 +2289,15 @@ End Sub
 
 Private Sub ScanActif(ScanEncours As Boolean)
 
-    Me.boxCache.Visible = ScanEncours
-    Me.lbl_InfoScan1.Visible = ScanEncours
-    Me.lbl_InfoScan2.Visible = ScanEncours
-    Me.lbl_InfoScan3.Visible = ScanEncours
-    Me.zlBases.Enabled = Not ScanEncours
-
+    Dim octr As Access.Control
+    
     Me.lstObjets.SetFocus
-    Me.cmdLanceScan.Enabled = False
 
-    Me.cmdCloseBd.Visible = ScanEncours
-    Me.cmbSelectBdd.Visible = Not ScanEncours
+    For Each octr In Me.F_Entete.Controls
+        octr.Visible = IIf(octr.Tag = 1, Not ScanEncours, ScanEncours)
+    Next
+
+    Me.zlBases.Enabled = Not ScanEncours
     Me.txtBdd = "Sélectionnez une base..."
 
 End Sub
@@ -2378,7 +2343,7 @@ End Function
 '// ################################# END PRIV. SUB/FUNC #################################
 
 '// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ PUBLIC SUB/FUNC   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-Public Sub AddLangue(AjoutNouvLangue As Boolean)
+Public Sub AddLangue(AjoutNouvLangue As Long)
     m_AjoutLangue = AjoutNouvLangue
 End Sub
 

@@ -4,9 +4,12 @@ PublishOption =1
 Begin Form
     AllowFilters = NotDefault
     RecordSelectors = NotDefault
+    MaxButton = NotDefault
+    MinButton = NotDefault
     AutoCenter = NotDefault
     NavigationButtons = NotDefault
     AllowDeletions = NotDefault
+    CloseButton = NotDefault
     DividingLines = NotDefault
     DefaultView =0
     ScrollBars =0
@@ -16,11 +19,11 @@ Begin Form
     GridY =10
     Width =12472
     DatasheetFontHeight =11
-    ItemSuffix =22
-    Left =4632
-    Top =2352
-    Right =17100
-    Bottom =5748
+    ItemSuffix =25
+    Left =1740
+    Top =432
+    Right =15552
+    Bottom =6180
     DatasheetGridlinesColor =15132391
     AfterInsert ="[Event Procedure]"
     RecSrcDt = Begin
@@ -315,7 +318,7 @@ Begin Form
                     Begin
                         Begin Label
                             OverlapFlags =85
-                            TextAlign =1
+                            TextAlign =3
                             Left =113
                             Top =283
                             Width =1470
@@ -327,7 +330,7 @@ Begin Form
                             BorderColor =8355711
                             ForeColor =6710886
                             Name ="lbl_LangueCode"
-                            Caption ="LangueCode"
+                            Caption ="Code langue :"
                             BottomPadding =150
                             GridlineColor =10921638
                             LayoutCachedLeft =113
@@ -368,7 +371,7 @@ Begin Form
                     Begin
                         Begin Label
                             OverlapFlags =85
-                            TextAlign =1
+                            TextAlign =3
                             Left =121
                             Top =737
                             Width =1455
@@ -380,7 +383,7 @@ Begin Form
                             BorderColor =8355711
                             ForeColor =6710886
                             Name ="lbl_LangueNom"
-                            Caption ="LangueNom"
+                            Caption ="Désignation :"
                             BottomPadding =150
                             GridlineColor =10921638
                             LayoutCachedLeft =121
@@ -435,7 +438,7 @@ Begin Form
                     Begin
                         Begin Label
                             OverlapFlags =85
-                            TextAlign =1
+                            TextAlign =3
                             Left =106
                             Top =1247
                             Width =1470
@@ -447,7 +450,7 @@ Begin Form
                             BorderColor =8355711
                             ForeColor =6710886
                             Name ="lbl_LangueImage"
-                            Caption ="LangueImage"
+                            Caption ="Image :"
                             GridlineColor =10921638
                             LayoutCachedLeft =106
                             LayoutCachedTop =1247
@@ -457,10 +460,11 @@ Begin Form
                     End
                 End
                 Begin Label
+                    FontItalic = NotDefault
                     OverlapFlags =85
-                    Left =3968
+                    Left =3848
                     Top =1247
-                    Width =8220
+                    Width =8568
                     Height =1470
                     BorderColor =8355711
                     ForeColor =6710886
@@ -468,11 +472,11 @@ Begin Form
                     Caption ="Note:\015\012- L'image doit être au format 32*32 (png)\015\012- Le nom doit corr"
                         "espondre à son code ie : 1033 -> 1033.png\015\012- Elle doit être située dans le"
                         " sous dossier 'Flags' de l'application,\015\012- Vous pouvez modifier ce dossier"
-                        " avec la contante DOS_DRAP de la classe C_TradTexte"
+                        " avec la contante DOS_DRAP du module MD_TradUtils."
                     GridlineColor =10921638
-                    LayoutCachedLeft =3968
+                    LayoutCachedLeft =3848
                     LayoutCachedTop =1247
-                    LayoutCachedWidth =12188
+                    LayoutCachedWidth =12416
                     LayoutCachedHeight =2717
                 End
                 Begin Label
@@ -623,12 +627,146 @@ Begin Form
             End
         End
         Begin FormFooter
-            Height =0
+            Height =566
             Name ="PiedFormulaire"
-            AutoHeight =1
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
-            BackThemeColorIndex =1
+            BackThemeColorIndex =2
+            BackTint =20.0
+            Begin
+                Begin CommandButton
+                    TabStop = NotDefault
+                    OverlapFlags =85
+                    Left =3968
+                    Top =170
+                    Width =1128
+                    Height =324
+                    ForeColor =4210752
+                    Name ="cmdValider"
+                    Caption ="Commande23"
+                    OnClick ="[Event Procedure]"
+                    Picture ="ic_cmbValider.png"
+                    GridlineColor =10921638
+                    ImageData = Begin
+                        0x89504e470d0a1a0a0000000d49484452000000100000001008060000001ff3ff ,
+                        0x610000000467414d410000afc837058ae900000006624b4744000000000000f9 ,
+                        0x43bb7f000000097048597300000048000000480046c96b3e0000000976704167 ,
+                        0x0000001000000010005cc6adc3000002a54944415438cba5934b4894511cc5cf ,
+                        0xbdf77b8df370149d69a2078e9536810d0922538b82ec21064591480549b90857 ,
+                        0x6db24dcf558ba295410f1002838484022ba7225cf4628232cd08ada69732d3a8 ,
+                        0xe54ccecc77bfefde16b6a8a0179efd397f38ffdf21524acc46c4792c0069034a ,
+                        0xde80ca1d50730e98c486a9e6006ac252394cdd84a479109543681c10e6526fc0 ,
+                        0x75012a0dd1ff3a270170bebba27c6eb469656dc4ab7ac43f0748294b05c5f9f5 ,
+                        0xb5551d8736ae99d73f3426e223c9664542964989690089df38212c51e3f4393a ,
+                        0xf6ac0d85365796e3c4ad27b81f8bef234e7a4d292e713f37b978997e6f3568c0 ,
+                        0xc79fbc42aa39db6a59b0a4e8e4c1866ac72abf176dbd4f10ed8b1fa1ba720e44 ,
+                        0x807a9833ddb0ba2cec2cd22e734b14cf540b085b56da062ead5b136c6fdfbec1 ,
+                        0x11f10770ecf610a277c64e6b52390e3af33d3a3a923d3b073eb46e89ac2405e8 ,
+                        0x1602c4e2a2ceed57a22d5bc3db8ed6ad87dfe5c2a9be67b87e23d1a573d6861f ,
+                        0x9a635a38303a91e17bf76fac5774b758f8e0c5bb9660c8dd7ca03152521fac46 ,
+                        0x4ea4d1f1e829baaf246ec2b47741b7b29662c2d6f290ba05e60d977d1e9fc8ce ,
+                        0x2f9d6754378657112390f56cada9524385e598b012b83a3880ab5da97e32459a ,
+                        0x5495a698ad40b53568dc012d5f00e65d1e947646e5536472c7f20a3f09fb1681 ,
+                        0x4986493b89bbaf86d0ddf9252ec7c9264d2771d5d2a059068cbc0bc674211c19 ,
+                        0x2f5871e532a896f13e931691c2c55f832e5dc1944c22f6e1357a3ab329fe51d9 ,
+                        0x4c0d3e2899f8ceae842412920a482a400d538743687932eae989c526314646d0 ,
+                        0x9f7c83de4e33630e17ec640cb13f014699ad83d93a0ca15ffcf4d8f9f6e1f018 ,
+                        0xee7531333be06d650cbd7f2394cd59b20254325042b274daf0a5865db5b917ee ,
+                        0xc360d619a959108c432a1c606206905fd738db397f0339d9212dec8f2d550000 ,
+                        0x0025744558746372656174652d6461746500323030392d31312d31355431363a ,
+                        0x30383a34312d30373a303024aee1e00000002574455874646174653a63726561 ,
+                        0x746500323031302d30322d31375430373a31323a32372d30373a3030009681fa ,
+                        0x0000002574455874646174653a6d6f6469667900323031302d30312d31315430 ,
+                        0x393a31383a33372d30373a3030a0624aec00000035744558744c6963656e7365 ,
+                        0x00687474703a2f2f6372656174697665636f6d6d6f6e732e6f72672f6c696365 ,
+                        0x6e7365732f4c47504c2f322e312f3bc1b41800000025744558746d6f64696679 ,
+                        0x2d6461746500323030392d31312d31355431363a30383a34312d30373a30307b ,
+                        0x1f97d40000001974455874536f6674776172650041646f626520496d61676552 ,
+                        0x6561647971c9653c0000000d74455874536f75726365004e75766f6c61ac4f35 ,
+                        0xf10000003474455874536f757263655f55524c00687474703a2f2f7777772e69 ,
+                        0x636f6e2d6b696e672e636f6d2f70726f6a656374732f6e75766f6c612f763db4 ,
+                        0x520000000049454e44ae426082
+                    End
+
+                    LayoutCachedLeft =3968
+                    LayoutCachedTop =170
+                    LayoutCachedWidth =5096
+                    LayoutCachedHeight =494
+                    BackColor =14461583
+                    BorderColor =14461583
+                    HoverColor =15189940
+                    PressedColor =9917743
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =3
+                    WebImagePaddingTop =3
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
+                End
+                Begin CommandButton
+                    TabStop = NotDefault
+                    OverlapFlags =85
+                    Left =7370
+                    Top =170
+                    Width =1128
+                    Height =324
+                    TabIndex =1
+                    ForeColor =4210752
+                    Name ="cmdAnnuler"
+                    Caption ="cmdAnnuler"
+                    OnClick ="[Event Procedure]"
+                    Picture ="ic_cmdAnnuler.png"
+                    GridlineColor =10921638
+                    ImageData = Begin
+                        0x89504e470d0a1a0a0000000d49484452000000100000001008060000001ff3ff ,
+                        0x6100000006624b4744000000000000f943bb7f000000097048597300000dd700 ,
+                        0x000dd70142289b7800000009767041670000001000000010005cc6adc3000002 ,
+                        0x474944415438cba553414fe240187d53ba9096b61883bb8b94e5c0de4c8c472f ,
+                        0x6b5bbc71e0b4077f62cfbd11136df5e481c490184f1e4058b6228db4582c9de9 ,
+                        0xecc18588072f7ea7c9f7de7cf9de7b3384738ecf94b83ab89625e666331b8480 ,
+                        0x69da89797e4edf125dcb1273616803d8c0851548a65347ae565b72b5da22d3a9 ,
+                        0xe35ad6c67012044e51d75bb2aeb74810ac711100f864622bb59a593b3e964008 ,
+                        0x069d8e39eff71dd7b2da00808707a758af9b7ab32981730c3a1d33babfb701fc ,
+                        0x160120a314d972896cb1401686d00d431a9c9e9ad170e80080aaeba66e1812f5 ,
+                        0x7d089af6ca650c004038e7700911d346c3512b15b3de6c4a591441d034dc7bde ,
+                        0x3300d40ca39845110445c1e0ec2c0ec763efcbdd5ddbe49c92550a2e216252af ,
+                        0x3b6aa562fc383a92b3f91c39550500b03084a0aa185c5cc4d178ec15fafdb6c9 ,
+                        0x395d6fb0368b1071a1eb8eb6bbfbab7a78a880fe0f421431baba9a87a3d1a534 ,
+                        0x1cae2f6fc4b82a4629e87209ba580059f6da4c53d02401a3f43d1d1b12c29d1d ,
+                        0x472e978deac1819c25097292f43af4e505423e8fd1f5751c3f3e7ada64b229c1 ,
+                        0x25447cdade76e4ad2de3fbfebecc974b907c1e0f37377300f8bab7a7ac7a7f7b ,
+                        0xbd387e7af2b682a06d724e0500084a253b5f2c1ae546434e6733304a31ec76e3 ,
+                        0x99ef5fce7cff72d8edc68c52a4618872a321e78b45232895ecb5078c31b03445 ,
+                        0x1ac70080c9ed6dfc12455ef9f9b90d008f8c397f7a3d63e7e74f199c234b53b0 ,
+                        0xf7efc02f149c82a2180090cce7deb72459ebfc08df30719ccbd9005061ece46d ,
+                        0x541fe1e4b3dff91fb4f75d4b844e6a8b0000002574455874646174653a637265 ,
+                        0x61746500323031302d30312d31315430393a31323a34322d30373a30309ee044 ,
+                        0x270000002574455874646174653a6d6f6469667900323031302d30312d313154 ,
+                        0x30393a31323a34322d30373a3030efbdfc9b00000034744558744c6963656e73 ,
+                        0x6500687474703a2f2f6372656174697665636f6d6d6f6e732e6f72672f6c6963 ,
+                        0x656e7365732f47504c2f322e302f6c6a06a80000001974455874536f66747761 ,
+                        0x7265007777772e696e6b73636170652e6f72679bee3c1a000000137445587453 ,
+                        0x6f7572636500474e4f4d452d436f6c6f7273aa9944e20000003174455874536f ,
+                        0x757263655f55524c00687474703a2f2f636f64652e676f6f676c652e636f6d2f ,
+                        0x702f676e6f6d652d636f6c6f72732f501db5eb0000000049454e44ae426082
+                    End
+
+                    LayoutCachedLeft =7370
+                    LayoutCachedTop =170
+                    LayoutCachedWidth =8498
+                    LayoutCachedHeight =494
+                    BackColor =14461583
+                    BorderColor =14461583
+                    HoverColor =15189940
+                    PressedColor =9917743
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =3
+                    WebImagePaddingTop =3
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
+                End
+            End
         End
     End
 End
@@ -677,12 +815,13 @@ End Sub
 ' DateMod :
 ' ----------------------------------------------------------------
 Private Sub Form_Load()
+On Error GoTo ERR_Form_Load
+
     Dim lCode As Long
 
     If Me.NewRecord Then
         '// Ajout d'une langue.
         Me.LangueCode.Enabled = True
-        Me.LangueNom = Me.OpenArgs
         Me.LangueCode.SetFocus
     Else
         '// Affiche la langue.
@@ -696,11 +835,23 @@ Private Sub Form_Load()
             Me.imgLangue00.Visible = False
         End If
     End If
+
+SORTIE_Form_Load:
+    Exit Sub
+
+ERR_Form_Load:
+    MsgBox "L’erreur suivante s’est produite" & vbCrLf & vbCrLf & _
+           "Erreur N°: " & Err.Number & vbCrLf & _
+           "Source : Form_F_Langues.Form_Load" & vbCrLf & _
+           "Description: " & Err.Description & _
+           Switch(Erl = 0, vbNullString, Erl <> 0, vbCrLf & "Line No: " & Erl), _
+           vbOKOnly + vbCritical, "Erreur survenue !"
+    Resume SORTIE_Form_Load
 End Sub
 
 Private Sub Form_AfterInsert()
 '// Indique au form F_Main qu'une nouvelle langue à été ajouter.
-    Forms.Item("F_Main").AddLangue True
+    Forms.Item("F_Main").AddLangue Me.LangueCode
 End Sub
 
 Private Sub cmbSelectImage_Click()
@@ -727,5 +878,15 @@ Private Sub cmbSelectImage_Click()
     Me.imgLangue.Picture = sImgSel
     Me.LangueImage = sImg
 
+End Sub
+
+
+Private Sub cmdAnnuler_Click()
+    If Me.Dirty Then Me.Undo
+    DoCmd.Close
+End Sub
+
+Private Sub cmdValider_Click()
+    DoCmd.Close
 End Sub
 '//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& END EVENTS &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&

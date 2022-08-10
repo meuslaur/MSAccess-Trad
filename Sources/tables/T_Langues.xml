@@ -1,7 +1,7 @@
 ﻿<dataroot xmlns:od="urn:schemas-microsoft-com:officedata">
 <T_Langues>
-<LangueCode>0</LangueCode>
-<LangueNom>???</LangueNom>
+<LangueCode>-1</LangueCode>
+<LangueNom>&amp;lt;Nouvelle langue&amp;gt;</LangueNom>
 <LangueImage>0000.png</LangueImage>
 </T_Langues>
 <T_Langues>

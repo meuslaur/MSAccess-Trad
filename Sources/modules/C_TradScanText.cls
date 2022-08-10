@@ -165,31 +165,53 @@ End Property
 '// Retourne Exist si tout est ok.
 '----------------------------------------------------------------
 Public Function IsNewApp() As eReponse
-    Dim sres As String
+    Dim sRes As String
     Dim eRep As eReponse
     Dim vTmp As Variant
+    Dim lRep As Long
+    Dim sMsg As String
 
     thisApp.ID = vbNullString
-    sres = ObjetAcc.GetPropTxt(PROP_GUID)   '// Obtenir le guid de la base...
-    If (sres = PROP_NA) Then IsNewApp = Inconnu: Exit Function  '// Inconnue, on sort.
+    sRes = ObjetAcc.GetPropTxt(PROP_GUID)   '// Obtenir le guid de la base...
 
-    eRep = CompareGuidAppEtTable(sres)      '// Vérifier les guid...
+    If (sRes = PROP_NA) Then IsNewApp = Inconnu: Exit Function '// Inconnue, on sort.
+
+    eRep = CompareGuidAppEtTable(sRes)      '// Vérifier les guid...
 
     Select Case eRep
 
-        Case eReponse.Valide
-            thisApp.ID = sres
+        Case eReponse.Valide        '// Existe, demande confirmation
+
+            thisApp.ID = sRes
             vTmp = DLookup("[Num]", "T_App", "[App_ID]=" & thisApp.ID)      '// Extraire N° de l'app.
             thisApp.Num = CLng(vTmp)
-            IsNewApp = Exist    '// ok.
 
-        Case eReponse.Inconnu   '// Pas dans la table.
-            IsNewApp = Faux
+            Beep
+            sMsg = "La base '" & ObjetAcc.BaseNom & "' est déjà enregistrée dans la table T_Objets." & vbCrLf & _
+                   "Les données concernant cette base vont être mise à jour." & vbCrLf & _
+                   "Voulez-vous continuer ?"
+            lRep = MsgBox(sMsg, vbExclamation + vbYesNo + vbDefaultButton2, "Base déjà enregistrée")
+            If (lRep = vbNo) Then
+                IsNewApp = Erreur
+            Else
+                IsNewApp = Valide
+            End If
+            Exit Function
 
-        Case eReponse.Faux      '// ne correspond pas.
-            IsNewApp = Erreur
+        Case eReponse.Inconnu       '// Pas dans la table.
+
+            MsgBox "Erreur App_ID pas dans la table.", vbCritical, "cmbSelectBdd_Click"
+            Exit Function
+
+        Case eReponse.Faux          '// ne correspond pas.
+
+            MsgBox "Erreur App_ID/table ne correspondent pas.", vbCritical, "cmbSelectBdd_Click"
+            Exit Function
+
         Case Else
     End Select
+
+    IsNewApp = Erreur
 
 End Function
 '//====================================== END PROP =======================================
@@ -385,7 +407,7 @@ Private Function ScanObjet(ObjType As E_ObjectTypeNum) As Boolean
 On Error GoTo ERR_ScanObjet
 
     Dim oObjet      As Object
-    Dim oCtr        As Access.Control
+    Dim octr        As Access.Control
 
     Set oObjet = GetObjet(thisObj.Nom, ObjType)             '// Ouvre le form/report mode création pour scan des contrôles...
     If (oObjet Is Nothing) Then mRep = False: Exit Function '// Erreur, on sort.
@@ -399,17 +421,17 @@ On Error GoTo ERR_ScanObjet
     If (mRep) Then
 
         '// On boucle sur les contrôles de l'objet.
-        For Each oCtr In oObjet.Controls
+        For Each octr In oObjet.Controls
 
             'If (ControlIsVisible(oCtr) = True) Then 'TODO: Ignore les ctr invisibles ?
-                thisChild.Nom = oCtr.name
+                thisChild.Nom = octr.name
                 thisChild.NomNet = MD_Utils.CheckApostrophe(thisChild.Nom)
-                thisChild.Type = TypeName(oCtr)
+                thisChild.Type = TypeName(octr)
                 '// Extraire le parent du control (page, label, etc.).
-                thisChild.Parent = IIf((oCtr.Parent.name <> thisObj.Nom), TypeName(oCtr.Parent) & "." & oCtr.Parent.name, vbNullString)
+                thisChild.Parent = IIf((octr.Parent.name <> thisObj.Nom), TypeName(octr.Parent) & "." & octr.Parent.name, vbNullString)
 
                 '----------------------------
-                mRep = ScanObjChilds(oCtr)               '// Scan les propriétés du contrôle...
+                mRep = ScanObjChilds(octr)               '// Scan les propriétés du contrôle...
                 '----------------------------
 
                 If (mRep = False) Then Exit For
@@ -1140,13 +1162,13 @@ End Sub
 '// Retourne TRUE si ok.
 '----------------------------------------------------------------
 Private Function MaJAppID() As Boolean
-    Dim sres As String
+    Dim sRes As String
     Dim sSql As String
     Dim vTmp As Long
 
-    sres = ObjetAcc.GetPropTxt(PROP_GUID)   '// Doit retourner "N/A"(non trouvée), sinon erreur.
+    sRes = ObjetAcc.GetPropTxt(PROP_GUID)   '// Doit retourner "N/A"(non trouvée), sinon erreur.
 
-    If (sres <> PROP_NA) Then Exit Function '// Erreur contient autre chose que "N/A".
+    If (sRes <> PROP_NA) Then Exit Function '// Erreur contient autre chose que "N/A".
 
     mRep = ObjetAcc.CreatePropTxt(PROP_GUID, thisApp.ID)      '// Ajout de la prop dans la base...
     If (mRep = False) Then Exit Function    '// Erreur.

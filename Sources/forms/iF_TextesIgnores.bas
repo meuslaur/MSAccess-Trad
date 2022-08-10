@@ -16,10 +16,10 @@ Begin Form
     GridY =10
     Width =11338
     DatasheetFontHeight =11
-    Left =1992
-    Top =528
-    Right =13332
-    Bottom =11856
+    Left =6888
+    Top =648
+    Right =18228
+    Bottom =11976
     RecSrcDt = Begin
         0x4f224c0d4cdde540
     End
@@ -156,7 +156,7 @@ Begin Form
                     RowSource ="RL_Apps"
                     ColumnWidths ="0;2089"
                     AfterUpdate ="[Event Procedure]"
-                    OnGotFocus ="=OuvreZl()"
+                    OnMouseDown ="=OuvreZl()"
                     ControlTipText ="Applications enregistrées."
                     GridlineColor =10921638
                     AllowValueListEdits =0

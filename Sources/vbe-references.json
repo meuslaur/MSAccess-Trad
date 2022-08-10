@@ -15,6 +15,14 @@
     "VBIDE": {
       "GUID": "{0002E157-0000-0000-C000-000000000046}",
       "Version": "5.3"
+    },
+    "CTVLib": {
+      "GUID": "{CD6C7865-5864-11D0-ABF0-0020AF6B0B7A}",
+      "Version": "1.0"
+    },
+    "MSComctlLib": {
+      "GUID": "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}",
+      "Version": "2.2"
     }
   }
 }
