@@ -18,10 +18,10 @@ Begin Form
     Width =18368
     DatasheetFontHeight =11
     ItemSuffix =70
-    Left =2940
-    Top =204
-    Right =21060
-    Bottom =12576
+    Left =-4152
+    Top =1260
+    Right =14220
+    Bottom =13596
     DatasheetGridlinesColor =15132391
     RecSrcDt = Begin
         0x5c7a48f85bd8e540
@@ -464,7 +464,6 @@ Begin Form
                     Height =330
                     BorderColor =10921638
                     Name ="img_NoLangue"
-                    Tag ="1"
                     Picture ="0000.png"
                     GridlineColor =10921638
                     ImageData = Begin
@@ -734,6 +733,7 @@ Begin Form
                     Visible = NotDefault
                     FontItalic = NotDefault
                     OldBorderStyle =1
+                    BorderWidth =1
                     OverlapFlags =85
                     TextFontCharSet =2
                     TextFontFamily =18
@@ -1415,9 +1415,9 @@ Begin Form
                     IMESentenceMode =3
                     ColumnCount =2
                     ListWidth =2085
-                    Left =1077
+                    Left =561
                     Top =1247
-                    Width =3630
+                    Width =5106
                     Height =315
                     TabIndex =8
                     BorderColor =10921638
@@ -1432,9 +1432,9 @@ Begin Form
                     ControlTipText ="Liste des applications déjà enregistrées,"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =1077
+                    LayoutCachedLeft =561
                     LayoutCachedTop =1247
-                    LayoutCachedWidth =4707
+                    LayoutCachedWidth =5667
                     LayoutCachedHeight =1562
                     BackThemeColorIndex =7
                     BackTint =20.0
@@ -1445,9 +1445,9 @@ Begin Form
                             OverlapFlags =93
                             TextAlign =2
                             TextFontFamily =49
-                            Left =1077
+                            Left =561
                             Top =907
-                            Width =3624
+                            Width =5100
                             Height =345
                             FontWeight =500
                             BorderColor =8355711
@@ -1456,9 +1456,9 @@ Begin Form
                             Caption ="Base"
                             FontName ="Consolas"
                             GridlineColor =10921638
-                            LayoutCachedLeft =1077
+                            LayoutCachedLeft =561
                             LayoutCachedTop =907
-                            LayoutCachedWidth =4701
+                            LayoutCachedWidth =5661
                             LayoutCachedHeight =1252
                             ThemeFontIndex =-1
                             BackThemeColorIndex =7
@@ -1476,7 +1476,7 @@ Begin Form
                     OverlapFlags =85
                     TextAlign =2
                     IMESentenceMode =3
-                    Left =2608
+                    Left =3628
                     Top =1644
                     Width =2046
                     Height =315
@@ -1488,9 +1488,9 @@ Begin Form
                     GridlineColor =10921638
                     ShowDatePicker =0
 
-                    LayoutCachedLeft =2608
+                    LayoutCachedLeft =3628
                     LayoutCachedTop =1644
-                    LayoutCachedWidth =4654
+                    LayoutCachedWidth =5674
                     LayoutCachedHeight =1959
                     BackThemeColorIndex =3
                     BackShade =25.0
@@ -1500,7 +1500,7 @@ Begin Form
                         Begin Label
                             OverlapFlags =85
                             TextAlign =3
-                            Left =907
+                            Left =1927
                             Top =1644
                             Width =1590
                             Height =315
@@ -1508,9 +1508,9 @@ Begin Form
                             Name ="lbl_txtDateScan"
                             Caption ="Dernier scan :"
                             GridlineColor =10921638
-                            LayoutCachedLeft =907
+                            LayoutCachedLeft =1927
                             LayoutCachedTop =1644
-                            LayoutCachedWidth =2497
+                            LayoutCachedWidth =3517
                             LayoutCachedHeight =1959
                             ForeThemeColorIndex =2
                             ForeTint =100.0
@@ -1521,8 +1521,8 @@ Begin Form
                 Begin CommandButton
                     TabStop = NotDefault
                     OverlapFlags =85
-                    Left =680
-                    Top =1247
+                    Left =566
+                    Top =510
                     Width =330
                     Height =330
                     TabIndex =10
@@ -1575,10 +1575,10 @@ Begin Form
                         0x322669643d329541f9c60000000049454e44ae426082
                     End
 
-                    LayoutCachedLeft =680
-                    LayoutCachedTop =1247
-                    LayoutCachedWidth =1010
-                    LayoutCachedHeight =1577
+                    LayoutCachedLeft =566
+                    LayoutCachedTop =510
+                    LayoutCachedWidth =896
+                    LayoutCachedHeight =840
                     UseTheme =0
                     BackColor =14461583
                     BorderColor =14461583
@@ -1690,15 +1690,15 @@ Begin Form
                 Begin CommandButton
                     TabStop = NotDefault
                     OverlapFlags =85
-                    Left =340
-                    Top =1247
+                    Left =907
+                    Top =510
                     Width =331
                     Height =331
                     TabIndex =11
                     ForeColor =4210752
                     Name ="cmdFrmTxtIgnore"
                     OnClick ="[Event Procedure]"
-                    ControlTipText ="Liste des textes filtrés lors du scan."
+                    ControlTipText ="Liste Erreurs survenues et des textes filtrés lors du scan."
                     Picture ="ic_FTextesIgnore.png"
                     GridlineColor =10921638
                     ImageData = Begin
@@ -1744,10 +1744,10 @@ Begin Form
                         0x72672fef37aacb0000000049454e44ae426082
                     End
 
-                    LayoutCachedLeft =340
-                    LayoutCachedTop =1247
-                    LayoutCachedWidth =671
-                    LayoutCachedHeight =1578
+                    LayoutCachedLeft =907
+                    LayoutCachedTop =510
+                    LayoutCachedWidth =1238
+                    LayoutCachedHeight =841
                     UseTheme =0
                     BackColor =14461583
                     BorderColor =14461583
@@ -1815,8 +1815,8 @@ Begin Form
                 Begin CommandButton
                     TabStop = NotDefault
                     OverlapFlags =85
-                    Left =340
-                    Top =907
+                    Left =1247
+                    Top =510
                     Width =331
                     Height =331
                     TabIndex =12
@@ -1860,10 +1860,10 @@ Begin Form
                         0x636f6e732e6f72672fef37aacb0000000049454e44ae426082
                     End
 
-                    LayoutCachedLeft =340
-                    LayoutCachedTop =907
-                    LayoutCachedWidth =671
-                    LayoutCachedHeight =1238
+                    LayoutCachedLeft =1247
+                    LayoutCachedTop =510
+                    LayoutCachedWidth =1578
+                    LayoutCachedHeight =841
                     UseTheme =0
                     BackColor =14461583
                     BorderColor =14461583
@@ -1972,7 +1972,6 @@ On Error GoTo ERR_cmbSelectBdd_Click
     vTmp = Split(sRep, ";")             '// Retourne folder;backup;base
     Me.txtBddSauve = vTmp(0) & vTmp(1)  '// folder + backup.
 
-    Beep
     sMsg = "Créez la sauvegarde ?" & vbCrLf & Me.txtBddSauve
     lRep = MsgBox(sMsg, vbQuestion + vbYesNo, "Sauvegarde...")
     If (lRep = vbYes) Then
@@ -2129,6 +2128,7 @@ Private Sub cmdLanceScan_Click()
     ScanActif False     '// Masque les contrôles d'avancement du scan...
 
     DoCmd.Hourglass False
+    Me.cmdCloseBd.Visible = False
 
     If bRep Then
         Me.zlBases.Requery
@@ -2185,7 +2185,7 @@ End Sub
 
 Private Sub cmdFrmTxtIgnore_Click()
     If Not ActiveCmbBases Then Exit Sub
-    DoCmd.OpenForm "iF_TextesIgnores", , , , , , Me.zlBases
+    DoCmd.OpenForm "iF_NonInclus", , , , , , Me.zlBases
 End Sub
 Private Sub cmdFrmIgnores_Click()
     If Not ActiveCmbBases Then Exit Sub
@@ -2229,7 +2229,7 @@ Private Function InitAppEtBase(sBase As String) As Boolean
 
     If (Not bRep) Then
         ObjetAcc.CloseMsBase True    '// Problème détecter, on ferme tout, RaZ et on sort...
-        Beep
+'        Beep
         MsgBox "Erreur initialisation de l'application", vbCritical, "Initialisation"
         DoCmd.Hourglass False
         DoCmd.Echo True
@@ -2294,7 +2294,9 @@ Private Sub ScanActif(ScanEncours As Boolean)
     Me.lstObjets.SetFocus
 
     For Each octr In Me.F_Entete.Controls
-        octr.Visible = IIf(octr.Tag = 1, Not ScanEncours, ScanEncours)
+        If (octr.Tag <> vbNullString) Then
+            octr.Visible = IIf(octr.Tag = 1, Not ScanEncours, ScanEncours)
+        End If
     Next
 
     Me.zlBases.Enabled = Not ScanEncours

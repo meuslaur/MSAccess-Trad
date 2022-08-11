@@ -16,15 +16,15 @@ Begin Form
     GridY =10
     Width =11338
     DatasheetFontHeight =11
-    Left =6888
-    Top =648
-    Right =18228
-    Bottom =11976
+    Left =3228
+    Top =672
+    Right =14568
+    Bottom =12000
     RecSrcDt = Begin
-        0x4f224c0d4cdde540
+        0x0e0613f613dee540
     End
-    RecordSource ="iT_TextesIgnores"
-    Caption ="Textes ignorés."
+    RecordSource ="iT_NonInclus"
+    Caption ="Erreurs survenues et Textes filtérs."
     OnOpen ="[Event Procedure]"
     DatasheetFontName ="Calibri"
     AllowDatasheetView =0
@@ -127,7 +127,6 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="txt_Texte"
-                    ControlSource ="Texte"
                     GridlineColor =10921638
                     TextFormat =1
 
@@ -146,7 +145,7 @@ Begin Form
                     ListWidth =2085
                     Left =566
                     Top =453
-                    Width =3630
+                    Width =5094
                     Height =300
                     BorderColor =10921638
                     ForeColor =3484194
@@ -163,7 +162,7 @@ Begin Form
 
                     LayoutCachedLeft =566
                     LayoutCachedTop =453
-                    LayoutCachedWidth =4196
+                    LayoutCachedWidth =5660
                     LayoutCachedHeight =753
                     BackThemeColorIndex =7
                     BackTint =20.0
@@ -176,7 +175,7 @@ Begin Form
                             TextFontFamily =49
                             Left =566
                             Top =170
-                            Width =3636
+                            Width =5100
                             Height =300
                             FontWeight =500
                             BorderColor =8355711
@@ -187,7 +186,7 @@ Begin Form
                             GridlineColor =10921638
                             LayoutCachedLeft =566
                             LayoutCachedTop =170
-                            LayoutCachedWidth =4202
+                            LayoutCachedWidth =5666
                             LayoutCachedHeight =470
                             ThemeFontIndex =-1
                             BackThemeColorIndex =7
@@ -233,7 +232,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="Texte12"
-                    ControlSource ="Texte"
+                    ControlSource ="Valeur"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =7086
@@ -416,10 +415,10 @@ End Sub
 
 Private Sub zlBases_AfterUpdate()
 
-    Me.Filter = "[ID]='" & Me.zlBases & "'"
+    Me.Filter = "[IDApp]='" & Me.zlBases & "'"
     Me.FilterOn = True
-    Me.txt_Texte.ControlSource = "Texte"
-    Me.Texte12.ControlSource = "Texte"
+    Me.txt_Texte.ControlSource = "Valeur"
+    Me.Texte12.ControlSource = "Valeur"
 
     Me.lblInfo.Visible = IsNull(Me.txt_Texte)
     Me.imgTxtVide.Visible = IsNull(Me.txt_Texte)

@@ -20,10 +20,10 @@ Begin Form
     Width =11338
     DatasheetFontHeight =11
     ItemSuffix =67
-    Left =9576
-    Top =1656
-    Right =20916
-    Bottom =12816
+    Left =1512
+    Top =780
+    Right =12852
+    Bottom =11940
     DatasheetGridlinesColor =15132391
     RecSrcDt = Begin
         0x2562231676dbe540
@@ -212,7 +212,7 @@ Begin Form
                 Begin Subform
                     OverlapFlags =85
                     Left =566
-                    Top =2777
+                    Top =2834
                     Width =10476
                     Height =3000
                     TabIndex =1
@@ -222,9 +222,9 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedLeft =566
-                    LayoutCachedTop =2777
+                    LayoutCachedTop =2834
                     LayoutCachedWidth =11042
-                    LayoutCachedHeight =5777
+                    LayoutCachedHeight =5834
                     Begin
                         Begin Label
                             Vertical = NotDefault
@@ -232,7 +232,7 @@ Begin Form
                             OverlapFlags =85
                             TextAlign =2
                             Left =113
-                            Top =2777
+                            Top =2834
                             Width =375
                             Height =3003
                             BorderColor =8355711
@@ -241,9 +241,9 @@ Begin Form
                             Caption ="Contrôles"
                             GridlineColor =10921638
                             LayoutCachedLeft =113
-                            LayoutCachedTop =2777
+                            LayoutCachedTop =2834
                             LayoutCachedWidth =488
-                            LayoutCachedHeight =5780
+                            LayoutCachedHeight =5837
                             BackThemeColorIndex =9
                             BackTint =30.0
                         End
@@ -747,13 +747,13 @@ Option Explicit
     End Enum
     Private thisFiltre  As E_FiltreSf
     Private mFltPrec    As E_FiltreSf   '// Filtre précedent sur les SF.
-'    Private mPrecChk    As Long         '// CheckBox précedement cochée.
 '//:::::::::::::::::::::::::::::::::: END VARIABLES ::::::::::::::::::::::::::::::::::::::
 
 ' ----------------------------------------------------------------
 '// Chargement de données suvant la base.
 ' ----------------------------------------------------------------
 Private Sub Form_Open(Cancel As Integer)
+On Error GoTo ERR_Form_Open
 
     If IsNull(Me.OpenArgs()) Then
         Cancel = True
@@ -801,6 +801,18 @@ Private Sub Form_Open(Cancel As Integer)
 
 '    If (UBound(Args()) > 0) Then Me.lblTitre.Caption = Me.lblTitre.Caption & " (" & Args(1) & ")"
 
+    
+SORTIE_Form_Open:
+    Exit Sub
+
+ERR_Form_Open:
+    MsgBox "L’erreur suivante s’est produite" & vbCrLf & vbCrLf & _
+           "Erreur N°: " & Err.Number & vbCrLf & _
+           "Source : Form_iF_Recap.Form_Open" & vbCrLf & _
+           "Description: " & Err.Description & _
+           Switch(Erl = 0, vbNullString, Erl <> 0, vbCrLf & "Line No: " & Erl), _
+           vbOKOnly + vbCritical, "Erreur survenue !"
+    Resume SORTIE_Form_Open
 End Sub
 
 Private Sub Form_Close()

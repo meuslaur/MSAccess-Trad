@@ -3,11 +3,12 @@ VersionRequired =20
 PublishOption =1
 Begin Form
     RecordSelectors = NotDefault
+    MaxButton = NotDefault
+    MinButton = NotDefault
     NavigationButtons = NotDefault
     AllowDeletions = NotDefault
     DividingLines = NotDefault
     AllowAdditions = NotDefault
-    AllowDesignChanges = NotDefault
     DefaultView =0
     ScrollBars =0
     PictureAlignment =2
@@ -31,6 +32,7 @@ Begin Form
     FilterOnLoad =0
     ShowPageMargins =0
     DisplayOnSharePointSite =1
+    AllowLayoutView =0
     DatasheetAlternateBackColor =15921906
     DatasheetGridlinesColor12 =0
     FitToScreen =1
@@ -102,7 +104,7 @@ Begin Form
         End
         Begin Section
             CanGrow = NotDefault
-            Height =9921
+            Height =10204
             Name ="Détail"
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
@@ -113,8 +115,8 @@ Begin Form
                     OverlapFlags =87
                     DecimalPlaces =0
                     IMESentenceMode =3
-                    Left =4195
-                    Top =510
+                    Left =6179
+                    Top =566
                     Width =1761
                     Height =330
                     BorderColor =5855577
@@ -125,10 +127,10 @@ Begin Form
                     OnGotFocus ="=OuvreZl()"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =4195
-                    LayoutCachedTop =510
-                    LayoutCachedWidth =5956
-                    LayoutCachedHeight =840
+                    LayoutCachedLeft =6179
+                    LayoutCachedTop =566
+                    LayoutCachedWidth =7940
+                    LayoutCachedHeight =896
                     BackThemeColorIndex =3
                     BackShade =90.0
                     BorderShade =35.0
@@ -141,18 +143,18 @@ Begin Form
                             OldBorderStyle =1
                             OverlapFlags =93
                             TextAlign =2
-                            Left =4195
-                            Top =170
+                            Left =6179
+                            Top =226
                             Width =1770
                             Height =342
                             ForeColor =5066061
                             Name ="lbl_zlObjetTypes"
                             Caption ="Objets"
                             GridlineColor =10921638
-                            LayoutCachedLeft =4195
-                            LayoutCachedTop =170
-                            LayoutCachedWidth =5965
-                            LayoutCachedHeight =512
+                            LayoutCachedLeft =6179
+                            LayoutCachedTop =226
+                            LayoutCachedWidth =7949
+                            LayoutCachedHeight =568
                             BackThemeColorIndex =3
                             BackShade =75.0
                             BorderThemeColorIndex =1
@@ -167,7 +169,7 @@ Begin Form
                     Left =340
                     Top =1077
                     Width =7632
-                    Height =8676
+                    Height =9000
                     TabIndex =1
                     BorderColor =10921638
                     Name ="sfObjets"
@@ -179,16 +181,16 @@ Begin Form
                     LayoutCachedLeft =340
                     LayoutCachedTop =1077
                     LayoutCachedWidth =7972
-                    LayoutCachedHeight =9753
+                    LayoutCachedHeight =10077
                 End
                 Begin TextBox
                     Locked = NotDefault
                     AllowAutoCorrect = NotDefault
-                    OverlapFlags =87
+                    OverlapFlags =215
                     IMESentenceMode =3
-                    Left =226
-                    Top =510
-                    Width =3630
+                    Left =340
+                    Top =566
+                    Width =4866
                     Height =315
                     TabIndex =2
                     BorderColor =10921638
@@ -196,10 +198,10 @@ Begin Form
                     ControlTipText ="Liste des applications déjà enregistrées,"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =226
-                    LayoutCachedTop =510
-                    LayoutCachedWidth =3856
-                    LayoutCachedHeight =825
+                    LayoutCachedLeft =340
+                    LayoutCachedTop =566
+                    LayoutCachedWidth =5206
+                    LayoutCachedHeight =881
                     BackThemeColorIndex =7
                     BackTint =20.0
                     ForeThemeColorIndex =2
@@ -212,9 +214,9 @@ Begin Form
                             OverlapFlags =93
                             TextAlign =2
                             TextFontFamily =49
-                            Left =226
-                            Top =170
-                            Width =3624
+                            Left =340
+                            Top =226
+                            Width =4872
                             Height =345
                             FontWeight =500
                             BorderColor =8355711
@@ -223,10 +225,10 @@ Begin Form
                             Caption ="Base"
                             FontName ="Consolas"
                             GridlineColor =10921638
-                            LayoutCachedLeft =226
-                            LayoutCachedTop =170
-                            LayoutCachedWidth =3850
-                            LayoutCachedHeight =515
+                            LayoutCachedLeft =340
+                            LayoutCachedTop =226
+                            LayoutCachedWidth =5212
+                            LayoutCachedHeight =571
                             ThemeFontIndex =-1
                             BackThemeColorIndex =7
                             BackTint =50.0
@@ -238,10 +240,10 @@ Begin Form
                     Visible = NotDefault
                     TabStop = NotDefault
                     AllowAutoCorrect = NotDefault
-                    OverlapFlags =85
+                    OverlapFlags =215
                     IMESentenceMode =3
-                    Left =6179
-                    Top =170
+                    Left =2097
+                    Top =56
                     Width =1425
                     Height =300
                     TabIndex =3
@@ -251,10 +253,10 @@ Begin Form
                     GridlineColor =10921638
                     ShowDatePicker =0
 
-                    LayoutCachedLeft =6179
-                    LayoutCachedTop =170
-                    LayoutCachedWidth =7604
-                    LayoutCachedHeight =470
+                    LayoutCachedLeft =2097
+                    LayoutCachedTop =56
+                    LayoutCachedWidth =3522
+                    LayoutCachedHeight =356
                 End
             End
         End

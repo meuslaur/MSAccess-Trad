@@ -3,10 +3,10 @@ VersionRequired =20
 PublishOption =1
 Begin Form
     RecordSelectors = NotDefault
+    NavigationButtons = NotDefault
     AllowDeletions = NotDefault
     DividingLines = NotDefault
     AllowAdditions = NotDefault
-    AllowDesignChanges = NotDefault
     ScrollBars =2
     ViewsAllowed =1
     PictureAlignment =2
@@ -29,6 +29,7 @@ Begin Form
     FilterOnLoad =255
     ShowPageMargins =0
     DisplayOnSharePointSite =1
+    AllowLayoutView =0
     DatasheetAlternateBackColor =15921906
     DatasheetGridlinesColor12 =0
     FitToScreen =1

@@ -275,32 +275,60 @@ End Function
 ' ----------------------------------------------------------------
 '// Retourne le recodset RstNom.
 ' ----------------------------------------------------------------
-Public Function GetRecordset(RstNom As String) As DAO.Recordset
-On Error GoTo ERR_GetRecordset
+Public Function GetRecordset(RstNom As String, _
+                             Optional CheckLinkTable As Boolean = False, _
+                             Optional CheckTableName As Boolean = False) As DAO.Recordset
 
     If (Len(RstNom) = 0) Then Exit Function
+
+    If CheckTableName Then
+        If (CheckTableExist(RstNom) = False) Then Exit Function
+    End If
+
+    If CheckLinkTable Then
+        If (CheckTdfLinked(RstNom) = False) Then Exit Function  '// Vérifier la liason si liée...
+    End If
+
     If (Not m_oRst Is Nothing) Then m_oRst.Close
 
     Set m_oRst = m_oMsBase.OpenRecordset(RstNom, dbOpenSnapshot, dbReadOnly)
     Set GetRecordset = m_oRst
 
-SORTIE_GetRecordset:
-    Exit Function
-
-ERR_GetRecordset:
-    MsgBox "L’erreur suivante s’est produite" & vbCrLf & vbCrLf & _
-           "Erreur N°: " & Err.Number & vbCrLf & _
-           "Source : C_ObjetsAccess.GetRecordset" & vbCrLf & _
-           "Description: " & Err.Description & _
-           Switch(Erl = 0, vbNullString, Erl <> 0, vbCrLf & "Line No: " & Erl), _
-           vbOKOnly + vbCritical, "Erreur survenue !"
-    Resume SORTIE_GetRecordset
 End Function
 
 Public Sub CloseOpenRecordset()
     If (Not m_oRst Is Nothing) Then m_oRst.Close
     Set m_oRst = Nothing
 End Sub
+
+' ----------------------------------------------------------------
+'// Vérifier la liason de la table.
+' ----------------------------------------------------------------
+Public Function CheckTdfLinked(TdfName As String, Optional AfficheMsg As Boolean = False) As Boolean
+
+    Dim sBdSource As String
+    Dim lPos      As Long
+    Dim bRep      As Boolean
+
+    bRep = True
+
+    With m_oMsBase.TableDefs(TdfName)
+        If (.Attributes = dbAttachedTable) Then      'TODO: tdf.Attributes = dbAttachedODBC
+            sBdSource = .Connect
+            lPos = InStr(1, sBdSource, "=")
+            sBdSource = Mid$(sBdSource, lPos + 1)
+            bRep = MD_FSO.FSOFileExist(sBdSource)   '// Verifier si la base est bien la...
+        End If
+    End With
+
+    If (Not bRep And AfficheMsg) Then
+'        Beep
+        MsgBox "Table liée [" & TdfName & "] liason rompue !", vbExclamation, "GetRecordset"
+    End If
+
+    CheckTdfLinked = bRep
+
+End Function
 
 '// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ END PUB. SUB/FUNC \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
@@ -337,6 +365,20 @@ Private Function GetStartUpForm(ByRef MsBase As DAO.Database) As String
         End If
     Next
     Set oProp = Nothing
+
+End Function
+
+Private Function CheckTableExist(TableNom As String) As Boolean
+
+    Dim oTdf As DAO.TableDef
+
+    With m_oMsBase
+        For Each oTdf In .TableDefs
+            If (oTdf.name = TableNom) Then CheckTableExist = True: Exit For
+        Next
+    End With
+
+    Set oTdf = Nothing
 
 End Function
 '// ################################# END PRIV. SUB/FUNC #################################

@@ -95,6 +95,8 @@ Option Explicit
 
     Private mObjNomTmp      As String           '// Pour stockage des valeurs texte ignorées.
     Private mPrpIgnore      As String           '// ""
+    
+
 '//:::::::::::::::::::::::::::::::::: END VARIABLES ::::::::::::::::::::::::::::::::::::::
 
 
@@ -102,14 +104,6 @@ Option Explicit
 '// Tables      Type=1
 'SELECT MSysNameMap.GUID FROM MSysNameMap
 'WHERE (((MSysNameMap.Name)='iF_Recap') AND ((MSysNameMap.Type)=32768));
-
-
-
-
-
-
-
-
 
 
 '//----------------------------------       INIT/TERM       ------------------------------
@@ -186,7 +180,7 @@ Public Function IsNewApp() As eReponse
             vTmp = DLookup("[Num]", "T_App", "[App_ID]=" & thisApp.ID)      '// Extraire N° de l'app.
             thisApp.Num = CLng(vTmp)
 
-            Beep
+'            Beep
             sMsg = "La base '" & ObjetAcc.BaseNom & "' est déjà enregistrée dans la table T_Objets." & vbCrLf & _
                    "Les données concernant cette base vont être mise à jour." & vbCrLf & _
                    "Voulez-vous continuer ?"
@@ -346,7 +340,7 @@ On Error GoTo ERR_ScanObjetsApp
         '// MàJ de la date du scan de l'app.
         sSql = "UPDATE T_App SET T_App.DernierScan = '" & m_DateMaJ & "';"
         ExecuteQdfTemp sSql
-        MaJTableTxtIgnore       '///...
+        MaJTableNonInclus       '///...
     End If
 
 RESET_ScanObjetsApp:
@@ -470,10 +464,17 @@ On Error GoTo ERR_ScanTables
 
     thisObj.IDNet = thisApp.Num & "." & thisObj.Type & "." & thisObj.NomNet
 
+    mRep = ObjetAcc.CheckTdfLinked(thisObj.Nom)     '// Vérifier liaison si tbl liée...
+    If (Not mRep) Then
+        mPrpIgnore = mPrpIgnore & "<div>Liaison rompu Table : <font color=white style=""BACKGROUND-COLOR:#FF0000"">" & thisObj.Nom & "</font></div>"
+        ScanTables = True
+        Exit Function 'TODO: Liaison rompue, on continu quand même sur les autres tables
+    End If
+
     mRep = MajTableObjet              '// ...
     If mRep = False Then Exit Function
 
-    Set oRstTab = ObjetAcc.GetRecordset(thisObj.Nom)
+    Set oRstTab = ObjetAcc.GetRecordset(thisObj.Nom, True)
     If oRstTab Is Nothing Then Exit Function
 
     '// On boucle sur les champs de la table.
@@ -1251,33 +1252,33 @@ Private Sub ExecuteQdfTemp(SqlVal As String)
 End Sub
 
 ' ----------------------------------------------------------------
-'// Stock les textes ignorés par les filtres (caption dans ScanPropreties)
+'// Stock erreur / les textes ignorés par les filtres (caption dans ScanPropreties)
 ' ----------------------------------------------------------------
-Private Sub MaJTableTxtIgnore()
+Private Sub MaJTableNonInclus()
 
     Dim sSql As String
     Dim vTmp As Variant
     Dim sTxt As String
 
-    vTmp = DLookup("[ID]", "iT_TextesIgnores", "[ID]='" & thisApp.ID & "'")
+    vTmp = DLookup("[IDApp]", "iT_NonInclus", "[IDApp]='" & thisApp.ID & "'")
 
     If (IsNull(vTmp)) Then
 
         If (mPrpIgnore = vbNullString) Then Exit Sub            '// Rien a faire on sort.
                                
         sTxt = MD_Utils.CheckApostrophe(mPrpIgnore)             '// Ajoute les texte.
-        sSql = "INSERT INTO iT_TextesIgnores (ID, Texte) " & _
+        sSql = "INSERT INTO iT_NonInclus (IDApp, Valeur) " & _
                "VALUES ('" & thisApp.ID & "', '" & sTxt & "');"
     Else
 
         If (mPrpIgnore = vbNullString) Then                     '// Plus de texte, efface les anciennes données.
-            sSql = "DELETE iT_TextesIgnores.* FROM iT_TextesIgnores " & _
-                   "WHERE (((iT_TextesIgnores.ID)='" & thisApp.ID & "'));"
+            sSql = "DELETE iT_NonInclus.* FROM iT_NonInclus " & _
+                   "WHERE (((iT_NonInclus.IDApp)='" & thisApp.ID & "'));"
 
         Else                                                    '// MàJ de la table.
-        sTxt = MD_Utils.CheckApostrophe(mPrpIgnore)
-            sSql = "UPDATE iT_TextesIgnores SET iT_TextesIgnores.Texte = '" & sTxt & "' " & _
-                   "WHERE (((iT_TextesIgnores.ID)='" & thisApp.ID & "'));"
+            sTxt = MD_Utils.CheckApostrophe(mPrpIgnore)
+            sSql = "UPDATE iT_NonInclus SET iT_NonInclus.Valeur = '" & sTxt & "' " & _
+                   "WHERE (((iT_NonInclus.IDApp)='" & thisApp.ID & "'));"
         End If
     End If
 
@@ -1286,8 +1287,8 @@ Private Sub MaJTableTxtIgnore()
 End Sub
 
 ' ----------------------------------------------------------------
-'// TxtCheck teexte à vérifier.
-'// Stock dans la table iT_TextesIgnores tous les textes rejetés par les filtres.
+'// TxtCheck texte à vérifier.
+'// Stock dans la table iT_NonInclus tous les textes rejetés par les filtres.
 '// Retourne Null string si ne passe pas les filtres, sinon retourne le texte d'origine.
 ' ----------------------------------------------------------------
 Private Function CheckTxtIgnore(TxtCheck As String) As String

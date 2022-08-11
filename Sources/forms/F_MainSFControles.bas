@@ -9,15 +9,16 @@ Begin Form
     AllowAdditions = NotDefault
     AllowEdits = NotDefault
     ScrollBars =2
+    ViewsAllowed =1
     PictureAlignment =2
     DatasheetGridlinesBehavior =3
     GridY =10
     Width =10262
     DatasheetFontHeight =11
-    Left =3900
-    Top =3516
-    Right =14160
-    Bottom =8244
+    Left =6384
+    Top =2616
+    Right =16644
+    Bottom =7344
     RecSrcDt = Begin
         0x6965100493dde540
     End
@@ -25,6 +26,7 @@ Begin Form
     Caption =" "
     OnCurrent ="[Event Procedure]"
     DatasheetFontName ="Calibri"
+    AllowDatasheetView =0
     FilterOnLoad =0
     ShowPageMargins =0
     DisplayOnSharePointSite =1

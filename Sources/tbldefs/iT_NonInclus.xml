@@ -2,15 +2,15 @@
 	<xsd:element name="dataroot">
 		<xsd:complexType>
 			<xsd:sequence>
-				<xsd:element ref="iT_TextesIgnores" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="iT_NonInclus" minOccurs="0" maxOccurs="unbounded"/>
 			</xsd:sequence>
 			<xsd:attribute name="generated" type="xsd:dateTime"/>
 		</xsd:complexType>
 	</xsd:element>
-	<xsd:element name="iT_TextesIgnores">
+	<xsd:element name="iT_NonInclus">
 		<xsd:annotation>
 			<xsd:appinfo>
-				<od:index index-name="PrimaryKey" index-key="ID " primary="yes" unique="yes" clustered="no" order="asc"/>
+				<od:index index-name="PrimaryKey" index-key="IDApp " primary="yes" unique="yes" clustered="no" order="asc"/>
 				<od:tableProperty name="PublishToWeb" type="2" value="1"/>
 				<od:tableProperty name="Orientation" type="2" value="0"/>
 				<od:tableProperty name="OrderByOn" type="1" value="0"/>
@@ -34,7 +34,7 @@
 		</xsd:annotation>
 		<xsd:complexType>
 			<xsd:sequence>
-				<xsd:element name="ID" minOccurs="1" od:jetType="text" od:sqlSType="nvarchar" od:nonNullable="yes">
+				<xsd:element name="IDApp" minOccurs="1" od:jetType="text" od:sqlSType="nvarchar" od:nonNullable="yes">
 					<xsd:annotation>
 						<xsd:appinfo>
 							<od:fieldProperty name="ColumnWidth" type="3" value="-1"/>
@@ -58,7 +58,31 @@
 						</xsd:restriction>
 					</xsd:simpleType>
 				</xsd:element>
-				<xsd:element name="Texte" minOccurs="0" od:jetType="memo" od:sqlSType="ntext" od:textFormat="1">
+				<xsd:element name="Nom" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
+					<xsd:annotation>
+						<xsd:appinfo>
+							<od:fieldProperty name="ColumnWidth" type="3" value="-1"/>
+							<od:fieldProperty name="ColumnOrder" type="3" value="0"/>
+							<od:fieldProperty name="ColumnHidden" type="1" value="0"/>
+							<od:fieldProperty name="Required" type="1" value="0"/>
+							<od:fieldProperty name="AllowZeroLength" type="1" value="1"/>
+							<od:fieldProperty name="DisplayControl" type="3" value="109"/>
+							<od:fieldProperty name="IMEMode" type="2" value="0"/>
+							<od:fieldProperty name="IMESentenceMode" type="2" value="3"/>
+							<od:fieldProperty name="UnicodeCompression" type="1" value="1"/>
+							<od:fieldProperty name="TextAlign" type="2" value="0"/>
+							<od:fieldProperty name="AggregateType" type="4" value="-1"/>
+							<od:fieldProperty name="ResultType" type="2" value="0"/>
+							<od:fieldProperty name="CurrencyLCID" type="4" value="0"/>
+						</xsd:appinfo>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:maxLength value="50"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="Valeur" minOccurs="0" od:jetType="memo" od:sqlSType="ntext" od:textFormat="1">
 					<xsd:annotation>
 						<xsd:appinfo>
 							<od:fieldProperty name="ColumnWidth" type="3" value="14112"/>
@@ -82,6 +106,23 @@
 							<xsd:maxLength value="536870910"/>
 						</xsd:restriction>
 					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="bType" minOccurs="0" od:jetType="byte" od:sqlSType="tinyint" type="xsd:unsignedByte">
+					<xsd:annotation>
+						<xsd:appinfo>
+							<od:fieldProperty name="ColumnWidth" type="3" value="-1"/>
+							<od:fieldProperty name="ColumnOrder" type="3" value="0"/>
+							<od:fieldProperty name="ColumnHidden" type="1" value="0"/>
+							<od:fieldProperty name="DecimalPlaces" type="2" value="255"/>
+							<od:fieldProperty name="DefaultValue" type="12" value="0"/>
+							<od:fieldProperty name="Required" type="1" value="0"/>
+							<od:fieldProperty name="DisplayControl" type="3" value="109"/>
+							<od:fieldProperty name="TextAlign" type="2" value="0"/>
+							<od:fieldProperty name="AggregateType" type="4" value="-1"/>
+							<od:fieldProperty name="ResultType" type="2" value="0"/>
+							<od:fieldProperty name="CurrencyLCID" type="4" value="0"/>
+						</xsd:appinfo>
+					</xsd:annotation>
 				</xsd:element>
 			</xsd:sequence>
 		</xsd:complexType>

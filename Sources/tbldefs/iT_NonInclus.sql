@@ -1,0 +1,6 @@
+﻿CREATE TABLE [iT_NonInclus] (
+  [IDApp] VARCHAR (40) CONSTRAINT [PrimaryKey] PRIMARY KEY UNIQUE NOT NULL,
+  [Nom] VARCHAR (50),
+  [Valeur] LONGTEXT ,
+  [bType] UNSIGNED BYTE 
+)
