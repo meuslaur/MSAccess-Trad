@@ -16,3 +16,5 @@ Sources/modules/clsOptionGroup.cls
 Sources/modules/clsOptionbutton.cls
 Sources/forms/a_test.bas
 Sources/modules/A_TestTbl.bas
+Sources/tbldefs/aTParam.sql
+Sources/tbldefs/aTParam.xml

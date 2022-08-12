@@ -20,10 +20,10 @@ Begin Form
     Width =11338
     DatasheetFontHeight =11
     ItemSuffix =67
-    Left =1512
-    Top =780
-    Right =12852
-    Bottom =11940
+    Left =2028
+    Top =1104
+    Right =13368
+    Bottom =12264
     DatasheetGridlinesColor =15132391
     RecSrcDt = Begin
         0x2562231676dbe540
@@ -307,7 +307,7 @@ Begin Form
 
                     LayoutCachedLeft =4581
                     LayoutCachedTop =56
-                    LayoutCachedWidth =7923
+                    LayoutCachedWidth =7935
                     LayoutCachedHeight =507
                     Begin
                         Begin Label
@@ -474,7 +474,7 @@ Begin Form
                                     OverlapFlags =247
                                     Left =6915
                                     Top =144
-                                    Width =960
+                                    Width =1020
                                     Height =300
                                     BorderColor =8355711
                                     ForeColor =6710886
@@ -483,7 +483,7 @@ Begin Form
                                     GridlineColor =10921638
                                     LayoutCachedLeft =6915
                                     LayoutCachedTop =144
-                                    LayoutCachedWidth =7875
+                                    LayoutCachedWidth =7935
                                     LayoutCachedHeight =444
                                 End
                             End

@@ -29,7 +29,7 @@
 				<od:tableProperty name="ReadOnlyWhenDisconnected" type="1" value="0"/>
 				<od:tableProperty name="DatasheetGridlinesThemeColorIndex" type="4" value="3"/>
 				<od:tableProperty name="DatasheetForeThemeColorIndex" type="4" value="0"/>
-				<od:tableProperty name="RowHeight" type="3" value="2640"/>
+				<od:tableProperty name="RowHeight" type="3" value="300"/>
 			</xsd:appinfo>
 		</xsd:annotation>
 		<xsd:complexType>
@@ -38,7 +38,7 @@
 					<xsd:annotation>
 						<xsd:appinfo>
 							<od:fieldProperty name="ColumnWidth" type="3" value="-1"/>
-							<od:fieldProperty name="ColumnOrder" type="3" value="0"/>
+							<od:fieldProperty name="ColumnOrder" type="3" value="1"/>
 							<od:fieldProperty name="ColumnHidden" type="1" value="0"/>
 							<od:fieldProperty name="Required" type="1" value="1"/>
 							<od:fieldProperty name="AllowZeroLength" type="1" value="1"/>
@@ -82,10 +82,10 @@
 						</xsd:restriction>
 					</xsd:simpleType>
 				</xsd:element>
-				<xsd:element name="Valeur" minOccurs="0" od:jetType="memo" od:sqlSType="ntext" od:textFormat="1">
+				<xsd:element name="Valeur" minOccurs="0" od:jetType="memo" od:sqlSType="ntext">
 					<xsd:annotation>
 						<xsd:appinfo>
-							<od:fieldProperty name="ColumnWidth" type="3" value="14112"/>
+							<od:fieldProperty name="ColumnWidth" type="3" value="2748"/>
 							<od:fieldProperty name="ColumnOrder" type="3" value="0"/>
 							<od:fieldProperty name="ColumnHidden" type="1" value="0"/>
 							<od:fieldProperty name="Required" type="1" value="0"/>
@@ -93,7 +93,7 @@
 							<od:fieldProperty name="IMEMode" type="2" value="0"/>
 							<od:fieldProperty name="IMESentenceMode" type="2" value="3"/>
 							<od:fieldProperty name="UnicodeCompression" type="1" value="0"/>
-							<od:fieldProperty name="TextFormat" type="2" value="1"/>
+							<od:fieldProperty name="TextFormat" type="2" value="0"/>
 							<od:fieldProperty name="TextAlign" type="2" value="0"/>
 							<od:fieldProperty name="AppendOnly" type="1" value="0"/>
 							<od:fieldProperty name="AggregateType" type="4" value="-1"/>

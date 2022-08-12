@@ -29,7 +29,7 @@ Option Explicit
 ' ------------------------------------------------------
 Public Function CreatePropText(PropNom As String, PropVal As String, Optional ByRef BDSelect As DAO.Database, Optional errMsg As Boolean = True) As Boolean
 
-    Dim oPrp As Property
+    Dim oPrp As Object
 
     Set m_BdSelect = IIf(BDSelect Is Nothing, CodeDb, BDSelect)
 

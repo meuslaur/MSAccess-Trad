@@ -38,7 +38,7 @@ Option Explicit
 '// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ PUBLIC SUB/FUNC   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 Public Function GetFSO() As Object
 
-Static pFSO As Object
+    Static pFSO As Object
 
     If pFSO Is Nothing Then
         Set pFSO = CreateObject("Scripting.FileSystemObject")

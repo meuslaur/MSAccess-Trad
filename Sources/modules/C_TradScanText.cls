@@ -37,35 +37,33 @@ Option Explicit
 '-----------------------------------------
 
     Private Type TApp
-        ID      As String
-        Num     As Long         '// N° de l'app pour ID (nom des app souvent beaucoup trop long).
-        Nom     As String
-        IDLang  As Long
-        ReScan  As Boolean      '// Indique base déjà scannée.
-        Track   As Boolean      '// Voir si l'option 'Track Name AutoCorrect Info' de la base est activée.
+        ID          As String
+        Num         As Long         '// N° de l'app pour ID (nom des app souvent beaucoup trop long).
+        Nom         As String
+        IDLang      As Long
+        ReScan      As Boolean      '// Indique base déjà scannée.
+        Track       As Boolean      '// Voir si l'option 'Track Name AutoCorrect Info' de la base est activée.
     End Type
     Private thisApp As TApp
 
     Private Type TObjet
-'        ID      As String
-        IDNet    As String      '// ID et Nom nettoyer des apostrophes (').
-        Nom      As String
-        NomNet   As String
-        Type     As String
-        Caption  As String
-        Nouveau  As Boolean     '// Indique nouvel objet à enregistrer.
-        TxtField As Boolean     '// Indique si la table contient des champs txt ou memo.
+        IDNet       As String      '// ID et Nom nettoyer des apostrophes (').
+        Nom         As String
+        NomNet      As String
+        Type        As String
+        Caption     As String
+        Nouveau     As Boolean     '// Indique nouvel objet à enregistrer.
+        TxtField    As Boolean     '// Indique si la table contient des champs txt ou memo.
     End Type
     Private thisObj As TObjet
 
     Private Type TChilds        '// Enfants des objets.
-'        ID      As String
-        IDNet   As String       '// ID et Nom nettoyer des apostrophes (').
-        Nom     As String
-        NomNet  As String
-        Type    As String
-        Parent  As String       '// Control parent du contrôle, si existe.
-        Nouveau As Boolean      '// Indique nouveau control à enregistrer.
+        IDNet       As String       '// ID et Nom nettoyer des apostrophes (').
+        Nom         As String
+        NomNet      As String
+        Type        As String
+        Parent      As String       '// Control parent du contrôle, si existe.
+        Nouveau     As Boolean      '// Indique nouveau control à enregistrer.
     End Type
     Private thisChild As TChilds
 
@@ -75,28 +73,26 @@ Option Explicit
         StatusBarText   As String
         ControlTipText  As String
     End Type
-    Private thisTxt As TTexte
+    Private thisTxt     As TTexte
 
-    Private ObjetAcc        As C_ObjetsAccess   '// Objet access utilisés (database, application...)
+    Private ObjetAcc    As C_ObjetsAccess   '// Objet access utilisés (database, application...)
 
-    Private m_oApp          As Application      '// App externe.
+    Private m_oApp      As Application      '// App externe.
 
-    Private m_oBDLocale     As DAO.Database     '// Base Currentdb.
-    Private qdfTemp         As DAO.QueryDef
+    Private m_oBDLocale As DAO.Database     '// Base Currentdb.
+    Private qdfTemp     As DAO.QueryDef
 '    Private m_TableControl  As DAO.Recordset    '// Table T_Controles.
 '    Private m_TableTxtObj   As DAO.Recordset    '// Table T_ObjetChildTextes pour les forms/Reports.
 '    Private m_TableTxtCtr   As DAO.Recordset    '// Table T_ObjetChildTextes pour les contrôles.
 
 
-    Private InfoScan        As C_LabelsInfo     '// Affichage info texte et barre lors du scan.
+    Private InfoScan    As C_LabelsInfo     '// Affichage info texte et barre lors du scan.
 
-    Private mRep            As Boolean
-    Private m_DateMaJ       As Date             '// Date heure de la créaton ou de la mise à jour.
+    Private mRep        As Boolean
+    Private m_DateMaJ   As Date             '// Date heure de la créaton ou de la mise à jour.
 
-    Private mObjNomTmp      As String           '// Pour stockage des valeurs texte ignorées.
-    Private mPrpIgnore      As String           '// ""
-    
-
+    Private mObjNomTmp  As String           '// Pour stockage des valeurs texte ignorées.
+    Private mNonEnrg    As String           '// ""
 '//:::::::::::::::::::::::::::::::::: END VARIABLES ::::::::::::::::::::::::::::::::::::::
 
 
@@ -260,7 +256,7 @@ On Error GoTo ERR_ScanObjetsApp
 
     Dim oBdExt  As DAO.Database
     Dim oRstSys As DAO.Recordset
-    Dim ObjType As E_ObjectTypeNum
+    Dim ObjType As E_ObjectType
     Dim sSql    As String
     Dim sBarreVal As String
 
@@ -290,8 +286,6 @@ On Error GoTo ERR_ScanObjetsApp
 
     '// Boucle sur les objets de la table MsysObjects.
     m_DateMaJ = Now()   '// Defini la date à utiliser.
-
-    mPrpIgnore = vbNullString
 
     '// Nouvelle app, obtenir un id...
     If (Not thisApp.ReScan) Then
@@ -368,6 +362,7 @@ ERR_ScanObjetsApp:
            "Description: " & Err.Description & _
            Switch(Erl = 0, vbNullString, Erl <> 0, vbCrLf & "Line No: " & Erl), _
            vbOKOnly + vbCritical, "Erreur survenue !"
+           Resume Next
     Resume SORTIE_ScanObjetsApp
 End Function
 
@@ -397,7 +392,7 @@ End Function
 ' Date    : 23/06/2022 - 11:30
 ' DateMod : 28/06/2022 - 18:38
 ' ----------------------------------------------------------------
-Private Function ScanObjet(ObjType As E_ObjectTypeNum) As Boolean
+Private Function ScanObjet(ObjType As E_ObjectType) As Boolean
 On Error GoTo ERR_ScanObjet
 
     Dim oObjet      As Object
@@ -459,16 +454,19 @@ On Error GoTo ERR_ScanTables
 
     Dim oRstTab As DAO.Recordset
     Dim oFld    As DAO.Field
+    Dim sRep    As String
+    Dim sTxt    As String
 '    Dim sSql    As String
 '    Dim vRep    As Variant
 
     thisObj.IDNet = thisApp.Num & "." & thisObj.Type & "." & thisObj.NomNet
 
-    mRep = ObjetAcc.CheckTdfLinked(thisObj.Nom)     '// Vérifier liaison si tbl liée...
-    If (Not mRep) Then
-        mPrpIgnore = mPrpIgnore & "<div>Liaison rompu Table : <font color=white style=""BACKGROUND-COLOR:#FF0000"">" & thisObj.Nom & "</font></div>"
+    sRep = ObjetAcc.CheckTdfLinked(thisObj.Nom)     '// Vérifier liaison si tbl liée...
+    If (sRep <> vbNullString) Then
+        sTxt = "Table : " & thisObj.Type & "." & thisObj.NomNet & " (Liaison rompue)" & vbCrLf & "--- [" & sRep & "]"
+        SauveTexte sTxt
         ScanTables = True
-        Exit Function 'TODO: Liaison rompue, on continu quand même sur les autres tables
+        Exit Function 'TODO: Liaison rompue, on continu quand même sur les autres tables.
     End If
 
     mRep = MajTableObjet              '// ...
@@ -864,13 +862,13 @@ Private Function MajTableChildPropTexte(PropNom As String, PropTexte As String) 
 
     thisTxt.ID = thisChild.IDNet & "." & PropNom
 
-'TODO: Test nom trop long
-If Len(thisTxt.ID) > 100 Then
-    mPrpIgnore = mPrpIgnore & "<div>" & PropNom & " : <font color=white style=""BACKGROUND-COLOR:#FF0000"">" & thisTxt.ID & "</font></div>"
-    MajTableChildPropTexte = True
-    Exit Function
-End If
-'TODO: Test nom trop long
+    If Len(thisTxt.ID) > 100 Then   'TODO: Test nom trop long
+
+        sTxt = "Nom trop long :" & thisObj.Type & "." & thisObj.NomNet & vbCrLf & PropNom & " - " & thisTxt.ID
+        SauveTexte sTxt
+        MajTableChildPropTexte = True
+        Exit Function
+    End If
 
     '// Vérifier si un/des apostrophe dans le texte...
     If (Len(PropTexte) > 2) Then
@@ -1041,7 +1039,7 @@ End Function
 ' Date    : 23/06/2022 - 15:35
 ' DateMod :
 ' ----------------------------------------------------------------
-Private Function GetObjet(ObjetNom As String, ObjetType As E_ObjectTypeNum) As Object
+Private Function GetObjet(ObjetNom As String, ObjetType As E_ObjectType) As Object
 On Error GoTo ERR_GetObjet
 
     Select Case ObjetType
@@ -1064,7 +1062,7 @@ ERR_GetObjet:
     Resume SORTIE_GetObjet
 End Function
 
-Private Sub CloseObjet(ObjetNom As String, ObjetType As E_ObjectTypeNum, Optional Methode As AcCloseSave = acSaveNo)
+Private Sub CloseObjet(ObjetNom As String, ObjetType As E_ObjectType, Optional Methode As AcCloseSave = acSaveNo)
 On Error GoTo ERR_CloseObjet
 
     Select Case ObjetType
@@ -1262,21 +1260,22 @@ Private Sub MaJTableNonInclus()
 
     vTmp = DLookup("[IDApp]", "iT_NonInclus", "[IDApp]='" & thisApp.ID & "'")
 
-    If (IsNull(vTmp)) Then
+    If (IsNull(vTmp) And (mNonEnrg = vbNullString)) Then Exit Sub   '// Rien a faire on sort.
 
-        If (mPrpIgnore = vbNullString) Then Exit Sub            '// Rien a faire on sort.
-                               
-        sTxt = MD_Utils.CheckApostrophe(mPrpIgnore)             '// Ajoute les texte.
+    sTxt = MD_Utils.CheckApostrophe(mNonEnrg)
+
+    If (IsNull(vTmp)) Then                      '// Ajoute les textes.
+
         sSql = "INSERT INTO iT_NonInclus (IDApp, Valeur) " & _
                "VALUES ('" & thisApp.ID & "', '" & sTxt & "');"
     Else
 
-        If (mPrpIgnore = vbNullString) Then                     '// Plus de texte, efface les anciennes données.
+        If (mNonEnrg = vbNullString) Then       '// Plus de texte, efface les anciennes données.
             sSql = "DELETE iT_NonInclus.* FROM iT_NonInclus " & _
                    "WHERE (((iT_NonInclus.IDApp)='" & thisApp.ID & "'));"
 
-        Else                                                    '// MàJ de la table.
-            sTxt = MD_Utils.CheckApostrophe(mPrpIgnore)
+        Else                                    '// MàJ du texte.
+
             sSql = "UPDATE iT_NonInclus SET iT_NonInclus.Valeur = '" & sTxt & "' " & _
                    "WHERE (((iT_NonInclus.IDApp)='" & thisApp.ID & "'));"
         End If
@@ -1295,19 +1294,27 @@ Private Function CheckTxtIgnore(TxtCheck As String) As String
     Dim sCap    As String
     Dim sCapTmp As String
 
-    sCap = TxtCheck
-    If (sCap <> vbNullString) Then
+    sCapTmp = Trim$(TxtCheck)
+    sCapTmp = IIf(Len(sCapTmp) < 2, vbNullString, sCapTmp)   '// Min 2 car.
 
-        sCapTmp = LTrim$(TxtCheck)
+    If (sCapTmp <> vbNullString) Then
+
         sCap = RegEx(REG_PAT, sCapTmp, True)            '// Applique la pattern Regex (voir Const REG_PAT)...
-    
-        If (sCap = vbNullString) Then                   '// Rejet Regex, on stock le texte ingoré.
+
+        If (sCap = vbNullString) Then                   '// Rejet Regex, on stock le texte ignoré.
+
+            Dim sTxt As String
             If (mObjNomTmp <> thisObj.Nom) Then
-                    mPrpIgnore = mPrpIgnore & "<div>----</div><div><font size=3><strong>" & thisObj.Type & "." & thisObj.Nom & "</strong></font></div><div>----</div><div>"
-                    mObjNomTmp = thisObj.Nom
-            End If
-            sCapTmp = RegexReplaceChevrons(TxtCheck)    '// Peux contenir des '< >'...
-            mPrpIgnore = mPrpIgnore & "<div>" & thisChild.Type & "." & thisChild.Nom & " : <font color=""#F2F2F2"" style=""BACKGROUND-COLOR:#000080"">" & sCapTmp & "</font></div>"
+
+                '// Entete si changement d'objet.
+                sTxt = "Valeur filtrée : " & thisObj.Type & "." & thisObj.NomNet & vbCrLf
+                mObjNomTmp = thisObj.Nom    '// Changement d'objet seulement ici.
+           End If
+
+            '// Cellules
+            sTxt = sTxt & "---> " & thisChild.Type & "." & thisChild.NomNet & " - " & sCapTmp
+
+            SauveTexte sTxt
         Else
             sCap = TxtCheck                             '// Passe les filtres retroune le texte d'origine.
         End If
@@ -1316,4 +1323,10 @@ Private Function CheckTxtIgnore(TxtCheck As String) As String
     CheckTxtIgnore = sCap   '// Null ou le texte d'origine.
 
 End Function
+
+Private Sub SauveTexte(NouvTxt As String, Optional Fermer As Boolean = False)
+
+    mNonEnrg = mNonEnrg & NouvTxt & vbCrLf
+
+End Sub
 '// ################################# END PRIV. SUB/FUNC #################################

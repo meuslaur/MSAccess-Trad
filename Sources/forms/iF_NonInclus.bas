@@ -128,7 +128,6 @@ Begin Form
                     ForeColor =4210752
                     Name ="txt_Texte"
                     GridlineColor =10921638
-                    TextFormat =1
 
                     LayoutCachedLeft =566
                     LayoutCachedTop =850

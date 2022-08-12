@@ -17,13 +17,17 @@ Begin Form
     Width =10207
     DatasheetFontHeight =11
     ItemSuffix =11
-    Left =2472
-    Top =4716
-    Right =12684
-    Bottom =7452
-    RecSrcDt = Begin
-        0x8d3387510ddee540
-    End
+    Left =2988
+    Top =5040
+    Right =13200
+    Bottom =7776
+    RecordSource ="SELECT T_ObjetChilds.Child_ID, T_ObjetChilds.ChildType, T_ObjetChilds.ChildNom, "
+        "T_ObjetChilds.IDObjet, T_ObjetChilds.Scanner, T_ObjetChilds.Nouveau, IIf(T_Objet"
+        "Childs.Scanner=False,\"=\",Null) AS Scan, IIf(T_ObjetChilds.Nouveau=True,\"=\",N"
+        "ull) AS Nouv FROM T_App INNER JOIN (T_Objets INNER JOIN T_ObjetChilds ON T_Objet"
+        "s.Objet_ID = T_ObjetChilds.IDObjet) ON T_App.App_ID = T_Objets.IDApp WHERE (((T_"
+        "App.App_ID)='{D4877126-229C-4719-A3AA-B0E5B291A011}')) ORDER BY T_ObjetChilds.Ch"
+        "ildType, T_ObjetChilds.ChildNom; "
     Caption =" "
     DatasheetFontName ="Calibri"
     AllowDatasheetView =0

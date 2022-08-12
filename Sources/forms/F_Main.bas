@@ -17,11 +17,11 @@ Begin Form
     GridY =10
     Width =18368
     DatasheetFontHeight =11
-    ItemSuffix =70
-    Left =-4152
-    Top =1260
-    Right =14220
-    Bottom =13596
+    ItemSuffix =72
+    Left =2940
+    Top =300
+    Right =21312
+    Bottom =12636
     DatasheetGridlinesColor =15132391
     RecSrcDt = Begin
         0x5c7a48f85bd8e540
@@ -1025,41 +1025,6 @@ Begin Form
                     ThemeFontIndex =-1
                     ForeTint =70.0
                 End
-                Begin TextBox
-                    Enabled = NotDefault
-                    Locked = NotDefault
-                    TabStop = NotDefault
-                    AllowAutoCorrect = NotDefault
-                    OverlapFlags =95
-                    TextAlign =2
-                    TextFontFamily =49
-                    IMESentenceMode =3
-                    Left =4195
-                    Top =113
-                    Width =4650
-                    Height =345
-                    ColumnOrder =5
-                    FontWeight =500
-                    TabIndex =6
-                    ForeColor =5066061
-                    Name ="txtGrObj"
-                    ControlSource ="=[lstObjets].[column](1)"
-                    FontName ="Consolas"
-                    GridlineColor =10921638
-                    ShowDatePicker =0
-
-                    LayoutCachedLeft =4195
-                    LayoutCachedTop =113
-                    LayoutCachedWidth =8845
-                    LayoutCachedHeight =458
-                    BackThemeColorIndex =4
-                    BackTint =60.0
-                    BorderThemeColorIndex =0
-                    BorderTint =50.0
-                    BorderShade =100.0
-                    ThemeFontIndex =-1
-                    ForeTint =70.0
-                End
                 Begin Label
                     BackStyle =1
                     OldBorderStyle =1
@@ -1339,7 +1304,7 @@ Begin Form
                     Top =1814
                     Width =975
                     Height =330
-                    TabIndex =7
+                    TabIndex =6
                     ForeColor =4210752
                     Name ="cmdFrmInfoCoul"
                     Caption =" Info"
@@ -1418,8 +1383,8 @@ Begin Form
                     Left =561
                     Top =1247
                     Width =5106
-                    Height =315
-                    TabIndex =8
+                    Height =300
+                    TabIndex =7
                     BorderColor =10921638
                     ForeColor =3484194
                     ColumnInfo ="\"\";\"\";\"\";\"\";\"10\";\"200\""
@@ -1435,7 +1400,7 @@ Begin Form
                     LayoutCachedLeft =561
                     LayoutCachedTop =1247
                     LayoutCachedWidth =5667
-                    LayoutCachedHeight =1562
+                    LayoutCachedHeight =1547
                     BackThemeColorIndex =7
                     BackTint =20.0
                     Begin
@@ -1876,6 +1841,35 @@ Begin Form
                     WebImagePaddingRight =2
                     WebImagePaddingBottom =2
                 End
+                Begin ComboBox
+                    LimitToList = NotDefault
+                    TabStop = NotDefault
+                    AllowAutoCorrect = NotDefault
+                    RowSourceTypeInt =1
+                    OverlapFlags =119
+                    IMESentenceMode =3
+                    ColumnCount =2
+                    Left =4195
+                    Top =113
+                    Width =4653
+                    Height =348
+                    TabIndex =8
+                    BorderColor =10921638
+                    ForeColor =3484194
+                    Name ="zlTypes"
+                    RowSourceType ="Value List"
+                    ColumnWidths ="0;4536"
+                    AfterUpdate ="[Event Procedure]"
+                    OnMouseDown ="=OuvreZl()"
+                    GridlineColor =10921638
+
+                    LayoutCachedLeft =4195
+                    LayoutCachedTop =113
+                    LayoutCachedWidth =8848
+                    LayoutCachedHeight =461
+                    BackThemeColorIndex =4
+                    BackTint =60.0
+                End
             End
         End
         Begin FormFooter
@@ -1927,12 +1921,17 @@ End Sub
 '//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&     EVENTS        &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 Private Sub Form_Load()
 
+    Dim sSql As String
+
     Set ScanTxt = New C_TradScanText                '// Initialisation des classes.
     Set ObjetAcc = ScanTxt.GetInstanceObjetAcc()    '// Récupère la classe initialisée.
 
     m_AjoutLangue = False
     Me.txtBdd.SetFocus
     Me.txtBdd = "Sélectionnez une base..."
+
+    sSql = "0;" & "<Tout>" & ";" & "1;" & C_FORM & ";" & "2;" & C_REPORT & ";" & "3;" & C_TABLE_LOCALE & ";" & "4;" & C_TABLE_LINK
+    Me.zlTypes.RowSource = sSql
 
 End Sub
 
@@ -2051,6 +2050,10 @@ Private Sub cmdCloseBd_Click()
     ScanTxt.ReScannerApp = False
     RazForm
     Me.txtBdd = "Sélectionnez un base..."
+
+    Set ScanTxt = Nothing
+    Set ObjetAcc = Nothing
+
     DoCmd.Hourglass False
 
 End Sub
@@ -2137,6 +2140,9 @@ Private Sub cmdLanceScan_Click()
         DoCmd.OpenForm "iF_Recap", , , , , acDialog, Me.zlBases
     End If
 
+    Set ScanTxt = Nothing
+    Set ObjetAcc = Nothing
+
 End Sub
 
 '----------------------------------------------------------------
@@ -2147,6 +2153,7 @@ Private Sub zlBases_AfterUpdate()
     If (IsNull(Me.zlBases)) Then Exit Sub
 
     Dim vDate As Variant
+    Dim sSql  As String
 
     DoCmd.Echo False
 
@@ -2163,8 +2170,11 @@ Private Sub zlBases_AfterUpdate()
     ActiveCmbBases      '// Active les boutons
 
     DoCmd.Echo True
-    Exit Sub
 
+End Sub
+
+Private Sub zlTypes_AfterUpdate()
+    MaJListeObjets Me.zlTypes.Column(1)
 End Sub
 
 Private Sub lstObjets_AfterUpdate()
@@ -2213,10 +2223,14 @@ End Function
 Private Function InitAppEtBase(sBase As String) As Boolean
     Dim bRep As Boolean
 
-    If (ObjetAcc Is Nothing) Then Exit Function
-
     DoCmd.Hourglass True
     DoCmd.Echo False
+
+    If (ObjetAcc Is Nothing) Then
+        Set ScanTxt = New C_TradScanText                '// Initialisation des classes.
+        Set ObjetAcc = ScanTxt.GetInstanceObjetAcc()    '// Récupère la classe initialisée.
+    End If
+
     
     If (ObjetAcc.MsAppIsUp = False) Then
         bRep = ObjetAcc.OpenMsApp()                 '// Création Access.Application...
@@ -2231,6 +2245,9 @@ Private Function InitAppEtBase(sBase As String) As Boolean
         ObjetAcc.CloseMsBase True    '// Problème détecter, on ferme tout, RaZ et on sort...
 '        Beep
         MsgBox "Erreur initialisation de l'application", vbCritical, "Initialisation"
+
+        Set ScanTxt = Nothing
+        Set ObjetAcc = Nothing
         DoCmd.Hourglass False
         DoCmd.Echo True
     End If
@@ -2242,28 +2259,25 @@ End Function
 ' ----------------------------------------------------------------
 '// Filtre la liste des objets suivant le type choisi.
 ' ----------------------------------------------------------------
-Private Sub MaJListeObjets() '(Optional TypeObj As Long = 0)
+Private Sub MaJListeObjets(Optional TypeObj As String)
 
     Dim sSql As String
-'    Dim sFlt As String
+    Dim sFlt As String
 
     sSql = "SELECT T_Objets.Objet_ID, T_Objets.ObjetType, T_Objets.ObjetNom " & _
            "FROM T_Objets " & _
            "WHERE (((T_Objets.IDApp) = '" & Me.zlBases & "') "
 
-'    Select Case TypeObj
-'        Case 1
-'            sFlt = " AND ((T_Objets.ObjetType) = 'Form') "
-'        Case 2
-'            sFlt = " AND ((T_Objets.ObjetType) = 'Report') "
-'    End Select
-
-'    sSql = sSql & sFlt
+    If (Len(TypeObj) > 0 And (Me.zlTypes > 0)) Then
+        sFlt = " AND ((T_Objets.ObjetType) = '" & TypeObj & "') "
+    End If
+    sSql = sSql & sFlt
     sSql = sSql & ") ORDER BY T_Objets.ObjetType, T_Objets.ObjetNom;"
 
     Me.lstObjets = Null
+    Me.zlTypes = 0
     Me.lstObjets.RowSource = sSql
-    Me.lstObjets.Requery
+
 '    Me.lbl_lstObjets.Caption = IIf(Me.zlObjetTypes = 0, "Objets", Me.zlObjetTypes.Column(1))
 
 End Sub

@@ -35,7 +35,7 @@ Option Explicit
     End Enum
 
     '// Objets Types. (type table MsysObjets)
-    Public Enum E_ObjectTypeNum
+    Public Enum E_ObjectType
         TableLocale = 1
         TableOdbc = 4
         TableLinked = 6
@@ -269,7 +269,7 @@ End Function
 
 
 '// Retourne en clair le type de l'objet.
-Public Function GetObjectTypeEnClair(eType As E_ObjectTypeNum) As String
+Public Function GetObjectTypeEnClair(eType As E_ObjectType) As String
     Dim sType As String
 
     Select Case eType

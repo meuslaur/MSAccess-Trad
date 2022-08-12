@@ -286,7 +286,7 @@ Public Function GetRecordset(RstNom As String, _
     End If
 
     If CheckLinkTable Then
-        If (CheckTdfLinked(RstNom) = False) Then Exit Function  '// Vérifier la liason si liée...
+        If (CheckTdfLinked(RstNom) <> vbNullString) Then Exit Function  '// Vérifier la liason si liée...
     End If
 
     If (Not m_oRst Is Nothing) Then m_oRst.Close
@@ -303,14 +303,14 @@ End Sub
 
 ' ----------------------------------------------------------------
 '// Vérifier la liason de la table.
+'// Retourne une chaine vide si ok, sinon le chemin de la base.
 ' ----------------------------------------------------------------
-Public Function CheckTdfLinked(TdfName As String, Optional AfficheMsg As Boolean = False) As Boolean
+Public Function CheckTdfLinked(TdfName As String, Optional AfficheMsg As Boolean = False) As String
 
     Dim sBdSource As String
     Dim lPos      As Long
     Dim bRep      As Boolean
-
-    bRep = True
+    Dim sRep      As String
 
     With m_oMsBase.TableDefs(TdfName)
         If (.Attributes = dbAttachedTable) Then      'TODO: tdf.Attributes = dbAttachedODBC
@@ -318,6 +318,7 @@ Public Function CheckTdfLinked(TdfName As String, Optional AfficheMsg As Boolean
             lPos = InStr(1, sBdSource, "=")
             sBdSource = Mid$(sBdSource, lPos + 1)
             bRep = MD_FSO.FSOFileExist(sBdSource)   '// Verifier si la base est bien la...
+            If (Not bRep) Then sRep = sBdSource
         End If
     End With
 
@@ -326,7 +327,7 @@ Public Function CheckTdfLinked(TdfName As String, Optional AfficheMsg As Boolean
         MsgBox "Table liée [" & TdfName & "] liason rompue !", vbExclamation, "GetRecordset"
     End If
 
-    CheckTdfLinked = bRep
+    CheckTdfLinked = sRep
 
 End Function
 
