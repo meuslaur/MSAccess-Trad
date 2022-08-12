@@ -296,7 +296,7 @@ Begin Form
                     OverlapFlags =85
                     Left =4581
                     Top =56
-                    Width =3342
+                    Width =3354
                     Height =451
                     TabIndex =3
                     BorderColor =10921638
