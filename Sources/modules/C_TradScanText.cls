@@ -245,7 +245,7 @@ End Function
 ' DateMod   : 28/06/2022 - 18:29
 '
 ' ----------------------------------------------------------------
-Public Function ScanObjetsApp() As Boolean '(eObjectType1 As E_ObjectTypeNum, _
+Public Function ScanObjetsApp(CurrentAppID As String) As Boolean  '(eObjectType1 As E_ObjectTypeNum, _
                      Optional eObjectType2 As E_ObjectTypeNum, _
                      Optional eObjectType3 As E_ObjectTypeNum) As Boolean
 On Error GoTo ERR_ScanObjetsApp
@@ -270,27 +270,31 @@ On Error GoTo ERR_ScanObjetsApp
     Set m_oApp = ObjetAcc.GetMsApp          '// Obtenir l'APP externe à utiliser...
     Set oBdExt = ObjetAcc.GetMsBase         '// Definir la base externe à utiliser...
 
-    thisApp.Nom = ObjetAcc.BaseNom
-    thisApp.Track = ObjetAcc.OptionTrackNameObjet
-
     Set oRstSys = oBdExt.OpenRecordset(sSql, dbOpenSnapshot, dbReadOnly)   '// Ouvre MsysObjects de la base externe.
 
     If (m_oBDLocale Is Nothing) Then Set m_oBDLocale = CodeDb()
 
     If InfoScan.BarreIsUp Then InfoScan.SetLengthBarre "a", oRstSys.RecordCount     '// Initialise la taille de la barre...
 
-    If thisApp.ReScan Then
-        mRep = ResetEtatsTables()                       '// Reset des champs etats des tables avant le scan...
+    '// Reset.
+    thisApp.ID = CurrentAppID
+    thisApp.Nom = ObjetAcc.BaseNom
+    thisApp.Track = ObjetAcc.OptionTrackNameObjet
+    m_DateMaJ = Now()       '// Defini la date à utiliser.
+    thisObj.IDNet = vbNullString
+    thisChild.IDNet = vbNullString
+    thisTxt.ID = vbNullString
+    mObjNomTmp = vbNullString
+
+    If thisApp.ReScan Then      '// Déjà scannée, reset des champs etats avant le scan.
+
+        mRep = ResetEtatsTables()
         If mRep = False Then GoTo RESET_ScanObjetsApp
-    End If
 
-    '// Boucle sur les objets de la table MsysObjects.
-    m_DateMaJ = Now()   '// Defini la date à utiliser.
+    Else                        '// Nouvelle app, obtenir un id.
 
-    '// Nouvelle app, obtenir un id...
-    If (Not thisApp.ReScan) Then
-        thisApp.ID = MD_Utils.CreateGuid()
-        mRep = MaJAppID()             '// Création ID...
+        thisApp.ID = MD_Utils.CreateGuid()  '// Création ID...
+        mRep = MaJAppID()
 
         If Not mRep Then
             MsgBox "Erreur ID Prop base", vbCritical, "ScanObjetsApp"
@@ -298,9 +302,12 @@ On Error GoTo ERR_ScanObjetsApp
         End If
     End If
 
+    '// Boucle sur les objets de la table MsysObjects.
     With oRstSys
         If (.RecordCount <> 0) Then
+
             Do While Not .EOF
+
                 thisObj.Nom = .Fields("Name").Value
                 thisObj.NomNet = MD_Utils.CheckApostrophe(thisObj.Nom)
                 ObjType = .Fields("Type").Value
@@ -331,10 +338,12 @@ On Error GoTo ERR_ScanObjetsApp
     End With
 
     If mRep Then    '// Tout est ok.
-        '// MàJ de la date du scan de l'app.
-        sSql = "UPDATE T_App SET T_App.DernierScan = '" & m_DateMaJ & "';"
+
+        sSql = "UPDATE T_App SET T_App.DernierScan = '" & m_DateMaJ & "' " & _
+               "WHERE (((T_App.App_ID)='" & thisApp.ID & "'));"
         ExecuteQdfTemp sSql
-        MaJTableNonInclus       '///...
+
+        MaJTableNonInclus       '// Stock les éléments non enregistrés...
     End If
 
 RESET_ScanObjetsApp:
@@ -362,7 +371,6 @@ ERR_ScanObjetsApp:
            "Description: " & Err.Description & _
            Switch(Erl = 0, vbNullString, Erl <> 0, vbCrLf & "Line No: " & Erl), _
            vbOKOnly + vbCritical, "Erreur survenue !"
-           Resume Next
     Resume SORTIE_ScanObjetsApp
 End Function
 
@@ -396,7 +404,7 @@ Private Function ScanObjet(ObjType As E_ObjectType) As Boolean
 On Error GoTo ERR_ScanObjet
 
     Dim oObjet      As Object
-    Dim octr        As Access.Control
+    Dim oCtr        As Access.Control
 
     Set oObjet = GetObjet(thisObj.Nom, ObjType)             '// Ouvre le form/report mode création pour scan des contrôles...
     If (oObjet Is Nothing) Then mRep = False: Exit Function '// Erreur, on sort.
@@ -410,17 +418,17 @@ On Error GoTo ERR_ScanObjet
     If (mRep) Then
 
         '// On boucle sur les contrôles de l'objet.
-        For Each octr In oObjet.Controls
+        For Each oCtr In oObjet.Controls
 
             'If (ControlIsVisible(oCtr) = True) Then 'TODO: Ignore les ctr invisibles ?
-                thisChild.Nom = octr.name
+                thisChild.Nom = oCtr.name
                 thisChild.NomNet = MD_Utils.CheckApostrophe(thisChild.Nom)
-                thisChild.Type = TypeName(octr)
+                thisChild.Type = TypeName(oCtr)
                 '// Extraire le parent du control (page, label, etc.).
-                thisChild.Parent = IIf((octr.Parent.name <> thisObj.Nom), TypeName(octr.Parent) & "." & octr.Parent.name, vbNullString)
+                thisChild.Parent = IIf((oCtr.Parent.name <> thisObj.Nom), TypeName(oCtr.Parent) & "." & oCtr.Parent.name, vbNullString)
 
                 '----------------------------
-                mRep = ScanObjChilds(octr)               '// Scan les propriétés du contrôle...
+                mRep = ScanObjChilds(oCtr)               '// Scan les propriétés du contrôle...
                 '----------------------------
 
                 If (mRep = False) Then Exit For
@@ -459,11 +467,11 @@ On Error GoTo ERR_ScanTables
 '    Dim sSql    As String
 '    Dim vRep    As Variant
 
-    thisObj.IDNet = thisApp.Num & "." & thisObj.Type & "." & thisObj.NomNet
+    thisObj.IDNet = thisObj.Type & "!" & thisObj.NomNet
 
     sRep = ObjetAcc.CheckTdfLinked(thisObj.Nom)     '// Vérifier liaison si tbl liée...
     If (sRep <> vbNullString) Then
-        sTxt = "Table : " & thisObj.Type & "." & thisObj.NomNet & " (Liaison rompue)" & vbCrLf & "--- [" & sRep & "]"
+        sTxt = "Table : " & thisObj.Type & "." & thisObj.NomNet & " (Liaison rompue)" & vbCrLf & "--- [" & sRep & "]" & vbCrLf
         SauveTexte sTxt
         ScanTables = True
         Exit Function 'TODO: Liaison rompue, on continu quand même sur les autres tables.
@@ -491,7 +499,7 @@ On Error GoTo ERR_ScanTables
 
 '            thisFld.Texte = oFld.Value
 '            thisFld.Texte = CheckTxtIgnore(oFld.Value)      '// Filtrage texte...
-            thisChild.IDNet = thisObj.IDNet & "." & thisChild.NomNet
+            thisChild.IDNet = thisObj.IDNet & "!" & thisChild.NomNet
             '-------------------------
             mRep = MajTableChild()          '// Stock le champ...
             '-------------------------
@@ -543,8 +551,7 @@ On Error GoTo ERR_MajObjet
     Dim vTmp As Variant
     Dim lTmp As Long
 
-'    thisObj.ID = thisApp.Num & "." & thisObj.Type & "." & thisObj.Nom
-    thisObj.IDNet = thisApp.Num & "." & thisObj.Type & "." & thisObj.NomNet
+    thisObj.IDNet = thisObj.Type & "!" & thisObj.NomNet
 
     mRep = MajTableObjet                    '// ...
     If mRep = False Then Exit Function
@@ -772,7 +779,7 @@ On Error GoTo ERR_ScanObjChilds
     thisTxt.StatusBarText = LTrim$(ObjControl.Properties(PROP_BAR).Value)
     thisTxt.ControlTipText = LTrim$(ObjControl.Properties(PROP_TIP).Value)
 
-    thisChild.IDNet = thisObj.IDNet & "." & thisChild.NomNet
+    thisChild.IDNet = thisObj.IDNet & "!" & thisChild.NomNet
 
     eRep = Texte_A_Enregistrer()        '// Voir si on doit enregistrer le control...
 
@@ -994,32 +1001,6 @@ Private Function TexteModifier(TexteOrg As String) As eReponse
 End Function
 
 '----------------------------------------------------------------
-' Procedure Nom   : SuppDonneesTexte
-' ----------------------------------------------------------------
-' Sujet           : Efface toutes les données des tables pour l'app indiquer.
-' Procedure Kind  : Sub
-' Procedure Access: Private
-' Objectif        :
-' Usage           : Utilisée dans le cas ou une erreur survient lors du scan.
-'
-'=== Paramètres ===
-' AppNom (String): Nom de l'application.
-'==================
-'
-' Author  : Laurent
-' Date    : 29/06/2022 - 17:08
-' DateMod :
-' ----------------------------------------------------------------
-'Private Sub SuppDonneesTexte(AppNom As String)  'Note: Non utilisé en attante
-'
-'    Dim sSql As String
-'
-'    sSql = "DELETE T_Objets.* FROM T_Objets " & _
-'           "WHERE (((T_Objets.IDApp)='" & thisApp.ID & "'));"
-'    ExecuteQdfTemp sSql
-'
-'End Sub
-'----------------------------------------------------------------
 ' Procedure Nom   : GetObjet
 ' ----------------------------------------------------------------
 ' Sujet           : Ouvre l'objet (Form,Report) de la base en mode création et non visible.
@@ -1225,13 +1206,17 @@ End Function
 Private Function ResetEtatsTables() As Boolean
     Dim sSql As String
 
-    sSql = "UPDATE (T_Objets INNER JOIN T_ObjetChilds " & _
-           "ON T_Objets.Objet_ID = T_ObjetChilds.IDObjet) " & _
-           "INNER JOIN T_ObjetChildTextes " & _
-           "ON T_ObjetChilds.Child_ID = T_ObjetChildTextes.IDChild " & _
-           "SET T_Objets.Scanner = 0, T_Objets.Nouveau = 0, " & _
-           "T_ObjetChilds.Scanner = 0, T_ObjetChilds.Nouveau = 0, " & _
+    '// Avec textes.
+    sSql = "UPDATE T_Objets INNER JOIN (T_ObjetChilds INNER JOIN T_ObjetChildTextes " & _
+           "ON T_ObjetChilds.Child_ID = T_ObjetChildTextes.IDChild) " & _
+           "ON T_Objets.Objet_ID = T_ObjetChilds.IDObjet " & _
+           "SET T_Objets.Scanner = 0, T_Objets.Nouveau = 0, T_ObjetChilds.Scanner = 0, T_ObjetChilds.Nouveau = 0, " & _
            "T_ObjetChildTextes.Scanner = 0, T_ObjetChildTextes.ModPropTexte = 0, T_ObjetChildTextes.Nouveau = 0 " & _
+           "WHERE (((T_Objets.IDApp)='" & thisApp.ID & "'));"
+    ExecuteQdfTemp sSql
+
+    sSql = "UPDATE T_Objets INNER JOIN T_ObjetChilds ON T_Objets.Objet_ID = T_ObjetChilds.IDObjet " & _
+           "SET T_Objets.Scanner = 0, T_Objets.Nouveau = 0, T_ObjetChilds.Scanner = 0, T_ObjetChilds.Nouveau = 0 " & _
            "WHERE (((T_Objets.IDApp)='" & thisApp.ID & "'));"
 
     ExecuteQdfTemp sSql

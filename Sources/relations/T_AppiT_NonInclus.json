@@ -1,0 +1,18 @@
+﻿{
+  "Info": {
+    "Class": "clsDbRelation",
+    "Description": "Database relationship"
+  },
+  "Items": {
+    "Name": "T_AppiT_NonInclus",
+    "Attributes": 4353,
+    "Table": "T_App",
+    "ForeignTable": "iT_NonInclus",
+    "Fields": [
+      {
+        "Name": "App_ID",
+        "ForeignName": "IDApp"
+      }
+    ]
+  }
+}

@@ -2051,7 +2051,6 @@ Private Sub cmdCloseBd_Click()
     RazForm
     Me.txtBdd = "Sélectionnez un base..."
 
-    Set ScanTxt = Nothing
     Set ObjetAcc = Nothing
 
     DoCmd.Hourglass False
@@ -2122,7 +2121,7 @@ Private Sub cmdLanceScan_Click()
     ScanTxt.InitialiseLabelsInfo Me.lbl_InfoScan2, Me.lbl_InfoScan3 '// Initialise les labels texte et d'avancement...
 
     ' ------------------------------
-    bRep = ScanTxt.ScanObjetsApp()      '// Lance le scan les objets de la base sélectionnée....
+    bRep = ScanTxt.ScanObjetsApp(Nz(Me.zlBases, vbNullString))      '// Lance le scan les objets de la base sélectionnée....
     ' ------------------------------
 
     Me.lbl_InfoScan2.Caption = "Fermeture de la base et de l'application...."
@@ -2140,7 +2139,6 @@ Private Sub cmdLanceScan_Click()
         DoCmd.OpenForm "iF_Recap", , , , , acDialog, Me.zlBases
     End If
 
-    Set ScanTxt = Nothing
     Set ObjetAcc = Nothing
 
 End Sub
@@ -2174,7 +2172,7 @@ Private Sub zlBases_AfterUpdate()
 End Sub
 
 Private Sub zlTypes_AfterUpdate()
-    MaJListeObjets Me.zlTypes.Column(1)
+    MaJListeObjets Me.zlTypes.Column(1), False
 End Sub
 
 Private Sub lstObjets_AfterUpdate()
@@ -2186,7 +2184,7 @@ End Sub
 '----------------------------------------------------------------
 Private Sub cmdFrmRecap_Click()
     If Not ActiveCmbBases Then Exit Sub
-    DoCmd.OpenForm "iF_Recap", , , , , acDialog, Me.zlBases & ";" & Me.txtDateScan
+    DoCmd.OpenForm "iF_Recap", , , , , , Me.zlBases & ";" & Me.txtDateScan
 End Sub
 
 Private Sub cmdFrmInfoCoul_Click()
@@ -2199,7 +2197,7 @@ Private Sub cmdFrmTxtIgnore_Click()
 End Sub
 Private Sub cmdFrmIgnores_Click()
     If Not ActiveCmbBases Then Exit Sub
-    DoCmd.OpenForm "F_Ignores", , , , , , Me.zlBases & ";" & Me.zlBases.Column(1)
+    DoCmd.OpenForm "iF_Ignores", , , , , , Me.zlBases & ";" & Me.zlBases.Column(1)
 End Sub
 
 Private Function ActiveCmbBases() As Boolean
@@ -2246,7 +2244,6 @@ Private Function InitAppEtBase(sBase As String) As Boolean
 '        Beep
         MsgBox "Erreur initialisation de l'application", vbCritical, "Initialisation"
 
-        Set ScanTxt = Nothing
         Set ObjetAcc = Nothing
         DoCmd.Hourglass False
         DoCmd.Echo True
@@ -2259,7 +2256,7 @@ End Function
 ' ----------------------------------------------------------------
 '// Filtre la liste des objets suivant le type choisi.
 ' ----------------------------------------------------------------
-Private Sub MaJListeObjets(Optional TypeObj As String)
+Private Sub MaJListeObjets(Optional TypeObj As String, Optional ResetType As Boolean = True)
 
     Dim sSql As String
     Dim sFlt As String
@@ -2275,10 +2272,8 @@ Private Sub MaJListeObjets(Optional TypeObj As String)
     sSql = sSql & ") ORDER BY T_Objets.ObjetType, T_Objets.ObjetNom;"
 
     Me.lstObjets = Null
-    Me.zlTypes = 0
     Me.lstObjets.RowSource = sSql
-
-'    Me.lbl_lstObjets.Caption = IIf(Me.zlObjetTypes = 0, "Objets", Me.zlObjetTypes.Column(1))
+    If ResetType Then Me.zlTypes = 0
 
 End Sub
 
@@ -2303,13 +2298,13 @@ End Sub
 
 Private Sub ScanActif(ScanEncours As Boolean)
 
-    Dim octr As Access.Control
+    Dim oCtr As Access.Control
     
     Me.lstObjets.SetFocus
 
-    For Each octr In Me.F_Entete.Controls
-        If (octr.Tag <> vbNullString) Then
-            octr.Visible = IIf(octr.Tag = 1, Not ScanEncours, ScanEncours)
+    For Each oCtr In Me.F_Entete.Controls
+        If (oCtr.Tag <> vbNullString) Then
+            oCtr.Visible = IIf(oCtr.Tag = 1, Not ScanEncours, ScanEncours)
         End If
     Next
 

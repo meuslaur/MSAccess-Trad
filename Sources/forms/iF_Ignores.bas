@@ -11,6 +11,7 @@ Begin Form
     AllowAdditions = NotDefault
     DefaultView =0
     ScrollBars =0
+    BorderStyle =3
     PictureAlignment =2
     DatasheetGridlinesBehavior =3
     Cycle =1
@@ -173,7 +174,7 @@ Begin Form
                     TabIndex =1
                     BorderColor =10921638
                     Name ="sfObjets"
-                    SourceObject ="Form.F_IgnoresSF"
+                    SourceObject ="Form.iF_IgnoresSF"
                     LinkChildFields ="IDApp"
                     LinkMasterFields ="txtIDApp"
                     GridlineColor =10921638
@@ -184,6 +185,7 @@ Begin Form
                     LayoutCachedHeight =10077
                 End
                 Begin TextBox
+                    Enabled = NotDefault
                     Locked = NotDefault
                     AllowAutoCorrect = NotDefault
                     OverlapFlags =215

@@ -10,7 +10,7 @@ Begin Form
     DividingLines = NotDefault
     DefaultView =0
     ScrollBars =0
-    BorderStyle =1
+    BorderStyle =3
     PictureAlignment =2
     DatasheetGridlinesBehavior =3
     GridY =10
