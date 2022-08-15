@@ -361,7 +361,7 @@ Private Function GetStartUpForm(ByRef MsBase As DAO.Database) As String
 
     For Each oProp In MsBase.Properties
         If oProp.name = "StartUpForm" Then
-            GetStartUpForm = oProp.Value
+            GetStartUpForm = oProp.value
             Exit For
         End If
     Next

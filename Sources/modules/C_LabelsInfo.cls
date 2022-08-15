@@ -37,7 +37,7 @@ Option Explicit
     Private m_BarreUp   As Boolean          '// Indique si on utilise le label barre.
     Private m_TexteUp   As Boolean          '// Indique si on utilise le label Texte.
 
-    Private m_CharBar   As String * 1       '// Caractère à afficher dans la barre.
+    Private m_CharBar   As String           '// Caractère à afficher dans la barre.
     Private m_NbChar    As Long             '// Nb de caractère total a afficher.
 
     Private m_lCompte   As Long             '// Compteur pour la barre d'avancement.
@@ -92,7 +92,7 @@ End Sub
 '----------------------------------------------------------------
 Public Sub SetLengthBarre(CharBarre As String, nbChar As Long)
 
-    If (nbChar < 1) Then Exit Sub
+    If ((nbChar = 0) Or (Len(CharBarre) = 0)) Then Exit Sub
 
     m_CharBar = Left$(CharBarre, 1)
 
@@ -185,9 +185,11 @@ Private Sub CalculCoul()
         Case Is <= MAX_LENG
             lCoul = CoulC
     End Select
+
     m_LblBarre.BorderColor = lCoul
     m_LblBarre.Caption = m_CharBar
     m_LblBarre.ForeColor = lCoul
+
 End Sub
 '// ################################# END PRIV. SUB/FUNC #################################
 

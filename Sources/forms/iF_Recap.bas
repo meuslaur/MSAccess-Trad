@@ -761,15 +761,15 @@ On Error GoTo ERR_Form_Open
         Exit Sub
     End If
 
-    Dim Args() As String
+    Dim args() As String
     Dim sSql   As String
 
-    Args = Split(Me.OpenArgs(), ";")
+    args = Split(Me.OpenArgs(), ";")
 
     sSql = "SELECT T_Objets.Objet_ID, T_Objets.ObjetType, T_Objets.ObjetNom, T_Objets.Scanner, T_Objets.Nouveau, " & _
            "IIf(Scanner=False,""="",Null) AS Scan, IIf(Nouveau=True,""="",Null) AS Nouv " & _
            "FROM T_Objets " & _
-           "WHERE ((T_Objets.IDApp)='" & Args(0) & "') " & _
+           "WHERE ((T_Objets.IDApp)='" & args(0) & "') " & _
            "ORDER BY T_Objets.ObjetType, T_Objets.ObjetNom;"
 
     Me.sfO.Form.RecordSource = sSql
@@ -780,7 +780,7 @@ On Error GoTo ERR_Form_Open
            "IIf(T_ObjetChilds.Nouveau=True,""="",Null) AS Nouv " & _
            "FROM T_App INNER JOIN (T_Objets INNER JOIN T_ObjetChilds " & _
            "ON T_Objets.Objet_ID = T_ObjetChilds.IDObjet) ON T_App.App_ID = T_Objets.IDApp " & _
-           "WHERE (((T_App.App_ID)='" & Args(0) & "')) " & _
+           "WHERE (((T_App.App_ID)='" & args(0) & "')) " & _
            "ORDER BY T_ObjetChilds.ChildType, T_ObjetChilds.ChildNom;"
 
     Me.sfC.Form.RecordSource = sSql
@@ -794,7 +794,7 @@ On Error GoTo ERR_Form_Open
            "ON T_ObjetChilds.Child_ID = T_ObjetChildTextes.IDChild) " & _
            "ON T_Objets.Objet_ID = T_ObjetChilds.IDObjet) " & _
            "ON T_App.App_ID = T_Objets.IDApp " & _
-           "WHERE (((T_App.App_ID)='" & Args(0) & "')) " & _
+           "WHERE (((T_App.App_ID)='" & args(0) & "')) " & _
            "ORDER BY T_ObjetChildTextes.Prop_ID;"
 
     Me.sfT.Form.RecordSource = sSql

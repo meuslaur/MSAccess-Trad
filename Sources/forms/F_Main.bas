@@ -1923,9 +1923,6 @@ Private Sub Form_Load()
 
     Dim sSql As String
 
-    Set ScanTxt = New C_TradScanText                '// Initialisation des classes.
-    Set ObjetAcc = ScanTxt.GetInstanceObjetAcc()    '// Récupère la classe initialisée.
-
     m_AjoutLangue = False
     Me.txtBdd.SetFocus
     Me.txtBdd = "Sélectionnez une base..."
@@ -2024,7 +2021,6 @@ On Error GoTo ERR_cmbSelectBdd_Click
     MsgBox "Vous pouvez lancer le scan", vbInformation, "Base ouverte"
 
     If Not ScanTxt.ReScannerApp Then Me.zlLangues.Dropdown
-    
 
 SORTIE_cmbSelectBdd_Click:
     Exit Sub
@@ -2225,11 +2221,10 @@ Private Function InitAppEtBase(sBase As String) As Boolean
     DoCmd.Echo False
 
     If (ObjetAcc Is Nothing) Then
-        Set ScanTxt = New C_TradScanText                '// Initialisation des classes.
-        Set ObjetAcc = ScanTxt.GetInstanceObjetAcc()    '// Récupère la classe initialisée.
+        Set ScanTxt = New C_TradScanText        '// Initialisation des classes.
+        Set ObjetAcc = ScanTxt.ObjetsAccess()   '// Récupère la classe initialisée.
     End If
 
-    
     If (ObjetAcc.MsAppIsUp = False) Then
         bRep = ObjetAcc.OpenMsApp()                 '// Création Access.Application...
         If (bRep = False) Then Exit Function
@@ -2281,11 +2276,11 @@ End Sub
 '// Affiche l'image de la langue,
 '// maj de la zl, et la vérouille si bEnabledZL est à true.
 '----------------------------------------------------------------
-Private Sub MaJLangue(Optional bEnabledZL As Boolean = True)
+Private Sub MaJLangue(Optional EnabledZL As Boolean = True)
     Dim sImg As String
 
     ScanTxt.IDLangApp = Me.zlLangues
-    Me.zlLangues.Enabled = bEnabledZL
+    Me.zlLangues.Enabled = EnabledZL
 
     sImg = ScanTxt.LangueExtraireFlag()     '// Obtenir l'image du drapeau correspondant a la langue...
     If (sImg = vbNullString) Then

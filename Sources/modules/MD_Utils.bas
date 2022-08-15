@@ -325,6 +325,7 @@ Public Function CheckApostrophe(sVal As String) As String
 
 End Function
 
+'NOTE: temp func
 Public Function CreateGuid() As String
 On Error GoTo ERR_CreateGuid
 
@@ -394,7 +395,7 @@ Public Function RegEx(Pattern As String, TextToSearch As String, Optional Ignore
 
     Set ReMatches = oRegex.Execute(TextToSearch)
 
-    If ReMatches.Count > 0 Then
+    If ReMatches.count > 0 Then
 '        RegEx = REMatches(0)
         RegEx = TextToSearch
     Else
@@ -405,23 +406,23 @@ Public Function RegEx(Pattern As String, TextToSearch As String, Optional Ignore
 
 End Function
 
-Public Function RegexReplaceChevrons(TexteBase As String) As String
-
-    If (oRegex Is Nothing) Then Set oRegex = CreateObject("vbscript.regexp")
-
-    Dim sRes As String
-
-    With oRegex
-        .MultiLine = True
-        .Global = True
-        .IgnoreCase = True
-        .Pattern = "([<])"
-    sRes = .Replace(TexteBase, "&lt;")
-        .Pattern = "([>])"
-    sRes = .Replace(sRes, "&gt;")
-    End With
-
-    RegexReplaceChevrons = sRes
-
-End Function
+'Public Function RegexReplaceChevrons(TexteBase As String) As String
+'
+'    If (oRegex Is Nothing) Then Set oRegex = CreateObject("vbscript.regexp")
+'
+'    Dim sRes As String
+'
+'    With oRegex
+'        .MultiLine = True
+'        .Global = True
+'        .IgnoreCase = True
+'        .Pattern = "([<])"
+'    sRes = .Replace(TexteBase, "&lt;")
+'        .Pattern = "([>])"
+'    sRes = .Replace(sRes, "&gt;")
+'    End With
+'
+'    RegexReplaceChevrons = sRes
+'
+'End Function
 '// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ END PUB. SUB/FUNC \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\

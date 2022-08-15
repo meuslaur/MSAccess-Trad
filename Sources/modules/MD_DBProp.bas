@@ -88,7 +88,7 @@ Public Function GetTextProp(PropNom As String, Optional ByRef BDSelect As DAO.Da
 
     Select Case mRep
         Case True
-            GetTextProp = m_BdSelect.Properties(PropNom).Value
+            GetTextProp = m_BdSelect.Properties(PropNom).value
 
         Case False
             If errMsg Then
@@ -113,7 +113,7 @@ Public Function SetTextProp(PropNom As String, NouvVal As String, Optional ByRef
 
     Select Case mRep
         Case True
-            BDSelect.Properties(PropNom).Value = NouvVal
+            BDSelect.Properties(PropNom).value = NouvVal
             SetTextProp = True
 
         Case False
@@ -181,14 +181,14 @@ On Error GoTo ERR_ExportProps
     TxtFile.WriteLine Join(Array("Index", "Nom", "Valeur"), vbTab)
 
     If (OnlyPropUser = False) Then
-        For iProp = 0 To oBd.Properties.Count - 1
+        For iProp = 0 To oBd.Properties.count - 1
             Set Prop = oBd.Properties(iProp)
-            TxtFile.WriteLine Join(Array(iProp, Prop.name, Prop.Value), vbTab)
+            TxtFile.WriteLine Join(Array(iProp, Prop.name, Prop.value), vbTab)
         Next
     End If
 
     For Each Prop In oBd.Containers("Databases").Documents("UserDefined").Properties
-        TxtFile.WriteLine Join(Array(iProp, Prop.name, Prop.Value), vbTab)        '// commence Item 8
+        TxtFile.WriteLine Join(Array(iProp, Prop.name, Prop.value), vbTab)        '// commence Item 8
     Next
 
     TxtFile.Close
