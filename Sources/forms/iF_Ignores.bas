@@ -280,15 +280,15 @@ Private Sub Form_Open(Cancel As Integer)
         Exit Sub
     End If
 
-    Dim Args() As String
+    Dim args() As String
     Dim sSql As String
     
-    Args = Split(Me.OpenArgs(), ";")
-    Me.txtIDApp = Args(0)
-    Me.txtBase = Args(1)
+    args = Split(Me.OpenArgs(), ";")
+    Me.txtIDApp = args(0)
+    Me.txtBase = args(1)
 
     sSql = "SELECT DISTINCT T_Objets.ObjetType FROM T_Objets " & _
-           "WHERE (((T_Objets.IDApp)='" & Args(0) & "')) " & _
+           "WHERE (((T_Objets.IDApp)='" & args(0) & "')) " & _
            "ORDER BY T_Objets.ObjetType;"
     Me.zlObjetTypes.RowSource = sSql
     Me.zlObjetTypes = Null

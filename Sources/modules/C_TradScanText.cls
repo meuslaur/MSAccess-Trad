@@ -85,7 +85,6 @@ Option Explicit
 '    Private m_TableTxtObj   As DAO.Recordset    '// Table T_ObjetChildTextes pour les forms/Reports.
 '    Private m_TableTxtCtr   As DAO.Recordset    '// Table T_ObjetChildTextes pour les contrôles.
 
-
     Private InfoScan    As C_LabelsInfo     '// Affichage info texte et barre lors du scan.
 
     Private mRep        As Boolean
@@ -95,7 +94,7 @@ Option Explicit
     Private mNonEnrg    As String           '// ""
 '//:::::::::::::::::::::::::::::::::: END VARIABLES ::::::::::::::::::::::::::::::::::::::
 
-
+'NOTE:
 '// Formulaires Type=32768
 '// Tables      Type=1
 'SELECT MSysNameMap.GUID FROM MSysNameMap
@@ -148,6 +147,12 @@ Public Property Let ReScannerApp(ReScanner As Boolean)
     thisApp.ReScan = ReScanner
 End Property
 
+Public Property Get ObjetsAccess() As C_ObjetsAccess
+    If (Not ObjetAcc Is Nothing) Then Set ObjetsAccess = ObjetAcc
+End Property
+'//====================================== END PROP =======================================
+
+'// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ PUBLIC SUB/FUNC   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 '----------------------------------------------------------------
 '// - Extraire le Guid des prop de la base,
 '// - Rechercher le guid dans la table T_App,
@@ -176,7 +181,6 @@ Public Function IsNewApp() As eReponse
             vTmp = DLookup("[Num]", "T_App", "[App_ID]=" & thisApp.ID)      '// Extraire N° de l'app.
             thisApp.Num = CLng(vTmp)
 
-'            Beep
             sMsg = "La base '" & ObjetAcc.BaseNom & "' est déjà enregistrée dans la table T_Objets." & vbCrLf & _
                    "Les données concernant cette base vont être mise à jour." & vbCrLf & _
                    "Voulez-vous continuer ?"
@@ -204,7 +208,6 @@ Public Function IsNewApp() As eReponse
     IsNewApp = Erreur
 
 End Function
-'//====================================== END PROP =======================================
 
 ' TextLength
 
@@ -224,7 +227,6 @@ End Function
 ' barre d'outils
  
 
-'// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ PUBLIC SUB/FUNC   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 ' ----------------------------------------------------------------
 ' Procedure Nom:    ScanObjetsApp
 ' Sujet:            Recherche tous les objets dans l'application,
@@ -258,7 +260,7 @@ On Error GoTo ERR_ScanObjetsApp
     Dim oRstSys As DAO.Recordset
     Dim ObjType As E_ObjectType
     Dim sSql    As String
-    Dim sBarreVal As String
+    Dim sBarTxt As String
 
     '// Extraire les objets de la table MsysObjects.
     sSql = "SELECT  MsysObjects.id, MsysObjects.Type, MsysObjects.Name " & _
@@ -274,7 +276,7 @@ On Error GoTo ERR_ScanObjetsApp
 
     If (m_oBDLocale Is Nothing) Then Set m_oBDLocale = CodeDb()
 
-    If InfoScan.BarreIsUp Then InfoScan.SetLengthBarre "a", oRstSys.RecordCount     '// Initialise la taille de la barre...
+    If InfoScan.BarreIsUp Then InfoScan.SetLengthBarre "a", oRstSys.RecordCount  '// Initialise la taille de la barre...
 
     '// Reset.
     thisApp.ID = CurrentAppID
@@ -308,13 +310,13 @@ On Error GoTo ERR_ScanObjetsApp
 
             Do While Not .EOF
 
-                thisObj.Nom = .Fields("Name").Value
+                thisObj.Nom = .Fields("Name").value
                 thisObj.NomNet = MD_Utils.CheckApostrophe(thisObj.Nom)
-                ObjType = .Fields("Type").Value
+                ObjType = .Fields("Type").value
                 thisObj.Type = GetObjectTypeEnClair(ObjType)    '// Traduire en clair le Type...
 
-                sBarreVal = thisObj.Type & " " & thisObj.Nom
-                If InfoScan.BarreIsUp Then InfoScan.UpdateBarre sBarreVal   '// Affiche l'état d'avancement du scan...
+                sBarTxt = thisObj.Type & " " & thisObj.Nom
+                If InfoScan.BarreIsUp Then InfoScan.UpdateBarre sBarTxt '// Affiche l'état d'avancement du scan...
                 DoEvents
 
                 If (ObjType = ObjetForm Or ObjType = ObjetReport) Then
@@ -355,8 +357,6 @@ RESET_ScanObjetsApp:
 '    If Not (m_TableTxtCtr Is Nothing) Then m_TableTxtCtr.Close
 '    Set m_TableTxtCtr = Nothing
 
-'    If (mrep = False) Then SuppDonneesTexte m_AppNom    '// 'NOTE: Efface tous en cas d'erreur...
-
 SORTIE_ScanObjetsApp:
     Set m_oApp = Nothing
     Set m_oApp = Nothing
@@ -374,9 +374,44 @@ ERR_ScanObjetsApp:
     Resume SORTIE_ScanObjetsApp
 End Function
 
-Public Function GetInstanceObjetAcc() As C_ObjetsAccess
-    If (Not ObjetAcc Is Nothing) Then Set GetInstanceObjetAcc = ObjetAcc
+'--------------------------------------------------------------
+'// Détermine l'image à afficher suivant l'ID de la langue,
+'// vérifie si le fichier image flag existe, retourne Null si pas trouver.
+'--------------------------------------------------------------
+Public Function LangueExtraireFlag(Optional IDLang As Long = 0) As String
+    Dim sImg As String
+    Dim lID  As Long
+
+    lID = IIf(IDLang = 0, thisApp.IDLang, 0)
+
+    sImg = CurrentProject.Path & DOS_DRAP & LTrim$(str$(lID)) & ".png"
+    If FSOFileExist(sImg) Then
+        LangueExtraireFlag = sImg
+    Else
+        LangueExtraireFlag = vbNullString
+    End If
+
 End Function
+
+' ----------------------------------------------------------------
+'// Obtenir l'ID de la langue d'origine de la base.
+' ----------------------------------------------------------------
+Public Function GetIDLangBase(Optional AppID As String = vbNullString) As Long
+    Dim vRes As Variant
+    Dim sApp As String
+
+    sApp = IIf(AppID = vbNullString, thisApp.ID, AppID)
+
+    vRes = Nz(DLookup("[LangueCodeBase]", "T_App", "[App_ID]='" & sApp & "'"), 0)
+
+    GetIDLangBase = CLng(vRes)
+
+End Function
+
+Public Sub InitialiseLabelsInfo(lblTexte As Access.Label, lblBarre As Access.Label)
+'// Initialise les controles label à utiliser pour afficher les info et la barre d'avancement.
+    InfoScan.InitialiseLabels lblBarre, lblTexte
+End Sub
 '// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ END PUB. SUB/FUNC \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 '// ################################ PRIVATE SUB/FUNC ####################################
@@ -773,11 +808,11 @@ On Error GoTo ERR_ScanObjChilds
     thisTxt.Caption = vbNullString: thisTxt.StatusBarText = vbNullString: thisTxt.ControlTipText = vbNullString
 
     '----------------------------------
-    thisTxt.Caption = CheckTxtIgnore(ObjControl.Properties(PROP_CAP).Value)     '// Filtrage texte Caption...
+    thisTxt.Caption = CheckTxtIgnore(ObjControl.Properties(PROP_CAP).value)     '// Filtrage texte Caption...
     '----------------------------------
 
-    thisTxt.StatusBarText = LTrim$(ObjControl.Properties(PROP_BAR).Value)
-    thisTxt.ControlTipText = LTrim$(ObjControl.Properties(PROP_TIP).Value)
+    thisTxt.StatusBarText = LTrim$(ObjControl.Properties(PROP_BAR).value)
+    thisTxt.ControlTipText = LTrim$(ObjControl.Properties(PROP_TIP).value)
 
     thisChild.IDNet = thisObj.IDNet & "!" & thisChild.NomNet
 
@@ -1096,45 +1131,6 @@ Private Function LangueCheckID(IDLang As Long) As Long
     End If
 
 End Function
-
-'--------------------------------------------------------------
-'// Détermine l'image à afficher suivant l'ID de la langue,
-'// vérifie si le fichier image flag existe, retourne Null si pas trouver.
-'--------------------------------------------------------------
-Public Function LangueExtraireFlag(Optional IDLang As Long = 0) As String
-    Dim sImg As String
-    Dim lID  As Long
-
-    lID = IIf(IDLang = 0, thisApp.IDLang, 0)
-
-    sImg = CurrentProject.Path & DOS_DRAP & LTrim$(str$(lID)) & ".png"
-    If FSOFileExist(sImg) Then
-        LangueExtraireFlag = sImg
-    Else
-        LangueExtraireFlag = vbNullString
-    End If
-
-End Function
-
-' ----------------------------------------------------------------
-'// Obtenir l'ID de la langue d'origine de la base.
-' ----------------------------------------------------------------
-Public Function GetIDLangBase(Optional AppID As String = vbNullString) As Long
-    Dim vRes As Variant
-    Dim sApp As String
-
-    sApp = IIf(AppID = vbNullString, thisApp.ID, AppID)
-
-    vRes = Nz(DLookup("[LangueCodeBase]", "T_App", "[App_ID]='" & sApp & "'"), 0)
-
-    GetIDLangBase = CLng(vRes)
-
-End Function
-
-Public Sub InitialiseLabelsInfo(lblTexte As Access.Label, lblBarre As Access.Label)
-'// Initialise les controles label à utiliser pour afficher les info et la barre d'avancement.
-    InfoScan.InitialiseLabels lblBarre, lblTexte
-End Sub
 
 '----------------------------------------------------------------
 '// Créer la propriété PROP_GUID pour la base en cours.

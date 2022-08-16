@@ -143,7 +143,7 @@ End Function
 '// 'C:\Folder1\Folder2' retourne 'C:\Folder1\'.
 '// 'C:\Folder1\Folder2\file.txt' retourne 'C:\Folder1\Folder2\'
 ' ----------------------------------------------------------------
-Public Function FSOGetParentFolder(FullPath As String, Optional Message As MessageFSO = 0) As String
+Public Function FSOGetParentFolder(FullPath As String, Optional checkFolder As Boolean = True, Optional Message As MessageFSO = 0) As String
 
     If (Len(FullPath) = 0) Then Exit Function
 
@@ -151,8 +151,10 @@ Public Function FSOGetParentFolder(FullPath As String, Optional Message As Messa
 
     If (mFSO Is Nothing) Then Set mFSO = GetFSO()
 
-    mRep = FSOFolderExist(FullPath, Message)
-    If Not mRep Then Exit Function
+    If checkFolder Then
+        mRep = FSOFolderExist(FullPath, Message)
+        If Not mRep Then Exit Function
+    End If
 
     sFolder = mFSO.GetParentFolderName(FullPath) & "\"
     FSOGetParentFolder = sFolder
