@@ -473,7 +473,7 @@ Public Function FSOMkDirIfNotExist(NewPath As String, Optional Message As Messag
     Dim sPath As String
 
     '// Vérifier les dossiers parent.
-    sPath = FSOGetParentFolder(NewPath)
+    sPath = FSOGetParentFolder(NewPath, False)
     If (Len(sPath) = 0) Then
         MsgBox "Chemin ou non de dossier non valide :" & vbCrLf & NewPath, vbExclamation, "FSOMkDirIfNotExist"
         Exit Function
