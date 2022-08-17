@@ -24,7 +24,7 @@ Begin Form
         0x0e0613f613dee540
     End
     RecordSource ="iT_NonInclus"
-    Caption ="Erreurs survenues et Textes filtérs."
+    Caption ="Textes filtes et problèmes renconter."
     OnOpen ="[Event Procedure]"
     DatasheetFontName ="Calibri"
     AllowDatasheetView =0
@@ -128,6 +128,7 @@ Begin Form
                     ForeColor =4210752
                     Name ="txt_Texte"
                     GridlineColor =10921638
+                    TextFormat =1
 
                     LayoutCachedLeft =566
                     LayoutCachedTop =850

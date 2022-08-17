@@ -18,9 +18,9 @@ Begin Form
     Width =18368
     DatasheetFontHeight =11
     ItemSuffix =72
-    Left =2940
+    Left =2652
     Top =300
-    Right =21312
+    Right =21024
     Bottom =12636
     DatasheetGridlinesColor =15132391
     RecSrcDt = Begin
@@ -1929,6 +1929,8 @@ Private Sub Form_Load()
 
     sSql = "0;" & "<Tout>" & ";" & "1;" & C_FORM & ";" & "2;" & C_REPORT & ";" & "3;" & C_TABLE_LOCALE & ";" & "4;" & C_TABLE_LINK
     Me.zlTypes.RowSource = sSql
+
+    Set ScanTxt = New C_TradScanText        '// Initialisation des classes.
 
 End Sub
 

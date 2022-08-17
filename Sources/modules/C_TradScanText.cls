@@ -33,7 +33,7 @@ Option Explicit
     '// Filtre le début de la chaine,
     '// ignore les valeurs sans caractère alphaNum
     '// ignore les valeurs defini par une source(commence par un '=').
-    Private Const REG_PAT   As String = "(^[a-zA-Z0-9-&%éè""'[({]{1,})+([A-Za-zÀ0-9-ÖØ-öø-ÿ& ,.-@~`!@#$%^&*\[\]\{\}()_=+°\\'|;:""\/?>.<,-]){1,}$"
+    Private Const REG_PAT   As String = "(^[a-zA-Z0-9-&%éèêô""'<>[({]{1,})+([A-Za-zÀ0-9-ÖØ-öø-ÿ& ,.-@~`!@#$%^&*\[\]\{\}()_=+°\\'|;:""\/?>.<,-]){1,}$"
 '-----------------------------------------
 
     Private Type TApp
@@ -498,7 +498,7 @@ On Error GoTo ERR_ScanTables
     Dim oRstTab As DAO.Recordset
     Dim oFld    As DAO.Field
     Dim sRep    As String
-    Dim sTxt    As String
+'    Dim sTxt    As String
 '    Dim sSql    As String
 '    Dim vRep    As Variant
 
@@ -506,8 +506,7 @@ On Error GoTo ERR_ScanTables
 
     sRep = ObjetAcc.CheckTdfLinked(thisObj.Nom)     '// Vérifier liaison si tbl liée...
     If (sRep <> vbNullString) Then
-        sTxt = "Table : " & thisObj.Type & "." & thisObj.NomNet & " (Liaison rompue)" & vbCrLf & "--- [" & sRep & "]" & vbCrLf
-        SauveTexte sTxt
+        SauveTexte thisObj.Type & "." & thisObj.NomNet, sRep, 1     '// Stock le texte...
         ScanTables = True
         Exit Function 'TODO: Liaison rompue, on continu quand même sur les autres tables.
     End If
@@ -905,9 +904,7 @@ Private Function MajTableChildPropTexte(PropNom As String, PropTexte As String) 
     thisTxt.ID = thisChild.IDNet & "." & PropNom
 
     If Len(thisTxt.ID) > 100 Then   'TODO: Test nom trop long
-
-        sTxt = "Nom trop long :" & thisObj.Type & "." & thisObj.NomNet & vbCrLf & PropNom & " - " & thisTxt.ID
-        SauveTexte sTxt
+        SauveTexte "Nom trop long :", thisChild.IDNet, 2    '// Stock le texte...
         MajTableChildPropTexte = True
         Exit Function
     End If
@@ -1202,20 +1199,30 @@ End Function
 Private Function ResetEtatsTables() As Boolean
     Dim sSql As String
 
-    '// Avec textes.
+    '// textes.
     sSql = "UPDATE T_Objets INNER JOIN (T_ObjetChilds INNER JOIN T_ObjetChildTextes " & _
            "ON T_ObjetChilds.Child_ID = T_ObjetChildTextes.IDChild) " & _
            "ON T_Objets.Objet_ID = T_ObjetChilds.IDObjet " & _
-           "SET T_Objets.Scanner = 0, T_Objets.Nouveau = 0, T_ObjetChilds.Scanner = 0, T_ObjetChilds.Nouveau = 0, " & _
-           "T_ObjetChildTextes.Scanner = 0, T_ObjetChildTextes.ModPropTexte = 0, T_ObjetChildTextes.Nouveau = 0 " & _
-           "WHERE (((T_Objets.IDApp)='" & thisApp.ID & "'));"
-    ExecuteQdfTemp sSql
-
-    sSql = "UPDATE T_Objets INNER JOIN T_ObjetChilds ON T_Objets.Objet_ID = T_ObjetChilds.IDObjet " & _
-           "SET T_Objets.Scanner = 0, T_Objets.Nouveau = 0, T_ObjetChilds.Scanner = 0, T_ObjetChilds.Nouveau = 0 " & _
+           "SET T_ObjetChildTextes.ModPropTexte = 0, T_ObjetChildTextes.Scanner = 0, T_ObjetChildTextes.Nouveau = 0 " & _
            "WHERE (((T_Objets.IDApp)='" & thisApp.ID & "'));"
 
     ExecuteQdfTemp sSql
+
+    '// child
+    sSql = "UPDATE T_Objets INNER JOIN T_ObjetChilds " & _
+           "ON T_Objets.Objet_ID = T_ObjetChilds.IDObjet " & _
+           "SET T_ObjetChilds.Scanner = 0, T_ObjetChilds.Nouveau = 0 " & _
+           "WHERE (((T_Objets.IDApp)='" & thisApp.ID & "'));"
+
+    ExecuteQdfTemp sSql
+
+    '// Obj
+    sSql = "UPDATE T_Objets " & _
+           "SET T_Objets.Scanner = 0, T_Objets.Nouveau = 0 " & _
+           "WHERE (((T_Objets.IDApp)='" & thisApp.ID & "'));"
+
+    ExecuteQdfTemp sSql
+
     ResetEtatsTables = True
 
 End Function
@@ -1274,28 +1281,32 @@ End Sub
 Private Function CheckTxtIgnore(TxtCheck As String) As String
     Dim sCap    As String
     Dim sCapTmp As String
+    Dim sTxt    As String
 
-    sCapTmp = Trim$(TxtCheck)
-    sCapTmp = IIf(Len(sCapTmp) < 2, vbNullString, sCapTmp)   '// Min 2 car.
+    If (InStr(1, TxtCheck, vbNewLine)) Then
+'        Beep
+    End If
 
-    If (sCapTmp <> vbNullString) Then
+    sCapTmp = Replace(TxtCheck, vbNewLine, vbNullString)    '// Supp les retourne ligne.
+    sCapTmp = Trim$(sCapTmp)
+    sCap = IIf(Len(sCapTmp) < 2, vbNullString, sCapTmp)     '// Min 2 car.
+
+    If (sCap <> vbNullString) Then
 
         sCap = RegEx(REG_PAT, sCapTmp, True)            '// Applique la pattern Regex (voir Const REG_PAT)...
 
         If (sCap = vbNullString) Then                   '// Rejet Regex, on stock le texte ignoré.
 
-            Dim sTxt As String
             If (mObjNomTmp <> thisObj.Nom) Then
 
-                '// Entete si changement d'objet.
-                sTxt = "Valeur filtrée : " & thisObj.Type & "." & thisObj.NomNet & vbCrLf
+            '// Entete si changement d'objet.
+                SauveTexte thisObj.Type & "." & thisObj.NomNet, vbNullString, 3     '// Stock le texte...
                 mObjNomTmp = thisObj.Nom    '// Changement d'objet seulement ici.
-           End If
+            End If
 
             '// Cellules
-            sTxt = sTxt & "---> " & thisChild.Type & "." & thisChild.NomNet & " - " & sCapTmp
+            SauveTexte thisChild.Type & "." & thisChild.NomNet, sCapTmp, 4          '// Stock le texte...
 
-            SauveTexte sTxt
         Else
             sCap = TxtCheck                             '// Passe les filtres retroune le texte d'origine.
         End If
@@ -1305,9 +1316,35 @@ Private Function CheckTxtIgnore(TxtCheck As String) As String
 
 End Function
 
-Private Sub SauveTexte(NouvTxt As String, Optional Fermer As Boolean = False)
+Private Sub SauveTexte(ObjNom As String, ValTxt As String, SvCase As Long)
+    Dim sTxt    As String
+    Dim sTxtTmp As String
 
-    mNonEnrg = mNonEnrg & NouvTxt & vbCrLf
+    Select Case SvCase
+        Case 1      '// Liaison tables.
+
+            sTxt = "<div>&nbsp;</div><div><strong>" & ObjNom & "</strong> (Liaison rompue)</div>" & _
+                   "<ul><ul><li><font style=""BACKGROUND-COLOR:#FFFF00"">[" & ValTxt & "]</font>&nbsp;</li></ul></ul>"
+
+        Case 2      '// Nom trop long.
+
+            sTxt = "<div>&nbsp;</div><div><font color=white style=""BACKGROUND-COLOR:#FF0000"">" & ObjNom & "</strong></font></div>" & _
+                   ValTxt & "</div>"
+
+        Case 3      '// Filtré objet.
+
+            sTxt = "<div>&nbsp;</div><div><font size=3><strong><u>" & ObjNom & "</u></strong></font></div>"
+
+        Case 4      '// Filtre texte.
+
+            sTxt = Replace(ValTxt, "<", "&lt;")      '// Remplace les éventuels chevrons.
+            sTxtTmp = Replace(sTxt, ">", "&gt;")
+
+            sTxt = "<ul><ul><li>" & ObjNom & _
+                   " <font color=white style=""BACKGROUND-COLOR:#000080"">" & sTxtTmp & "</font>&nbsp;</li></ul></ul>"
+    End Select
+
+    mNonEnrg = mNonEnrg & sTxt
 
 End Sub
 '// ################################# END PRIV. SUB/FUNC #################################
