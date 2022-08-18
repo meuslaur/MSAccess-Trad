@@ -14,10 +14,10 @@ Attribute VB_Exposed = False
 ' Kind     : Module de classe
 ' Purpose  : Outils pour l'app TradAccess
 ' Author   : Laurent
-' Sujet    :
+' Sujet    : https://github.com/meuslaur/MsAccess-ProgressBarre
 ' Objectif :
 ' Date     : 03/07/2022 - 18:01
-' DateMod  : 11/08/2022 - 15:25
+' DateMod  : 17/08/2022 - 13:43
 ' ------------------------------------------------------
 Option Compare Database
 Option Explicit
@@ -31,43 +31,47 @@ Option Explicit
         CoulC = 9359785     '// Fin (Vert)
     End Enum
 
-    Private m_LblTexte  As Access.Label     '// Label texte d'info.
-    Private m_LblBarre  As Access.Label     '// Label barre.
+    Private colLabels   As Collection
+    Private mLblBar     As C_LabelsInfoItem
+    Private mLblTxt     As C_LabelsInfoItem
 
-    Private m_BarreUp   As Boolean          '// Indique si on utilise le label barre.
-    Private m_TexteUp   As Boolean          '// Indique si on utilise le label Texte.
-
-    Private m_CharBar   As String           '// Caractère à afficher dans la barre.
-    Private m_NbChar    As Long             '// Nb de caractère total a afficher.
-
-    Private m_lCompte   As Long             '// Compteur pour la barre d'avancement.
+    Public Enum eNumLabel
+        LabelNum1 = 1
+        LabelNum2 = 2
+    End Enum
+    Private mCurLabel As eNumLabel
 '//:::::::::::::::::::::::::::::::::: END VARIABLES ::::::::::::::::::::::::::::::::::::::
 
 '//----------------------------------       INIT/TERM       ------------------------------
-'Private Sub Class_Initialize()
-'
-'End Sub
-
-Private Sub Class_Terminate()
-    Set m_LblTexte = Nothing
-    Set m_LblBarre = Nothing
+Private Sub Class_Initialize()
+    Set colLabels = New Collection
 End Sub
-
+Private Sub Class_Terminate()
+    Set colLabels = Nothing
+End Sub
 '//---------------------------------------------------------------------------------------
 
 '//==================================       PROP        ==================================
-Public Property Get BarreIsUp() As Boolean
-    BarreIsUp = m_BarreUp
+Public Property Get BarreIsUp(NumBar As eNumLabel) As Boolean
+
+    If (mCurLabel = NumBar) Then BarreIsUp = mLblBar.LabelIsUp: Exit Property
+    
+    Dim cItem   As C_LabelsInfoItem
+    Set cItem = colLabels("B" & CStr(NumBar))
+    BarreIsUp = cItem.LabelIsUp
+    Set cItem = Nothing
+
 End Property
-'Public Property Let BarreIsUp(ActiveBarre As Boolean)
-'    m_BarreUp = ActiveBarre
-'End Property
-Public Property Get TexteIsUp() As Boolean
-    TexteIsUp = m_TexteUp
+Public Property Get TexteIsUp(NumBar As eNumLabel) As Boolean
+
+    If (mCurLabel = NumBar) Then TexteIsUp = mLblTxt.LabelIsUp: Exit Property
+
+    Dim cItem   As C_LabelsInfoItem
+    Set cItem = colLabels("T" & CStr(NumBar))
+    TexteIsUp = cItem.LabelIsUp
+    Set cItem = Nothing
+
 End Property
-'Public Property Let TexteIsUp(ActiveTexte As Boolean)
-'    m_TexteUp = ActiveTexte
-'End Property
 '//====================================== END PROP =======================================
 
 '// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ PUBLIC SUB/FUNC   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -75,14 +79,14 @@ End Property
 '----------------------------------------------------------------
 '// Initialise les label (pour le texte et pour la barre d'avancement)
 '----------------------------------------------------------------
-Public Sub InitialiseLabels(LabelBarre As Access.Label, LabelTexte As Access.Label)
+Public Sub InitialiseLabels(LabelBarre As Access.Label, LabelTexte As Access.Label, _
+                            Optional LabelBarre2 As Access.Label, _
+                            Optional LabelTexte2 As Access.Label)
 
-    If (Not LabelBarre Is Nothing) Then Set m_LblBarre = LabelBarre: m_BarreUp = True
-    If (Not LabelTexte Is Nothing) Then Set m_LblTexte = LabelTexte: m_TexteUp = True
-
-    If (m_LblTexte Is Nothing) And (m_LblBarre Is Nothing) Then Exit Sub
-
-    m_lCompte = 1
+    AddLabel "B1", LabelBarre
+    AddLabel "T1", LabelTexte
+    AddLabel "B2", LabelBarre2
+    AddLabel "T2", LabelTexte2
 
 End Sub
 
@@ -90,18 +94,30 @@ End Sub
 '// CharBarre 1 caractère, NbChar nombre total de car à affiche.
 '//     SetLengthBarre "a",25
 '----------------------------------------------------------------
-Public Sub SetLengthBarre(CharBarre As String, nbChar As Long)
+Public Sub SetLengthBarre(CharBarre As String, NbChar As Long, Optional NumLabel As eNumLabel = LabelNum1)
 
-    If ((nbChar = 0) Or (Len(CharBarre) = 0)) Then Exit Sub
+    If (NbChar < 1) Then Exit Sub                       'TODO: ERR ->Gestionnaire d'erreur / msg.
+    If (Len(CharBarre) <> 1) Then Exit Sub              'TODO: ERR ->Gestionnaire d'erreur / msg.
 
-    m_CharBar = Left$(CharBarre, 1)
+    Set mLblBar = colLabels("B" & CStr(NumLabel))
+    Set mLblTxt = colLabels("T" & CStr(NumLabel))
+
+    mCurLabel = NumLabel
+
+    If (mLblBar.LabelIsUp) Then mLblBar.LabelObj.Visible = True
+    If (mLblTxt.LabelIsUp) Then mLblTxt.LabelObj.Visible = True
+
+    If (Not mLblBar.LabelIsUp) Then Exit Sub
+
+    mLblBar.NbChar = NbChar
+    mLblBar.Caractere = CharBarre
 
     '// Détermine la taille de la barre...
-    m_NbChar = nbChar
-    CalculCoul
-    InitialiseTailleBarre nbChar
+    InitialiseTailleBarre
+    CalculCoul NbChar
 
 End Sub
+
 '----------------------------------------------------------------
 ' Sujet : Affiche de texte et de l'avancement
 '
@@ -116,21 +132,23 @@ End Sub
 Public Sub UpdateBarre(NewTexte As String)
 On Error GoTo ERR_UpdateBarre
 
-    If (TexteIsUp) Then
-        m_LblTexte.Caption = NewTexte & "..."
+    If ((mLblTxt Is Nothing) And (mLblBar Is Nothing)) Then Exit Sub    'TODO: ERR ->Gestionnaire d'erreur / msg.
+
+    If (mLblTxt.LabelIsUp) Then
+        mLblTxt.LabelObj.Caption = NewTexte & "..."
     End If
 
-    If (Not BarreIsUp) Then Exit Sub
+    If (Not mLblBar.LabelIsUp) Then Exit Sub
 
-    m_LblBarre.Caption = String(m_lCompte, m_CharBar)
+    mLblBar.LabelObj.Caption = String(mLblBar.Compteur, mLblBar.Caractere)
 
-    If (m_lCompte > MAX_LENG) Then          '// Trop long, on redim la barre avec le reste à faire...
-        m_NbChar = (m_NbChar - m_lCompte)
-        InitialiseTailleBarre (m_NbChar)
-        m_lCompte = 0
-        CalculCoul
+    If (mLblBar.Compteur > MAX_LENG) Then           '// Trop long, on redim la barre avec le reste à faire...
+        mLblBar.NbChar = (mLblBar.NbChar - mLblBar.Compteur)
+        InitialiseTailleBarre
+        mLblBar.Compteur = 0
+        CalculCoul mLblBar.NbChar
     End If
-    m_lCompte = m_lCompte + 1
+    mLblBar.Compteur = mLblBar.Compteur + 1
 
 SORTIE_UpdateBarre:
     Exit Sub
@@ -142,42 +160,53 @@ ERR_UpdateBarre:
     Resume SORTIE_UpdateBarre
 End Sub
 
+Public Sub ReturnFirstBarre()
+    HiddenCurrentLabels
+    Set mLblBar = colLabels("B1")
+    Set mLblTxt = colLabels("T1")
+End Sub
+
+Public Sub HiddenCurrentLabels()
+    If (mLblBar.LabelIsUp) Then mLblBar.LabelObj.Visible = False
+    If (mLblTxt.LabelIsUp) Then mLblTxt.LabelObj.Visible = False
+End Sub
 '// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ END PUB. SUB/FUNC \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 '// ################################ PRIVATE SUB/FUNC ####################################
-
 '----------------------------------------------------------------
 ' Sujet   : Détermine la taille de la brre d'vancement
 ' Author  : Laurent
 ' Date    : 09/08/2022 - 17:31
 ' DateMod :
 ' ----------------------------------------------------------------
-Private Sub InitialiseTailleBarre(NbCharBar As Long)
-    
+Private Sub InitialiseTailleBarre()
+
     Dim lWidth  As Long
     Dim lHeight As Long
     Dim sTexte  As String
     Dim lMax    As Long
 
-    lMax = IIf(NbCharBar > MAX_LENG, MAX_LENG, NbCharBar)   '// Limite à MAX_LENG caractères.
+    lMax = IIf(mLblBar.NbChar > MAX_LENG, MAX_LENG, mLblBar.NbChar)   '// Limite à MAX_LENG caractères.
 
-    sTexte = String(lMax, m_CharBar)
+    sTexte = String(lMax, mLblBar.Caractere)
 
-    WizHook.Key = 51488399
-    WizHook.TwipsFromFont m_LblBarre.FontName, m_LblBarre.FontSize, m_LblBarre.FontWeight, _
-                          m_LblBarre.FontItalic, m_LblBarre.FontUnderline, 0, _
-                          sTexte, 0, lWidth, lHeight
-
-    m_LblBarre.Width = lWidth + 50  '// + 50 pour la marge droite
-    m_LblBarre.Height = lHeight
+    With mLblBar.LabelObj
+        WizHook.Key = 51488399
+        WizHook.TwipsFromFont .FontName, .FontSize, .FontWeight, _
+                              .FontItalic, .FontUnderline, 0, _
+                              sTexte, 0, lWidth, lHeight
+        .Width = lWidth + 60  '// + 60 pour la marge droite
+        .Height = lHeight
+        .Caption = vbNullString
+    End With
 
 End Sub
 
-Private Sub CalculCoul()
+Private Sub CalculCoul(CurNbChar As Long)
 
     Dim lCoul As T_Coul
 
-    Select Case m_NbChar
+    Select Case CurNbChar
         Case Is > (MAX_LENG * 2)
             lCoul = CoulA
         Case Is > (MAX_LENG)
@@ -186,10 +215,24 @@ Private Sub CalculCoul()
             lCoul = CoulC
     End Select
 
-    m_LblBarre.BorderColor = lCoul
-    m_LblBarre.Caption = m_CharBar
-    m_LblBarre.ForeColor = lCoul
+    mLblBar.LabelObj.BorderColor = lCoul
+    mLblBar.LabelObj.ForeColor = lCoul
+
+End Sub
+
+Private Sub AddLabel(CleCol As String, LabelItem As Access.Label)
+
+    Dim LblItem As C_LabelsInfoItem
+    Set LblItem = New C_LabelsInfoItem
+
+    With LblItem
+        Set .LabelObj = LabelItem
+        .LabelIsUp = IIf(LabelItem Is Nothing, False, True)
+        .Compteur = 1
+    End With
+
+    colLabels.Add LblItem, CleCol
+    Set LblItem = Nothing
 
 End Sub
 '// ################################# END PRIV. SUB/FUNC #################################
-

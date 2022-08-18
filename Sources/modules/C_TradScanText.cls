@@ -85,7 +85,7 @@ Option Explicit
 '    Private m_TableTxtObj   As DAO.Recordset    '// Table T_ObjetChildTextes pour les forms/Reports.
 '    Private m_TableTxtCtr   As DAO.Recordset    '// Table T_ObjetChildTextes pour les contrôles.
 
-    Private InfoScan    As C_LabelsInfo     '// Affichage info texte et barre lors du scan.
+    Private cLabels     As C_LabelsInfo     '// Affichage info texte et barre lors du scan.
 
     Private mRep        As Boolean
     Private m_DateMaJ   As Date             '// Date heure de la créaton ou de la mise à jour.
@@ -105,7 +105,7 @@ Option Explicit
 Private Sub Class_Initialize()
 
     If (ObjetAcc Is Nothing) Then Set ObjetAcc = New C_ObjetsAccess
-    If (InfoScan Is Nothing) Then Set InfoScan = New C_LabelsInfo
+    If (cLabels Is Nothing) Then Set cLabels = New C_LabelsInfo
 
     Set m_oBDLocale = CodeDb()
 
@@ -120,7 +120,7 @@ Private Sub Class_Terminate()
     Set m_oBDLocale = Nothing
     Set ObjetAcc = Nothing      '// Reset tous les objets.
     Set m_oApp = Nothing
-    Set InfoScan = Nothing
+    Set cLabels = Nothing
 
 End Sub
 '//---------------------------------------------------------------------------------------
@@ -276,7 +276,7 @@ On Error GoTo ERR_ScanObjetsApp
 
     If (m_oBDLocale Is Nothing) Then Set m_oBDLocale = CodeDb()
 
-    If InfoScan.BarreIsUp Then InfoScan.SetLengthBarre "a", oRstSys.RecordCount  '// Initialise la taille de la barre...
+    cLabels.SetLengthBarre "a", oRstSys.RecordCount  '// Initialise la taille de la barre...
 
     '// Reset.
     thisApp.ID = CurrentAppID
@@ -316,7 +316,7 @@ On Error GoTo ERR_ScanObjetsApp
                 thisObj.Type = GetObjectTypeEnClair(ObjType)    '// Traduire en clair le Type...
 
                 sBarTxt = thisObj.Type & " " & thisObj.Nom
-                If InfoScan.BarreIsUp Then InfoScan.UpdateBarre sBarTxt '// Affiche l'état d'avancement du scan...
+                cLabels.UpdateBarre sBarTxt '// Affiche l'état d'avancement du scan...
                 DoEvents
 
                 If (ObjType = ObjetForm Or ObjType = ObjetReport) Then
@@ -408,14 +408,13 @@ Public Function GetIDLangBase(Optional AppID As String = vbNullString) As Long
 
 End Function
 
-Public Sub InitialiseLabelsInfo(lblTexte As Access.Label, lblBarre As Access.Label)
-'// Initialise les controles label à utiliser pour afficher les info et la barre d'avancement.
-    InfoScan.InitialiseLabels lblBarre, lblTexte
-End Sub
+'// Renvoi l'instance C_LabelsInfo utiliser dans cette classe.
+Public Function GetInstanceLabelsBar() As C_LabelsInfo
+    Set GetInstanceLabelsBar = cLabels
+End Function
 '// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ END PUB. SUB/FUNC \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 '// ################################ PRIVATE SUB/FUNC ####################################
-
 '----------------------------------------------------------------
 ' Procedure Nom   : ScanObjet
 ' ----------------------------------------------------------------
@@ -438,8 +437,9 @@ End Sub
 Private Function ScanObjet(ObjType As E_ObjectType) As Boolean
 On Error GoTo ERR_ScanObjet
 
-    Dim oObjet      As Object
-    Dim oCtr        As Access.Control
+    Dim oObjet  As Object
+    Dim oCtr    As Access.Control
+    Dim sBarTxt As String
 
     Set oObjet = GetObjet(thisObj.Nom, ObjType)             '// Ouvre le form/report mode création pour scan des contrôles...
     If (oObjet Is Nothing) Then mRep = False: Exit Function '// Erreur, on sort.
@@ -452,6 +452,8 @@ On Error GoTo ERR_ScanObjet
 
     If (mRep) Then
 
+        cLabels.SetLengthBarre "a", oObjet.Controls.count, LabelNum2 '// Initialise la taille de la barre...
+
         '// On boucle sur les contrôles de l'objet.
         For Each oCtr In oObjet.Controls
 
@@ -461,6 +463,10 @@ On Error GoTo ERR_ScanObjet
                 thisChild.Type = TypeName(oCtr)
                 '// Extraire le parent du control (page, label, etc.).
                 thisChild.Parent = IIf((oCtr.Parent.name <> thisObj.Nom), TypeName(oCtr.Parent) & "." & oCtr.Parent.name, vbNullString)
+
+                sBarTxt = thisChild.Type & " " & thisChild.Nom
+                cLabels.UpdateBarre sBarTxt '// Affiche l'état d'avancement du scan...
+                DoEvents
 
                 '----------------------------
                 mRep = ScanObjChilds(oCtr)               '// Scan les propriétés du contrôle...
@@ -472,6 +478,8 @@ On Error GoTo ERR_ScanObjet
     End If
 
     CloseObjet thisObj.Nom, ObjType                     '// Femeture de l'objet...
+
+    cLabels.ReturnFirstBarre
 
 SORTIE_ScanObjet:
     ScanObjet = mRep
@@ -1282,10 +1290,6 @@ Private Function CheckTxtIgnore(TxtCheck As String) As String
     Dim sCap    As String
     Dim sCapTmp As String
     Dim sTxt    As String
-
-    If (InStr(1, TxtCheck, vbNewLine)) Then
-'        Beep
-    End If
 
     sCapTmp = Replace(TxtCheck, vbNewLine, vbNullString)    '// Supp les retourne ligne.
     sCapTmp = Trim$(sCapTmp)
