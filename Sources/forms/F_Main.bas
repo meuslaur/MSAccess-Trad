@@ -17,11 +17,11 @@ Begin Form
     GridY =10
     Width =18368
     DatasheetFontHeight =11
-    ItemSuffix =72
-    Left =2652
-    Top =300
-    Right =21024
-    Bottom =12636
+    ItemSuffix =75
+    Left =-432
+    Top =408
+    Right =17940
+    Bottom =12744
     DatasheetGridlinesColor =15132391
     RecSrcDt = Begin
         0x5c7a48f85bd8e540
@@ -237,7 +237,7 @@ Begin Form
             PressedForeThemeColorIndex =1
         End
         Begin FormHeader
-            Height =1133
+            Height =1417
             BackColor =3684411
             Name ="F_Entete"
             AlternateBackThemeColorIndex =1
@@ -270,7 +270,7 @@ Begin Form
                     Begin
                         Begin Label
                             BackStyle =1
-                            OverlapFlags =93
+                            OverlapFlags =85
                             TextAlign =3
                             Left =113
                             Top =226
@@ -405,7 +405,7 @@ Begin Form
                 Begin ComboBox
                     Enabled = NotDefault
                     TabStop = NotDefault
-                    OverlapFlags =93
+                    OverlapFlags =85
                     IMESentenceMode =3
                     ColumnCount =2
                     ListWidth =2250
@@ -689,70 +689,97 @@ Begin Form
                 End
                 Begin Label
                     Visible = NotDefault
-                    OverlapFlags =247
-                    Left =2608
-                    Top =283
-                    Width =11175
+                    OverlapFlags =255
+                    Left =2551
+                    Top =113
+                    Width =8271
                     Height =285
                     FontSize =10
                     BorderColor =8355711
                     ForeColor =16777215
-                    Name ="lbl_InfoScan2"
+                    Name ="lblTexte1Info"
                     FontName ="Verdana"
-                    Tag ="0"
                     GridlineColor =10921638
-                    LayoutCachedLeft =2608
-                    LayoutCachedTop =283
-                    LayoutCachedWidth =13783
-                    LayoutCachedHeight =568
+                    LayoutCachedLeft =2551
+                    LayoutCachedTop =113
+                    LayoutCachedWidth =10822
+                    LayoutCachedHeight =398
                     ThemeFontIndex =-1
                     ForeTint =0.0
-                End
-                Begin Label
-                    Visible = NotDefault
-                    OverlapFlags =215
-                    TextAlign =3
-                    Left =623
-                    Top =283
-                    Width =1935
-                    Height =315
-                    BorderColor =8355711
-                    ForeColor =13421772
-                    Name ="lbl_InfoScan1"
-                    Caption ="Analyse :"
-                    Tag ="0"
-                    GridlineColor =10921638
-                    LayoutCachedLeft =623
-                    LayoutCachedTop =283
-                    LayoutCachedWidth =2558
-                    LayoutCachedHeight =598
-                    ForeThemeColorIndex =-1
-                    ForeTint =20.0
                 End
                 Begin Label
                     Visible = NotDefault
                     FontItalic = NotDefault
                     OldBorderStyle =1
                     BorderWidth =1
-                    OverlapFlags =85
+                    OverlapFlags =247
                     TextFontCharSet =2
                     TextFontFamily =18
-                    Left =2608
-                    Top =737
+                    Left =2551
+                    Top =396
                     Width =255
                     Height =300
                     FontSize =10
                     FontWeight =700
                     BorderColor =8355711
-                    Name ="lbl_InfoScan3"
+                    Name ="lblBarre1Info"
                     Caption ="a"
                     FontName ="Webdings"
-                    Tag ="0"
                     GridlineColor =10921638
-                    LayoutCachedLeft =2608
-                    LayoutCachedTop =737
-                    LayoutCachedWidth =2863
-                    LayoutCachedHeight =1037
+                    LayoutCachedLeft =2551
+                    LayoutCachedTop =396
+                    LayoutCachedWidth =2806
+                    LayoutCachedHeight =696
+                    ThemeFontIndex =-1
+                    BackThemeColorIndex =7
+                    BackTint =20.0
+                    ForeThemeColorIndex =9
+                    ForeTint =100.0
+                    ForeShade =75.0
+                End
+                Begin Label
+                    Visible = NotDefault
+                    OverlapFlags =93
+                    Left =2551
+                    Top =793
+                    Width =8271
+                    Height =285
+                    FontSize =10
+                    BorderColor =8355711
+                    ForeColor =16777215
+                    Name ="lblTexte2Info"
+                    FontName ="Verdana"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =2551
+                    LayoutCachedTop =793
+                    LayoutCachedWidth =10822
+                    LayoutCachedHeight =1078
+                    ThemeFontIndex =-1
+                    ForeTint =0.0
+                End
+                Begin Label
+                    Visible = NotDefault
+                    FontItalic = NotDefault
+                    OldBorderStyle =1
+                    BorderWidth =1
+                    OverlapFlags =87
+                    TextFontCharSet =2
+                    TextFontFamily =18
+                    Left =2551
+                    Top =1076
+                    Width =255
+                    Height =300
+                    FontSize =10
+                    FontWeight =700
+                    BorderColor =8355711
+                    Name ="lblBarre2Info"
+                    Caption ="a"
+                    FontName ="Webdings"
+                    GridlineColor =10921638
+                    LayoutCachedLeft =2551
+                    LayoutCachedTop =1076
+                    LayoutCachedWidth =2806
+                    LayoutCachedHeight =1376
                     ThemeFontIndex =-1
                     BackThemeColorIndex =7
                     BackTint =20.0
@@ -2111,18 +2138,20 @@ Private Sub cmdLanceScan_Click()
     End If
 
     Dim bRep As Boolean
+    Dim cLbl As C_LabelsInfo
 
     DoCmd.Hourglass True
 
     ScanActif True      '// Affiche les contrôles d'avancement du scan...
 
-    ScanTxt.InitialiseLabelsInfo Me.lbl_InfoScan2, Me.lbl_InfoScan3 '// Initialise les labels texte et d'avancement...
+    Set cLbl = ScanTxt.GetInstanceLabelsBar()
+    cLbl.InitialiseLabels Me.lblBarre1Info, Me.lblTexte1Info, Me.lblBarre2Info, Me.lblTexte2Info    '// Initialise les labels texte et d'avancement...
 
     ' ------------------------------
     bRep = ScanTxt.ScanObjetsApp(Nz(Me.zlBases, vbNullString))      '// Lance le scan les objets de la base sélectionnée....
     ' ------------------------------
 
-    Me.lbl_InfoScan2.Caption = "Fermeture de la base et de l'application...."
+    Me.lblTexte1Info.Caption = "Fermeture de la base et de l'application...."
     ObjetAcc.CloseMsBase True       '// Femeture base et app...
 
     ScanActif False     '// Masque les contrôles d'avancement du scan...
@@ -2137,6 +2166,9 @@ Private Sub cmdLanceScan_Click()
         DoCmd.OpenForm "iF_Recap", , , , , acDialog, Me.zlBases
     End If
 
+    cLbl.HiddenCurrentLabels
+
+    Set cLbl = Nothing
     Set ObjetAcc = Nothing
 
 End Sub
