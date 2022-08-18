@@ -1,11 +1,10 @@
 # MSAccessTrad
 
-Alpha [v0.49] Outil d'aide pour traduction des textes dans une bases Access
+Alpha [v0.50] Outil d'aide pour traduction des textes dans une bases Access
 
 # Formulaire F_Main
 
-![Formulaire de démarrage](Doc/F_Main01.png)
-![Formulaire Récap](Doc/F_Main01-1.png)
+![Formulaire de démarrage](Doc/diaporama.gif)
 
 # Utilisation :
 

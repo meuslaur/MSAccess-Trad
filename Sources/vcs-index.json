@@ -6,7 +6,7 @@
   "Items": {
     "MergeBuildDate": null,
     "FullBuildDate": null,
-    "ExportDate": "18/08/2022 14:35:18",
+    "ExportDate": "18/08/2022 14:59:57",
     "FullExportDate": "07/08/2022 07:40:18",
     "OptionsHash": "39cfc42",
     "LastMergedCommit": "",
@@ -246,7 +246,7 @@
       "Project": {
         "project.json": {
           "Hash": "19c3478",
-          "ExportDate": "18/08/2022 14:35:17",
+          "ExportDate": "18/08/2022 14:59:56",
           "SourceModified": "01/08/2022 17:42:00",
           "FilePropertiesHash": "fae01b6"
         }
@@ -315,9 +315,9 @@
           "FilePropertiesHash": "2ff36d9"
         },
         "iT_NonInclus.xml": {
-          "ExportDate": "18/08/2022 14:35:17",
-          "SourceModified": "18/08/2022 14:35:17",
-          "FilePropertiesHash": "6dfa4d0"
+          "ExportDate": "18/08/2022 14:59:56",
+          "SourceModified": "18/08/2022 14:59:56",
+          "FilePropertiesHash": "b97b124"
         },
         "iT_TextesIgnores.xml": {
           "ExportDate": "07/08/2022 07:40:17",
@@ -325,24 +325,24 @@
           "FilePropertiesHash": "1380f51"
         },
         "T_App.xml": {
-          "ExportDate": "18/08/2022 14:35:17",
-          "SourceModified": "18/08/2022 14:35:17",
-          "FilePropertiesHash": "ea711ec"
+          "ExportDate": "18/08/2022 14:59:56",
+          "SourceModified": "18/08/2022 14:59:56",
+          "FilePropertiesHash": "a42828b"
         },
         "T_Langues.xml": {
-          "ExportDate": "18/08/2022 14:35:17",
-          "SourceModified": "18/08/2022 14:35:17",
-          "FilePropertiesHash": "6cd2ff5"
+          "ExportDate": "18/08/2022 14:59:56",
+          "SourceModified": "18/08/2022 14:59:56",
+          "FilePropertiesHash": "68414dd"
         },
         "T_ObjetChilds.xml": {
-          "ExportDate": "18/08/2022 14:35:17",
-          "SourceModified": "18/08/2022 14:35:17",
-          "FilePropertiesHash": "da5617b"
+          "ExportDate": "18/08/2022 14:59:56",
+          "SourceModified": "18/08/2022 14:59:56",
+          "FilePropertiesHash": "a79b8c3"
         },
         "T_ObjetChildTextes.xml": {
-          "ExportDate": "18/08/2022 14:35:17",
-          "SourceModified": "18/08/2022 14:35:17",
-          "FilePropertiesHash": "e1fd73a"
+          "ExportDate": "18/08/2022 14:59:56",
+          "SourceModified": "18/08/2022 14:59:56",
+          "FilePropertiesHash": "88f241e"
         },
         "T_ObjetControles.xml": {
           "ExportDate": "07/08/2022 07:40:17",
@@ -350,9 +350,9 @@
           "FilePropertiesHash": "b7cbef0"
         },
         "T_Objets.xml": {
-          "ExportDate": "18/08/2022 14:35:17",
-          "SourceModified": "18/08/2022 14:35:17",
-          "FilePropertiesHash": "60bd490"
+          "ExportDate": "18/08/2022 14:59:56",
+          "SourceModified": "18/08/2022 14:59:56",
+          "FilePropertiesHash": "1686840"
         },
         "T_PropTextes.xml": {
           "ExportDate": "07/08/2022 07:40:17",
@@ -363,7 +363,7 @@
       "VB Project": {
         "vbe-project.json": {
           "Hash": "1932bef",
-          "ExportDate": "18/08/2022 14:35:17",
+          "ExportDate": "18/08/2022 14:59:56",
           "SourceModified": "01/08/2022 17:42:00",
           "FilePropertiesHash": "d6106a4"
         }
@@ -371,7 +371,7 @@
       "VBE References": {
         "vbe-references.json": {
           "Hash": "8b085f6",
-          "ExportDate": "18/08/2022 14:35:17",
+          "ExportDate": "18/08/2022 14:59:56",
           "SourceModified": "12/08/2022 23:10:44",
           "FilePropertiesHash": "8c4e744"
         }

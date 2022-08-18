@@ -1,4 +1,8 @@
 #Changelog
+## V 0.50 2022/18/08
+- Ajoute de la nouvelle progressBar
+- Modification de la documentation
+
 ## V 0.49 2022/08/08
 - Procédure de sauvegarde avant de lancer le scan de la base.
 - Ajout du form `F_Ignores` permettant d'ignorés certains objets (par la suite pour ses enfants aussi)
