@@ -274,7 +274,7 @@ Private Sub Form_Open(Cancel As Integer)
 
     On Error Resume Next
     '// Empeche l'ouverture indépendante.
-    If (Me.Parent.name = vbNullString) Then
+    If (Me.Parent.Name = vbNullString) Then
         If Err.Number = 2452 Then
             Cancel = True
             DoCmd.Close

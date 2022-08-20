@@ -183,12 +183,12 @@ On Error GoTo ERR_ExportProps
     If (OnlyPropUser = False) Then
         For iProp = 0 To oBd.Properties.count - 1
             Set Prop = oBd.Properties(iProp)
-            TxtFile.WriteLine Join(Array(iProp, Prop.name, Prop.value), vbTab)
+            TxtFile.WriteLine Join(Array(iProp, Prop.Name, Prop.value), vbTab)
         Next
     End If
 
     For Each Prop In oBd.Containers("Databases").Documents("UserDefined").Properties
-        TxtFile.WriteLine Join(Array(iProp, Prop.name, Prop.value), vbTab)        '// commence Item 8
+        TxtFile.WriteLine Join(Array(iProp, Prop.Name, Prop.value), vbTab)        '// commence Item 8
     Next
 
     TxtFile.Close
@@ -222,7 +222,7 @@ On Error GoTo ERR_PropExist
     If (Len(PropNom) = 0) Then Exit Function
 
     Dim sTmp As String
-    sTmp = m_BdSelect.Properties(PropNom).name
+    sTmp = m_BdSelect.Properties(PropNom).Name
     PropExist = True
 
 SORTIE_PropExist:

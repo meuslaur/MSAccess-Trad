@@ -166,13 +166,13 @@ On Error GoTo ERR_OpenMsBase
         Exit Function
     End If
 
+    Me.MsBaseIsOpen = True
+
     '// Vérifier si macro Autoexec...
     bAutoEx = HasAutoexec(m_oMsBase)
     If bAutoEx Then
-        MsgBox "La base utilise une macro 'Autoexec', désactivez la avant d'utiliser cet outil." & vbCrLf & _
-               "Opération annulée.", vbExclamation, "OpenMsBase"
-        Me.MsBaseIsOpen = True
-        Exit Function
+        MsgBox "La base utilise une macro 'Autoexec', Il est recommandé de la désactiver.", vbExclamation, "OpenMsBase"
+'        Exit Function 'TODO:  AVOIR
     End If
 
     '// Vérifier si un form ouvert au démarrage...
@@ -360,7 +360,7 @@ Private Function GetStartUpForm(ByRef MsBase As DAO.Database) As String
     Dim oProp As DAO.Property
 
     For Each oProp In MsBase.Properties
-        If oProp.name = "StartUpForm" Then
+        If oProp.Name = "StartUpForm" Then
             GetStartUpForm = oProp.value
             Exit For
         End If
@@ -375,7 +375,7 @@ Private Function CheckTableExist(TableNom As String) As Boolean
 
     With m_oMsBase
         For Each oTdf In .TableDefs
-            If (oTdf.name = TableNom) Then CheckTableExist = True: Exit For
+            If (oTdf.Name = TableNom) Then CheckTableExist = True: Exit For
         Next
     End With
 
