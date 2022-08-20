@@ -18,10 +18,9 @@ Begin Form
     Width =18368
     DatasheetFontHeight =11
     ItemSuffix =75
-    Left =-432
-    Top =408
-    Right =17940
-    Bottom =12744
+    Top =192
+    Right =18336
+    Bottom =12816
     DatasheetGridlinesColor =15132391
     RecSrcDt = Begin
         0x5c7a48f85bd8e540
@@ -741,8 +740,8 @@ Begin Form
                     Visible = NotDefault
                     OverlapFlags =93
                     Left =2551
-                    Top =793
-                    Width =8271
+                    Top =1020
+                    Width =4767
                     Height =285
                     FontSize =10
                     BorderColor =8355711
@@ -751,9 +750,9 @@ Begin Form
                     FontName ="Verdana"
                     GridlineColor =10921638
                     LayoutCachedLeft =2551
-                    LayoutCachedTop =793
-                    LayoutCachedWidth =10822
-                    LayoutCachedHeight =1078
+                    LayoutCachedTop =1020
+                    LayoutCachedWidth =7318
+                    LayoutCachedHeight =1305
                     ThemeFontIndex =-1
                     ForeTint =0.0
                 End
@@ -766,7 +765,7 @@ Begin Form
                     TextFontCharSet =2
                     TextFontFamily =18
                     Left =2551
-                    Top =1076
+                    Top =737
                     Width =255
                     Height =300
                     FontSize =10
@@ -777,9 +776,9 @@ Begin Form
                     FontName ="Webdings"
                     GridlineColor =10921638
                     LayoutCachedLeft =2551
-                    LayoutCachedTop =1076
+                    LayoutCachedTop =737
                     LayoutCachedWidth =2806
-                    LayoutCachedHeight =1376
+                    LayoutCachedHeight =1037
                     ThemeFontIndex =-1
                     BackThemeColorIndex =7
                     BackTint =20.0
@@ -2142,10 +2141,10 @@ Private Sub cmdLanceScan_Click()
 
     DoCmd.Hourglass True
 
-    ScanActif True      '// Affiche les contrôles d'avancement du scan...
+    ScanActif True      '// Masque les contrôles de l'entête...
 
     Set cLbl = ScanTxt.GetInstanceLabelsBar()
-    cLbl.InitialiseLabels Me.lblBarre1Info, Me.lblTexte1Info, Me.lblBarre2Info, Me.lblTexte2Info    '// Initialise les labels texte et d'avancement...
+    cLbl.InitialiseLabels Me.lblBarre1Info, Me.lblTexte1Info, Me.lblBarre2Info, Nothing    '// Initialise les labels texte et d'avancement...
 
     ' ------------------------------
     bRep = ScanTxt.ScanObjetsApp(Nz(Me.zlBases, vbNullString))      '// Lance le scan les objets de la base sélectionnée....
@@ -2154,10 +2153,11 @@ Private Sub cmdLanceScan_Click()
     Me.lblTexte1Info.Caption = "Fermeture de la base et de l'application...."
     ObjetAcc.CloseMsBase True       '// Femeture base et app...
 
-    ScanActif False     '// Masque les contrôles d'avancement du scan...
-
     DoCmd.Hourglass False
     Me.cmdCloseBd.Visible = False
+
+    cLbl.HiddenCurrentLabels
+    ScanActif False     '// Affiche les contrôles de l'entête...
 
     If bRep Then
         Me.zlBases.Requery
@@ -2166,8 +2166,7 @@ Private Sub cmdLanceScan_Click()
         DoCmd.OpenForm "iF_Recap", , , , , acDialog, Me.zlBases
     End If
 
-    cLbl.HiddenCurrentLabels
-
+    Me.cmdCloseBd.Visible = False
     Set cLbl = Nothing
     Set ObjetAcc = Nothing
 

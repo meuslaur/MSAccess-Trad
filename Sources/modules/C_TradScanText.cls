@@ -439,7 +439,7 @@ On Error GoTo ERR_ScanObjet
 
     Dim oObjet  As Object
     Dim oCtr    As Access.Control
-    Dim sBarTxt As String
+'    Dim sBarTxt As String
 
     Set oObjet = GetObjet(thisObj.Nom, ObjType)             '// Ouvre le form/report mode création pour scan des contrôles...
     If (oObjet Is Nothing) Then mRep = False: Exit Function '// Erreur, on sort.
@@ -452,20 +452,20 @@ On Error GoTo ERR_ScanObjet
 
     If (mRep) Then
 
-        cLabels.SetLengthBarre "a", oObjet.Controls.count, LabelNum2 '// Initialise la taille de la barre...
+        cLabels.SetLengthBarre ChrW(199), oObjet.Controls.count, LabelNum2 '// Initialise la taille de la barre...
 
         '// On boucle sur les contrôles de l'objet.
         For Each oCtr In oObjet.Controls
 
             'If (ControlIsVisible(oCtr) = True) Then 'TODO: Ignore les ctr invisibles ?
-                thisChild.Nom = oCtr.name
+                thisChild.Nom = oCtr.Name
                 thisChild.NomNet = MD_Utils.CheckApostrophe(thisChild.Nom)
                 thisChild.Type = TypeName(oCtr)
                 '// Extraire le parent du control (page, label, etc.).
-                thisChild.Parent = IIf((oCtr.Parent.name <> thisObj.Nom), TypeName(oCtr.Parent) & "." & oCtr.Parent.name, vbNullString)
+                thisChild.Parent = IIf((oCtr.Parent.Name <> thisObj.Nom), TypeName(oCtr.Parent) & "." & oCtr.Parent.Name, vbNullString)
 
-                sBarTxt = thisChild.Type & " " & thisChild.Nom
-                cLabels.UpdateBarre sBarTxt '// Affiche l'état d'avancement du scan...
+'                sBarTxt = thisChild.Type & " " & thisChild.Nom
+                cLabels.UpdateBarre vbNullString        '// Affiche l'état d'avancement du scan...
                 DoEvents
 
                 '----------------------------
@@ -534,7 +534,7 @@ On Error GoTo ERR_ScanTables
 
             thisObj.TxtField = True
 
-            thisChild.Nom = oFld.name
+            thisChild.Nom = oFld.Name
             thisChild.NomNet = MD_Utils.CheckApostrophe(thisChild.Nom)
             thisChild.Type = IIf(oFld.Type = dbMemo, "dbMeno", "dbText")
             thisChild.Parent = vbNullString
