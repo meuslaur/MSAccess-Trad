@@ -164,8 +164,8 @@ On Error GoTo ERR_ExportProps
     Dim sExpPath    As String   '// Dossier d'exportation.
     Dim sFile       As String
 
-    sExpPath = IIf(Right$(ExportFolder, 1) = "\", ExportFolder, ExportFolder & "\")
-    sExpPath = IIf(Left$(ExportFolder, 1) = "\", sExpPath, "\" & sExpPath)
+    sExpPath = IIf(right$(ExportFolder, 1) = "\", ExportFolder, ExportFolder & "\")
+    sExpPath = IIf(left$(ExportFolder, 1) = "\", sExpPath, "\" & sExpPath)
 
     sPath = CurrentProject.Path
     sExpPath = sPath & sExpPath

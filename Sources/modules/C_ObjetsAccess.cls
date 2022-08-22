@@ -74,8 +74,12 @@ End Property
 Public Property Let MsBaseIsOpen(NouvelEtat As Boolean)
     m_bMsBaseIsOpen = IIf((m_oMsApp.CurrentProject.Connection Is Nothing), False, NouvelEtat)
 End Property
-Public Property Let BaseFullPathName(NewVal As String)
-    m_sBaseFullName = NewVal
+Public Property Get BaseFullPathName() As String
+    BaseFullPathName = m_sBaseFullName
+End Property
+Public Property Let BaseFullPathName(NewFullPath As String)
+    If MD_FSO.FSOFileExist(NewFullPath, NonTrouver) = False Then Exit Property
+    m_sBaseFullName = NewFullPath
 End Property
 Public Property Get BaseNom() As String
     BaseNom = m_sBaseNom
@@ -308,15 +312,15 @@ End Sub
 Public Function CheckTdfLinked(TdfName As String, Optional AfficheMsg As Boolean = False) As String
 
     Dim sBdSource As String
-    Dim lPos      As Long
+    Dim lpos      As Long
     Dim bRep      As Boolean
     Dim sRep      As String
 
     With m_oMsBase.TableDefs(TdfName)
         If (.Attributes = dbAttachedTable) Then      'TODO: tdf.Attributes = dbAttachedODBC
             sBdSource = .Connect
-            lPos = InStr(1, sBdSource, "=")
-            sBdSource = Mid$(sBdSource, lPos + 1)
+            lpos = InStr(1, sBdSource, "=")
+            sBdSource = Mid$(sBdSource, lpos + 1)
             bRep = MD_FSO.FSOFileExist(sBdSource)   '// Verifier si la base est bien la...
             If (Not bRep) Then sRep = sBdSource
         End If

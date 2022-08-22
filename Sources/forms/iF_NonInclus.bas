@@ -141,7 +141,7 @@ Begin Form
                     AllowAutoCorrect = NotDefault
                     OverlapFlags =215
                     IMESentenceMode =3
-                    ColumnCount =2
+                    ColumnCount =3
                     ListWidth =2085
                     Left =566
                     Top =453
@@ -153,7 +153,7 @@ Begin Form
                     Name ="zlBases"
                     RowSourceType ="Table/Query"
                     RowSource ="RL_Apps"
-                    ColumnWidths ="0;2089"
+                    ColumnWidths ="0;2090;0"
                     AfterUpdate ="[Event Procedure]"
                     OnMouseDown ="=OuvreZl()"
                     ControlTipText ="Applications enregistrées."

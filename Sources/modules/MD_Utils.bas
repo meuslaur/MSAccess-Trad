@@ -333,7 +333,7 @@ On Error GoTo ERR_CreateGuid
     Dim sSql    As String
     Dim vGuid() As Byte
     Dim sGuid   As String
-    Dim lPos    As Long
+    Dim lpos    As Long
 
     Set qdf = CurrentDb.CreateQueryDef("")
 
@@ -349,8 +349,8 @@ On Error GoTo ERR_CreateGuid
 
     vGuid = DFirst("[Guid]", "aTg")
     sGuid = Application.StringFromGUID(vGuid)
-    lPos = InStr(2, sGuid, "{")
-    sGuid = Mid$(sGuid, lPos, (Len(sGuid) - lPos))
+    lpos = InStr(2, sGuid, "{")
+    sGuid = Mid$(sGuid, lpos, (Len(sGuid) - lpos))
     CreateGuid = sGuid
 
     sSql = "DELETE aTg.* FROM aTg;"

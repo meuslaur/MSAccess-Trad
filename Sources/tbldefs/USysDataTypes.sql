@@ -1,0 +1,5 @@
+﻿CREATE TABLE [USysDataTypes] (
+  [DataTypeEnumID] AUTOINCREMENT CONSTRAINT [PrimaryKey] PRIMARY KEY UNIQUE NOT NULL,
+  [DataTypeEnumValue] UNSIGNED BYTE ,
+  [DataTypeName] VARCHAR (20)
+)

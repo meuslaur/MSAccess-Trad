@@ -16,14 +16,14 @@ Begin Form
     Width =10204
     DatasheetFontHeight =11
     ItemSuffix =12
-    Left =2988
-    Top =2772
-    Right =13188
-    Bottom =4500
+    Left =7668
+    Top =2376
+    Right =17868
+    Bottom =4104
     RecordSource ="SELECT T_Objets.Objet_ID, T_Objets.ObjetType, T_Objets.ObjetNom, T_Objets.Scanne"
         "r, T_Objets.Nouveau, IIf(Scanner=False,\"=\",Null) AS Scan, IIf(Nouveau=True,\"="
-        "\",Null) AS Nouv FROM T_Objets WHERE ((T_Objets.IDApp)='{D4877126-229C-4719-A3AA"
-        "-B0E5B291A011}') ORDER BY T_Objets.ObjetType, T_Objets.ObjetNom; "
+        "\",Null) AS Nouv FROM T_Objets WHERE ((T_Objets.IDApp)='{76B75FE7-935B-470D-A39C"
+        "-CAE0E6205054}') ORDER BY T_Objets.ObjetType, T_Objets.ObjetNom; "
     Caption =" "
     DatasheetFontName ="Calibri"
     AllowDatasheetView =0

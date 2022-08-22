@@ -5,6 +5,7 @@ Begin Form
     RecordSelectors = NotDefault
     MaxButton = NotDefault
     MinButton = NotDefault
+    AutoCenter = NotDefault
     NavigationButtons = NotDefault
     AllowDeletions = NotDefault
     DividingLines = NotDefault
@@ -19,10 +20,10 @@ Begin Form
     Width =8163
     DatasheetFontHeight =11
     ItemSuffix =16
-    Left =3588
-    Top =1224
-    Right =11496
-    Bottom =10884
+    Left =7716
+    Top =1056
+    Right =15624
+    Bottom =10716
     RecSrcDt = Begin
         0xc605179cabdde540
     End
@@ -148,7 +149,6 @@ Begin Form
                             Top =226
                             Width =1770
                             Height =342
-                            ForeColor =5066061
                             Name ="lbl_zlObjetTypes"
                             Caption ="Objets"
                             GridlineColor =10921638
@@ -157,11 +157,11 @@ Begin Form
                             LayoutCachedWidth =7949
                             LayoutCachedHeight =568
                             BackThemeColorIndex =3
-                            BackShade =75.0
+                            BackShade =70.0
                             BorderThemeColorIndex =1
                             BorderTint =100.0
                             BorderShade =35.0
-                            ForeTint =70.0
+                            ForeTint =100.0
                         End
                     End
                 End

@@ -117,7 +117,7 @@ Public Function FSOFileExist(ByVal FullPathFileName As String, _
         sBase = mFSO.GetBaseName(sFile)
     
         '// Ajoute le '.' si besoin
-        If (Left$(ExtFile, 1) <> ".") Then sExt = "." & ExtFile
+        If (left$(ExtFile, 1) <> ".") Then sExt = "." & ExtFile
         
         sPath = sFolder & sBase & sExt
     Else
@@ -209,7 +209,7 @@ Public Function FSOGetTempFile(Optional ByVal Path As String = "WINDOWS TEMP FOL
                       Optional Prefix As String = "temp") As String         'Note: Non utilisé
 
     If Path = "WINDOWS TEMP FOLDER" Then Path = FSOGetTempPath
-    If Right$(Path, 1) <> "\" Then Path = Path & "\"
+    If right$(Path, 1) <> "\" Then Path = Path & "\"
 
     If Not (Path Like "?:\*" Or Path Like "\\*") Then
         Err.Raise 52    '"Bad file name or number."
@@ -297,7 +297,7 @@ Public Function ADOFileWrite(FullPathFileName As String, TextSource As String, _
         .Charset = "utf-8"
         .WriteText TextSource
         ' Ensure that we are ending the content with a vbcrlf
-        If Right$(TextSource, 2) <> vbCrLf Then .WriteText vbCrLf
+        If right$(TextSource, 2) <> vbCrLf Then .WriteText vbCrLf
         ' Write to disk
         .SaveToFile FullPathFileName, 2     'adSaveCreateNotExist 1, adSaveCreateOverWrite 2
         .Close
@@ -541,11 +541,11 @@ Public Function AddSlash(Dossier As String, _
     Dim sFolder As String
     sFolder = Dossier
 
-    If ((Right$(sFolder, 1) <> PathSep) And addRight) Then
+    If ((right$(sFolder, 1) <> PathSep) And addRight) Then
         sFolder = sFolder & PathSep
     End If
 
-    If ((Left$(sFolder, 1) <> PathSep) And addLeft) Then
+    If ((left$(sFolder, 1) <> PathSep) And addLeft) Then
         sFolder = PathSep & sFolder
     End If
 
@@ -585,8 +585,8 @@ End Function
 ' Purpose   : Strip the trailing slash
 '---------------------------------------------------------------------------------------
 Private Function StripSlash(strText As String) As String
-    If Right$(strText, 1) = PathSep Then
-        StripSlash = Left$(strText, Len(strText) - 1)
+    If right$(strText, 1) = PathSep Then
+        StripSlash = left$(strText, Len(strText) - 1)
     Else
         StripSlash = strText
     End If
