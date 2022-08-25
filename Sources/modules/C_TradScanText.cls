@@ -48,13 +48,14 @@ Option Explicit
     Private thisApp As TApp
 
     Private Type TObjet
-        IDNet       As String      '// ID et Nom nettoyer des apostrophes (').
+        IDNet       As String       '// ID et Nom nettoyer des apostrophes (').
         Nom         As String
         NomNet      As String
         Type        As String
+        TypeNum     As eObjectType  '// Type suivant tabm MSysObjects
         Caption     As String
-        Nouveau     As Boolean     '// Indique nouvel objet à enregistrer.
-        TxtField    As Boolean     '// Indique si la table contient des champs txt ou memo.
+        Nouveau     As Boolean      '// Indique nouvel objet à enregistrer.
+        TxtField    As Boolean      '// Indique si la table contient des champs txt ou memo.
     End Type
     Private thisObj As TObjet
 
@@ -164,7 +165,6 @@ Public Function IsNewApp() As eReponse
     Dim sRes As String
     Dim eRep As eReponse
     Dim vTmp As Variant
-    Dim lRep As Long
     Dim sMsg As String
 
     thisApp.ID = vbNullString
@@ -185,8 +185,8 @@ Public Function IsNewApp() As eReponse
             sMsg = "La base '" & ObjetAcc.BaseNom & "' est déjà enregistrée dans la table T_Objets." & vbCrLf & _
                    "Les données concernant cette base vont être mise à jour." & vbCrLf & _
                    "Voulez-vous continuer ?"
-            lRep = MsgBox(sMsg, vbExclamation + vbYesNo + vbDefaultButton2, "Base déjà enregistrée")
-            If (lRep = vbNo) Then
+            mRep = MsgBox(sMsg, vbExclamation + vbYesNo + vbDefaultButton2, "Base déjà enregistrée")
+            If (mRep = vbNo) Then
                 IsNewApp = Erreur
             Else
                 IsNewApp = Valide
@@ -259,14 +259,14 @@ On Error GoTo ERR_ScanObjetsApp
 
     Dim oBdExt  As DAO.Database
     Dim oRstSys As DAO.Recordset
-    Dim ObjType As E_ObjectType
     Dim sSql    As String
     Dim sBarTxt As String
 
     '// Extraire les objets de la table MsysObjects.
     sSql = "SELECT  MsysObjects.id, MsysObjects.Type, MsysObjects.Name " & _
            "FROM MsysObjects " & _
-           "WHERE (((MsysObjects.Type) = " & ObjetForm & " Or (MsysObjects.Type) = " & ObjetReport & " Or (MsysObjects.Type) = " & TableLocale & " Or (MsysObjects.Type) = " & TableLinked & ") " & _
+           "WHERE (((MsysObjects.Type) = " & ObjetForm & " Or (MsysObjects.Type) = " & ObjetReport & _
+           " Or (MsysObjects.Type) = " & TableLocale & " Or (MsysObjects.Type) = " & TableLinked & ") " & _
            "AND ((MsysObjects.Name) Not Like '~*' And (MsysObjects.Name) Not Like 'MSys*')  AND ((MsysObjects.Flags)>=0)) " & _
            "ORDER BY MsysObjects.Type, MsysObjects.Name;"
 
@@ -316,21 +316,21 @@ On Error GoTo ERR_ScanObjetsApp
 
                 thisObj.Nom = .Fields("Name").value
                 thisObj.NomNet = MD_Utils.CheckApostrophe(thisObj.Nom)
-                ObjType = .Fields("Type").value
-                thisObj.Type = GetObjectTypeEnClair(ObjType)    '// Traduire en clair le Type...
+                thisObj.TypeNum = .Fields("Type").value
+                thisObj.Type = GetObjectTypeEnClair(thisObj.TypeNum)    '// Traduire en clair le Type...
 
                 sBarTxt = thisObj.Type & " " & thisObj.Nom
                 cLabels.UpdateBarre sBarTxt '// Affiche l'état d'avancement du scan...
                 DoEvents
 
-                If (ObjType = ObjetForm Or ObjType = ObjetReport) Then
+                If (thisObj.TypeNum = ObjetForm Or thisObj.TypeNum = ObjetReport) Then
                     '--------------------------
-                    mRep = ScanObjet(ObjType)           '// Enregistre les info forms/reports...
+                    mRep = ScanObjet(thisObj.TypeNum)   '// Enregistre les info forms/reports...
                     '--------------------------
                     If (Not mRep) Then Exit Do
                 End If
 
-                If (ObjType = TableLocale Or ObjType = TableLinked) Then
+                If (thisObj.TypeNum = TableLocale Or thisObj.TypeNum = TableLinked) Then
                     '--------------------------
                     mRep = ScanTables()                 '// Enregistre les info Tables...
                     '--------------------------
@@ -438,7 +438,7 @@ End Function
 ' Date    : 23/06/2022 - 11:30
 ' DateMod : 28/06/2022 - 18:38
 ' ----------------------------------------------------------------
-Private Function ScanObjet(ObjType As E_ObjectType) As Boolean
+Private Function ScanObjet(ObjType As eObjectType) As Boolean
 On Error GoTo ERR_ScanObjet
 
     Dim oObjet  As Object
@@ -456,7 +456,7 @@ On Error GoTo ERR_ScanObjet
 
     If (mRep) Then
 
-        cLabels.SetLengthBarre ChrW(199), oObjet.Controls.count, LabelNum2 '// Initialise la taille de la barre...
+        cLabels.SetLengthBarre ChrW$(199), oObjet.Controls.count, LabelNum2 '// Initialise la taille de la barre...
 
         '// On boucle sur les contrôles de l'objet.
         For Each oCtr In oObjet.Controls
@@ -649,8 +649,8 @@ Private Function MajTableObjet() As Boolean
         thisChild.Nouveau = True
 
         sSql = "INSERT INTO T_Objets " & _
-                "(Objet_ID, ObjetNom, ObjetType, IDApp, Scanner, Nouveau) " & _
-                "VALUES ('" & thisObj.IDNet & "', '" & thisObj.NomNet & "', '" & thisObj.Type & "', '" & _
+                "(Objet_ID, ObjetNom, IDType, IDApp, Scanner, Nouveau) " & _
+                "VALUES ('" & thisObj.IDNet & "', '" & thisObj.NomNet & "', '" & thisObj.TypeNum & "', '" & _
                 thisApp.ID & "', " & CInt(True) & ", " & CInt(True) & ");"
 
     Else                        '// Déjà enregistrer..
@@ -1064,7 +1064,7 @@ End Function
 ' Date    : 23/06/2022 - 15:35
 ' DateMod :
 ' ----------------------------------------------------------------
-Private Function GetObjet(ObjetNom As String, ObjetType As E_ObjectType) As Object
+Private Function GetObjet(ObjetNom As String, ObjetType As eObjectType) As Object
 On Error GoTo ERR_GetObjet
 
     Select Case ObjetType
@@ -1087,7 +1087,7 @@ ERR_GetObjet:
     Resume SORTIE_GetObjet
 End Function
 
-Private Sub CloseObjet(ObjetNom As String, ObjetType As E_ObjectType, Optional Methode As AcCloseSave = acSaveNo)
+Private Sub CloseObjet(ObjetNom As String, ObjetType As eObjectType, Optional Methode As AcCloseSave = acSaveNo)
 On Error GoTo ERR_CloseObjet
 
     Select Case ObjetType
@@ -1293,7 +1293,6 @@ End Sub
 Private Function CheckTxtIgnore(TxtCheck As String) As String
     Dim sCap    As String
     Dim sCapTmp As String
-    Dim sTxt    As String
 
     sCapTmp = Replace(TxtCheck, vbNewLine, vbNullString)    '// Supp les retourne ligne.
     sCapTmp = Trim$(sCapTmp)

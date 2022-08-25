@@ -6,7 +6,7 @@
   "Items": {
     "MergeBuildDate": null,
     "FullBuildDate": null,
-    "ExportDate": "22/08/2022 17:32:43",
+    "ExportDate": "25/08/2022 18:19:35",
     "FullExportDate": "07/08/2022 07:40:18",
     "OptionsHash": "39cfc42",
     "LastMergedCommit": "",
@@ -23,6 +23,16 @@
           "Hash": "7f244c4",
           "SourceModified": "17/08/2022 09:44:28",
           "FilePropertiesHash": "3ad0a46"
+        },
+        "aF_LinkTemp.bas": {
+          "ExportDate": "25/08/2022 18:14:38",
+          "SourceModified": "25/08/2022 18:14:38",
+          "FilePropertiesHash": "d3591a3"
+        },
+        "F_atmp.bas": {
+          "ExportDate": "25/08/2022 07:51:48",
+          "SourceModified": "25/08/2022 07:51:48",
+          "FilePropertiesHash": "92fdcd2"
         },
         "F_Ignores.bas": {
           "ExportDate": "11/08/2022 16:56:32",
@@ -49,10 +59,10 @@
           "FilePropertiesHash": "99f97be"
         },
         "F_Main.bas": {
-          "Hash": "b33ebf0",
-          "ExportDate": "22/08/2022 17:32:43",
-          "SourceModified": "22/08/2022 17:32:42",
-          "FilePropertiesHash": "400fc52"
+          "Hash": "33ccbf1",
+          "ExportDate": "25/08/2022 18:14:37",
+          "SourceModified": "25/08/2022 18:14:37",
+          "FilePropertiesHash": "cd6dd6e"
         },
         "F_MainSFControles.bas": {
           "ExportDate": "22/08/2022 17:32:43",
@@ -86,10 +96,10 @@
           "FilePropertiesHash": "a234f75"
         },
         "F_Trad.bas": {
-          "Hash": "8864009",
-          "ExportDate": "07/08/2022 22:45:18",
-          "SourceModified": "07/08/2022 22:45:18",
-          "FilePropertiesHash": "2253620"
+          "Hash": "c158b94",
+          "ExportDate": "25/08/2022 18:14:37",
+          "SourceModified": "25/08/2022 18:14:37",
+          "FilePropertiesHash": "afc9075"
         },
         "F_TradSFOrg.bas": {
           "ExportDate": "08/08/2022 16:57:51",
@@ -97,16 +107,16 @@
           "FilePropertiesHash": "cf06190"
         },
         "iF_Ignores.bas": {
-          "ExportDate": "22/08/2022 17:32:43",
-          "Hash": "7c4090e",
-          "SourceModified": "22/08/2022 17:32:43",
-          "FilePropertiesHash": "14cc3e3"
+          "ExportDate": "25/08/2022 18:14:38",
+          "Hash": "91546a9",
+          "SourceModified": "25/08/2022 18:14:38",
+          "FilePropertiesHash": "df2a8cd"
         },
         "iF_IgnoresSF.bas": {
-          "ExportDate": "20/08/2022 11:26:26",
+          "ExportDate": "25/08/2022 18:14:38",
           "Hash": "d0c38e1",
-          "SourceModified": "20/08/2022 11:26:26",
-          "FilePropertiesHash": "842c4a6"
+          "SourceModified": "25/08/2022 18:14:38",
+          "FilePropertiesHash": "438e649"
         },
         "iF_InfoRecap.bas": {
           "ExportDate": "08/08/2022 16:57:51",
@@ -121,26 +131,26 @@
           "FilePropertiesHash": "1fc4baa"
         },
         "iF_Recap.bas": {
-          "ExportDate": "15/08/2022 20:49:26",
-          "Hash": "fb98e76",
-          "SourceModified": "15/08/2022 20:49:26",
-          "FilePropertiesHash": "b3efcd2"
+          "ExportDate": "25/08/2022 18:14:38",
+          "Hash": "6d1dd50",
+          "SourceModified": "25/08/2022 18:14:38",
+          "FilePropertiesHash": "67814c3"
         },
         "iF_RecapSFC.bas": {
-          "ExportDate": "22/08/2022 17:32:43",
-          "SourceModified": "22/08/2022 17:32:43",
-          "FilePropertiesHash": "62418ed"
+          "ExportDate": "25/08/2022 18:14:38",
+          "SourceModified": "25/08/2022 18:14:38",
+          "FilePropertiesHash": "418f9f0"
         },
         "iF_RecapSFO.bas": {
-          "ExportDate": "22/08/2022 17:32:43",
-          "SourceModified": "22/08/2022 17:32:43",
-          "FilePropertiesHash": "33568b9",
+          "ExportDate": "25/08/2022 18:14:37",
+          "SourceModified": "25/08/2022 18:14:37",
+          "FilePropertiesHash": "032a222",
           "Hash": "1857406"
         },
         "iF_RecapSFT.bas": {
-          "ExportDate": "22/08/2022 17:32:43",
-          "SourceModified": "22/08/2022 17:32:43",
-          "FilePropertiesHash": "01f7868",
+          "ExportDate": "25/08/2022 18:14:37",
+          "SourceModified": "25/08/2022 18:14:37",
+          "FilePropertiesHash": "bc8790d",
           "Hash": "c7d5a8f"
         },
         "iF_TextesIgnores.bas": {
@@ -157,11 +167,17 @@
           "SourceModified": "07/08/2022 07:40:18",
           "FilePropertiesHash": "9524b2e"
         },
+        "a_Module1.bas": {
+          "Hash": "066110f",
+          "ExportDate": "25/08/2022 07:51:49",
+          "SourceModified": "25/08/2022 07:51:49",
+          "FilePropertiesHash": "c782235"
+        },
         "A_Test.bas": {
-          "Hash": "d2f3291",
-          "ExportDate": "22/08/2022 17:32:43",
-          "SourceModified": "22/08/2022 17:32:43",
-          "FilePropertiesHash": "887c6e4"
+          "Hash": "f09b078",
+          "ExportDate": "25/08/2022 18:14:38",
+          "SourceModified": "25/08/2022 18:14:38",
+          "FilePropertiesHash": "b4e15dd"
         },
         "A_TestTbl.bas": {
           "Hash": "c5d4b20",
@@ -182,22 +198,22 @@
           "FilePropertiesHash": "56489bf"
         },
         "C_ObjetsAccess.cls": {
-          "Hash": "3eec2ae",
-          "ExportDate": "22/08/2022 17:32:43",
-          "SourceModified": "22/08/2022 17:32:43",
-          "FilePropertiesHash": "df6c974"
+          "Hash": "6f5a515",
+          "ExportDate": "25/08/2022 07:51:49",
+          "SourceModified": "25/08/2022 07:51:49",
+          "FilePropertiesHash": "f790ef9"
         },
         "C_TradScanText.cls": {
-          "Hash": "55fff16",
-          "ExportDate": "22/08/2022 17:32:43",
-          "SourceModified": "22/08/2022 17:32:43",
-          "FilePropertiesHash": "dbb06cf"
+          "Hash": "fab94ac",
+          "ExportDate": "25/08/2022 18:14:38",
+          "SourceModified": "25/08/2022 18:14:38",
+          "FilePropertiesHash": "189ad9d"
         },
         "C_UtLabelsInfo.cls": {
-          "Hash": "8302d78",
-          "ExportDate": "20/08/2022 15:46:54",
-          "SourceModified": "20/08/2022 15:46:54",
-          "FilePropertiesHash": "3d09a02"
+          "Hash": "7ccc50c",
+          "ExportDate": "25/08/2022 18:14:38",
+          "SourceModified": "25/08/2022 18:14:38",
+          "FilePropertiesHash": "25aa043"
         },
         "C_UtLabelsInfoItem.cls": {
           "Hash": "49b0c08",
@@ -218,46 +234,52 @@
           "FilePropertiesHash": "04fdb6c"
         },
         "MD_DBProp.bas": {
-          "Hash": "8ecfbc0",
-          "ExportDate": "22/08/2022 17:32:43",
-          "SourceModified": "22/08/2022 17:32:43",
-          "FilePropertiesHash": "a39c4be"
+          "Hash": "5cef641",
+          "ExportDate": "25/08/2022 18:14:38",
+          "SourceModified": "25/08/2022 18:14:38",
+          "FilePropertiesHash": "b37a75f"
         },
         "MD_FSO.bas": {
-          "Hash": "75b3f9e",
-          "ExportDate": "22/08/2022 17:32:43",
-          "SourceModified": "22/08/2022 17:32:43",
-          "FilePropertiesHash": "8a40669"
+          "Hash": "0c0291d",
+          "ExportDate": "25/08/2022 18:14:38",
+          "SourceModified": "25/08/2022 18:14:38",
+          "FilePropertiesHash": "1a782d0"
+        },
+        "MD_TradLinkTbl.bas": {
+          "Hash": "b02c03f",
+          "ExportDate": "25/08/2022 18:14:38",
+          "SourceModified": "25/08/2022 18:14:38",
+          "FilePropertiesHash": "7b69dc0"
         },
         "MD_TradUtils.bas": {
-          "Hash": "c545a99",
-          "ExportDate": "07/08/2022 07:40:18",
-          "SourceModified": "07/08/2022 07:40:18",
-          "FilePropertiesHash": "73a3585"
+          "Hash": "1433e9e",
+          "ExportDate": "25/08/2022 18:14:38",
+          "SourceModified": "25/08/2022 18:14:38",
+          "FilePropertiesHash": "e769847"
         },
         "MD_Utils.bas": {
-          "Hash": "a02e8f2",
-          "ExportDate": "22/08/2022 17:32:43",
-          "SourceModified": "22/08/2022 17:32:43",
-          "FilePropertiesHash": "3ff2ff9"
+          "Hash": "bb412b5",
+          "ExportDate": "25/08/2022 18:14:38",
+          "SourceModified": "25/08/2022 18:14:38",
+          "FilePropertiesHash": "78e6f68"
         },
         "StringBuilder.cls": {
-          "Hash": "9a1d1ad",
-          "ExportDate": "15/08/2022 20:49:26",
-          "SourceModified": "15/08/2022 20:49:26",
-          "FilePropertiesHash": "e88d0d2"
+          "Hash": "d4b315d",
+          "ExportDate": "25/08/2022 18:14:38",
+          "SourceModified": "25/08/2022 18:14:38",
+          "FilePropertiesHash": "3e57f4f"
         },
         "StringUtils.bas": {
-          "Hash": "22f37fa",
-          "ExportDate": "20/08/2022 15:46:54",
-          "SourceModified": "20/08/2022 15:46:54",
-          "FilePropertiesHash": "8dff481"
+          "Hash": "88fddd3",
+          "ExportDate": "25/08/2022 18:14:38",
+          "SourceModified": "25/08/2022 18:14:38",
+          "FilePropertiesHash": "6501708"
         }
       },
       "Project": {
         "project.json": {
           "Hash": "19c3478",
-          "ExportDate": "22/08/2022 17:32:42",
+          "ExportDate": "25/08/2022 18:19:34",
           "SourceModified": "01/08/2022 17:42:00",
           "FilePropertiesHash": "fae01b6"
         }
@@ -274,32 +296,47 @@
           "FilePropertiesHash": "061b270"
         },
         "R_F_IgnoresSF.bas": {
-          "ExportDate": "22/08/2022 17:32:42",
-          "SourceModified": "22/08/2022 17:32:42",
-          "FilePropertiesHash": "242f04d"
+          "ExportDate": "25/08/2022 18:14:37",
+          "SourceModified": "25/08/2022 18:14:37",
+          "FilePropertiesHash": "40d6aa2"
         },
         "R_F_MainSFControles.bas": {
-          "ExportDate": "22/08/2022 17:32:42",
-          "SourceModified": "22/08/2022 17:32:42",
-          "FilePropertiesHash": "dfb1ab8"
+          "ExportDate": "25/08/2022 18:14:37",
+          "SourceModified": "25/08/2022 18:14:37",
+          "FilePropertiesHash": "d0fd969"
         },
         "R_F_MainSFTextes.bas": {
-          "ExportDate": "22/08/2022 17:32:42",
-          "SourceModified": "22/08/2022 17:32:42",
-          "FilePropertiesHash": "2531200"
+          "ExportDate": "25/08/2022 18:14:37",
+          "SourceModified": "25/08/2022 18:14:37",
+          "FilePropertiesHash": "f8d40c2"
         },
         "RL_Apps.bas": {
-          "ExportDate": "22/08/2022 17:32:42",
-          "SourceModified": "22/08/2022 17:32:42",
-          "FilePropertiesHash": "d28e97b"
+          "ExportDate": "25/08/2022 18:14:37",
+          "SourceModified": "25/08/2022 18:14:37",
+          "FilePropertiesHash": "02e7c2a"
         },
         "RL_Langues.bas": {
-          "ExportDate": "22/08/2022 17:32:42",
-          "SourceModified": "22/08/2022 17:32:42",
-          "FilePropertiesHash": "9c817a8"
+          "ExportDate": "25/08/2022 18:14:37",
+          "SourceModified": "25/08/2022 18:14:37",
+          "FilePropertiesHash": "6b2cf3c"
+        },
+        "RL_ObjetTypes.bas": {
+          "ExportDate": "25/08/2022 18:14:37",
+          "SourceModified": "25/08/2022 18:14:37",
+          "FilePropertiesHash": "ed90d7b"
         }
       },
       "Tables": {
+        "a_tmp.xml": {
+          "ExportDate": "25/08/2022 07:51:48",
+          "SourceModified": "25/08/2022 07:51:48",
+          "FilePropertiesHash": "520ef97"
+        },
+        "aT_LinkTemp.json": {
+          "ExportDate": "25/08/2022 18:14:37",
+          "SourceModified": "25/08/2022 18:14:37",
+          "FilePropertiesHash": "d31b944"
+        },
         "aTC.xml": {
           "ExportDate": "07/08/2022 07:40:17",
           "SourceModified": "07/08/2022 07:40:17",
@@ -326,9 +363,9 @@
           "FilePropertiesHash": "2ff36d9"
         },
         "iT_NonInclus.xml": {
-          "ExportDate": "22/08/2022 17:32:42",
-          "SourceModified": "22/08/2022 17:32:42",
-          "FilePropertiesHash": "759e8e1"
+          "ExportDate": "25/08/2022 18:19:34",
+          "SourceModified": "25/08/2022 18:19:34",
+          "FilePropertiesHash": "4d500df"
         },
         "iT_TextesIgnores.xml": {
           "ExportDate": "07/08/2022 07:40:17",
@@ -336,24 +373,24 @@
           "FilePropertiesHash": "1380f51"
         },
         "T_App.xml": {
-          "ExportDate": "22/08/2022 17:32:42",
-          "SourceModified": "22/08/2022 17:32:42",
-          "FilePropertiesHash": "3127af7"
+          "ExportDate": "25/08/2022 18:19:34",
+          "SourceModified": "25/08/2022 18:19:34",
+          "FilePropertiesHash": "9527bf9"
         },
         "T_Langues.xml": {
-          "ExportDate": "22/08/2022 17:32:42",
-          "SourceModified": "22/08/2022 17:32:42",
-          "FilePropertiesHash": "2e6e578"
+          "ExportDate": "25/08/2022 18:19:34",
+          "SourceModified": "25/08/2022 18:19:34",
+          "FilePropertiesHash": "43fcf7e"
         },
         "T_ObjetChilds.xml": {
-          "ExportDate": "22/08/2022 17:32:42",
-          "SourceModified": "22/08/2022 17:32:42",
-          "FilePropertiesHash": "9dd2166"
+          "ExportDate": "25/08/2022 18:19:34",
+          "SourceModified": "25/08/2022 18:19:34",
+          "FilePropertiesHash": "f753ed6"
         },
         "T_ObjetChildTextes.xml": {
-          "ExportDate": "22/08/2022 17:32:42",
-          "SourceModified": "22/08/2022 17:32:42",
-          "FilePropertiesHash": "eb6e506"
+          "ExportDate": "25/08/2022 18:19:34",
+          "SourceModified": "25/08/2022 18:19:34",
+          "FilePropertiesHash": "00dc176"
         },
         "T_ObjetControles.xml": {
           "ExportDate": "07/08/2022 07:40:17",
@@ -361,9 +398,14 @@
           "FilePropertiesHash": "b7cbef0"
         },
         "T_Objets.xml": {
-          "ExportDate": "22/08/2022 17:32:42",
-          "SourceModified": "22/08/2022 17:32:42",
-          "FilePropertiesHash": "638eddd"
+          "ExportDate": "25/08/2022 18:19:35",
+          "SourceModified": "25/08/2022 18:19:35",
+          "FilePropertiesHash": "cc3f802"
+        },
+        "T_ObjetTypes.xml": {
+          "ExportDate": "25/08/2022 18:19:35",
+          "SourceModified": "25/08/2022 18:19:35",
+          "FilePropertiesHash": "cc39202"
         },
         "T_PropTextes.xml": {
           "ExportDate": "07/08/2022 07:40:17",
@@ -389,7 +431,7 @@
       "VB Project": {
         "vbe-project.json": {
           "Hash": "1932bef",
-          "ExportDate": "22/08/2022 17:32:42",
+          "ExportDate": "25/08/2022 18:19:34",
           "SourceModified": "01/08/2022 17:42:00",
           "FilePropertiesHash": "d6106a4"
         }
@@ -397,7 +439,7 @@
       "VBE References": {
         "vbe-references.json": {
           "Hash": "8b085f6",
-          "ExportDate": "22/08/2022 17:32:42",
+          "ExportDate": "25/08/2022 18:19:34",
           "SourceModified": "12/08/2022 23:10:44",
           "FilePropertiesHash": "8c4e744"
         }

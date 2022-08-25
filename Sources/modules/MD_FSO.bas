@@ -22,7 +22,7 @@ Option Explicit
 #End If
 
 '//::::::::::::::::::::::::::::::::::    VARIABLES      ::::::::::::::::::::::::::::::::::
-    Public Enum MessageFSO
+    Public Enum eMessageFSO
         Masquer = 0
         Afficher = 1
         Trouver = 2
@@ -30,9 +30,10 @@ Option Explicit
     End Enum
 
     Private Const CHUNK_SIZE As Long = 131072    ' (128K)
-    Private mFSO             As Object
-    Private mRep             As Boolean
-    Private mMsg             As String
+
+    Private mFSO As Object
+    Private mRep As Boolean
+    Private mMsg As String
 '//:::::::::::::::::::::::::::::::::: END VARIABLES ::::::::::::::::::::::::::::::::::::::
 
 '// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ PUBLIC SUB/FUNC   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -53,7 +54,7 @@ End Function
 '// - PathToFolder peut être un chemin 'C:\Folder1\Folder2' avec ou sans '\' a la fin.
 '// - Ou le chemlin et le fichier 'C:\Folder1\Folder2\file/txt'
 ' ----------------------------------------------------------------
-Public Function FSOFolderExist(ByVal PathToFolder As String, Optional Message As MessageFSO = 0) As Boolean
+Public Function FSOFolderExist(ByVal PathToFolder As String, Optional Message As eMessageFSO = 0) As Boolean
 
     Dim sTmp  As String
     Dim sPath As String
@@ -69,9 +70,9 @@ Public Function FSOFolderExist(ByVal PathToFolder As String, Optional Message As
 
     mMsg = vbCrLf & PathToFolder
     Select Case Message
-        Case MessageFSO.NonTrouver
+        Case eMessageFSO.NonTrouver
             If (Not mRep) Then MsgBox "Dossier non trouvé :" & mMsg, vbExclamation, "FSOFolderExist"
-        Case MessageFSO.Trouver
+        Case eMessageFSO.Trouver
             If (mRep) Then MsgBox "Ce dossier existe déjà :" & mMsg, vbExclamation, "FSOFolderExist"
     End Select
 
@@ -87,7 +88,7 @@ End Function
 '
 '=== Paramètres ===
 ' FullPathFileName (String) : Chemin complet et nom du fichier.
-' Message (MessageFSO)      : Affiche ou non le message d'erreur.
+' Message (eMessageFSO)      : Affiche ou non le message d'erreur.
 '==================
 ' Return Type:  Boolean, TRUE si le fichier existe.
 ' Author  : Laurent
@@ -95,7 +96,7 @@ End Function
 ' DateMod : 29/07/2022 - 13:41
 ' ----------------------------------------------------------------
 Public Function FSOFileExist(ByVal FullPathFileName As String, _
-                             Optional Message As MessageFSO = 0, _
+                             Optional Message As eMessageFSO = 0, _
                              Optional ExtFile As String) As Boolean
 
     Dim sPath   As String
@@ -128,9 +129,9 @@ Public Function FSOFileExist(ByVal FullPathFileName As String, _
 
     mMsg = vbCrLf & sPath
     Select Case Message
-        Case MessageFSO.NonTrouver
+        Case eMessageFSO.NonTrouver
             If (Not mRep) Then MsgBox "Fichier non trouvé :" & mMsg, vbExclamation, "FSOFileExist"
-        Case MessageFSO.Trouver
+        Case eMessageFSO.Trouver
             If (mRep) Then MsgBox "Ce fichier existe déjà :" & mMsg, vbExclamation, "FSOFileExist"
     End Select
 
@@ -143,7 +144,7 @@ End Function
 '// 'C:\Folder1\Folder2' retourne 'C:\Folder1\'.
 '// 'C:\Folder1\Folder2\file.txt' retourne 'C:\Folder1\Folder2\'
 ' ----------------------------------------------------------------
-Public Function FSOGetParentFolder(FullPath As String, Optional checkFolder As Boolean = True, Optional Message As MessageFSO = 0) As String
+Public Function FSOGetParentFolder(FullPath As String, Optional checkFolder As Boolean = True, Optional Message As eMessageFSO = 0) As String
 
     If (Len(FullPath) = 0) Then Exit Function
 
@@ -165,7 +166,7 @@ End Function
 '// Renvoie une chaîne contenant le nom de base du dernier composant,
 '// sans l'extension de fichier, dans un chemin d'accès.
 ' ----------------------------------------------------------------
-Public Function FSOGetFileName(FileSpec As String, Optional Message As MessageFSO = 0) As String
+Public Function FSOGetFileName(FileSpec As String, Optional Message As eMessageFSO = 0) As String
 
     If (Len(FileSpec) = 0) Then Exit Function
 
@@ -180,7 +181,7 @@ End Function
 '// Renvoie une chaîne contenant le nom de base du dernier composant,
 '// sans l'extension de fichier, dans un chemin d'accès.
 ' ----------------------------------------------------------------
-Public Function FSOGetBaseName(FullPathFileName As String, Optional Message As MessageFSO = 0) As String
+Public Function FSOGetBaseName(FullPathFileName As String, Optional Message As eMessageFSO = 0) As String
 
     If (Len(FullPathFileName) = 0) Then Exit Function
     If (mFSO Is Nothing) Then Set mFSO = GetFSO()
@@ -241,15 +242,15 @@ End Function
 '   - Returns true if successful
 ' ----------------------------------------------------------------
 Public Function FSOFileWrite(FullPathFileName As String, Contents As String, _
-                             Optional Message As MessageFSO = 0, _
+                             Optional Message As eMessageFSO = 0, _
                              Optional OverwritesFile As Boolean = False) As Boolean
 
     If (Len(FullPathFileName) = 0) Then Exit Function
 
     Dim FNum As Integer
-    Dim Msg  As MessageFSO
+    Dim Msg  As eMessageFSO
 
-    Msg = IIf(OverwritesFile, MessageFSO.Masquer, Message)
+    Msg = IIf(OverwritesFile, eMessageFSO.Masquer, Message)
     mRep = FSOFileExist(FullPathFileName, Msg)
     If (mRep And (Not OverwritesFile)) Then Exit Function
 
@@ -276,13 +277,13 @@ End Function
 '---------------------------------------------------------------------------------------
 
 Public Function ADOFileWrite(FullPathFileName As String, TextSource As String, _
-                             Optional Message As MessageFSO = 0, _
+                             Optional Message As eMessageFSO = 0, _
                              Optional OverwritesFile As Boolean = False) As Boolean
 
     If (Len(FullPathFileName) = 0) Then Exit Function
 
     Dim oStream As Object
-    Dim Msg     As MessageFSO
+    Dim Msg     As eMessageFSO
 
     Msg = IIf(OverwritesFile, Masquer, Message)
     mRep = FSOFileExist(FullPathFileName, Msg)
@@ -311,7 +312,7 @@ End Function
 ' ----------------------------------------------------------------
 'Returns the contents of file FName as a string
 ' ----------------------------------------------------------------
-Public Function FSOFileRead(FullPathFileName As String, Optional Message As MessageFSO = 0) As String    'Note: Non utilisé
+Public Function FSOFileRead(FullPathFileName As String, Optional Message As eMessageFSO = 0) As String    'Note: Non utilisé
 
     If (Len(FullPathFileName) = 0) Then Exit Function
     If Not FSOFileExist(FullPathFileName, Message) Then Exit Function
@@ -336,7 +337,7 @@ End Function
 '           : Read in UTF-8 encoding, removing a BOM if found at start of file.
 '---------------------------------------------------------------------------------------
 Public Function ADOFileRead(FullPathFileName As String, _
-                            Optional Message As MessageFSO = 0, _
+                            Optional Message As eMessageFSO = 0, _
                             Optional Charset As String = "utf-8") As String
 
     If (Len(FullPathFileName) = 0) Then Exit Function
@@ -375,13 +376,13 @@ End Function
 ' ----------------------------------------------------------------
 Public Function FSOFileAppend(FullPathFileName As String, Contents As String, _
                          Optional CreateIfNotExist As Boolean = False, _
-                         Optional Message As MessageFSO = 0) As Boolean                 'Note: Non utilisé
+                         Optional Message As eMessageFSO = 0) As Boolean                 'Note: Non utilisé
 
     If (Len(FullPathFileName) = 0) Then Exit Function
 
-    Dim Msg As MessageFSO
+    Dim Msg As eMessageFSO
 
-    Msg = IIf(CreateIfNotExist, MessageFSO.Masquer, Message)
+    Msg = IIf(CreateIfNotExist, eMessageFSO.Masquer, Message)
     
     mRep = FSOFileWrite(FullPathFileName, Contents, Msg)   '// Création du fichier.
 
@@ -402,7 +403,7 @@ End Function
 ' ----------------------------------------------------------------
 Public Function FSODeleteFile(FullPathFileName As String, _
                     Optional DelayInSeconds As Long = 0, _
-                    Optional Message As MessageFSO = 0) As Boolean
+                    Optional Message As eMessageFSO = 0) As Boolean
 On Error GoTo ERR_FSODeleteFile
 
     If (Len(FullPathFileName) = 0) Then Exit Function
@@ -462,7 +463,7 @@ End Function
 ' DateMod   : 31/07/2022 - 13:44(Laurent)
 ' Purpose   : Create folder `Path`. Silently do nothing if it already exists.
 '---------------------------------------------------------------------------------------
-Public Function FSOMkDirIfNotExist(NewPath As String, Optional Message As MessageFSO = 0) As Boolean
+Public Function FSOMkDirIfNotExist(NewPath As String, Optional Message As eMessageFSO = 0) As Boolean
 
     If (Len(NewPath) = 0) Then Exit Function
 
@@ -494,7 +495,7 @@ End Function
 ' Date      : 7/30/2020
 ' Purpose   : Get the last modified date on a folder or file with Unicode support.
 '---------------------------------------------------------------------------------------
-Public Function FSOGetLastModifiedDate(PathOrFile As String, Optional Message As MessageFSO = 0) As Date
+Public Function FSOGetLastModifiedDate(PathOrFile As String, Optional Message As eMessageFSO = 0) As Date
 
     If (Len(PathOrFile) = 0) Then Exit Function
 

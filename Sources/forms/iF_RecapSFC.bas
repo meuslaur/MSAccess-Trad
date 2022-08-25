@@ -21,13 +21,9 @@ Begin Form
     Top =4644
     Right =17880
     Bottom =7380
-    RecordSource ="SELECT T_ObjetChilds.Child_ID, T_ObjetChilds.ChildType, T_ObjetChilds.ChildNom, "
-        "T_ObjetChilds.IDObjet, T_ObjetChilds.Scanner, T_ObjetChilds.Nouveau, IIf(T_Objet"
-        "Childs.Scanner=False,\"=\",Null) AS Scan, IIf(T_ObjetChilds.Nouveau=True,\"=\",N"
-        "ull) AS Nouv FROM T_App INNER JOIN (T_Objets INNER JOIN T_ObjetChilds ON T_Objet"
-        "s.Objet_ID = T_ObjetChilds.IDObjet) ON T_App.App_ID = T_Objets.IDApp WHERE (((T_"
-        "App.App_ID)='{76B75FE7-935B-470D-A39C-CAE0E6205054}')) ORDER BY T_ObjetChilds.Ch"
-        "ildType, T_ObjetChilds.ChildNom; "
+    RecSrcDt = Begin
+        0x19bad8c7d6dfe540
+    End
     Caption =" "
     DatasheetFontName ="Calibri"
     AllowDatasheetView =0

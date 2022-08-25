@@ -7,6 +7,7 @@ Begin Form
     AllowDeletions = NotDefault
     DividingLines = NotDefault
     AllowAdditions = NotDefault
+    FilterOn = NotDefault
     ScrollBars =2
     ViewsAllowed =1
     PictureAlignment =2
@@ -15,12 +16,13 @@ Begin Form
     Width =7370
     DatasheetFontHeight =11
     ItemSuffix =11
-    Left =4320
-    Top =3408
-    Right =11688
-    Bottom =11820
+    Left =10032
+    Top =3216
+    Right =17400
+    Bottom =11952
+    Filter ="[IDType]=-32768"
     RecSrcDt = Begin
-        0x0c38e801b4dde540
+        0xb79d0573d7dfe540
     End
     RecordSource ="R_F_IgnoresSf"
     OnOpen ="[Event Procedure]"
@@ -129,7 +131,7 @@ Begin Form
                     BorderColor =8355711
                     ForeColor =6710886
                     Name ="lbl_Ignorer"
-                    Caption ="Ignorer"
+                    Caption ="Masquer"
                     Tag ="DetachedLabel"
                     GridlineStyleBottom =1
                     GridlineColor =10921638
@@ -157,8 +159,8 @@ Begin Form
                     TabIndex =2
                     BorderColor =10921638
                     ForeColor =4210752
-                    Name ="txtObjetType"
-                    ControlSource ="ObjetType"
+                    Name ="txtTypeNom"
+                    ControlSource ="TypeNom"
                     GridlineColor =10921638
                     ShowDatePicker =0
 

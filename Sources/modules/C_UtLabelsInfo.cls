@@ -25,7 +25,7 @@ Option Explicit
 '//::::::::::::::::::::::::::::::::::    VARIABLES      ::::::::::::::::::::::::::::::::::
     Private Const MAX_LENG As Long = 50     '// Nb Max d'itérations, reprend à 0 si atteint.
 
-    Private Enum T_Coul
+    Private Enum eCoul
         CoulA = 8630772     '// Début (Orange)
         CoulB = 6740479     '// Milieu (Bleu)
         CoulC = 9359785     '// Fin (Vert)
@@ -204,7 +204,7 @@ End Sub
 
 Private Sub CalculCoul(CurNbChar As Long)
 
-    Dim lCoul As T_Coul
+    Dim lCoul As eCoul
 
     Select Case CurNbChar
         Case Is > (MAX_LENG * 2)

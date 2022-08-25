@@ -176,7 +176,7 @@ On Error GoTo ERR_OpenMsBase
     bAutoEx = HasAutoexec(m_oMsBase)
     If bAutoEx Then
         MsgBox "La base utilise une macro 'Autoexec', Il est recommandé de la désactiver.", vbExclamation, "OpenMsBase"
-'        Exit Function 'TODO:  AVOIR
+'        Exit Function 'TODO:  Msg macro autoexec
     End If
 
     '// Vérifier si un form ouvert au démarrage...
@@ -343,13 +343,13 @@ End Function
 ' ----------------------------------------------------------------
 '// Vérifier si macro autoExec existe. (True si oui)
 ' ----------------------------------------------------------------
-Private Function HasAutoexec(ByRef MsBase As DAO.Database) As Boolean
+Private Function HasAutoexec(ByRef msBase As DAO.Database) As Boolean
     Dim oRst As DAO.Recordset
     Dim sSql As String
 
     sSql = "SELECT MSysObjects.Name FROM MSysObjects WHERE MSysObjects.Name = 'AutoExec' AND MSysObjects.Type = -32766"
 
-    Set oRst = MsBase.OpenRecordset(sSql)
+    Set oRst = msBase.OpenRecordset(sSql)
     If Not (oRst.EOF And oRst.BOF) Then HasAutoexec = True
 
     oRst.Close
@@ -360,10 +360,10 @@ End Function
 ' ----------------------------------------------------------------
 '// Retourne le nom du form lancer a l'ouverture de la base.
 ' ----------------------------------------------------------------
-Private Function GetStartUpForm(ByRef MsBase As DAO.Database) As String
+Private Function GetStartUpForm(ByRef msBase As DAO.Database) As String
     Dim oProp As DAO.Property
 
-    For Each oProp In MsBase.Properties
+    For Each oProp In msBase.Properties
         If oProp.Name = "StartUpForm" Then
             GetStartUpForm = oProp.value
             Exit For

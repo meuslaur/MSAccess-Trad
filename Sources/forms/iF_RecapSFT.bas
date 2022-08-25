@@ -21,6 +21,9 @@ Begin Form
     Top =7764
     Right =17868
     Bottom =12324
+    RecSrcDt = Begin
+        0xdd989e4877dfe540
+    End
     RecordSource ="SELECT T_ObjetChildTextes.Prop_ID, T_ObjetChildTextes.PropNom, T_ObjetChildTexte"
         "s.PropTexte, T_ObjetChildTextes.IDChild, T_ObjetChildTextes.ModPropTexte, T_Obje"
         "tChildTextes.Scanner, T_ObjetChildTextes.Nouveau, IIf(T_ObjetChildTextes.Scanner"

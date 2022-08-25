@@ -210,7 +210,7 @@ Begin Form
                     TabIndex =1
                     BorderColor =10921638
                     ForeColor =3484194
-                    ColumnInfo ="\"\";\"0000\";\"\";\"\";\"10\";\"100\""
+                    ColumnInfo ="\"\";\"\";\"\";\"\";\"10\";\"100\""
                     Name ="zlLangues"
                     RowSourceType ="Table/Query"
                     RowSource ="RL_Langues"
@@ -448,18 +448,11 @@ Option Explicit
     Private ScanTxt As C_TradScanText
 '//:::::::::::::::::::::::::::::::::: END VARIABLES ::::::::::::::::::::::::::::::::::::::
 
-
-'//==================================       PROP        ==================================
-'//====================================== END PROP =======================================
-
 '// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ PUBLIC SUB/FUNC   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 Private m_IDLang As Long
 '// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ END PUB. SUB/FUNC \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-
-
 '//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&     EVENTS        &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-
 Private Sub Form_Open(Cancel As Integer)
     Set ScanTxt = New C_TradScanText    '// Initialisation des classes.
 
@@ -484,11 +477,10 @@ Private Sub zlApps_AfterUpdate()
     Me.SF_TradOrg.Form.RecordSource = sSql
 
     vTmp = DLookup("[LangueCodeBase]", "T_App", "[App_ID]='" & Me.zlApps & "'")
-    If (IsNull(vTmp)) Then
-    'TODO: Err code langue.
-    Else
-        m_IDLang = CLng(vTmp)
-    End If
+
+    If (IsNull(vTmp)) Then vTmp = 0     'TODO: ERR ->code langue.
+
+    m_IDLang = CLng(vTmp)
 
     Me.img_Langue.Picture = AfficheFlag(m_IDLang)   '// MàJ de l'image du drapeau....
 
