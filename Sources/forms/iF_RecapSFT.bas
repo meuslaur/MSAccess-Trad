@@ -17,10 +17,13 @@ Begin Form
     Width =10204
     DatasheetFontHeight =11
     ItemSuffix =17
-    Left =2988
-    Top =8160
-    Right =13188
-    Bottom =12720
+    Left =7668
+    Top =7764
+    Right =17868
+    Bottom =12324
+    RecSrcDt = Begin
+        0xdd989e4877dfe540
+    End
     RecordSource ="SELECT T_ObjetChildTextes.Prop_ID, T_ObjetChildTextes.PropNom, T_ObjetChildTexte"
         "s.PropTexte, T_ObjetChildTextes.IDChild, T_ObjetChildTextes.ModPropTexte, T_Obje"
         "tChildTextes.Scanner, T_ObjetChildTextes.Nouveau, IIf(T_ObjetChildTextes.Scanner"
@@ -28,8 +31,8 @@ Begin Form
         "jetChildTextes.Nouveau=True,\"=\",Null) AS Nouv FROM T_App INNER JOIN (T_Objets "
         "INNER JOIN (T_ObjetChilds INNER JOIN T_ObjetChildTextes ON T_ObjetChilds.Child_I"
         "D = T_ObjetChildTextes.IDChild) ON T_Objets.Objet_ID = T_ObjetChilds.IDObjet) ON"
-        " T_App.App_ID = T_Objets.IDApp WHERE (((T_App.App_ID)='{D4877126-229C-4719-A3AA-"
-        "B0E5B291A011}')) ORDER BY T_ObjetChildTextes.Prop_ID; "
+        " T_App.App_ID = T_Objets.IDApp WHERE (((T_App.App_ID)='{76B75FE7-935B-470D-A39C-"
+        "CAE0E6205054}')) ORDER BY T_ObjetChildTextes.Prop_ID; "
     Caption =" "
     DatasheetFontName ="Calibri"
     AllowDatasheetView =0

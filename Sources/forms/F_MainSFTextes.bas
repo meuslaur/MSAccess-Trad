@@ -14,13 +14,13 @@ Begin Form
     PictureAlignment =2
     DatasheetGridlinesBehavior =3
     GridY =10
-    Width =10545
+    Width =10431
     DatasheetFontHeight =11
     ItemSuffix =14
-    Left =3612
-    Top =3084
-    Right =13908
-    Bottom =5364
+    Left =9660
+    Top =10770
+    Right =19830
+    Bottom =13740
     RecSrcDt = Begin
         0xb161d64291dbe540
     End
@@ -94,7 +94,7 @@ Begin Form
                     OverlapFlags =85
                     TextAlign =1
                     Left =963
-                    Width =1080
+                    Width =960
                     Height =315
                     BorderColor =8355711
                     Name ="lbl_PropNom"
@@ -103,7 +103,7 @@ Begin Form
                     GridlineStyleBottom =1
                     GridlineColor =10921638
                     LayoutCachedLeft =963
-                    LayoutCachedWidth =2043
+                    LayoutCachedWidth =1923
                     LayoutCachedHeight =315
                     ForeThemeColorIndex =3
                     ForeTint =100.0
@@ -113,7 +113,7 @@ Begin Form
                     OverlapFlags =85
                     TextAlign =1
                     Left =2720
-                    Width =678
+                    Width =600
                     Height =315
                     BorderColor =8355711
                     Name ="lbl_PropTexte"
@@ -122,7 +122,7 @@ Begin Form
                     GridlineStyleBottom =1
                     GridlineColor =10921638
                     LayoutCachedLeft =2720
-                    LayoutCachedWidth =3398
+                    LayoutCachedWidth =3320
                     LayoutCachedHeight =315
                     ForeThemeColorIndex =3
                     ForeTint =100.0
@@ -215,10 +215,10 @@ Begin Form
                 End
                 Begin TextBox
                     EnterKeyBehavior = NotDefault
-                    OverlapFlags =255
+                    OverlapFlags =95
                     IMESentenceMode =3
                     Left =2648
-                    Width =7893
+                    Width =7770
                     Height =585
                     ColumnWidth =3000
                     TabIndex =2
@@ -230,7 +230,7 @@ Begin Form
                     ShowDatePicker =0
 
                     LayoutCachedLeft =2648
-                    LayoutCachedWidth =10541
+                    LayoutCachedWidth =10418
                     LayoutCachedHeight =585
                 End
                 Begin TextBox
@@ -264,7 +264,8 @@ Begin Form
                     TextFontFamily =18
                     IMESentenceMode =3
                     Width =291
-                    Height =345
+                    Height =270
+                    FontSize =7
                     TabIndex =3
                     BorderColor =10921638
                     ForeColor =2366701
@@ -274,7 +275,7 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedWidth =291
-                    LayoutCachedHeight =345
+                    LayoutCachedHeight =270
                     ThemeFontIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -291,7 +292,8 @@ Begin Form
                     IMESentenceMode =3
                     Left =566
                     Width =291
-                    Height =345
+                    Height =270
+                    FontSize =7
                     TabIndex =4
                     BorderColor =10921638
                     Name ="Nouv"
@@ -301,7 +303,7 @@ Begin Form
 
                     LayoutCachedLeft =566
                     LayoutCachedWidth =857
-                    LayoutCachedHeight =345
+                    LayoutCachedHeight =270
                     ThemeFontIndex =-1
                     ForeThemeColorIndex =8
                     ForeTint =100.0
@@ -313,7 +315,7 @@ Begin Form
                     TabStop = NotDefault
                     AllowAutoCorrect = NotDefault
                     OldBorderStyle =0
-                    OverlapFlags =247
+                    OverlapFlags =87
                     TextFontCharSet =2
                     TextAlign =2
                     TextFontFamily =18
@@ -321,7 +323,8 @@ Begin Form
                     IMESentenceMode =3
                     Left =283
                     Width =292
-                    Height =345
+                    Height =270
+                    FontSize =7
                     TabIndex =5
                     BorderColor =10921638
                     Name ="txtNouv"
@@ -331,7 +334,7 @@ Begin Form
 
                     LayoutCachedLeft =283
                     LayoutCachedWidth =575
-                    LayoutCachedHeight =345
+                    LayoutCachedHeight =270
                     ThemeFontIndex =-1
                     ForeThemeColorIndex =9
                     ForeTint =100.0

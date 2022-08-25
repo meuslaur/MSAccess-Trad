@@ -5,6 +5,7 @@ Begin Form
     RecordSelectors = NotDefault
     MaxButton = NotDefault
     MinButton = NotDefault
+    AutoCenter = NotDefault
     NavigationButtons = NotDefault
     AllowDeletions = NotDefault
     DividingLines = NotDefault
@@ -19,14 +20,14 @@ Begin Form
     Width =8163
     DatasheetFontHeight =11
     ItemSuffix =16
-    Left =3588
-    Top =1224
-    Right =11496
-    Bottom =10884
+    Left =9300
+    Top =1032
+    Right =17460
+    Bottom =11220
     RecSrcDt = Begin
         0xc605179cabdde540
     End
-    Caption ="Sélection des objets à ignorés."
+    Caption ="Sélection des objets à masquer."
     OnOpen ="[Event Procedure]"
     DatasheetFontName ="Calibri"
     AllowDatasheetView =0
@@ -113,24 +114,27 @@ Begin Form
             Begin
                 Begin ComboBox
                     LimitToList = NotDefault
-                    OverlapFlags =87
+                    OverlapFlags =215
                     DecimalPlaces =0
                     IMESentenceMode =3
+                    ColumnCount =2
                     Left =6179
                     Top =566
-                    Width =1761
+                    Width =1749
                     Height =330
                     BorderColor =5855577
+                    ColumnInfo ="\"\";\"\";\"\";\"\";\"10\";\"40\""
                     Name ="zlObjetTypes"
                     RowSourceType ="Table/Query"
-                    ColumnWidths ="1701"
+                    RowSource ="RL_ObjetTypes"
+                    ColumnWidths ="0;1701"
                     AfterUpdate ="=FiltreSF()"
-                    OnGotFocus ="=OuvreZl()"
+                    OnMouseDown ="=OuvreZl()"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =6179
                     LayoutCachedTop =566
-                    LayoutCachedWidth =7940
+                    LayoutCachedWidth =7928
                     LayoutCachedHeight =896
                     BackThemeColorIndex =3
                     BackShade =90.0
@@ -146,22 +150,21 @@ Begin Form
                             TextAlign =2
                             Left =6179
                             Top =226
-                            Width =1770
-                            Height =342
-                            ForeColor =5066061
+                            Width =1752
+                            Height =348
                             Name ="lbl_zlObjetTypes"
-                            Caption ="Objets"
+                            Caption ="Objet types"
                             GridlineColor =10921638
                             LayoutCachedLeft =6179
                             LayoutCachedTop =226
-                            LayoutCachedWidth =7949
-                            LayoutCachedHeight =568
+                            LayoutCachedWidth =7931
+                            LayoutCachedHeight =574
                             BackThemeColorIndex =3
-                            BackShade =75.0
+                            BackShade =70.0
                             BorderThemeColorIndex =1
                             BorderTint =100.0
                             BorderShade =35.0
-                            ForeTint =70.0
+                            ForeTint =100.0
                         End
                     End
                 End
@@ -280,18 +283,12 @@ Private Sub Form_Open(Cancel As Integer)
         Exit Sub
     End If
 
-    Dim args() As String
-    Dim sSql As String
+    Dim frmArgs() As String
     
-    args = Split(Me.OpenArgs(), ";")
-    Me.txtIDApp = args(0)
-    Me.txtBase = args(1)
-
-    sSql = "SELECT DISTINCT T_Objets.ObjetType FROM T_Objets " & _
-           "WHERE (((T_Objets.IDApp)='" & args(0) & "')) " & _
-           "ORDER BY T_Objets.ObjetType;"
-    Me.zlObjetTypes.RowSource = sSql
-    Me.zlObjetTypes = Null
+    frmArgs = Split(Me.OpenArgs(), ";")
+    Me.txtIDApp = frmArgs(0)
+    Me.txtBase = frmArgs(1)
+    Me.zlObjetTypes = 0
 
 End Sub
 
@@ -305,7 +302,7 @@ End Function
 Private Function FiltreSF() As Boolean
     Dim sFiltreT As String
 
-    sFiltreT = IIf(IsNull(Me.zlObjetTypes), vbNullString, "[ObjetType]='" & Me.zlObjetTypes & "'")
+    sFiltreT = IIf(IsNull(Me.zlObjetTypes), vbNullString, "[IDType]=" & Me.zlObjetTypes)
 
     Me.sfObjets.Form.Filter = sFiltreT
     Me.sfObjets.Form.FilterOn = True

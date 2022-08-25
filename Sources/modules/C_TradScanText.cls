@@ -40,6 +40,7 @@ Option Explicit
         ID          As String
         Num         As Long         '// N° de l'app pour ID (nom des app souvent beaucoup trop long).
         Nom         As String
+        FullPath    As String
         IDLang      As Long
         ReScan      As Boolean      '// Indique base déjà scannée.
         Track       As Boolean      '// Voir si l'option 'Track Name AutoCorrect Info' de la base est activée.
@@ -47,13 +48,14 @@ Option Explicit
     Private thisApp As TApp
 
     Private Type TObjet
-        IDNet       As String      '// ID et Nom nettoyer des apostrophes (').
+        IDNet       As String       '// ID et Nom nettoyer des apostrophes (').
         Nom         As String
         NomNet      As String
         Type        As String
+        TypeNum     As eObjectType  '// Type suivant tabm MSysObjects
         Caption     As String
-        Nouveau     As Boolean     '// Indique nouvel objet à enregistrer.
-        TxtField    As Boolean     '// Indique si la table contient des champs txt ou memo.
+        Nouveau     As Boolean      '// Indique nouvel objet à enregistrer.
+        TxtField    As Boolean      '// Indique si la table contient des champs txt ou memo.
     End Type
     Private thisObj As TObjet
 
@@ -85,7 +87,7 @@ Option Explicit
 '    Private m_TableTxtObj   As DAO.Recordset    '// Table T_ObjetChildTextes pour les forms/Reports.
 '    Private m_TableTxtCtr   As DAO.Recordset    '// Table T_ObjetChildTextes pour les contrôles.
 
-    Private cLabels     As C_LabelsInfo     '// Affichage info texte et barre lors du scan.
+    Private cLabels     As C_UtLabelsInfo   '// Affichage info texte et barre lors du scan.
 
     Private mRep        As Boolean
     Private m_DateMaJ   As Date             '// Date heure de la créaton ou de la mise à jour.
@@ -105,7 +107,7 @@ Option Explicit
 Private Sub Class_Initialize()
 
     If (ObjetAcc Is Nothing) Then Set ObjetAcc = New C_ObjetsAccess
-    If (cLabels Is Nothing) Then Set cLabels = New C_LabelsInfo
+    If (cLabels Is Nothing) Then Set cLabels = New C_UtLabelsInfo
 
     Set m_oBDLocale = CodeDb()
 
@@ -163,7 +165,6 @@ Public Function IsNewApp() As eReponse
     Dim sRes As String
     Dim eRep As eReponse
     Dim vTmp As Variant
-    Dim lRep As Long
     Dim sMsg As String
 
     thisApp.ID = vbNullString
@@ -184,8 +185,8 @@ Public Function IsNewApp() As eReponse
             sMsg = "La base '" & ObjetAcc.BaseNom & "' est déjà enregistrée dans la table T_Objets." & vbCrLf & _
                    "Les données concernant cette base vont être mise à jour." & vbCrLf & _
                    "Voulez-vous continuer ?"
-            lRep = MsgBox(sMsg, vbExclamation + vbYesNo + vbDefaultButton2, "Base déjà enregistrée")
-            If (lRep = vbNo) Then
+            mRep = MsgBox(sMsg, vbExclamation + vbYesNo + vbDefaultButton2, "Base déjà enregistrée")
+            If (mRep = vbNo) Then
                 IsNewApp = Erreur
             Else
                 IsNewApp = Valide
@@ -258,14 +259,14 @@ On Error GoTo ERR_ScanObjetsApp
 
     Dim oBdExt  As DAO.Database
     Dim oRstSys As DAO.Recordset
-    Dim ObjType As E_ObjectType
     Dim sSql    As String
     Dim sBarTxt As String
 
     '// Extraire les objets de la table MsysObjects.
     sSql = "SELECT  MsysObjects.id, MsysObjects.Type, MsysObjects.Name " & _
            "FROM MsysObjects " & _
-           "WHERE (((MsysObjects.Type) = " & ObjetForm & " Or (MsysObjects.Type) = " & ObjetReport & " Or (MsysObjects.Type) = " & TableLocale & " Or (MsysObjects.Type) = " & TableLinked & ") " & _
+           "WHERE (((MsysObjects.Type) = " & ObjetForm & " Or (MsysObjects.Type) = " & ObjetReport & _
+           " Or (MsysObjects.Type) = " & TableLocale & " Or (MsysObjects.Type) = " & TableLinked & ") " & _
            "AND ((MsysObjects.Name) Not Like '~*' And (MsysObjects.Name) Not Like 'MSys*')  AND ((MsysObjects.Flags)>=0)) " & _
            "ORDER BY MsysObjects.Type, MsysObjects.Name;"
 
@@ -281,8 +282,11 @@ On Error GoTo ERR_ScanObjetsApp
     '// Reset.
     thisApp.ID = CurrentAppID
     thisApp.Nom = ObjetAcc.BaseNom
+    thisApp.FullPath = ObjetAcc.BaseFullPathName
     thisApp.Track = ObjetAcc.OptionTrackNameObjet
+
     m_DateMaJ = Now()       '// Defini la date à utiliser.
+
     thisObj.IDNet = vbNullString
     thisChild.IDNet = vbNullString
     thisTxt.ID = vbNullString
@@ -312,21 +316,21 @@ On Error GoTo ERR_ScanObjetsApp
 
                 thisObj.Nom = .Fields("Name").value
                 thisObj.NomNet = MD_Utils.CheckApostrophe(thisObj.Nom)
-                ObjType = .Fields("Type").value
-                thisObj.Type = GetObjectTypeEnClair(ObjType)    '// Traduire en clair le Type...
+                thisObj.TypeNum = .Fields("Type").value
+                thisObj.Type = GetObjectTypeEnClair(thisObj.TypeNum)    '// Traduire en clair le Type...
 
                 sBarTxt = thisObj.Type & " " & thisObj.Nom
                 cLabels.UpdateBarre sBarTxt '// Affiche l'état d'avancement du scan...
                 DoEvents
 
-                If (ObjType = ObjetForm Or ObjType = ObjetReport) Then
+                If (thisObj.TypeNum = ObjetForm Or thisObj.TypeNum = ObjetReport) Then
                     '--------------------------
-                    mRep = ScanObjet(ObjType)           '// Enregistre les info forms/reports...
+                    mRep = ScanObjet(thisObj.TypeNum)   '// Enregistre les info forms/reports...
                     '--------------------------
                     If (Not mRep) Then Exit Do
                 End If
 
-                If (ObjType = TableLocale Or ObjType = TableLinked) Then
+                If (thisObj.TypeNum = TableLocale Or thisObj.TypeNum = TableLinked) Then
                     '--------------------------
                     mRep = ScanTables()                 '// Enregistre les info Tables...
                     '--------------------------
@@ -409,8 +413,8 @@ Public Function GetIDLangBase(Optional AppID As String = vbNullString) As Long
 End Function
 
 '// Renvoi l'instance C_LabelsInfo utiliser dans cette classe.
-Public Function GetInstanceLabelsBar() As C_LabelsInfo
-    Set GetInstanceLabelsBar = cLabels
+Public Function GetInstanceLabelsBar() As C_UtLabelsInfo
+   Set GetInstanceLabelsBar = cLabels
 End Function
 '// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ END PUB. SUB/FUNC \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
@@ -434,7 +438,7 @@ End Function
 ' Date    : 23/06/2022 - 11:30
 ' DateMod : 28/06/2022 - 18:38
 ' ----------------------------------------------------------------
-Private Function ScanObjet(ObjType As E_ObjectType) As Boolean
+Private Function ScanObjet(ObjType As eObjectType) As Boolean
 On Error GoTo ERR_ScanObjet
 
     Dim oObjet  As Object
@@ -452,7 +456,7 @@ On Error GoTo ERR_ScanObjet
 
     If (mRep) Then
 
-        cLabels.SetLengthBarre ChrW(199), oObjet.Controls.count, LabelNum2 '// Initialise la taille de la barre...
+        cLabels.SetLengthBarre ChrW$(199), oObjet.Controls.count, LabelNum2 '// Initialise la taille de la barre...
 
         '// On boucle sur les contrôles de l'objet.
         For Each oCtr In oObjet.Controls
@@ -462,7 +466,7 @@ On Error GoTo ERR_ScanObjet
                 thisChild.NomNet = MD_Utils.CheckApostrophe(thisChild.Nom)
                 thisChild.Type = TypeName(oCtr)
                 '// Extraire le parent du control (page, label, etc.).
-                thisChild.Parent = IIf((oCtr.Parent.Name <> thisObj.Nom), TypeName(oCtr.Parent) & "." & oCtr.Parent.Name, vbNullString)
+                thisChild.Parent = IIf((oCtr.Parent.Name <> thisObj.Nom), TypeName(oCtr.Parent) & "!" & oCtr.Parent.Name, vbNullString)
 
 '                sBarTxt = thisChild.Type & " " & thisChild.Nom
                 cLabels.UpdateBarre vbNullString        '// Affiche l'état d'avancement du scan...
@@ -514,7 +518,7 @@ On Error GoTo ERR_ScanTables
 
     sRep = ObjetAcc.CheckTdfLinked(thisObj.Nom)     '// Vérifier liaison si tbl liée...
     If (sRep <> vbNullString) Then
-        SauveTexte thisObj.Type & "." & thisObj.NomNet, sRep, 1     '// Stock le texte...
+        SauveTexte thisObj.Type & "!" & thisObj.NomNet, sRep, 1     '// Stock le texte...
         ScanTables = True
         Exit Function 'TODO: Liaison rompue, on continu quand même sur les autres tables.
     End If
@@ -611,7 +615,7 @@ On Error GoTo ERR_MajObjet
     mRep = MajTableObjetProp()              '// ...
     If (mRep = False) Then Exit Function
 
-    thisTxt.ID = thisObj.IDNet & "." & PROP_CAP
+    thisTxt.ID = thisObj.IDNet & "!" & PROP_CAP
     mRep = MajTableObjetTexte              '// ...
 
 SORTIE_MajObjet:
@@ -645,8 +649,8 @@ Private Function MajTableObjet() As Boolean
         thisChild.Nouveau = True
 
         sSql = "INSERT INTO T_Objets " & _
-                "(Objet_ID, ObjetNom, ObjetType, IDApp, Scanner, Nouveau) " & _
-                "VALUES ('" & thisObj.IDNet & "', '" & thisObj.NomNet & "', '" & thisObj.Type & "', '" & _
+                "(Objet_ID, ObjetNom, IDType, IDApp, Scanner, Nouveau) " & _
+                "VALUES ('" & thisObj.IDNet & "', '" & thisObj.NomNet & "', '" & thisObj.TypeNum & "', '" & _
                 thisApp.ID & "', " & CInt(True) & ", " & CInt(True) & ");"
 
     Else                        '// Déjà enregistrer..
@@ -909,7 +913,7 @@ Private Function MajTableChildPropTexte(PropNom As String, PropTexte As String) 
     Dim bMod    As Boolean      '// 1 modifier 0 non modifier.
     Dim eMod    As eReponse     '// Retour function.
 
-    thisTxt.ID = thisChild.IDNet & "." & PropNom
+    thisTxt.ID = thisChild.IDNet & "!" & PropNom
 
     If Len(thisTxt.ID) > 100 Then   'TODO: Test nom trop long
         SauveTexte "Nom trop long :", thisChild.IDNet, 2    '// Stock le texte...
@@ -1060,7 +1064,7 @@ End Function
 ' Date    : 23/06/2022 - 15:35
 ' DateMod :
 ' ----------------------------------------------------------------
-Private Function GetObjet(ObjetNom As String, ObjetType As E_ObjectType) As Object
+Private Function GetObjet(ObjetNom As String, ObjetType As eObjectType) As Object
 On Error GoTo ERR_GetObjet
 
     Select Case ObjetType
@@ -1083,7 +1087,7 @@ ERR_GetObjet:
     Resume SORTIE_GetObjet
 End Function
 
-Private Sub CloseObjet(ObjetNom As String, ObjetType As E_ObjectType, Optional Methode As AcCloseSave = acSaveNo)
+Private Sub CloseObjet(ObjetNom As String, ObjetType As eObjectType, Optional Methode As AcCloseSave = acSaveNo)
 On Error GoTo ERR_CloseObjet
 
     Select Case ObjetType
@@ -1155,8 +1159,8 @@ Private Function MaJAppID() As Boolean
     If (mRep = False) Then Exit Function    '// Erreur.
 
     '// MàJ de la table T_App.
-    sSql = "INSERT INTO T_App ( App_ID, AppNom, LangueCodeBase ) " & _
-           "VALUES ('" & thisApp.ID & "', '" & thisApp.Nom & "', " & thisApp.IDLang & ");"
+    sSql = "INSERT INTO T_App ( App_ID, AppNom, AppFullPath, LangueCodeBase ) " & _
+           "VALUES ('" & thisApp.ID & "', '" & thisApp.Nom & "', '" & thisApp.FullPath & "', " & thisApp.IDLang & ");"
     ExecuteQdfTemp sSql
 
     vTmp = DLookup("[Num]", "T_App", "[App_ID]=" & thisApp.ID)      '// Extraire N° de l'app.
@@ -1289,7 +1293,6 @@ End Sub
 Private Function CheckTxtIgnore(TxtCheck As String) As String
     Dim sCap    As String
     Dim sCapTmp As String
-    Dim sTxt    As String
 
     sCapTmp = Replace(TxtCheck, vbNewLine, vbNullString)    '// Supp les retourne ligne.
     sCapTmp = Trim$(sCapTmp)
@@ -1304,12 +1307,12 @@ Private Function CheckTxtIgnore(TxtCheck As String) As String
             If (mObjNomTmp <> thisObj.Nom) Then
 
             '// Entete si changement d'objet.
-                SauveTexte thisObj.Type & "." & thisObj.NomNet, vbNullString, 3     '// Stock le texte...
+                SauveTexte thisObj.Type & "!" & thisObj.NomNet, vbNullString, 3     '// Stock le texte...
                 mObjNomTmp = thisObj.Nom    '// Changement d'objet seulement ici.
             End If
 
             '// Cellules
-            SauveTexte thisChild.Type & "." & thisChild.NomNet, sCapTmp, 4          '// Stock le texte...
+            SauveTexte thisChild.Type & "!" & thisChild.NomNet, sCapTmp, 4          '// Stock le texte...
 
         Else
             sCap = TxtCheck                             '// Passe les filtres retroune le texte d'origine.

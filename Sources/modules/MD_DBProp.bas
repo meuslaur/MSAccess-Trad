@@ -154,7 +154,7 @@ On Error GoTo ERR_ExportProps
 
     If (Len(ExportFolder) = 0) Then Exit Function
 
-    Dim oBd         As DAO.Database
+    Dim oBD         As DAO.Database
     Dim oFSO        As Object
 
     Dim TxtFile     As Variant  '// FSO TextFile.
@@ -164,8 +164,8 @@ On Error GoTo ERR_ExportProps
     Dim sExpPath    As String   '// Dossier d'exportation.
     Dim sFile       As String
 
-    sExpPath = IIf(Right$(ExportFolder, 1) = "\", ExportFolder, ExportFolder & "\")
-    sExpPath = IIf(Left$(ExportFolder, 1) = "\", sExpPath, "\" & sExpPath)
+    sExpPath = IIf(right$(ExportFolder, 1) = "\", ExportFolder, ExportFolder & "\")
+    sExpPath = IIf(left$(ExportFolder, 1) = "\", sExpPath, "\" & sExpPath)
 
     sPath = CurrentProject.Path
     sExpPath = sPath & sExpPath
@@ -175,31 +175,31 @@ On Error GoTo ERR_ExportProps
     sFile = sExpPath & "Properties.cvs"
 
     Set oFSO = MD_FSO.GetFSO
-    Set oBd = IIf(BDSelect Is Nothing, CodeDb, BDSelect)
+    Set oBD = IIf(BDSelect Is Nothing, CodeDb, BDSelect)
 
     Set TxtFile = oFSO.CreateTextFile(sFile, True)
     TxtFile.WriteLine Join(Array("Index", "Nom", "Valeur"), vbTab)
 
     If (OnlyPropUser = False) Then
-        For iProp = 0 To oBd.Properties.count - 1
-            Set Prop = oBd.Properties(iProp)
+        For iProp = 0 To oBD.Properties.count - 1
+            Set Prop = oBD.Properties(iProp)
             TxtFile.WriteLine Join(Array(iProp, Prop.Name, Prop.value), vbTab)
         Next
     End If
 
-    For Each Prop In oBd.Containers("Databases").Documents("UserDefined").Properties
+    For Each Prop In oBD.Containers("Databases").Documents("UserDefined").Properties
         TxtFile.WriteLine Join(Array(iProp, Prop.Name, Prop.value), vbTab)        '// commence Item 8
     Next
 
     TxtFile.Close
-    oBd.Close
+    oBD.Close
 
     ExportProps = True
 
 SORTIE_ExportProps:
     Set TxtFile = Nothing
     Set oFSO = Nothing
-    Set oBd = Nothing
+    Set oBD = Nothing
     Exit Function
 
 ERR_ExportProps:

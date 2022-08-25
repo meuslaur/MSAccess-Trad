@@ -16,13 +16,13 @@ Option Explicit
 'Declare PtrSafe Function CoCreateGuid Lib "ole32.dll" (Guid As GUID_TYPE) As Long
 '//::::::::::::::::::::::::::::::::::    VARIABLES      ::::::::::::::::::::::::::::::::::
 '// FileDialog type pour la fonction OuvreBoite
-    Public Enum T_FileDialogType
+    Public Enum eFileDialogType
         FD_TypeFilePicker = 3
         FD_TypeFolderPicker = 4
         FD_TypeFileOpen = 1
         FD_TypeFileSaveAs = 2
     End Enum
-    Public Enum T_FileDialogView
+    Public Enum eFileDialogView
         FD_ViewDetails = 2
         FD_ViewLargeIcons = 6
         FD_ViewList = 1
@@ -35,7 +35,9 @@ Option Explicit
     End Enum
 
     '// Objets Types. (type table MsysObjets)
-    Public Enum E_ObjectType
+    Public Enum eObjectType
+        Tous = 0
+        Masquer = 99
         TableLocale = 1
         TableOdbc = 4
         TableLinked = 6
@@ -94,7 +96,7 @@ Public Function OuvreBoite(Optional sFltDes As String = "Tous fichiers", _
                            Optional sFltExt As String = "*.*", _
                            Optional sTitre As String, _
                            Optional sInitialPath As String, _
-                           Optional eDialogType As T_FileDialogType = FD_TypeFilePicker) As String
+                           Optional eDialogType As eFileDialogType = FD_TypeFilePicker) As String
 On Error GoTo ERR_OuvreBoite
 
     Dim oFd             As Object
@@ -269,10 +271,10 @@ End Function
 
 
 '// Retourne en clair le type de l'objet.
-Public Function GetObjectTypeEnClair(eType As E_ObjectType) As String
+Public Function GetObjectTypeEnClair(eTypeObj As eObjectType) As String
     Dim sType As String
 
-    Select Case eType
+    Select Case eTypeObj
         Case TableLocale
             sType = C_TABLE_LOCALE
 '        Case TableOdbc
@@ -333,7 +335,7 @@ On Error GoTo ERR_CreateGuid
     Dim sSql    As String
     Dim vGuid() As Byte
     Dim sGuid   As String
-    Dim lPos    As Long
+    Dim lpos    As Long
 
     Set qdf = CurrentDb.CreateQueryDef("")
 
@@ -349,8 +351,8 @@ On Error GoTo ERR_CreateGuid
 
     vGuid = DFirst("[Guid]", "aTg")
     sGuid = Application.StringFromGUID(vGuid)
-    lPos = InStr(2, sGuid, "{")
-    sGuid = Mid$(sGuid, lPos, (Len(sGuid) - lPos))
+    lpos = InStr(2, sGuid, "{")
+    sGuid = Mid$(sGuid, lpos, (Len(sGuid) - lpos))
     CreateGuid = sGuid
 
     sSql = "DELETE aTg.* FROM aTg;"

@@ -20,10 +20,10 @@ Begin Form
     Width =11338
     DatasheetFontHeight =11
     ItemSuffix =67
-    Left =2028
-    Top =1104
-    Right =13368
-    Bottom =12264
+    Left =2364
+    Top =540
+    Right =13704
+    Bottom =11700
     DatasheetGridlinesColor =15132391
     RecSrcDt = Begin
         0x2562231676dbe540
@@ -564,6 +564,7 @@ Begin Form
                     WebImagePaddingTop =3
                     WebImagePaddingRight =2
                     WebImagePaddingBottom =2
+                    Overlaps =1
                 End
                 Begin Image
                     Left =4138
@@ -740,13 +741,13 @@ Option Explicit
 '//::::::::::::::::::::::::::::::::::    VARIABLES      ::::::::::::::::::::::::::::::::::
     Private mFrmInfoIsOpen As Boolean
 
-    Private Enum E_FiltreSf
+    Private Enum eFiltreSf
         Aucun = 0
         Objet = 1
         Texte = 2
     End Enum
-    Private thisFiltre  As E_FiltreSf
-    Private mFltPrec    As E_FiltreSf   '// Filtre précedent sur les SF.
+    Private thisFiltre  As eFiltreSf
+    Private mFltPrec    As eFiltreSf    '// Filtre précedent sur les SF.
 '//:::::::::::::::::::::::::::::::::: END VARIABLES ::::::::::::::::::::::::::::::::::::::
 
 ' ----------------------------------------------------------------
@@ -761,16 +762,18 @@ On Error GoTo ERR_Form_Open
         Exit Sub
     End If
 
-    Dim args() As String
+    Dim Args() As String
     Dim sSql   As String
 
-    args = Split(Me.OpenArgs(), ";")
+    Args = Split(Me.OpenArgs(), ";")
 
-    sSql = "SELECT T_Objets.Objet_ID, T_Objets.ObjetType, T_Objets.ObjetNom, T_Objets.Scanner, T_Objets.Nouveau, " & _
-           "IIf(Scanner=False,""="",Null) AS Scan, IIf(Nouveau=True,""="",Null) AS Nouv " & _
-           "FROM T_Objets " & _
-           "WHERE ((T_Objets.IDApp)='" & args(0) & "') " & _
-           "ORDER BY T_Objets.ObjetType, T_Objets.ObjetNom;"
+    sSql = "SELECT T_Objets.Objet_ID, T_ObjetTypes.TypeNom, T_Objets.ObjetNom, T_Objets.Scanner, T_Objets.Nouveau, " & _
+           "IIf(Scanner=False,""="",Null) AS Scan, " & _
+           "IIf(Nouveau=True,""="",Null) AS Nouv " & _
+           "FROM T_ObjetTypes " & _
+           "INNER JOIN T_Objets ON (T_ObjetTypes.Type_ID = T_Objets.IDType) AND (T_ObjetTypes.Type_ID = T_Objets.IDType) " & _
+           "WHERE (((T_Objets.IDApp)='" & Args(0) & "')) " & _
+           "ORDER BY T_ObjetTypes.TypeNom, T_Objets.ObjetNom;"
 
     Me.sfO.Form.RecordSource = sSql
 
@@ -780,7 +783,7 @@ On Error GoTo ERR_Form_Open
            "IIf(T_ObjetChilds.Nouveau=True,""="",Null) AS Nouv " & _
            "FROM T_App INNER JOIN (T_Objets INNER JOIN T_ObjetChilds " & _
            "ON T_Objets.Objet_ID = T_ObjetChilds.IDObjet) ON T_App.App_ID = T_Objets.IDApp " & _
-           "WHERE (((T_App.App_ID)='" & args(0) & "')) " & _
+           "WHERE (((T_App.App_ID)='" & Args(0) & "')) " & _
            "ORDER BY T_ObjetChilds.ChildType, T_ObjetChilds.ChildNom;"
 
     Me.sfC.Form.RecordSource = sSql
@@ -794,7 +797,7 @@ On Error GoTo ERR_Form_Open
            "ON T_ObjetChilds.Child_ID = T_ObjetChildTextes.IDChild) " & _
            "ON T_Objets.Objet_ID = T_ObjetChilds.IDObjet) " & _
            "ON T_App.App_ID = T_Objets.IDApp " & _
-           "WHERE (((T_App.App_ID)='" & args(0) & "')) " & _
+           "WHERE (((T_App.App_ID)='" & Args(0) & "')) " & _
            "ORDER BY T_ObjetChildTextes.Prop_ID;"
 
     Me.sfT.Form.RecordSource = sSql
@@ -832,7 +835,7 @@ Private Sub grpChk_AfterUpdate()
             sFiltre = "Scanner=False"
 
         Case 2      '// Modif
-            Me.sfO.Form.Filter = "ObjetType='X'"
+            Me.sfO.Form.Filter = "Objet_ID='X'"
             Me.sfO.Form.FilterOn = True
             Me.sfC.Form.Filter = "Child_ID='X'"
             Me.sfC.Form.FilterOn = True
@@ -877,14 +880,14 @@ End Sub
 ' ----------------------------------------------------------------
 '// Utilisée par les sf iF_RecapSFO et iF_RecapSFT, Filtre sur dbClick.
 ' ----------------------------------------------------------------
-Public Function FiltreDbClick(ValFiltre As String, FiltreObjet As Boolean) As Boolean
+Public Sub FiltreDbClick(ValFiltre As String, FiltreObjet As Boolean)
 
     If (Me.grpChk <> 4) Then Me.grpChk = 4
 
     '// Si 2ème dbClick sur le même filtre on reset les filtres.
     If ((mFltPrec = Texte) Or ((mFltPrec = Objet) And (FiltreObjet = True))) Then
         ResetFiltres
-        Exit Function
+        Exit Sub
     End If
 
     DoCmd.Echo False
@@ -918,4 +921,4 @@ Public Function FiltreDbClick(ValFiltre As String, FiltreObjet As Boolean) As Bo
     mFltPrec = thisFiltre
     DoCmd.Echo True
 
-End Function
+End Sub

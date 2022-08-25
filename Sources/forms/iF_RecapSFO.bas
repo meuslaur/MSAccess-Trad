@@ -16,14 +16,13 @@ Begin Form
     Width =10204
     DatasheetFontHeight =11
     ItemSuffix =12
-    Left =2988
-    Top =2772
-    Right =13188
-    Bottom =4500
-    RecordSource ="SELECT T_Objets.Objet_ID, T_Objets.ObjetType, T_Objets.ObjetNom, T_Objets.Scanne"
-        "r, T_Objets.Nouveau, IIf(Scanner=False,\"=\",Null) AS Scan, IIf(Nouveau=True,\"="
-        "\",Null) AS Nouv FROM T_Objets WHERE ((T_Objets.IDApp)='{D4877126-229C-4719-A3AA"
-        "-B0E5B291A011}') ORDER BY T_Objets.ObjetType, T_Objets.ObjetNom; "
+    Left =2520
+    Top =828
+    Right =12720
+    Bottom =2556
+    RecSrcDt = Begin
+        0x592d12c7d6dfe540
+    End
     Caption =" "
     DatasheetFontName ="Calibri"
     AllowDatasheetView =0
@@ -318,7 +317,7 @@ Begin Form
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="ObjetType"
-                    ControlSource ="ObjetType"
+                    ControlSource ="TypeNom"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =569

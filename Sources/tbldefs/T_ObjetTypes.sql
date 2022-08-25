@@ -1,0 +1,4 @@
+﻿CREATE TABLE [T_ObjetTypes] (
+  [Type_ID] LONG  CONSTRAINT [PrimaryKey] PRIMARY KEY UNIQUE NOT NULL,
+  [TypeNom] VARCHAR (20)
+)

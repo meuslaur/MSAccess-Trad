@@ -13,18 +13,17 @@ Begin Form
     PictureAlignment =2
     DatasheetGridlinesBehavior =3
     GridY =10
-    Width =10262
+    Width =10160
     DatasheetFontHeight =11
-    Left =6384
-    Top =2616
-    Right =16644
-    Bottom =7344
+    Left =3888
+    Top =2220
+    Right =14304
+    Bottom =6924
     RecSrcDt = Begin
         0x6965100493dde540
     End
     RecordSource ="R_F_MainSFControles"
     Caption =" "
-    OnCurrent ="[Event Procedure]"
     DatasheetFontName ="Calibri"
     AllowDatasheetView =0
     FilterOnLoad =0
@@ -82,7 +81,7 @@ Begin Form
                 Begin Label
                     OverlapFlags =85
                     Left =680
-                    Width =1704
+                    Width =1425
                     Height =315
                     BorderColor =8355711
                     Name ="lbl_ControlParentName"
@@ -91,7 +90,7 @@ Begin Form
                     GridlineStyleBottom =1
                     GridlineColor =10921638
                     LayoutCachedLeft =680
-                    LayoutCachedWidth =2384
+                    LayoutCachedWidth =2105
                     LayoutCachedHeight =315
                     ForeThemeColorIndex =3
                     ForeTint =100.0
@@ -100,7 +99,7 @@ Begin Form
                 Begin Label
                     OverlapFlags =85
                     Left =4932
-                    Width =1080
+                    Width =525
                     Height =315
                     BorderColor =8355711
                     Name ="lbl_Child_ID"
@@ -109,7 +108,7 @@ Begin Form
                     GridlineStyleBottom =1
                     GridlineColor =10921638
                     LayoutCachedLeft =4932
-                    LayoutCachedWidth =6012
+                    LayoutCachedWidth =5457
                     LayoutCachedHeight =315
                     ForeThemeColorIndex =3
                     ForeTint =100.0
@@ -118,7 +117,7 @@ Begin Form
                 Begin Label
                     OverlapFlags =85
                     Left =3117
-                    Width =1080
+                    Width =525
                     Height =315
                     BorderColor =8355711
                     Name ="lbl_ChildType"
@@ -127,7 +126,7 @@ Begin Form
                     GridlineStyleBottom =1
                     GridlineColor =10921638
                     LayoutCachedLeft =3117
-                    LayoutCachedWidth =4197
+                    LayoutCachedWidth =3642
                     LayoutCachedHeight =315
                     ForeThemeColorIndex =3
                     ForeTint =100.0
@@ -221,7 +220,7 @@ Begin Form
                     OverlapFlags =255
                     IMESentenceMode =3
                     Left =4817
-                    Width =5445
+                    Width =5343
                     Height =315
                     TabIndex =2
                     BorderColor =10921638
@@ -232,7 +231,7 @@ Begin Form
                     ShowDatePicker =0
 
                     LayoutCachedLeft =4817
-                    LayoutCachedWidth =10262
+                    LayoutCachedWidth =10160
                     LayoutCachedHeight =315
                     BackThemeColorIndex =9
                     BackTint =30.0
@@ -244,8 +243,8 @@ Begin Form
                     AllowAutoCorrect = NotDefault
                     OverlapFlags =247
                     IMESentenceMode =3
-                    Left =6235
-                    Width =1590
+                    Left =5442
+                    Width =906
                     Height =315
                     TabIndex =3
                     BorderColor =10921638
@@ -254,8 +253,8 @@ Begin Form
                     ControlSource ="IDObjet"
                     GridlineColor =10921638
 
-                    LayoutCachedLeft =6235
-                    LayoutCachedWidth =7825
+                    LayoutCachedLeft =5442
+                    LayoutCachedWidth =6348
                     LayoutCachedHeight =315
                 End
                 Begin TextBox
@@ -268,7 +267,8 @@ Begin Form
                     TextFontFamily =18
                     IMESentenceMode =3
                     Width =291
-                    Height =315
+                    Height =270
+                    FontSize =7
                     TabIndex =4
                     BorderColor =10921638
                     ForeColor =2366701
@@ -278,7 +278,7 @@ Begin Form
                     GridlineColor =10921638
 
                     LayoutCachedWidth =291
-                    LayoutCachedHeight =315
+                    LayoutCachedHeight =270
                     ThemeFontIndex =-1
                     ForeThemeColorIndex =-1
                     ForeTint =100.0
@@ -294,7 +294,8 @@ Begin Form
                     IMESentenceMode =3
                     Left =283
                     Width =291
-                    Height =315
+                    Height =270
+                    FontSize =7
                     TabIndex =5
                     BorderColor =10921638
                     Name ="Nouv"
@@ -304,7 +305,7 @@ Begin Form
 
                     LayoutCachedLeft =283
                     LayoutCachedWidth =574
-                    LayoutCachedHeight =315
+                    LayoutCachedHeight =270
                     ThemeFontIndex =-1
                     ForeThemeColorIndex =9
                     ForeTint =100.0
@@ -316,7 +317,7 @@ Begin Form
                     AllowAutoCorrect = NotDefault
                     OverlapFlags =247
                     IMESentenceMode =3
-                    Left =7993
+                    Left =6689
                     Width =1116
                     Height =315
                     TabIndex =6
@@ -327,8 +328,8 @@ Begin Form
                     GridlineColor =10921638
                     ShowDatePicker =0
 
-                    LayoutCachedLeft =7993
-                    LayoutCachedWidth =9109
+                    LayoutCachedLeft =6689
+                    LayoutCachedWidth =7805
                     LayoutCachedHeight =315
                 End
             End
@@ -342,25 +343,3 @@ Begin Form
         End
     End
 End
-CodeBehindForm
-Attribute VB_GlobalNameSpace = False
-Attribute VB_Creatable = True
-Attribute VB_PredeclaredId = True
-Attribute VB_Exposed = False
-'@Folder("Form")
-Option Compare Database
-Option Explicit
-
-'// Affiche info sur l'enfant en cours dans le form parent (F_Main).
-Private Sub Form_Current()
-    If (Me.ChildType = C_FORM Or Me.ChildType = C_REPORT) Then Exit Sub
-
-    Dim sNom As String
-    Dim lPos As Long
-
-    lPos = InStrRev(Me.Child_ID, ".")
-    sNom = Right$(Me.Child_ID, Len(Me.Child_ID) - lPos)
-
-    Me.Parent.MajControlInfo Nz(Me.ControlParentName, vbNullString), Me.ChildType, sNom
-
-End Sub
