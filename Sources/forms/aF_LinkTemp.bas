@@ -17,13 +17,12 @@ Begin Form
     GridY =10
     Width =10204
     DatasheetFontHeight =11
-    ItemSuffix =376
+    ItemSuffix =588
     Left =7536
     Top =7644
     Right =17988
     Bottom =11484
-    RecordSource ="SELECT aT_LinkTemp.[ErrorDescription], aT_LinkTemp.[Hyperlink] FROM aT_LinkTemp;"
-        " "
+    RecordSource ="SELECT aT_LinkTemp.[TreeViewName], aT_LinkTemp.[GUIDTreeView] FROM aT_LinkTemp; "
     Caption ="a_tmp"
     DatasheetFontName ="Calibri"
     AllowFormView =0
@@ -99,8 +98,8 @@ Begin Form
                     Height =300
                     BorderColor =10921638
                     ForeColor =4210752
-                    Name ="ErrorDescription"
-                    ControlSource ="ErrorDescription"
+                    Name ="TreeViewName"
+                    ControlSource ="TreeViewName"
                     GridlineColor =10921638
 
                     LayoutCachedWidth =200
@@ -115,8 +114,8 @@ Begin Form
                     TabIndex =1
                     BorderColor =10921638
                     ForeColor =4210752
-                    Name ="Hyperlink"
-                    ControlSource ="Hyperlink"
+                    Name ="GUIDTreeView"
+                    ControlSource ="GUIDTreeView"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =203

@@ -509,22 +509,19 @@ On Error GoTo ERR_ScanTables
 
     Dim oRstTab As DAO.Recordset
     Dim oFld    As DAO.Field
-    Dim sRep    As String
-'    Dim sTxt    As String
-'    Dim sSql    As String
-'    Dim vRep    As Variant
+    Dim sLien   As String
 
     thisObj.IDNet = thisObj.Type & "!" & thisObj.NomNet
 
-    sRep = ObjetAcc.CheckTdfLinked(thisObj.Nom)     '// Vérifier liaison si tbl liée...
-    If (sRep <> vbNullString) Then
-        SauveTexte thisObj.Type & "!" & thisObj.NomNet, sRep, 1     '// Stock le texte...
+    sLien = ObjetAcc.CheckTableLinked(thisObj.Nom)                  '// Vérifier liaison si tbl liée...
+    If (ObjetAcc.TableLinkRompu) Then
+        SauveTexte thisObj.Type & "!" & thisObj.NomNet, sLien, 1    '// Stock le texte...
         ScanTables = True
         Exit Function 'TODO: Liaison rompue, on continu quand même sur les autres tables.
     End If
 
-    mRep = MajTableObjet              '// ...
-    If mRep = False Then Exit Function
+    mRep = MajTableObjet(sLien)                 '// ...
+    If (Not mRep) Then Exit Function
 
     Set oRstTab = ObjetAcc.GetRecordset(thisObj.Nom, True)
     If oRstTab Is Nothing Then Exit Function
@@ -543,8 +540,6 @@ On Error GoTo ERR_ScanTables
             thisChild.Type = IIf(oFld.Type = dbMemo, "dbMeno", "dbText")
             thisChild.Parent = vbNullString
 
-'            thisFld.Texte = oFld.Value
-'            thisFld.Texte = CheckTxtIgnore(oFld.Value)      '// Filtrage texte...
             thisChild.IDNet = thisObj.IDNet & "!" & thisChild.NomNet
             '-------------------------
             mRep = MajTableChild()          '// Stock le champ...
@@ -552,10 +547,7 @@ On Error GoTo ERR_ScanTables
             If (mRep = False) Then Exit For
 
         End If
-'    If (mRep) Then mRep = MajTableChildPropTexte(PROP_CAP, thisTxt.Caption)          '// Stock ses textes...
     Next
-
-'    If thisObj.TxtField Then ExecuteQdfTemp sSql    '// Champs texte trouvés, on enregistre la table.
 
     ObjetAcc.CloseOpenRecordset
     ScanTables = True
@@ -636,7 +628,7 @@ End Function
 '--------------------------------------------------------------
 '// Stock les objets (forms/reports).
 '--------------------------------------------------------------
-Private Function MajTableObjet() As Boolean
+Private Function MajTableObjet(Optional LienTable As String = vbNullString) As Boolean
 
     Dim sSql As String
     Dim vRep As Variant
@@ -649,14 +641,14 @@ Private Function MajTableObjet() As Boolean
         thisChild.Nouveau = True
 
         sSql = "INSERT INTO T_Objets " & _
-                "(Objet_ID, ObjetNom, IDType, IDApp, Scanner, Nouveau) " & _
+                "(Objet_ID, ObjetNom, IDType, IDApp, Scanner, Nouveau, TblLink) " & _
                 "VALUES ('" & thisObj.IDNet & "', '" & thisObj.NomNet & "', '" & thisObj.TypeNum & "', '" & _
-                thisApp.ID & "', " & CInt(True) & ", " & CInt(True) & ");"
+                thisApp.ID & "', " & CInt(True) & ", " & CInt(True) & ", '" & LienTable & "');"
 
     Else                        '// Déjà enregistrer..
         thisObj.Nouveau = False
-        sSql = "UPDATE T_Objets SET T_Objets.Scanner=" & CInt(True) & _
-               " WHERE (((T_Objets.Objet_ID)='" & thisObj.IDNet & "'));"
+        sSql = "UPDATE T_Objets SET T_Objets.Scanner=" & CInt(True) & ", T_Objets.TblLink='" & LienTable & "' " & _
+               "WHERE (((T_Objets.Objet_ID)='" & thisObj.IDNet & "'));"
     End If
 
     ExecuteQdfTemp sSql

@@ -16,10 +16,12 @@ Begin Form
     GridY =10
     Width =11338
     DatasheetFontHeight =11
-    Left =3228
-    Top =672
-    Right =14568
-    Bottom =12000
+    ItemSuffix =1
+    Left =1464
+    Top =540
+    Right =12804
+    Bottom =11868
+    DatasheetGridlinesColor =15132391
     RecSrcDt = Begin
         0x0e0613f613dee540
     End
@@ -69,6 +71,34 @@ Begin Form
             GridlineThemeColorIndex =1
             GridlineShade =65.0
         End
+        Begin CommandButton
+            Width =1701
+            Height =283
+            FontSize =11
+            FontWeight =400
+            FontName ="Calibri"
+            ForeThemeColorIndex =0
+            ForeTint =75.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+            UseTheme =1
+            Shape =1
+            Gradient =12
+            BackThemeColorIndex =4
+            BackTint =60.0
+            BorderLineStyle =0
+            BorderThemeColorIndex =4
+            BorderTint =60.0
+            ThemeFontIndex =1
+            HoverThemeColorIndex =4
+            HoverTint =40.0
+            PressedThemeColorIndex =4
+            PressedShade =75.0
+            HoverForeThemeColorIndex =0
+            HoverForeTint =75.0
+            PressedForeThemeColorIndex =0
+            PressedForeTint =75.0
+        End
         Begin TextBox
             AddColon = NotDefault
             FELineBreak = NotDefault
@@ -108,10 +138,44 @@ Begin Form
         Begin Section
             Height =11338
             Name ="Détail"
+            AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
             BackThemeColorIndex =1
             Begin
+                Begin CommandButton
+                    Cancel = NotDefault
+                    TabStop = NotDefault
+                    OverlapFlags =85
+                    Left =6292
+                    Top =170
+                    Width =336
+                    Height =288
+                    TabIndex =3
+                    ForeColor =4210752
+                    Name ="cmdFerme"
+                    OnClick ="[Event Procedure]"
+                    GridlineColor =10921638
+                    BackStyle =0
+
+                    LayoutCachedLeft =6292
+                    LayoutCachedTop =170
+                    LayoutCachedWidth =6628
+                    LayoutCachedHeight =458
+                    UseTheme =0
+                    Gradient =0
+                    BackColor =14461583
+                    BorderColor =14461583
+                    HoverColor =15189940
+                    PressedColor =9917743
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =3
+                    WebImagePaddingTop =3
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
+                    Overlaps =1
+                End
                 Begin TextBox
                     Locked = NotDefault
                     TabStop = NotDefault
@@ -149,7 +213,7 @@ Begin Form
                     Height =300
                     BorderColor =10921638
                     ForeColor =3484194
-                    ColumnInfo ="\"\";\"\";\"\";\"\";\"10\";\"200\""
+                    ColumnInfo ="\"\";\"\";\"\";\"\";\"\";\"\";\"10\";\"200\""
                     Name ="zlBases"
                     RowSourceType ="Table/Query"
                     RowSource ="RL_Apps"
@@ -226,8 +290,8 @@ Begin Form
                     IMESentenceMode =3
                     Left =7086
                     Top =113
-                    Width =3633
-                    Height =444
+                    Width =1425
+                    Height =396
                     TabIndex =2
                     BorderColor =10921638
                     ForeColor =4210752
@@ -237,8 +301,8 @@ Begin Form
 
                     LayoutCachedLeft =7086
                     LayoutCachedTop =113
-                    LayoutCachedWidth =10719
-                    LayoutCachedHeight =557
+                    LayoutCachedWidth =8511
+                    LayoutCachedHeight =509
                 End
                 Begin Image
                     Visible = NotDefault
@@ -390,7 +454,7 @@ Begin Form
                     LayoutCachedTop =5556
                     LayoutCachedWidth =6040
                     LayoutCachedHeight =6324
-                    TabIndex =3
+                    TabIndex =4
                 End
             End
         End
@@ -424,6 +488,10 @@ Private Sub zlBases_AfterUpdate()
     Me.imgTxtVide.Visible = IsNull(Me.txt_Texte)
     Me.txt_Texte.Enabled = Not (IsNull(Me.txt_Texte))
 
+End Sub
+
+Private Sub cmdFerme_Click()
+    DoCmd.Close
 End Sub
 
 ' ----------------------------------------------------------------

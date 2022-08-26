@@ -16,13 +16,16 @@ Begin Form
     Width =10204
     DatasheetFontHeight =11
     ItemSuffix =12
-    Left =2520
-    Top =828
-    Right =12720
-    Bottom =2556
-    RecSrcDt = Begin
-        0x592d12c7d6dfe540
-    End
+    Left =6060
+    Top =2268
+    Right =16260
+    Bottom =3996
+    RecordSource ="SELECT T_Objets.Objet_ID, T_ObjetTypes.TypeNom, T_Objets.ObjetNom, T_Objets.Scan"
+        "ner, T_Objets.Nouveau, IIf(Scanner=False,\"=\",Null) AS Scan, IIf(Nouveau=True,\""
+        "=\",Null) AS Nouv FROM T_ObjetTypes INNER JOIN T_Objets ON (T_ObjetTypes.Type_ID"
+        " = T_Objets.IDType) AND (T_ObjetTypes.Type_ID = T_Objets.IDType) WHERE (((T_Obje"
+        "ts.IDApp)='{139E20AE-B5D6-4239-888C-B0771B23EDD2}')) ORDER BY T_ObjetTypes.TypeN"
+        "om, T_Objets.ObjetNom; "
     Caption =" "
     DatasheetFontName ="Calibri"
     AllowDatasheetView =0
@@ -68,6 +71,34 @@ Begin Form
             BorderShade =65.0
             GridlineThemeColorIndex =1
             GridlineShade =65.0
+        End
+        Begin CommandButton
+            Width =1701
+            Height =283
+            FontSize =11
+            FontWeight =400
+            FontName ="Calibri"
+            ForeThemeColorIndex =0
+            ForeTint =75.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+            UseTheme =1
+            Shape =1
+            Gradient =12
+            BackThemeColorIndex =4
+            BackTint =60.0
+            BorderLineStyle =0
+            BorderThemeColorIndex =4
+            BorderTint =60.0
+            ThemeFontIndex =1
+            HoverThemeColorIndex =4
+            HoverTint =40.0
+            PressedThemeColorIndex =4
+            PressedShade =75.0
+            HoverForeThemeColorIndex =0
+            HoverForeTint =75.0
+            PressedForeThemeColorIndex =0
+            PressedForeTint =75.0
         End
         Begin CheckBox
             BorderLineStyle =0

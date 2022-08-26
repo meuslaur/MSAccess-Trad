@@ -5,8 +5,8 @@
   },
   "Items": {
     "Name": "aT_LinkTemp",
-    "Connect": ";DATABASE=D:\\Access365\\_Dev\\_BDTest\\CAI_v357.accdb",
-    "SourceTableName": "tblAccessErrorCodes",
+    "Connect": ";DATABASE=D:\\Access365\\_Dev\\_BDTest\\TreeViewConfigurator.accdb",
+    "SourceTableName": "tblTreeViews",
     "Attributes": 1073741824,
     "PrimaryKey": "[ID]"
   }

@@ -42,6 +42,9 @@
       "T_Langues": {
         "Format": "XML Format"
       },
+      "T_ObjetTypes": {
+        "Format": "XML Format"
+      },
       "USysRegInfo": {
         "Format": "Tab Delimited"
       },

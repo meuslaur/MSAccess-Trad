@@ -30,7 +30,7 @@ Begin OrderBy
 End
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
-dbByte "RecordsetType" ="0"
+dbByte "RecordsetType" ="1"
 dbBoolean "OrderByOn" ="0"
 dbByte "Orientation" ="0"
 dbByte "DefaultView" ="2"
@@ -60,28 +60,20 @@ Begin
         dbLong "AggregateType" ="-1"
     End
     Begin
-        dbText "Name" ="T_ObjetTypes.Type_ID"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
         dbText "Name" ="T_Objets.IDType"
-        dbLong "AggregateType" ="-1"
-    End
-    Begin
-        dbText "Name" ="T_Objets.Type_ID"
         dbLong "AggregateType" ="-1"
     End
 End
 Begin
-    State =2
-    Left =-9
-    Top =-38
-    Right =1228
-    Bottom =1158
+    State =0
+    Left =0
+    Top =40
+    Right =2127
+    Bottom =1149
     Left =-1
     Top =-1
-    Right =1199
-    Bottom =507
+    Right =2099
+    Bottom =486
     Left =0
     Top =0
     ColumnsShown =539

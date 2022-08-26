@@ -32,6 +32,7 @@ Option Explicit
     Private m_sBaseNom          As String   '// Nom de la base sans extension.
     Private m_bMsAppIsUp        As Boolean
     Private m_bMsBaseIsOpen     As Boolean
+    Private m_bLienRompu        As Boolean  '// Indique si lien vers table liée est rompu.
 '//:::::::::::::::::::::::::::::::::: END VARIABLES ::::::::::::::::::::::::::::::::::::::
 
 '//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&     EVENTS        &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -90,6 +91,9 @@ End Property
 'Public Property Get GetLangue() As Long 'Note: Non utilisé
 '    GetLangue = m_oMsApp.LanguageSettings.LanguageID(msoLanguageIDUI)
 'End Property
+Public Property Get TableLinkRompu() As Boolean
+    TableLinkRompu = m_bLienRompu
+End Property
 '//====================================== END PROP =======================================
 
 '// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ PUBLIC SUB/FUNC   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -290,7 +294,8 @@ Public Function GetRecordset(RstNom As String, _
     End If
 
     If CheckLinkTable Then
-        If (CheckTdfLinked(RstNom) <> vbNullString) Then Exit Function  '// Vérifier la liason si liée...
+        CheckTableLinked RstNom         '// Vérifier la liason si liée...
+        If Me.TableLinkRompu Then Exit Function
     End If
 
     If (Not m_oRst Is Nothing) Then m_oRst.Close
@@ -309,12 +314,11 @@ End Sub
 '// Vérifier la liason de la table.
 '// Retourne une chaine vide si ok, sinon le chemin de la base.
 ' ----------------------------------------------------------------
-Public Function CheckTdfLinked(TdfName As String, Optional AfficheMsg As Boolean = False) As String
+Public Function CheckTableLinked(TdfName As String, Optional AfficheMsg As Boolean = False) As String
 
     Dim sBdSource As String
     Dim lpos      As Long
     Dim bRep      As Boolean
-    Dim sRep      As String
 
     With m_oMsBase.TableDefs(TdfName)
         If (.Attributes = dbAttachedTable) Then      'TODO: tdf.Attributes = dbAttachedODBC
@@ -322,16 +326,15 @@ Public Function CheckTdfLinked(TdfName As String, Optional AfficheMsg As Boolean
             lpos = InStr(1, sBdSource, "=")
             sBdSource = Mid$(sBdSource, lpos + 1)
             bRep = MD_FSO.FSOFileExist(sBdSource)   '// Verifier si la base est bien la...
-            If (Not bRep) Then sRep = sBdSource
+            m_bLienRompu = IIf((Not bRep), True, False)
         End If
     End With
 
     If (Not bRep And AfficheMsg) Then
-'        Beep
-        MsgBox "Table liée [" & TdfName & "] liason rompue !", vbExclamation, "GetRecordset"
+        MsgBox "Table liée [" & TdfName & "] liason rompue !", vbExclamation, "CheckTableLinked"
     End If
 
-    CheckTdfLinked = sRep
+    CheckTableLinked = sBdSource
 
 End Function
 

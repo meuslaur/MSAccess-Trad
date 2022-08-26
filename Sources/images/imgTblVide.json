@@ -1,0 +1,11 @@
+﻿{
+  "Info": {
+    "Class": "clsDbSharedImage",
+    "Description": "Shared Image Gallery Item"
+  },
+  "Items": {
+    "Name": "imgTblVide",
+    "FileName": "imgTblVide.png",
+    "Extension": "png"
+  }
+}

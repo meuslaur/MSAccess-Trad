@@ -19,11 +19,11 @@ Begin Form
     GridY =10
     Width =11338
     DatasheetFontHeight =11
-    ItemSuffix =67
-    Left =2364
-    Top =540
-    Right =13704
-    Bottom =11700
+    ItemSuffix =68
+    Left =5100
+    Top =600
+    Right =16440
+    Bottom =11760
     DatasheetGridlinesColor =15132391
     RecSrcDt = Begin
         0x2562231676dbe540
@@ -707,7 +707,7 @@ Begin Form
                     LayoutCachedTop =10885
                     LayoutCachedWidth =4365
                     LayoutCachedHeight =11112
-                    TabIndex =5
+                    TabIndex =6
                 End
                 Begin Label
                     OverlapFlags =85
@@ -724,6 +724,38 @@ Begin Form
                     LayoutCachedTop =10828
                     LayoutCachedWidth =6810
                     LayoutCachedHeight =11128
+                End
+                Begin CommandButton
+                    Cancel = NotDefault
+                    TabStop = NotDefault
+                    OverlapFlags =85
+                    Left =226
+                    Top =113
+                    Width =345
+                    Height =179
+                    TabIndex =5
+                    ForeColor =4210752
+                    Name ="cmdFermer"
+                    OnClick ="[Event Procedure]"
+                    GridlineColor =10921638
+                    BackStyle =0
+
+                    LayoutCachedLeft =226
+                    LayoutCachedTop =113
+                    LayoutCachedWidth =571
+                    LayoutCachedHeight =292
+                    UseTheme =0
+                    Gradient =0
+                    BackColor =14461583
+                    BorderColor =14461583
+                    HoverColor =15189940
+                    PressedColor =9917743
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =3
+                    WebImagePaddingTop =3
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
                 End
             End
         End
@@ -822,6 +854,15 @@ Private Sub Form_Close()
     If mFrmInfoIsOpen Then DoCmd.Close acForm, "iF_InfoRecap"
 End Sub
 
+Private Sub cmdFermer_Click()
+    DoCmd.Close
+End Sub
+
+Private Sub cmdAfficheInfo_Click()
+    mFrmInfoIsOpen = True
+    DoCmd.OpenForm "iF_InfoRecap"
+End Sub
+
 ' ----------------------------------------------------------------
 '// Filtrage suivant choix des chkBox.
 ' ----------------------------------------------------------------
@@ -860,11 +901,6 @@ Private Sub grpChk_AfterUpdate()
 
 End Sub
 
-Private Sub cmdAfficheInfo_Click()
-    mFrmInfoIsOpen = True
-    DoCmd.OpenForm "iF_InfoRecap"
-End Sub
-
 Private Sub ResetFiltres()
 
     Me.sfO.Form.Controls("imgFiltre").BackStyle = 0
@@ -890,7 +926,6 @@ Public Sub FiltreDbClick(ValFiltre As String, FiltreObjet As Boolean)
         Exit Sub
     End If
 
-    DoCmd.Echo False
     Select Case FiltreObjet
 
         Case True   '// Filtre par objet.
@@ -919,6 +954,5 @@ Public Sub FiltreDbClick(ValFiltre As String, FiltreObjet As Boolean)
     End Select
 
     mFltPrec = thisFiltre
-    DoCmd.Echo True
 
 End Sub
