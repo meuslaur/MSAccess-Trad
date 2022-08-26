@@ -1,4 +1,11 @@
 #Changelog
+
+#Changelog
+## V 0.6.1 2022/26/08
+- Ajoute affichage des tables.
+- Implemente objets ignorés.
+- Corrections bug.
+
 ## V 0.50 2022/18/08
 - Ajoute de la nouvelle progressBar
 - Modification de la documentation
