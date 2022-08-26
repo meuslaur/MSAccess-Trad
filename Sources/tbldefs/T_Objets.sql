@@ -5,5 +5,6 @@
   [IDApp] VARCHAR (40),
   [Scanner] BIT ,
   [Nouveau] BIT ,
-  [Ignorer] BIT 
+  [Ignorer] BIT ,
+  [TblLink] VARCHAR (100)
 )

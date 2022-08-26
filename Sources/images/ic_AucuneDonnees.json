@@ -1,0 +1,11 @@
+﻿{
+  "Info": {
+    "Class": "clsDbSharedImage",
+    "Description": "Shared Image Gallery Item"
+  },
+  "Items": {
+    "Name": "ic_AucuneDonnees",
+    "FileName": "ic_AucuneDonnees.png",
+    "Extension": "png"
+  }
+}

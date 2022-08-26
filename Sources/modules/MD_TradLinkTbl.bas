@@ -10,6 +10,8 @@ Option Explicit
 Public Function AfficheTable(BaseNom As String, TableNom As String) As eReponse
     Dim eRep As eReponse
 
+    If (MD_FSO.FSOFileExist(BaseNom) = False) Then AfficheTable = Faux: Exit Function
+
     DoCmd.Hourglass True
 
     If (mBD Is Nothing) Then Set mBD = CodeDb()

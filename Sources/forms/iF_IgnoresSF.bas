@@ -7,7 +7,7 @@ Begin Form
     AllowDeletions = NotDefault
     DividingLines = NotDefault
     AllowAdditions = NotDefault
-    FilterOn = NotDefault
+    AllowUpdating =1
     ScrollBars =2
     ViewsAllowed =1
     PictureAlignment =2
@@ -16,13 +16,12 @@ Begin Form
     Width =7370
     DatasheetFontHeight =11
     ItemSuffix =11
-    Left =10032
-    Top =3216
-    Right =17400
-    Bottom =11952
-    Filter ="[IDType]=-32768"
+    Left =6324
+    Top =4008
+    Right =13692
+    Bottom =12744
     RecSrcDt = Begin
-        0xb79d0573d7dfe540
+        0xaa064de3eedfe540
     End
     RecordSource ="R_F_IgnoresSf"
     OnOpen ="[Event Procedure]"
@@ -200,6 +199,7 @@ Begin Form
                     BorderColor =10921638
                     Name ="chkIgnorer"
                     ControlSource ="Ignorer"
+                    AfterUpdate ="[Event Procedure]"
                     GridlineColor =10921638
 
                     LayoutCachedLeft =6973
@@ -209,6 +209,7 @@ Begin Form
                 End
                 Begin TextBox
                     Visible = NotDefault
+                    Locked = NotDefault
                     TabStop = NotDefault
                     EnterKeyBehavior = NotDefault
                     AllowAutoCorrect = NotDefault
@@ -231,6 +232,7 @@ Begin Form
                 End
                 Begin TextBox
                     Visible = NotDefault
+                    Locked = NotDefault
                     TabStop = NotDefault
                     AllowAutoCorrect = NotDefault
                     OverlapFlags =247
@@ -282,4 +284,9 @@ Private Sub Form_Open(Cancel As Integer)
             DoCmd.Close
         End If
     End If
+End Sub
+
+Private Sub chkIgnorer_AfterUpdate()
+'// Indique au form F_Main objets ingorés mis à jour.
+    Forms.Item("F_Main").UpdateIgnorer
 End Sub

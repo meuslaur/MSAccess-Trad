@@ -19,16 +19,18 @@ Begin Form
     GridY =10
     Width =8163
     DatasheetFontHeight =11
-    ItemSuffix =16
-    Left =9300
-    Top =1032
-    Right =17460
-    Bottom =11220
+    ItemSuffix =17
+    Left =3960
+    Top =948
+    Right =14052
+    Bottom =11136
+    DatasheetGridlinesColor =15132391
     RecSrcDt = Begin
         0xc605179cabdde540
     End
     Caption ="Sélection des objets à masquer."
     OnOpen ="[Event Procedure]"
+    OnClose ="[Event Procedure]"
     DatasheetFontName ="Calibri"
     AllowDatasheetView =0
     FilterOnLoad =0
@@ -57,6 +59,34 @@ Begin Form
             ForeTint =60.0
             GridlineThemeColorIndex =1
             GridlineShade =65.0
+        End
+        Begin CommandButton
+            Width =1701
+            Height =283
+            FontSize =11
+            FontWeight =400
+            FontName ="Calibri"
+            ForeThemeColorIndex =0
+            ForeTint =75.0
+            GridlineThemeColorIndex =1
+            GridlineShade =65.0
+            UseTheme =1
+            Shape =1
+            Gradient =12
+            BackThemeColorIndex =4
+            BackTint =60.0
+            BorderLineStyle =0
+            BorderThemeColorIndex =4
+            BorderTint =60.0
+            ThemeFontIndex =1
+            HoverThemeColorIndex =4
+            HoverTint =40.0
+            PressedThemeColorIndex =4
+            PressedShade =75.0
+            HoverForeThemeColorIndex =0
+            HoverForeTint =75.0
+            PressedForeThemeColorIndex =0
+            PressedForeTint =75.0
         End
         Begin TextBox
             AddColon = NotDefault
@@ -108,10 +138,40 @@ Begin Form
             CanGrow = NotDefault
             Height =10204
             Name ="Détail"
+            AlternateBackColor =15921906
             AlternateBackThemeColorIndex =1
             AlternateBackShade =95.0
             BackThemeColorIndex =1
             Begin
+                Begin CommandButton
+                    Cancel = NotDefault
+                    TabStop = NotDefault
+                    OverlapFlags =85
+                    Width =392
+                    Height =170
+                    TabIndex =1
+                    ForeColor =4210752
+                    Name ="cmdFerme"
+                    OnClick ="[Event Procedure]"
+                    GridlineColor =10921638
+                    BackStyle =0
+
+                    LayoutCachedWidth =392
+                    LayoutCachedHeight =170
+                    UseTheme =0
+                    Gradient =0
+                    BackColor =14461583
+                    BorderColor =14461583
+                    HoverColor =15189940
+                    PressedColor =9917743
+                    HoverForeColor =4210752
+                    PressedForeColor =4210752
+                    WebImagePaddingLeft =3
+                    WebImagePaddingTop =3
+                    WebImagePaddingRight =2
+                    WebImagePaddingBottom =2
+                    Overlaps =1
+                End
                 Begin ComboBox
                     LimitToList = NotDefault
                     OverlapFlags =215
@@ -131,7 +191,10 @@ Begin Form
                     AfterUpdate ="=FiltreSF()"
                     OnMouseDown ="=OuvreZl()"
                     GridlineColor =10921638
+                    AllowValueListEdits =0
+                    InheritValueList =0
 
+                    ShowOnlyRowSourceValues =255
                     LayoutCachedLeft =6179
                     LayoutCachedTop =566
                     LayoutCachedWidth =7928
@@ -174,7 +237,7 @@ Begin Form
                     Top =1077
                     Width =7632
                     Height =9000
-                    TabIndex =1
+                    TabIndex =2
                     BorderColor =10921638
                     Name ="sfObjets"
                     SourceObject ="Form.iF_IgnoresSF"
@@ -190,6 +253,7 @@ Begin Form
                 Begin TextBox
                     Enabled = NotDefault
                     Locked = NotDefault
+                    TabStop = NotDefault
                     AllowAutoCorrect = NotDefault
                     OverlapFlags =215
                     IMESentenceMode =3
@@ -197,7 +261,7 @@ Begin Form
                     Top =566
                     Width =4866
                     Height =315
-                    TabIndex =2
+                    TabIndex =3
                     BorderColor =10921638
                     Name ="txtBase"
                     ControlTipText ="Liste des applications déjà enregistrées,"
@@ -245,23 +309,23 @@ Begin Form
                     Visible = NotDefault
                     TabStop = NotDefault
                     AllowAutoCorrect = NotDefault
-                    OverlapFlags =215
+                    OverlapFlags =85
                     IMESentenceMode =3
-                    Left =2097
-                    Top =56
-                    Width =1425
+                    Left =5269
+                    Top =566
+                    Width =849
                     Height =300
-                    TabIndex =3
+                    TabIndex =4
                     BorderColor =10921638
                     ForeColor =4210752
                     Name ="txtIDApp"
                     GridlineColor =10921638
                     ShowDatePicker =0
 
-                    LayoutCachedLeft =2097
-                    LayoutCachedTop =56
-                    LayoutCachedWidth =3522
-                    LayoutCachedHeight =356
+                    LayoutCachedLeft =5269
+                    LayoutCachedTop =566
+                    LayoutCachedWidth =6118
+                    LayoutCachedHeight =866
                 End
             End
         End
@@ -290,6 +354,14 @@ Private Sub Form_Open(Cancel As Integer)
     Me.txtBase = frmArgs(1)
     Me.zlObjetTypes = 0
 
+End Sub
+
+Private Sub Form_Close()
+    Forms.Item("F_Main").UpdateIgnorer
+End Sub
+
+Private Sub cmdFerme_Click()
+    DoCmd.Close
 End Sub
 
 ' ----------------------------------------------------------------
