@@ -96,11 +96,11 @@ End Sub
 '----------------------------------------------------------------
 Public Sub SetLengthBarre(CharBarre As String, NbChar As Long, Optional NumLabel As eNumLabel = LabelNum1)
 
-    If (NbChar < 1) Then Exit Sub                       'TODO: ERR ->Gestionnaire d'erreur / msg.
-    If (Len(CharBarre) <> 1) Then Exit Sub              'TODO: ERR ->Gestionnaire d'erreur / msg.
-
     Set mLblBar = colLabels("B" & CStr(NumLabel))
     Set mLblTxt = colLabels("T" & CStr(NumLabel))
+
+    If (NbChar < 1) Then Exit Sub                       'TODO: ERR ->Gestionnaire d'erreur / msg.
+    If (Len(CharBarre) <> 1) Then Exit Sub              'TODO: ERR ->Gestionnaire d'erreur / msg.
 
     mCurLabel = NumLabel
 
