@@ -17,12 +17,12 @@ Begin Form
     GridY =10
     Width =10204
     DatasheetFontHeight =11
-    ItemSuffix =588
+    ItemSuffix =648
     Left =7536
     Top =7644
     Right =17988
     Bottom =11484
-    RecordSource ="SELECT aT_LinkTemp.[TreeViewName], aT_LinkTemp.[GUIDTreeView] FROM aT_LinkTemp; "
+    RecordSource ="SELECT aT_LinkTemp.[UserName] FROM aT_LinkTemp; "
     Caption ="a_tmp"
     DatasheetFontName ="Calibri"
     AllowFormView =0
@@ -92,34 +92,17 @@ Begin Form
             BackThemeColorIndex =1
             Begin
                 Begin TextBox
-                    OverlapFlags =93
+                    OverlapFlags =85
                     IMESentenceMode =3
                     Width =200
                     Height =300
                     BorderColor =10921638
                     ForeColor =4210752
-                    Name ="TreeViewName"
-                    ControlSource ="TreeViewName"
+                    Name ="UserName"
+                    ControlSource ="UserName"
                     GridlineColor =10921638
 
                     LayoutCachedWidth =200
-                    LayoutCachedHeight =300
-                End
-                Begin TextBox
-                    OverlapFlags =87
-                    IMESentenceMode =3
-                    Left =203
-                    Width =200
-                    Height =300
-                    TabIndex =1
-                    BorderColor =10921638
-                    ForeColor =4210752
-                    Name ="GUIDTreeView"
-                    ControlSource ="GUIDTreeView"
-                    GridlineColor =10921638
-
-                    LayoutCachedLeft =203
-                    LayoutCachedWidth =403
                     LayoutCachedHeight =300
                 End
             End

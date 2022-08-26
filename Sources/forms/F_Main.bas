@@ -18,10 +18,10 @@ Begin Form
     Width =18232
     DatasheetFontHeight =11
     ItemSuffix =86
-    Left =3708
-    Top =396
-    Right =21936
-    Bottom =12456
+    Left =-96
+    Top =324
+    Right =17880
+    Bottom =12132
     DatasheetGridlinesColor =15132391
     RecSrcDt = Begin
         0x5c7a48f85bd8e540
@@ -793,7 +793,6 @@ Begin Form
                     RowSourceType ="Table/Query"
                     ColumnWidths ="0;0;1304;4826;0"
                     AfterUpdate ="[Event Procedure]"
-                    OnDblClick ="[Event Procedure]"
                     GridlineColor =10921638
                     AllowValueListEdits =0
 
@@ -2069,9 +2068,9 @@ Option Explicit
 
     Private m_AjoutLangue As Long       '// Indique a la liste des langues qu'une nouvelle langue à été saisie dans le form F_Langues.
     Private mBaseCur      As String
-    Private mTableCur     As String
     Private mObjCur       As String
 '//:::::::::::::::::::::::::::::::::: END VARIABLES ::::::::::::::::::::::::::::::::::::::
+
 
 Private Sub Commande65_Click()
 '    If (Not IsNull(Me.zlBases)) Then
@@ -2113,13 +2112,13 @@ End Sub
 Private Sub cmbSelectBdd_Click()
 On Error GoTo ERR_cmbSelectBdd_Click
 
-    Dim bRep        As Boolean
-    Dim eRep        As eReponse
-    Dim sRep        As String
-    Dim lRep        As Long
-    Dim sBaseSel    As String
-    Dim sMsg        As String
-    Dim vTmp        As Variant  '// Pour Split de sBackup.
+    Dim bRep     As Boolean
+    Dim eRep     As eReponse
+    Dim sRep     As String
+    Dim lRep     As Long
+    Dim sBaseSel As String
+    Dim sMsg     As String
+    Dim vTmp     As Variant  '// Pour Split de sBackup.
 
     '// Sélection de la base à utiliser.
     sBaseSel = OuvreBoite("MS Access", "*.accdb", , , FD_TypeFilePicker)
@@ -2137,9 +2136,6 @@ On Error GoTo ERR_cmbSelectBdd_Click
         If (bRep = False) Then Exit Sub
     End If
 '//----- Sauvegarde
-
-    DoCmd.Hourglass True
-    DoCmd.Echo False
 
     bRep = InitAppEtBase(sBaseSel)  '// Création Access.Application, ouverture de la base....
     If (Not bRep) Then Exit Sub
@@ -2161,25 +2157,18 @@ On Error GoTo ERR_cmbSelectBdd_Click
         Case eReponse.Valide        '// Déjà scannée.
 
             ScanTxt.ReScannerApp = True
-            Me.zlLangues = ScanTxt.GetIDLangBase()      '// Extraire la langue d'origine de la base...
             Me.zlBases = ScanTxt.AppID()
-            ActiveCmbBases      '// Active les boutons.
-            MaJLangue False     '// Affiche le drapeau.
+            UpdateBases False       '// ...
 
         Case eReponse.Inconnu       '// Nouvelle app.
 
-            Me.zlLangues.SetFocus
             ScanTxt.ReScannerApp = False
-            Me.zlBases = Null
             ActiveCmbBases  '// Désactive les boutons.
+            Me.zlLangues.SetFocus
 
     End Select
 
     Me.txtBdd = sBaseSel
-    Me.zlTypes = 0
-
-    DoCmd.Echo True
-    DoCmd.Hourglass False
 
     MsgBox "Vous pouvez lancer le scan", vbInformation, "Base ouverte"
 
@@ -2189,8 +2178,6 @@ SORTIE_cmbSelectBdd_Click:
     Exit Sub
 
 ERR_cmbSelectBdd_Click:
-    DoCmd.Echo True
-    DoCmd.Hourglass False
     MsgBox "Erreur " & Err.Number & vbCrLf & _
             " (" & Err.Description & ")", vbCritical, _
             "Form_F_Main.cmbSelectBdd_Click"
@@ -2208,7 +2195,6 @@ Private Sub cmdCloseBd_Click()
 
     ScanTxt.ReScannerApp = False
     RazForm
-    Me.txtBdd = "Sélectionnez un base..."
 
     Set ObjetAcc = Nothing
 
@@ -2220,54 +2206,7 @@ Private Sub lstObjets_AfterUpdate()
 
     If (mObjCur = Me.lstObjets) Then Exit Sub
 
-    Dim bTbl  As Boolean
-    Dim lType As Long
-
-    mObjCur = Me.lstObjets
-
-    lType = CLng(Me.lstObjets.Column(1))
-
-    bTbl = (lType = eObjectType.TableLocale Or lType = eObjectType.TableLinked)
-
-    Me.SF_Table.Visible = (bTbl And (mTableCur = Me.lstObjets) And (Me.SF_Table.SourceObject <> vbNullString))
-    Me.imgTblVide.Visible = False
-    Me.imgRompu.Visible = False
-    Me.SF_Textes.Visible = Not bTbl
-
-End Sub
-
-Private Sub lstObjets_DblClick(Cancel As Integer)
-    Dim lType As Long
-    Dim sLien As String
-
-    lType = CLng(Me.lstObjets.Column(1))
-    If ((lType <> eObjectType.TableLocale) And (lType <> eObjectType.TableLinked)) Then Exit Sub
-
-    Dim eRep As eReponse
-
-    Me.SF_Table.SourceObject = vbNullString
-    mTableCur = Me.lstObjets
-
-    sLien = IIf(Me.lstObjets.Column(4) <> vbNullString, Me.lstObjets.Column(4), Me.zlBases.Column(2))
-    eRep = AfficheTable(sLien, Me.lstObjets.Column(3))      '// ...
-    DoEvents
-
-    Select Case eRep
-        Case eReponse.Faux          '// Liaison rompue
-        'TODO: A FINIR lstObjets_DblClick liaison rompue.
-            Me.imgTblVide.Visible = False
-            Me.imgRompu.Visible = True
-            Me.SF_Table.Visible = False
-
-        Case eReponse.Inconnu       '// Table vide ou pas de champ text/memo
-            Me.imgTblVide.Visible = True
-            Me.imgRompu.Visible = False
-            Me.SF_Table.Visible = False
-
-        Case eReponse.Valide        '// Ok
-            Me.SF_Table.SourceObject = FRM_LINK
-            Me.SF_Table.Visible = True
-    End Select
+    ActualiseTable
 
 End Sub
 
@@ -2372,27 +2311,6 @@ Private Sub zlBases_AfterUpdate()
 
 End Sub
 
-Private Sub UpdateBases()
-
-    Dim vDate As Variant
-
-    mBaseCur = Me.zlBases
-    Me.zlTypes = 0
-    MD_TradLinkTbl.CleanAfficheTable
-
-    MaJListeObjets      '// Charge la liste des objets suivant l'app en cours ...
-
-    vDate = DLookup("[DernierScan]", "T_App", "[App_ID]='" & Me.zlBases & "'")
-    Me.txtDateScan.Visible = Not (IsNull(vDate))
-    Me.txtDateScan = Nz(vDate, vbNullString)
-
-    Me.zlLangues = ScanTxt.GetIDLangBase(Me.zlBases)    '// Extraire la langue d'origine de la base...
-    MaJLangue False                                     '// Affiche le drapeau, vérouille la zl...
-
-    ActiveCmbBases      '// Active les boutons
-
-End Sub
-
 Private Sub zlTypes_AfterUpdate()
     If (IsNull(Me.zlBases)) Then
         Me.zlTypes = 0
@@ -2446,6 +2364,7 @@ Private Function InitAppEtBase(sBase As String) As Boolean
     Dim bRep As Boolean
 
     DoCmd.Hourglass True
+    DoCmd.Echo False
 
     If (ObjetAcc Is Nothing) Then
         Set ScanTxt = New C_TradScanText        '// Initialisation des classes.
@@ -2454,10 +2373,9 @@ Private Function InitAppEtBase(sBase As String) As Boolean
 
     If (ObjetAcc.MsAppIsUp = False) Then
         bRep = ObjetAcc.OpenMsApp()                 '// Création Access.Application...
-        If (bRep = False) Then Exit Function
     End If
 
-    If (ObjetAcc.MsBaseIsOpen = False) Then
+    If ((ObjetAcc.MsBaseIsOpen = False) And ObjetAcc.MsAppIsUp) Then
         bRep = ObjetAcc.OpenMsBase(sBase)           '// Ouverture de la base...
     End If
 
@@ -2468,10 +2386,38 @@ Private Function InitAppEtBase(sBase As String) As Boolean
         Set ObjetAcc = Nothing
     End If
 
-    DoCmd.Hourglass False
     InitAppEtBase = bRep
 
+    DoCmd.Hourglass False
+    DoCmd.Echo True
+
 End Function
+
+
+' ----------------------------------------------------------------
+'// Affiche info suivant la base en cours.
+' ----------------------------------------------------------------
+Private Sub UpdateBases(Optional MajObjets As Boolean = True)
+
+    Dim vDate As Variant
+
+    mBaseCur = Me.zlBases
+    Me.zlTypes = 0
+    MD_TradLinkTbl.CleanAfficheTable
+
+    If MajObjets Then MaJListeObjets    '// Charge la liste des objets suivant l'app en cours ...
+
+    vDate = DLookup("[DernierScan]", "T_App", "[App_ID]='" & Me.zlBases & "'")
+    Me.txtDateScan.Visible = Not (IsNull(vDate))
+    Me.txtDateScan = Nz(vDate, vbNullString)
+
+    Me.zlLangues = ScanTxt.GetIDLangBase(Me.zlBases)    '// Extraire la langue d'origine de la base...
+    MaJLangue False                                     '// Affiche le drapeau, vérouille la zl...
+
+    ActiveCmbBases      '// Active les boutons
+
+End Sub
+
 
 ' ----------------------------------------------------------------
 '// Filtre la liste des objets suivant le type choisi.
@@ -2502,7 +2448,7 @@ Private Sub MaJListeObjets(Optional TypeObj As eObjectType = 0)
 
     Me.SF_Textes.Visible = True
     Me.SF_Table.Visible = False
-    Me.SF_Table.SourceObject = vbNullString
+    mObjCur = vbNullString
 
     Me.imgLstObjVide.Visible = (Me.lstObjets.ListCount = 0)
     Me.lstObjets.Visible = Not (Me.lstObjets.ListCount = 0)
@@ -2528,6 +2474,8 @@ Private Sub MaJLangue(Optional EnabledZL As Boolean = True)
 
 End Sub
 
+'// Masque/Affiche les controls de l'entête suivant scan en cours.
+'--------------------------------------------
 Private Sub ScanActif(ScanEncours As Boolean)
 
     Dim oCtr As Access.Control
@@ -2544,6 +2492,52 @@ Private Sub ScanActif(ScanEncours As Boolean)
 
 End Sub
 
+'--------------------------------------------
+'// Affiche/Masque controls détail.
+'// Si tablle affiche les données.
+'--------------------------------------------
+Private Sub ActualiseTable()
+
+    Dim bTbl  As Boolean
+    Dim lType As Long
+
+    lType = CLng(Me.lstObjets.Column(1))
+
+    bTbl = (lType = eObjectType.TableLocale Or lType = eObjectType.TableLinked)
+
+    Me.SF_Table.Visible = (bTbl And (mObjCur = Me.lstObjets) And (Me.SF_Table.SourceObject <> vbNullString))
+    Me.imgTblVide.Visible = False
+    Me.imgRompu.Visible = False
+    Me.SF_Textes.Visible = Not bTbl
+
+    If ((lType <> eObjectType.TableLocale) And (lType <> eObjectType.TableLinked)) Then mObjCur = Me.lstObjets: Exit Sub   '// Pas une table on sort.
+
+    If (mObjCur = Me.lstObjets) Then Exit Sub   '// Même table, on srot.
+
+    Dim sLien As String
+    Dim eRep  As eReponse
+
+    mObjCur = Me.lstObjets
+    Me.SF_Table.SourceObject = vbNullString
+    sLien = IIf(Me.lstObjets.Column(4) <> vbNullString, Me.lstObjets.Column(4), Me.zlBases.Column(2))
+
+    eRep = AfficheTable(sLien, Me.lstObjets.Column(3))      '// Affiche champs text/memo de la table ...
+    DoEvents
+
+    Select Case eRep
+        Case eReponse.Faux, eReponse.Inconnu        '// Liaison rompue, Table vide ou pas de champ Text/Memo
+            Me.imgTblVide.Visible = (eRep = Inconnu)
+            Me.imgRompu.Visible = (eRep = Faux)
+            Me.SF_Table.Visible = False
+            Me.SF_Table.SourceObject = vbNullString
+
+        Case eReponse.Valide                        '// Ok
+            Me.SF_Table.SourceObject = FRM_LINK
+            Me.SF_Table.Visible = True
+    End Select
+
+End Sub
+
 '----------------------------------------------------------------
 '// Applique les valeurs par défaut.
 '----------------------------------------------------------------
@@ -2551,26 +2545,30 @@ Private Sub RazForm(Optional bActive As Boolean)
 
     m_AjoutLangue = False
     mObjCur = vbNullString
-    mTableCur = vbNullString
     mBaseCur = vbNullString
 
     Me.txtBdd.SetFocus
     Me.txtBdd = "Sélectionnez une base..."
+    Me.txtDateScan = vbNullString
     Me.txtBddSauve = vbNullString
-    Me.zlBases = Null
-    Me.zlTypes = 0
-    If (Not bActive) Then Me.txtDateScan = vbNullString
+
     Me.lstObjets.RowSource = vbNullString
     Me.lstObjets = Null
-    Me.zlLangues = Null
+
     Me.imgLangue.Picture = vbNullString
 
     Me.cmdCloseBd.Visible = bActive
     Me.cmbSelectBdd.Visible = Not bActive
     Me.cmdLanceScan.Enabled = bActive
+
+    Me.zlBases = Null
+    Me.zlTypes = 0
+    Me.zlLangues = Null
     Me.zlBases.Enabled = Not bActive
     Me.zlTypes.Enabled = Not bActive
     Me.zlLangues.Enabled = bActive
+
+    Me.SF_Table.SourceObject = vbNullString
 
 End Sub
 
