@@ -1,3 +1,5 @@
+<img align="left" src="https://github.com/meuslaur/meuslaur/blob/main/Logo_MsAccess.png" width="64px">
+
 # MSAccessTrad
 
 Alpha [v0.50] Outil d'aide pour traduction des textes dans une bases Access
